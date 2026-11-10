@@ -127,6 +127,12 @@ main.wrap{max-width:1180px;padding:6px 28px 80px calc(var(--dock-x) + var(--dock
 .btn.perigo{background:transparent;border-color:var(--perigo);color:var(--perigo)}
 .btn.perigo:hover{background:var(--perigo-soft)}
 .btn.peq{padding:7px 13px;font-size:13px}
+.linha-garimpo{display:flex;margin:0 0 12px}
+.garimpo-barra{margin:0 0 14px}
+.garimpo-barra .gb-t{display:flex;justify-content:space-between;gap:8px;font-size:13px;margin-bottom:6px;flex-wrap:wrap}
+.garimpo-barra .gb-tempo{color:var(--muted)}
+.gb-trilho{height:8px;border-radius:99px;background:rgba(127,127,127,.2);overflow:hidden}
+.gb-enche{height:100%;width:0;border-radius:99px;background:var(--pri,#2f80ed);transition:width 1s linear}
 .btn svg.i{width:17px;height:17px}
 .acoes{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px}
 label.rot{display:block;font-size:13px;font-weight:600;color:var(--muted);margin:16px 0 6px}
@@ -357,7 +363,7 @@ button.chip{font-family:var(--font)}
         <div class="kpi"><div class="ic"><svg class="i"><use href="#i-check"/></svg></div><div><div class="n" id="k_postados">0</div><div class="l">já postados</div></div></div>
       </div>
       <div class="grade g2">
-        <div class="card"><div class="secao">Próximos da fila <a class="conta-s" href="#" onclick="ir('agenda');return false">ver tudo</a></div><div id="ini_fila"></div></div>
+        <div class="card"><div class="secao">Próximos da fila <a class="conta-s" href="#" onclick="ir('agenda');return false">ver tudo</a></div><div class="linha-garimpo"><button class="btn pri peq bt-garimpo" onclick="garimpar()"><svg class="i"><use href="#i-picareta"/></svg>Garimpar novos</button></div><div class="garimpo-barra oculto"><div class="gb-t"><b>⛏ Garimpando livros e ofertas na Amazon…</b><span class="gb-tempo"></span></div><div class="gb-trilho"><div class="gb-enche"></div></div></div><div id="ini_fila"></div></div>
         <div class="card"><div class="secao">Postados há pouco <a class="conta-s" href="#" onclick="ir('noar');return false">ver no ar</a></div><div id="ini_hist"></div></div>
       </div>
     </section>
@@ -477,7 +483,7 @@ button.chip{font-family:var(--font)}
     <section data-pagina="agenda" class="oculto">
       <div class="titulo"><div><h1>Agenda e fila</h1><p>A fila automática solta um post em cada horário. Os agendados saem na hora marcada.</p></div></div>
       <div class="card"><div class="secao">Agendados <span class="conta-s" id="c_agendados"></span></div><div id="lista_agendados"></div></div>
-      <div class="card"><div class="secao">Fila automática <span class="conta-s" id="c_fila"></span></div><div id="lista_fila"></div></div>
+      <div class="card"><div class="secao">Fila automática <span class="conta-s" id="c_fila"></span></div><div class="linha-garimpo"><button class="btn pri peq bt-garimpo" onclick="garimpar()"><svg class="i"><use href="#i-picareta"/></svg>Garimpar novos</button></div><div class="garimpo-barra oculto"><div class="gb-t"><b>⛏ Garimpando livros e ofertas na Amazon…</b><span class="gb-tempo"></span></div><div class="gb-trilho"><div class="gb-enche"></div></div></div><div id="lista_fila"></div></div>
       <div class="card"><div class="secao">Histórico</div><div id="lista_historico"></div></div>
     </section>
 
@@ -802,6 +808,7 @@ function render() {
 
   $("ch_auto").setAttribute("aria-checked", !a.pausado); $("ch_aprov").setAttribute("aria-checked", a.aprovacao);
   $("botao_garimpo").disabled = a.garimpando;
+  mostrarGarimpo(a.garimpando);
   if (document.activeElement !== $("horarios")) $("horarios").value = (a.horarios || []).join(" ");
   if (document.activeElement !== $("expira_auto")) $("expira_auto").value = a.expira_auto_horas ?? "";
   $("link_internet").innerHTML = a.painel_url
@@ -831,11 +838,32 @@ async function salvarCanal(id) {
 async function removerCanal(id) { if (confirm("Tirar este canal do painel? (o canal não é apagado)")) { try { await api(`/api/canais/${id}`, { remover: true }); } catch (e) {} carregar(); } }
 async function alternar(campo) { try { await api("/api/ajustes", { [campo]: !dados.ajustes[campo] }); } catch (e) {} carregar(); }
 async function salvarAjustes() { try { await api("/api/ajustes", { horarios: $("horarios").value, expira_auto_horas: $("expira_auto").value }); } catch (e) {} carregar(); }
-async function garimpar() { try { await api("/api/garimpar", {}); } catch (e) {} carregar(); }
+let garimpoDesde = null, garimpoTimer = null;
+function mostrarGarimpo(ligado) {
+  if (ligado && !garimpoDesde) garimpoDesde = Date.now();
+  if (!ligado) garimpoDesde = null;
+  document.querySelectorAll(".bt-garimpo").forEach(b => { b.disabled = ligado; b.lastChild.textContent = ligado ? "Garimpando…" : "Garimpar novos"; });
+  document.querySelectorAll(".garimpo-barra").forEach(el => el.classList.toggle("oculto", !ligado));
+  clearInterval(garimpoTimer);
+  if (!ligado) return;
+  const pinta = () => {
+    const s = Math.floor((Date.now() - garimpoDesde) / 1000), min = Math.floor(s / 60);
+    const pct = Math.min(95, s / 300 * 100);  // leva uns 5 minutos
+    document.querySelectorAll(".gb-enche").forEach(el => el.style.width = pct + "%");
+    document.querySelectorAll(".gb-tempo").forEach(el => el.textContent = (min ? `${min} min ` : "") + `${s % 60} s · leva uns 5 minutos`);
+  };
+  pinta(); garimpoTimer = setInterval(pinta, 1000);
+}
+async function garimpar() {
+  mostrarGarimpo(true);
+  try { await api("/api/garimpar", {}); } catch (e) {}
+  carregar();
+}
 
 try { const aba = localStorage.getItem("aba"); if (aba && document.querySelector(`[data-pagina="${aba}"]`)) ir(aba); } catch (e) {}
 previa(); entrarPeloTelegram().then(carregar);
 setInterval(() => { if (!document.hidden && dados) carregar(); }, 20000);
+setInterval(() => { if (!document.hidden && dados && garimpoDesde) carregar(); }, 5000);
 </script>
 </body>
 </html>
