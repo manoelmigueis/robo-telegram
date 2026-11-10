@@ -84,5 +84,11 @@
     "5560098011": "Turismo e Viagem",
     "5559908011": "LGBT",
     "5559899011": "Erótico"
+  },
+  "ingles": {
+    "canal": "@inglescomia",
+    "horarios": ["09:00", "13:00", "19:00"],
+    "link_curso": "",
+    "curso_a_cada": 5
   }
 }

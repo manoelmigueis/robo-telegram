@@ -1,0 +1,46 @@
+[
+  {
+    "id": "001-break-the-ice",
+    "tipo": "palavra",
+    "imagem": "img/01-break-the-ice.png",
+    "texto": "🇺🇸 <b>EXPRESSÃO DO DIA: Break the ice</b>\n\n🧊 Significa <b>quebrar o gelo</b>: puxar conversa para acabar com aquele silêncio constrangedor.\n\n💬 <i>He told a joke to break the ice.</i>\n👉 Ele contou uma piada para quebrar o gelo.\n\n💬 <i>Games are a great way to break the ice.</i>\n👉 Jogos são um ótimo jeito de quebrar o gelo.\n\n✍️ Escreva nos comentários uma frase sua usando <b>break the ice</b>!"
+  },
+  {
+    "id": "002-make-vs-do",
+    "tipo": "aula",
+    "imagem": "img/02-make-vs-do.png",
+    "texto": "📘 <b>MINI-AULA: MAKE ou DO?</b>\n\nAs duas podem virar \"fazer\" em português, mas não são a mesma coisa.\n\n🔴 <b>MAKE</b> = criar, produzir algo que não existia\n• make <b>a cake</b> (fazer um bolo)\n• make <b>a mistake</b> (cometer um erro)\n• make <b>a decision</b> (tomar uma decisão)\n\n🔵 <b>DO</b> = realizar uma tarefa, uma atividade\n• do <b>homework</b> (fazer a lição de casa)\n• do <b>the dishes</b> (lavar a louça)\n• do <b>your best</b> (fazer o seu melhor)\n\n💡 Dica: se dá para \"pegar na mão\" o resultado, geralmente é <b>MAKE</b>."
+  },
+  {
+    "id": "003-quiz-goes",
+    "tipo": "quiz",
+    "quiz": {
+      "pergunta": "Complete: \"She ___ to the gym every day.\"",
+      "opcoes": ["go", "goes", "going", "gone"],
+      "correta": 1,
+      "explicacao": "Com he/she/it no presente simples, o verbo ganha -s ou -es: she goes, he works, it rains."
+    }
+  },
+  {
+    "id": "004-actually",
+    "tipo": "palavra",
+    "imagem": "img/04-actually.png",
+    "texto": "⚠️ <b>FALSO AMIGO: Actually</b>\n\nParece \"atualmente\", mas <b>não é</b>!\n\n✅ <b>Actually</b> = na verdade, na realidade\n💬 <i>I thought he was American. Actually, he's Canadian.</i>\n👉 Achei que ele era americano. Na verdade, ele é canadense.\n\n❌ Para dizer <b>atualmente</b>, use <b>currently</b> ou <b>nowadays</b>:\n💬 <i>I currently live in Manaus.</i>\n👉 Atualmente eu moro em Manaus.\n\n🔁 Mande para alguém que ainda confunde!"
+  },
+  {
+    "id": "005-in-on-at",
+    "tipo": "aula",
+    "imagem": "img/05-in-on-at.png",
+    "texto": "📘 <b>MINI-AULA: IN, ON, AT para tempo</b>\n\nPense num funil: do mais exato para o mais amplo.\n\n🔴 <b>AT</b> = horário exato\n• at 7 pm • at noon • at night\n\n🔵 <b>ON</b> = dias e datas\n• on Monday • on May 5th • on my birthday\n\n⚫ <b>IN</b> = meses, anos, estações, períodos longos\n• in July • in 2026 • in the summer • in the morning\n\n💬 <i>I'll see you on Friday at 8 pm.</i>\n👉 Te vejo na sexta, às 20h."
+  },
+  {
+    "id": "006-quiz-pretend",
+    "tipo": "quiz",
+    "quiz": {
+      "pergunta": "O que significa \"pretend\" em inglês?",
+      "opcoes": ["Pretender", "Fingir", "Prender", "Prevenir"],
+      "correta": 1,
+      "explicacao": "Falso amigo! Pretend = fingir. Ex.: He pretended to be sick. Para \"pretender\" (ter a intenção), use intend ou plan."
+    }
+  }
+]
