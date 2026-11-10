@@ -3,5 +3,6 @@
   "admin": 185039128,
   "pausado": false,
   "painel_url": "https://logs-tagged-settle-sleeve.trycloudflare.com",
-  "ultimo_tipo": "oferta"
+  "ultimo_tipo": "oferta",
+  "ultimo_garimpo": "2026-11-10"
 }
