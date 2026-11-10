@@ -170,7 +170,11 @@ def legenda_livro(l):
     if pago:
         linhas.append(f"💰 Por <b>{_reais(l['preco'])}</b> no Kindle")
         if l.get("kindle_unlimited"):
-            linhas.append("📚 <b>Grátis para quem assina o Kindle Unlimited</b>")
+            ku = CONFIG.get("link_kindle_unlimited")  # link de afiliado do Manoel para o KU
+            if ku:
+                linhas.append(f'📚 <b>Grátis para quem assina o <a href="{e(ku, quote=True)}">Kindle Unlimited</a></b>')
+            else:
+                linhas.append("📚 <b>Grátis para quem assina o Kindle Unlimited</b>")
         if l.get("link"):
             linhas.append(f'👉 <a href="{e(l["link"], quote=True)}"><b>VER NA AMAZON</b></a>')
     elif l.get("preco_sugerido"):
