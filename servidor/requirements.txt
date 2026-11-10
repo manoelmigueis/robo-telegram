@@ -1,0 +1,6 @@
+requests
+playwright
+fastapi
+uvicorn
+python-multipart
+tzdata

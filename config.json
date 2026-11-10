@@ -1,0 +1,54 @@
+{
+  "tag_afiliado_br": "manoeljuniorm-20",
+  "pausa_segundos": [
+    3,
+    6
+  ],
+  "nota_minima": 4.0,
+  "conferir_ate": 25,
+  "top_do_dia": 12,
+  "horarios": [
+    "08:00",
+    "09:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00",
+    "18:00",
+    "19:00",
+    "20:00",
+    "21:00",
+    "22:00"
+  ],
+  "aprovacao": false,
+  "garimpo_diario": "07:30",
+  "oferta_chance": 0.3,
+  "canal_assinatura": "@livrosepubpdfx",
+  "tags_fixas": [
+    "#ebookgratis",
+    "#kindle",
+    "#livrosgratis",
+    "#amazon"
+  ],
+  "ofertas": {
+    "categorias": [
+      "electronics",
+      "computers",
+      "videogames"
+    ],
+    "desconto_minimo": 20,
+    "nota_minima": 4.3,
+    "avaliacoes_minimas": 300,
+    "conferir_ate": 30,
+    "por_dia": 6
+  },
+  "buscas_livros": [
+    "https://www.amazon.com.br/s?bbn=5308307011&rh=n%3A5308307011%2Cp_36%3A5560478011&language=pt_BR"
+  ],
+  "paginas_por_busca": 3,
+  "posta_no_pc": true
+}

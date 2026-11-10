@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Central do Telegram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{
+  --font:'Urbanist',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --bg:#e8edf4; --mesh-a:#a9c7f3; --mesh-b:#b8e0f1; --mesh-c:#d5dbf6;
+  --glass:rgba(255,255,255,.56); --glass-2:rgba(255,255,255,.74); --glass-3:rgba(255,255,255,.92);
+  --rim:rgba(255,255,255,.8); --line:rgba(15,26,43,.09); --line-2:rgba(15,26,43,.17); --soft:rgba(15,26,43,.055);
+  --ink:#0f1a2b; --muted:#4c586b; --faint:#7a8597;
+  --tinta:#0f1d33; --on-tinta:#f3f7fd; --pri:#0f1d33; --on-pri:#f3f7fd;
+  --acento:#1a64d6; --on-acento:#ffffff; --acento-soft:#dbe7fb; --acento-ink:#134ea8;
+  --ok:#1b7f4a; --ok-soft:#dcf1e5; --aviso:#94570a; --aviso-soft:#fbeed8; --perigo:#b8322a; --perigo-soft:#f9e1dc;
+  --shadow:0 1px 0 rgba(255,255,255,.7) inset,0 24px 48px -30px rgba(20,40,80,.35);
+  --shadow-pop:0 24px 60px -18px rgba(20,40,80,.35),0 2px 6px rgba(20,40,80,.08);
+  --tg-fundo:#cfdeec; --tg-bolha:#ffffff; --tg-texto:#0f1419; --tg-link:#2481cc; --tg-sub:#5f6d7b;
+  --r-card:26px; --r-tile:20px; --dock-w:60px; --dock-x:20px; --topo:78px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0b1019; --mesh-a:rgba(31,111,235,.30); --mesh-b:rgba(56,189,248,.15); --mesh-c:rgba(99,102,241,.14);
+  --glass:rgba(255,255,255,.05); --glass-2:rgba(255,255,255,.08); --glass-3:#1a2232;
+  --rim:rgba(255,255,255,.07); --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.16); --soft:rgba(255,255,255,.06);
+  --ink:#e9eef7; --muted:#a3adbf; --faint:#7d8799;
+  --tinta:rgba(255,255,255,.08); --pri:#e9eef7; --on-pri:#0f1a2b;
+  --acento:#6aa6f5; --on-acento:#0b1424; --acento-soft:rgba(106,166,245,.16); --acento-ink:#8dbcf8;
+  --ok:#5cc896; --ok-soft:rgba(92,200,150,.14); --aviso:#e9a54a; --aviso-soft:rgba(233,165,74,.14); --perigo:#f08a68; --perigo-soft:rgba(240,138,104,.14);
+  --shadow:0 1px 0 rgba(255,255,255,.05) inset,0 24px 48px -30px rgba(0,0,0,.7);
+  --shadow-pop:0 24px 60px -18px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08);
+  --tg-fundo:#0e1621; --tg-bolha:#182533; --tg-texto:#f5f5f5; --tg-link:#6ab3f3; --tg-sub:#6d7f8f;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0b1019; --mesh-a:rgba(31,111,235,.30); --mesh-b:rgba(56,189,248,.15); --mesh-c:rgba(99,102,241,.14);
+  --glass:rgba(255,255,255,.05); --glass-2:rgba(255,255,255,.08); --glass-3:#1a2232;
+  --rim:rgba(255,255,255,.07); --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.16); --soft:rgba(255,255,255,.06);
+  --ink:#e9eef7; --muted:#a3adbf; --faint:#7d8799;
+  --tinta:rgba(255,255,255,.08); --pri:#e9eef7; --on-pri:#0f1a2b;
+  --acento:#6aa6f5; --on-acento:#0b1424; --acento-soft:rgba(106,166,245,.16); --acento-ink:#8dbcf8;
+  --ok:#5cc896; --ok-soft:rgba(92,200,150,.14); --aviso:#e9a54a; --aviso-soft:rgba(233,165,74,.14); --perigo:#f08a68; --perigo-soft:rgba(240,138,104,.14);
+  --shadow:0 1px 0 rgba(255,255,255,.05) inset,0 24px 48px -30px rgba(0,0,0,.7);
+  --shadow-pop:0 24px 60px -18px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08);
+  --tg-fundo:#0e1621; --tg-bolha:#182533; --tg-texto:#f5f5f5; --tg-link:#6ab3f3; --tg-sub:#6d7f8f;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;font:500 14.5px/1.5 var(--font);color:var(--ink);-webkit-font-smoothing:antialiased}
+body{background:var(--bg);min-height:100vh}
+body::before{content:'';position:fixed;inset:-10%;z-index:-1;pointer-events:none;
+  background:radial-gradient(closest-side,var(--mesh-a),transparent) -8% -14%/66% 70% no-repeat,
+             radial-gradient(closest-side,var(--mesh-b),transparent) 112% 8%/58% 58% no-repeat,
+             radial-gradient(closest-side,var(--mesh-c),transparent) 50% 118%/70% 60% no-repeat}
+::selection{background:var(--acento);color:var(--on-acento)}
+:focus-visible{outline:2px solid var(--acento);outline-offset:3px;border-radius:12px}
+h1,h2,h3{letter-spacing:-.025em;margin:0}
+a{color:var(--acento-ink)}
+svg.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.oculto{display:none!important}
+* {scrollbar-width:thin;scrollbar-color:var(--line-2) transparent}
+
+/* ---------- entrar ---------- */
+.login{min-height:100vh;display:grid;place-items:center;padding:24px}
+.login .card{width:min(380px,100%);text-align:center;padding:34px 30px 26px}
+.login .logo{margin:0 auto 16px;width:56px;height:56px}
+.login h1{font-size:24px;font-weight:700}
+.login p{color:var(--muted);margin:6px 0 20px}
+.login input{text-align:center}
+.login .btn{width:100%;justify-content:center;margin-top:12px;padding:12px}
+.login small{display:block;margin-top:16px;color:var(--muted);font-size:12.5px}
+
+/* ---------- topo e dock ---------- */
+header.topo{height:var(--topo);display:flex;align-items:center;gap:16px;padding:0 28px 0 calc(var(--dock-x) + var(--dock-w) + 22px)}
+.marca{display:flex;align-items:center;gap:12px;font-size:18px;font-weight:700;letter-spacing:-.02em;flex:1;min-width:0}
+.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(140deg,#2f86f6,#1a4fb8);display:grid;place-items:center;box-shadow:0 12px 24px -12px rgba(26,79,184,.8);flex:none}
+.logo svg{width:22px;height:22px;fill:#fff;stroke:none}
+.marca small{display:block;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:0}
+.pilula{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:8px 14px;font-size:13px;font-weight:700;background:var(--glass-3);border:1px solid var(--rim);box-shadow:var(--shadow);white-space:nowrap}
+.pilula .pt{width:8px;height:8px;border-radius:50%;background:var(--faint)}
+.pilula.ok .pt{background:var(--ok);box-shadow:0 0 0 4px var(--ok-soft)}
+.pilula.pausa .pt{background:var(--aviso);box-shadow:0 0 0 4px var(--aviso-soft)}
+.redondo{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--glass-3);border:1px solid var(--rim);box-shadow:var(--shadow);color:var(--ink);cursor:pointer;flex:none}
+
+.dock{position:fixed;left:var(--dock-x);top:calc(var(--topo) + 10px);z-index:20;width:var(--dock-w);background:var(--tinta);border-radius:999px;padding:10px 0;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 24px 50px -20px rgba(0,0,0,.6)}
+:root[data-theme="dark"] .dock{border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(18px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dock{border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(18px)}}
+.dock button{position:relative;width:44px;height:44px;border-radius:50%;border:0;background:transparent;color:rgba(243,247,253,.74);display:grid;place-items:center;cursor:pointer;transition:background .2s var(--ease),color .2s;font:inherit}
+.dock button svg.i{width:20px;height:20px}
+.dock button:hover{background:rgba(255,255,255,.1);color:#fff}
+.dock button[aria-current="page"]{background:rgba(255,255,255,.16);color:#fff}
+.dock button[aria-current="page"]::after{content:'';position:absolute;right:-4px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:#6aa6f5}
+.dock .rot{position:absolute;left:calc(100% + 12px);top:50%;transform:translate(-4px,-50%);background:#0f1d33;color:#f3f7fd;font-size:12.5px;font-weight:600;padding:6px 10px;border-radius:10px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s var(--ease)}
+.dock button:hover .rot,.dock button:focus-visible .rot{opacity:1;transform:translate(0,-50%)}
+.dock hr{width:26px;border:0;border-top:1px solid rgba(255,255,255,.14);margin:4px 0}
+
+main.wrap{max-width:1180px;padding:6px 28px 80px calc(var(--dock-x) + var(--dock-w) + 30px)}
+.titulo{margin:8px 0 22px;display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.titulo>div{flex:1;min-width:240px}
+.titulo h1{font-size:clamp(28px,3.4vw,42px);line-height:1.05;letter-spacing:-.035em;font-weight:700}
+.titulo p{color:var(--muted);margin:8px 0 0;font-size:15px;max-width:62ch}
+.secao{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;display:flex;align-items:center;gap:8px}
+.secao .conta-s{margin-left:auto;text-transform:none;letter-spacing:0;font-weight:600}
+
+/* ---------- vidro ---------- */
+.card{background:var(--glass);border:1px solid var(--rim);box-shadow:var(--shadow);backdrop-filter:blur(18px) saturate(1.15);-webkit-backdrop-filter:blur(18px) saturate(1.15);border-radius:var(--r-card);padding:22px;margin-bottom:18px}
+.grade{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.criar-grade{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.85fr);gap:18px;align-items:start}
+.grudar{position:sticky;top:18px}
+
+/* ---------- controles ---------- */
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:10px 18px;font:600 14px var(--font);background:var(--glass-2);border:1px solid var(--line-2);color:var(--ink);cursor:pointer;transition:background .2s var(--ease),border-color .2s,transform .15s var(--ease);text-decoration:none;white-space:nowrap}
+.btn:hover{background:var(--glass-3);border-color:var(--ink)}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.55;cursor:wait}
+.btn.pri{background:var(--pri);border-color:var(--pri);color:var(--on-pri)}
+.btn.pri:hover{filter:brightness(1.15)}
+.btn.acento{background:var(--acento);border-color:var(--acento);color:var(--on-acento)}
+.btn.acento:hover{filter:brightness(1.08)}
+.btn.perigo{background:transparent;border-color:var(--perigo);color:var(--perigo)}
+.btn.perigo:hover{background:var(--perigo-soft)}
+.btn.peq{padding:7px 13px;font-size:13px}
+.btn svg.i{width:17px;height:17px}
+.acoes{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px}
+label.rot{display:block;font-size:13px;font-weight:600;color:var(--muted);margin:16px 0 6px}
+input,select,textarea{width:100%;border-radius:999px;border:1px solid var(--line-2);background:var(--glass-3);padding:11px 16px;color:var(--ink);font:500 14.5px var(--font)}
+textarea{border-radius:18px;min-height:190px;resize:vertical;line-height:1.55;padding:12px 16px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--acento);box-shadow:0 0 0 4px var(--acento-soft)}
+input[type=file]{padding:8px 10px;border-radius:16px}
+input[type=file]::file-selector-button{border:0;border-radius:999px;background:var(--soft);color:var(--ink);font:600 13px var(--font);padding:7px 12px;margin-right:10px;cursor:pointer}
+.linha{display:flex;gap:12px;flex-wrap:wrap}
+.linha>*{flex:1 1 200px}
+.dica{font-size:12.5px;color:var(--muted);margin-top:6px}
+.nota{background:var(--soft);border-radius:14px;padding:10px 14px;font-size:13px;color:var(--muted);margin-top:12px}
+
+.seg{display:flex;background:var(--soft);border-radius:999px;padding:5px;gap:2px;flex-wrap:wrap}
+.seg button{flex:1 1 auto;border:0;background:transparent;border-radius:999px;padding:9px 14px;color:var(--muted);font:600 13.5px var(--font);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap}
+.seg button svg.i{width:16px;height:16px}
+.seg button[aria-pressed="true"]{background:var(--glass-3);color:var(--ink);box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 6px 16px -8px rgba(20,40,80,.4)}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:8px 14px;font-size:13.5px;font-weight:600;background:var(--glass-2);border:1px solid var(--line);color:var(--ink);cursor:pointer;user-select:none;transition:border-color .2s,background .2s}
+.chip:hover{border-color:var(--ink)}
+.chip input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.chip:has(input:checked){background:var(--pri);border-color:var(--pri);color:var(--on-pri)}
+.chip:has(input:focus-visible){outline:2px solid var(--acento);outline-offset:2px}
+.chip .ck{width:16px;height:16px;border-radius:50%;border:1.6px solid currentColor;display:grid;place-items:center;opacity:.7}
+.chip:has(input:checked) .ck{background:var(--acento);border-color:var(--acento);opacity:1}
+.chip:has(input:checked) .ck::after{content:'';width:6px;height:6px;border-radius:50%;background:#fff}
+button.chip{font-family:var(--font)}
+
+.ferramentas{display:flex;gap:4px;margin-bottom:6px;flex-wrap:wrap;align-items:center}
+.ferramentas button{border:1px solid var(--line);background:var(--glass-2);color:var(--ink);border-radius:10px;min-width:34px;height:32px;padding:0 9px;font:700 13px var(--font);cursor:pointer}
+.ferramentas button:hover{border-color:var(--ink)}
+.ferramentas .conta{margin-left:auto;font-size:12.5px;color:var(--muted);font-weight:600}
+.conta.passou{color:var(--perigo)}
+
+.badge{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 10px;font-size:11.5px;font-weight:700;background:var(--soft);color:var(--muted)}
+.badge.azul{background:var(--acento-soft);color:var(--acento-ink)}
+.badge.ok{background:var(--ok-soft);color:var(--ok)}
+.badge.aviso{background:var(--aviso-soft);color:var(--aviso)}
+.badge.perigo{background:var(--perigo-soft);color:var(--perigo)}
+
+/* ---------- início ---------- */
+.hero{border-radius:32px;padding:30px 32px;color:#f3f7fd;box-shadow:var(--shadow-pop);margin-bottom:18px;position:relative;overflow:hidden;
+  background:radial-gradient(120% 140% at 100% 0%,rgba(47,134,246,.55),transparent 55%),linear-gradient(120deg,#0f1d33 30%,#163a72)}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-80px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.12);box-shadow:0 0 0 40px rgba(255,255,255,.03),0 0 0 80px rgba(255,255,255,.02)}
+.hero .k{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;opacity:.8;display:flex;align-items:center;gap:8px}
+.hero .k .pt{width:8px;height:8px;border-radius:50%;background:#5cc896;box-shadow:0 0 0 4px rgba(92,200,150,.25)}
+.hero .k .pt.pausa{background:#e9a54a;box-shadow:0 0 0 4px rgba(233,165,74,.25)}
+.hero h2{font-size:clamp(26px,3vw,38px);line-height:1.08;margin:12px 0 6px;letter-spacing:-.035em;max-width:20ch}
+.hero p{margin:0;opacity:.85;max-width:52ch}
+.hero .acoes{position:relative;z-index:1}
+.hero .btn{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.22);color:#fff}
+.hero .btn:hover{background:rgba(255,255,255,.2)}
+.hero .btn.acento{background:#2f86f6;border-color:#2f86f6;color:#fff}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}
+.kpi{background:var(--glass);border:1px solid var(--rim);box-shadow:var(--shadow);backdrop-filter:blur(18px);border-radius:var(--r-tile);padding:16px 18px;display:flex;gap:14px;align-items:center}
+.kpi .ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--acento-soft);color:var(--acento-ink);flex:none}
+.kpi .n{font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1.05}
+.kpi .l{font-size:13px;color:var(--muted)}
+
+/* ---------- listas ---------- */
+.item{display:flex;gap:14px;padding:13px 0;border-top:1px solid var(--line);align-items:flex-start}
+.item:first-child{border-top:0;padding-top:2px}
+.capa{width:46px;height:64px;border-radius:10px;object-fit:cover;background:var(--soft);flex:none;display:grid;place-items:center;color:var(--muted)}
+.capa svg.i{width:20px;height:20px}
+.item .corpo{flex:1;min-width:0}
+.item .tit{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item .meta{font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:3px}
+.item .botoes{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+.item .erro{font-size:12.5px;color:var(--perigo);margin-top:4px}
+.vazio{color:var(--muted);text-align:center;padding:22px 8px;font-size:14px}
+
+/* ---------- modelos ---------- */
+.modelos{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.modelo{text-align:left;border:1px solid var(--line);background:var(--glass-2);border-radius:18px;padding:14px;cursor:pointer;font:inherit;color:var(--ink);transition:border-color .2s,transform .2s var(--ease)}
+.modelo:hover{border-color:var(--acento);transform:translateY(-2px)}
+.modelo .em{font-size:22px;line-height:1}
+.modelo b{display:block;margin-top:8px;font-size:14.5px}
+.modelo span{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.fonte{margin-top:16px;padding:16px;border-radius:20px;background:var(--soft)}
+.fonte .linha{align-items:center}
+
+/* ---------- prévia estilo Telegram ---------- */
+.tg{border-radius:22px;overflow:hidden;border:1px solid var(--rim);box-shadow:var(--shadow)}
+.tg-topo{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--tg-bolha);color:var(--tg-texto);border-bottom:1px solid var(--line)}
+.tg-topo .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(140deg,#2f86f6,#1a4fb8);display:grid;place-items:center;color:#fff;font-weight:700;font-size:14px}
+.tg-topo b{display:block;font-size:14.5px}
+.tg-topo small{color:var(--tg-sub);font-size:12px}
+.tg-chat{background:var(--tg-fundo);padding:18px 14px 20px;min-height:320px;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:18px 18px}
+.tg-bolha{background:var(--tg-bolha);color:var(--tg-texto);border-radius:14px 14px 14px 4px;max-width:420px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.tg-bolha img{display:block;width:100%;max-height:380px;object-fit:cover;background:rgba(0,0,0,.08)}
+.tg-txt{padding:9px 12px 4px;white-space:pre-wrap;word-wrap:break-word;font:400 14.5px/1.42 -apple-system,'Segoe UI',Roboto,sans-serif}
+.tg-txt a{color:var(--tg-link);text-decoration:none}
+.tg-hora{text-align:right;font-size:11.5px;color:var(--tg-sub);padding:0 10px 6px}
+.tg-botao{max-width:420px;margin-top:4px;border-radius:10px;padding:9px;text-align:center;font:600 14px -apple-system,'Segoe UI',Roboto,sans-serif;color:#fff;background:rgba(40,60,80,.42);backdrop-filter:blur(6px)}
+
+/* ---------- canais ---------- */
+.canais-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.canal-c{margin:0}
+.canal-c .cab{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+.canal-c .cab .av{width:42px;height:42px;border-radius:50%;background:linear-gradient(140deg,#2f86f6,#1a4fb8);display:grid;place-items:center;color:#fff;font-weight:700;flex:none}
+.canal-c .cab{flex-wrap:wrap}
+.canal-c .cab b{display:block;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.canal-c .cab small{color:var(--muted)}
+
+/* ---------- interruptores ---------- */
+.opcao{display:flex;align-items:center;gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+.opcao:first-of-type{border-top:0}
+.opcao .t{flex:1}
+.opcao .t b{display:block}
+.opcao .t span{font-size:13px;color:var(--muted)}
+.chave{position:relative;width:52px;height:30px;border-radius:999px;background:var(--line-2);border:0;cursor:pointer;flex:none;transition:background .2s}
+.chave::after{content:'';position:absolute;left:3px;top:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.25);transition:transform .25s var(--ease)}
+.chave[aria-checked="true"]{background:var(--acento)}
+.chave[aria-checked="true"]::after{transform:translateX(22px)}
+
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,10px);background:#0f1d33;color:#f3f7fd;padding:12px 18px;border-radius:16px;opacity:0;transition:opacity .2s,transform .2s var(--ease);pointer-events:none;max-width:calc(100% - 32px);z-index:50;font-weight:600;box-shadow:var(--shadow-pop)}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+.girando{width:16px;height:16px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:gira .8s linear infinite;display:inline-block}
+@keyframes gira{to{transform:rotate(360deg)}}
+
+/* ---------- celular ---------- */
+@media (max-width:900px){
+  .criar-grade{grid-template-columns:minmax(0,1fr)}
+  .grudar{position:static}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g2{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:760px){
+  :root{--topo:64px}
+  header.topo{padding:0 16px;gap:10px}
+  .marca{font-size:16px}
+  .marca small{display:none}
+  .pilula .txt-longo{display:none}
+  main.wrap{padding:4px 16px calc(110px + env(safe-area-inset-bottom))}
+  .dock{top:auto;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));width:auto;flex-direction:row;justify-content:space-around;border-radius:24px;padding:6px;gap:0;background:#0f1d33}
+  .dock hr{display:none}
+  .dock button{width:auto;flex:1;height:54px;border-radius:18px;display:flex;flex-direction:column;gap:2px;justify-content:center}
+  .dock button[aria-current="page"]::after{display:none}
+  .dock .rot{position:static;opacity:1;transform:none;background:none;padding:0;font-size:11px;color:inherit}
+  .card{padding:18px;border-radius:22px}
+  .hero{padding:24px 22px;border-radius:26px}
+  .canais-grade{grid-template-columns:minmax(0,1fr)}
+  #toast{bottom:calc(96px + env(safe-area-inset-bottom))}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-aviao" viewBox="0 0 24 24"><path d="M21.4 3.2 2.9 10.4c-1 .4-1 1.9.1 2.2l4.7 1.5 1.8 5.6c.3.9 1.4 1.1 2 .4l2.6-2.7 4.7 3.5c.8.6 1.9.1 2.1-.8l3-15.1c.2-1.1-.9-2-1.9-1.6Zm-3.3 4.1-8 7.3-.4 3.3-1.2-4 9.6-6.6Z"/></symbol>
+  <symbol id="i-casa" viewBox="0 0 24 24"><path d="M4 20V10l8-6 8 6v10"/><path d="M9.5 20v-6h5v6"/></symbol>
+  <symbol id="i-criar" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol>
+  <symbol id="i-agenda" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M8 2.5v4M16 2.5v4M3 9.5h18"/><path d="M8 14h3"/></symbol>
+  <symbol id="i-noar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8a6 6 0 0 1 0 8.4M7.8 16.2a6 6 0 0 1 0-8.4M19 5a10 10 0 0 1 0 14M5 19A10 10 0 0 1 5 5"/></symbol>
+  <symbol id="i-canais" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1Z"/><path d="M16 9a4 4 0 0 1 0 6"/></symbol>
+  <symbol id="i-ajustes" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></symbol>
+  <symbol id="i-sol" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-lua" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></symbol>
+  <symbol id="i-carrinho" viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20.5" r="1.2"/><circle cx="17" cy="20.5" r="1.2"/></symbol>
+  <symbol id="i-brilho" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8Z"/></symbol>
+  <symbol id="i-modelo" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+  <symbol id="i-folha" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6Z"/><path d="M14 3v4h4"/></symbol>
+  <symbol id="i-fila" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></symbol>
+  <symbol id="i-relogio" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-foguete" viewBox="0 0 24 24"><path d="M5 15c-1.5 1.3-2 5-2 5s3.7-.5 5-2"/><path d="M9 12a22 22 0 0 1 11-9c0 4-1.5 8-9 11Z"/><path d="M9 12H5l2-4h4M12 15v4l4-2v-4"/></symbol>
+  <symbol id="i-pausa" viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5v14l11-7Z"/></symbol>
+  <symbol id="i-lixo" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></symbol>
+  <symbol id="i-mais" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-picareta" viewBox="0 0 24 24"><path d="M14 4c3 0 6 2 7 5-3-1.5-6-2-9-1.5"/><path d="M13.5 6.5 4 20"/></symbol>
+</svg>
+
+<!-- ENTRAR -->
+<div id="entrar" class="login oculto">
+  <div class="card">
+    <div class="logo"><svg><use href="#i-aviao"/></svg></div>
+    <h1>Central do Telegram</h1>
+    <p>Entre com a senha do painel</p>
+    <input id="senha" type="password" autocomplete="current-password" placeholder="Senha" aria-label="Senha">
+    <button class="btn pri" onclick="entrar()">Entrar</button>
+    <small>No Telegram, abra pelo botão “Painel” do robô e entre sem senha.</small>
+  </div>
+</div>
+
+<div id="app" class="oculto">
+  <header class="topo">
+    <div class="marca">
+      <div class="logo"><svg><use href="#i-aviao"/></svg></div>
+      <div>Central do Telegram<small>seus canais, posts e ofertas</small></div>
+    </div>
+    <span id="status" class="pilula"><span class="pt"></span><span id="status_txt"></span></span>
+    <button class="redondo" id="tema" aria-label="Trocar tema claro ou escuro"><svg class="i"><use href="#i-lua"/></svg></button>
+  </header>
+
+  <nav class="dock" id="abas" aria-label="Seções">
+    <button data-aba="inicio" aria-current="page"><svg class="i"><use href="#i-casa"/></svg><span class="rot">Início</span></button>
+    <button data-aba="criar"><svg class="i"><use href="#i-criar"/></svg><span class="rot">Criar</span></button>
+    <button data-aba="agenda"><svg class="i"><use href="#i-agenda"/></svg><span class="rot">Agenda</span></button>
+    <button data-aba="noar"><svg class="i"><use href="#i-noar"/></svg><span class="rot">No ar</span></button>
+    <hr>
+    <button data-aba="canais"><svg class="i"><use href="#i-canais"/></svg><span class="rot">Canais</span></button>
+    <button data-aba="ajustes"><svg class="i"><use href="#i-ajustes"/></svg><span class="rot">Ajustes</span></button>
+  </nav>
+
+  <main class="wrap">
+
+    <!-- INÍCIO -->
+    <section data-pagina="inicio">
+      <div class="titulo"><div><h1 id="saudacao">Olá</h1><p>O que está acontecendo nos seus canais agora.</p></div></div>
+      <div class="hero">
+        <div class="k"><span class="pt" id="hero_pt"></span><span id="hero_k"></span></div>
+        <h2 id="hero_h"></h2>
+        <p id="hero_p"></p>
+        <div class="acoes">
+          <button class="btn acento" onclick="ir('criar')"><svg class="i"><use href="#i-mais"/></svg>Criar post</button>
+          <button class="btn" id="hero_proximo" onclick="postarProximo()"><svg class="i"><use href="#i-foguete"/></svg>Postar o próximo agora</button>
+          <button class="btn" id="hero_pausa" onclick="alternar('pausado')"></button>
+        </div>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="ic"><svg class="i"><use href="#i-fila"/></svg></div><div><div class="n" id="k_fila">0</div><div class="l" id="k_fila_l">na fila</div></div></div>
+        <div class="kpi"><div class="ic"><svg class="i"><use href="#i-agenda"/></svg></div><div><div class="n" id="k_agenda">0</div><div class="l">agendados</div></div></div>
+        <div class="kpi"><div class="ic"><svg class="i"><use href="#i-noar"/></svg></div><div><div class="n" id="k_noar">0</div><div class="l">posts no ar</div></div></div>
+        <div class="kpi"><div class="ic"><svg class="i"><use href="#i-check"/></svg></div><div><div class="n" id="k_postados">0</div><div class="l">já postados</div></div></div>
+      </div>
+      <div class="grade g2">
+        <div class="card"><div class="secao">Próximos da fila <a class="conta-s" href="#" onclick="ir('agenda');return false">ver tudo</a></div><div id="ini_fila"></div></div>
+        <div class="card"><div class="secao">Postados há pouco <a class="conta-s" href="#" onclick="ir('noar');return false">ver no ar</a></div><div id="ini_hist"></div></div>
+      </div>
+    </section>
+
+    <!-- CRIAR -->
+    <section data-pagina="criar" class="oculto">
+      <div class="titulo"><div><h1>Criar post</h1><p>Para qualquer canal e qualquer nicho. Comece em branco, por um link da Amazon, com a IA ou por um modelo pronto.</p></div></div>
+      <div class="criar-grade">
+        <div>
+          <div class="card">
+            <div class="secao">Começar por</div>
+            <div class="seg" id="fontes" role="group" aria-label="Como começar">
+              <button data-fonte="branco" aria-pressed="true"><svg class="i"><use href="#i-criar"/></svg>Em branco</button>
+              <button data-fonte="amazon" aria-pressed="false"><svg class="i"><use href="#i-carrinho"/></svg>Link da Amazon</button>
+              <button data-fonte="ia" aria-pressed="false"><svg class="i"><use href="#i-brilho"/></svg>Com IA</button>
+              <button data-fonte="modelos" aria-pressed="false"><svg class="i"><use href="#i-modelo"/></svg>Modelos</button>
+            </div>
+
+            <div class="fonte oculto" data-painel="amazon">
+              <label class="rot" for="am_link" style="margin-top:0">Link do produto ou do livro</label>
+              <div class="linha">
+                <input id="am_link" placeholder="https://www.amazon.com.br/dp/... ou https://amzn.to/...">
+                <button class="btn acento" style="flex:0 0 auto" id="am_btn" onclick="montarAmazon()"><svg class="i"><use href="#i-carrinho"/></svg>Montar post</button>
+              </div>
+              <label class="chip" style="margin-top:10px"><input type="checkbox" id="am_ia" checked><span class="ck"></span>Descrição escrita pela IA</label>
+              <p class="dica">Serve para livro e para qualquer produto: eletrônico, casa, moda, beleza. O robô abre a página, pega nome, foto, preço e nota, e o link sai com a sua tag <b>manoeljuniorm-20</b>. Leva de 20 segundos a 1 minuto.</p>
+            </div>
+
+            <div class="fonte oculto" data-painel="ia">
+              <label class="rot" style="margin-top:0">Tipo de post</label>
+              <div class="chips" id="ia_formatos">
+                <label class="chip"><input type="radio" name="ia_formato" value="dica" checked><span class="ck"></span>💡 Dica</label>
+                <label class="chip"><input type="radio" name="ia_formato" value="promocao"><span class="ck"></span>🔥 Promoção</label>
+                <label class="chip"><input type="radio" name="ia_formato" value="novidade"><span class="ck"></span>🆕 Novidade</label>
+                <label class="chip"><input type="radio" name="ia_formato" value="lista"><span class="ck"></span>📋 Lista</label>
+                <label class="chip"><input type="radio" name="ia_formato" value="pergunta"><span class="ck"></span>💬 Pergunta</label>
+                <label class="chip"><input type="radio" name="ia_formato" value="aviso"><span class="ck"></span>📢 Aviso</label>
+              </div>
+              <div class="linha">
+                <div><label class="rot" for="ia_nicho">Nicho do canal</label><input id="ia_nicho" list="lista_nichos" placeholder="ex.: tecnologia, receitas, fitness"></div>
+              </div>
+              <label class="rot" for="ia_tema">Sobre o que é o post</label>
+              <textarea id="ia_tema" style="min-height:90px" placeholder="Ex.: 3 apps grátis para organizar a rotina. Ou: fone JBL com 40% de desconto, bom para academia."></textarea>
+              <div class="acoes" style="margin-top:12px"><button class="btn acento" id="ia_btn" onclick="escreverIA()"><svg class="i"><use href="#i-brilho"/></svg>Escrever com IA</button></div>
+              <p class="dica">A IA não inventa preço, cupom nem link. Se quiser esses dados no post, escreva aqui no pedido.</p>
+            </div>
+
+            <div class="fonte oculto" data-painel="modelos">
+              <div class="modelos" id="lista_modelos"></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="secao">Texto</div>
+            <div class="ferramentas">
+              <button type="button" data-marca="**" title="Negrito" aria-label="Negrito">B</button>
+              <button type="button" data-marca="__" title="Itálico" aria-label="Itálico" style="font-style:italic">I</button>
+              <button type="button" data-marca="~~" title="Riscado" aria-label="Riscado" style="text-decoration:line-through">S</button>
+              <button type="button" id="b_link" title="Pôr link no texto selecionado" aria-label="Link">🔗 Link</button>
+              <span class="conta" id="conta">0 / 4096</span>
+            </div>
+            <textarea id="texto" aria-label="Texto do post" placeholder="Escreva o post. Selecione um trecho e use B, I, S ou 🔗 para formatar."></textarea>
+
+            <div class="linha">
+              <div><label class="rot" for="foto">Foto do computador ou celular</label><input id="foto" type="file" accept="image/*"></div>
+              <div><label class="rot" for="foto_url">ou link da foto</label><input id="foto_url" placeholder="https://...jpg"></div>
+            </div>
+            <div class="linha">
+              <div><label class="rot" for="botao_texto">Texto do botão (opcional)</label><input id="botao_texto" placeholder="🛒 VER OFERTA"></div>
+              <div><label class="rot" for="botao_url">Link do botão</label><input id="botao_url" placeholder="https://..."></div>
+            </div>
+            <p class="dica" id="aviso_tag"></p>
+          </div>
+
+          <div class="card">
+            <div class="secao">Onde e quando</div>
+            <label class="rot" style="margin-top:0">Canais</label>
+            <div class="chips" id="escolha_canais"></div>
+            <div class="chips" id="escolha_nichos" style="margin-top:10px"></div>
+
+            <label class="rot">Quando</label>
+            <div class="seg" id="modos" role="group" aria-label="Quando postar">
+              <button data-modo="agora" aria-pressed="true">Agora</button>
+              <button data-modo="agendar" aria-pressed="false">Agendar</button>
+              <button data-modo="fila" aria-pressed="false">Próximo horário livre</button>
+            </div>
+            <div id="campo_quando" class="oculto"><label class="rot" for="quando">Dia e hora</label><input id="quando" type="datetime-local"></div>
+            <label class="rot" for="expira">Apagar sozinho depois de (horas)</label>
+            <input id="expira" type="number" min="0" step="0.5" placeholder="Em branco = nunca apaga">
+
+            <div class="acoes">
+              <button class="btn acento" id="enviar" onclick="criarPost()"><svg class="i"><use href="#i-aviao"/></svg><span>Postar agora</span></button>
+              <button class="btn" onclick="limpar()">Limpar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grudar">
+          <div class="secao">Como vai aparecer</div>
+          <div class="tg">
+            <div class="tg-topo"><div class="av" id="pv_av">C</div><div><b id="pv_nome">Seu canal</b><small>canal</small></div></div>
+            <div class="tg-chat">
+              <div class="tg-bolha">
+                <div id="pv_foto"></div>
+                <div class="tg-txt" id="previa"></div>
+                <div class="tg-hora" id="pv_hora"></div>
+              </div>
+              <div class="tg-botao oculto" id="pv_botao"></div>
+            </div>
+          </div>
+          <p class="dica">Cada canal recebe o seu @ e as hashtags próprias dele, que você define em Canais.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AGENDA -->
+    <section data-pagina="agenda" class="oculto">
+      <div class="titulo"><div><h1>Agenda e fila</h1><p>A fila automática solta um post em cada horário. Os agendados saem na hora marcada.</p></div></div>
+      <div class="card"><div class="secao">Agendados <span class="conta-s" id="c_agendados"></span></div><div id="lista_agendados"></div></div>
+      <div class="card"><div class="secao">Fila automática <span class="conta-s" id="c_fila"></span></div><div id="lista_fila"></div></div>
+      <div class="card"><div class="secao">Histórico</div><div id="lista_historico"></div></div>
+    </section>
+
+    <!-- NO AR -->
+    <section data-pagina="noar" class="oculto">
+      <div class="titulo"><div><h1>No ar</h1><p>Os posts do robô que estão nos canais agora. Dá para apagar qualquer um.</p></div></div>
+      <div class="card">
+        <div class="secao">Apagar qualquer mensagem pelo link</div>
+        <div class="linha">
+          <input id="link_apagar" placeholder="https://t.me/livrosepubpdfx/1234" aria-label="Link da mensagem">
+          <button class="btn perigo" style="flex:0 0 auto" onclick="apagarLink()"><svg class="i"><use href="#i-lixo"/></svg>Apagar</button>
+        </div>
+        <p class="dica">No Telegram, toque e segure no post e escolha “Copiar link”.</p>
+      </div>
+      <div class="card"><div class="secao">Postados pelo robô <span class="conta-s" id="c_noar"></span></div><div id="lista_noar"></div></div>
+    </section>
+
+    <!-- CANAIS -->
+    <section data-pagina="canais" class="oculto">
+      <div class="titulo"><div><h1>Canais</h1><p>Cada canal tem o seu nicho, o seu @ na assinatura e as suas hashtags.</p></div></div>
+      <div class="card">
+        <div class="secao">Adicionar canal</div>
+        <div class="linha">
+          <input id="novo_canal" placeholder="@meucanal ou https://t.me/meucanal" aria-label="Canal novo">
+          <button class="btn pri" style="flex:0 0 auto" onclick="addCanal()"><svg class="i"><use href="#i-mais"/></svg>Adicionar</button>
+        </div>
+        <p class="dica">Antes, ponha o robô como administrador do canal, com permissão de <b>postar</b> e de <b>apagar mensagens</b>.</p>
+      </div>
+      <div class="canais-grade" id="lista_canais"></div>
+      <datalist id="lista_nichos"></datalist>
+    </section>
+
+    <!-- AJUSTES -->
+    <section data-pagina="ajustes" class="oculto">
+      <div class="titulo"><div><h1>Ajustes</h1><p>Como o robô posta sozinho.</p></div></div>
+      <div class="grade g2">
+        <div class="card">
+          <div class="secao">Postagem automática</div>
+          <div class="opcao"><div class="t"><b>Automático ligado</b><span>Posta um livro ou oferta da fila em cada horário.</span></div><button class="chave" id="ch_auto" role="switch" aria-label="Automático" onclick="alternar('pausado')"></button></div>
+          <div class="opcao"><div class="t"><b>Pedir minha aprovação</b><span>Em cada horário, o robô te manda a prévia no Telegram e espera o “Publicar”.</span></div><button class="chave" id="ch_aprov" role="switch" aria-label="Aprovação" onclick="alternar('aprovacao')"></button></div>
+          <div class="opcao"><div class="t"><b>Garimpar agora</b><span>Busca livros grátis e ofertas novas na Amazon (uns 5 minutos).</span></div><button class="btn peq" id="botao_garimpo" onclick="garimpar()"><svg class="i"><use href="#i-picareta"/></svg>Garimpar</button></div>
+        </div>
+        <div class="card">
+          <div class="secao">Horários e validade</div>
+          <label class="rot" for="horarios" style="margin-top:0">Horários gerais (para os canais sem horário próprio)</label>
+          <input id="horarios" placeholder="08:00 09:00 10:00">
+          <label class="rot" for="expira_auto">Apagar posts automáticos depois de (horas)</label>
+          <input id="expira_auto" type="number" min="0" step="1" placeholder="Em branco = nunca apaga">
+          <p class="dica">Promoção de Kindle costuma durar de 1 a 5 dias. Com 48, o post some do canal 2 dias depois.</p>
+          <div class="acoes"><button class="btn pri" onclick="salvarAjustes()">Salvar</button></div>
+        </div>
+      </div>
+      <div class="card"><div class="secao">Abrir de fora do PC</div><p class="dica" id="link_internet" style="margin:0"></p></div>
+    </section>
+  </main>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+let dados = null, modo = "agora", fotoLocal = "";
+const $ = (id) => document.getElementById(id);
+const ico = (n) => `<svg class="i"><use href="#i-${n}"/></svg>`;
+function toast(msg) { const t = $("toast"); t.textContent = msg; t.classList.add("on"); clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove("on"), 4000); }
+function esc(s) { return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function dataBR(s) { if (!s) return ""; const [d, h] = s.split(" "); const [, m, dia] = d.split("-"); return `${dia}/${m} ${(h || "").slice(0, 5)}`; }
+
+// ---------- tema ----------
+function aplicarTema(t) { if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
+  const escuro = t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  $("tema").innerHTML = ico(escuro ? "sol" : "lua"); }
+let tema = ""; try { tema = localStorage.getItem("tema") || ""; } catch (e) {}
+const TG = window.Telegram && window.Telegram.WebApp;
+if (!tema && TG && TG.initData && TG.colorScheme) tema = TG.colorScheme;
+aplicarTema(tema);
+$("tema").onclick = () => { const escuro = document.documentElement.dataset.theme ? document.documentElement.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  tema = escuro ? "light" : "dark"; aplicarTema(tema); try { localStorage.setItem("tema", tema); } catch (e) {} };
+
+// ---------- acesso ----------
+let chave = ""; try { chave = sessionStorage.getItem("chave") || ""; } catch (e) {}
+function guardarChave(j) { if (j && j.token) { chave = j.token; try { sessionStorage.setItem("chave", chave); } catch (e) {} } }
+async function api(caminho, corpo) {
+  const op = { method: corpo ? "POST" : "GET", headers: {} };
+  if (chave) op.headers["X-Painel"] = chave;
+  if (corpo instanceof FormData) op.body = corpo;
+  else if (corpo) { op.body = JSON.stringify(corpo); op.headers["Content-Type"] = "application/json"; }
+  const r = await fetch(caminho, op);
+  const j = await r.json().catch(() => ({}));
+  if (r.status === 401 && caminho !== "/api/login") { mostrarLogin(); throw new Error("login"); }
+  if (!r.ok) { toast(j.erro || "Deu erro."); throw new Error(j.erro); }
+  if (j.msg) toast(j.msg);
+  return j;
+}
+function mostrarLogin() { $("app").classList.add("oculto"); $("entrar").classList.remove("oculto"); $("senha").focus(); }
+async function entrar() { try { guardarChave(await api("/api/login", { senha: $("senha").value })); $("entrar").classList.add("oculto"); carregar(); } catch (e) {} }
+async function entrarPeloTelegram() {
+  if (!TG || !TG.initData) return false;
+  TG.ready(); TG.expand();
+  try { guardarChave(await api("/api/login-telegram", { initData: TG.initData })); return true; } catch (e) { return false; }
+}
+$("senha").addEventListener("keydown", e => { if (e.key === "Enter") entrar(); });
+
+// ---------- navegação ----------
+function ir(aba) {
+  document.querySelectorAll("#abas button").forEach(b => { if (b.dataset.aba === aba) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current"); });
+  document.querySelectorAll("[data-pagina]").forEach(s => s.classList.toggle("oculto", s.dataset.pagina !== aba));
+  try { localStorage.setItem("aba", aba); } catch (e) {}
+  scrollTo({ top: 0 });
+}
+$("abas").addEventListener("click", e => { const b = e.target.closest("button"); if (b) ir(b.dataset.aba); });
+
+// ---------- texto do post ----------
+function md(t) {
+  const links = [];
+  t = esc(t).replace(/\[([^\]\n]+)\]\(((?:https?|tg):\/\/[^\s)]+)\)/g, (_, txt, url) => { links.push(url); return `\u0000${links.length - 1}\u0001${txt}\u0002`; });
+  t = t.replace(/\*\*(.+?)\*\*/gs, "<b>$1</b>").replace(/__(.+?)__/gs, "<i>$1</i>").replace(/~~(.+?)~~/gs, "<s>$1</s>");
+  return t.replace(/\u0000(\d+)\u0001(.*?)\u0002/gs, (_, i, txt) => `<a href="${links[+i]}" target="_blank" rel="noopener">${txt}</a>`);
+}
+function visivel(t) { return t.trim().replace(/\[([^\]\n]+)\]\(((?:https?|tg):\/\/[^\s)]+)\)/g, "$1").replace(/\*\*|__|~~/g, "").length; }
+
+function previa() {
+  const txt = $("texto").value;
+  $("previa").innerHTML = md(txt) || '<span style="color:var(--tg-sub)">A prévia do post aparece aqui.</span>';
+  const temFoto = !!($("foto").files.length || $("foto_url").value.trim());
+  const limite = temFoto ? 1024 : 4096, n = visivel(txt);
+  $("conta").textContent = `${n} / ${limite}`; $("conta").classList.toggle("passou", n > limite);
+  const src = fotoLocal || $("foto_url").value.trim();
+  $("pv_foto").innerHTML = src ? `<img src="${esc(src)}" alt="Foto do post">` : "";
+  const bt = $("botao_texto").value.trim();
+  $("pv_botao").classList.toggle("oculto", !bt); $("pv_botao").textContent = bt;
+  const marcado = document.querySelector("#escolha_canais input:checked");
+  const canal = marcado && dados ? dados.canais.find(c => String(c.id) === marcado.value) : null;
+  $("pv_nome").textContent = canal ? canal.nome : "Seu canal";
+  $("pv_av").textContent = (canal ? canal.nome : "C").trim().charAt(0).toUpperCase();
+  $("pv_hora").textContent = new Date().toTimeString().slice(0, 5);
+  const urls = (txt.match(/https?:\/\/[^\s)]*amazon\.com\.br[^\s)]*/g) || []).concat($("botao_url").value.includes("amazon.com.br") ? [$("botao_url").value] : []);
+  const semTag = urls.filter(u => !u.includes("tag=manoeljuniorm-20"));
+  $("aviso_tag").innerHTML = semTag.length ? '<span class="badge perigo">⚠️ Tem link da Amazon sem a sua tag manoeljuniorm-20. Sem ela, a comissão se perde.</span>' : "";
+}
+["texto", "botao_texto", "botao_url", "foto_url"].forEach(id => $(id).addEventListener("input", previa));
+$("foto").addEventListener("change", () => { if (fotoLocal) URL.revokeObjectURL(fotoLocal); fotoLocal = $("foto").files[0] ? URL.createObjectURL($("foto").files[0]) : ""; previa(); });
+$("escolha_canais").addEventListener("change", previa);
+
+document.querySelectorAll(".ferramentas [data-marca]").forEach(b => b.onclick = () => envolver(b.dataset.marca, b.dataset.marca));
+$("b_link").onclick = () => {
+  const url = prompt("Cole o link (https://...)"); if (!url) return;
+  if (!/^(https?|tg):\/\//.test(url.trim())) { toast("O link precisa começar com https://"); return; }
+  envolver("[", `](${url.trim()})`, "texto do link");
+};
+function envolver(a, b, padrao) {
+  const t = $("texto"), i = t.selectionStart, f = t.selectionEnd, sel = t.value.slice(i, f) || padrao || "texto";
+  t.value = t.value.slice(0, i) + a + sel + b + t.value.slice(f);
+  t.focus(); t.setSelectionRange(i + a.length, i + a.length + sel.length); previa();
+}
+
+// ---------- começar por ----------
+$("fontes").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  document.querySelectorAll("#fontes button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  document.querySelectorAll("[data-painel]").forEach(p => p.classList.toggle("oculto", p.dataset.painel !== b.dataset.fonte));
+  if (b.dataset.fonte === "ia" && !$("ia_nicho").value) { const c = canalMarcado(); if (c && c.nicho) $("ia_nicho").value = c.nicho; }
+});
+function canalMarcado() { const m = document.querySelector("#escolha_canais input:checked"); return m && dados ? dados.canais.find(c => String(c.id) === m.value) : null; }
+function preencher(j, substituir = true) {
+  if (!substituir && $("texto").value.trim() && !confirm("Trocar o texto que já está escrito?")) return false;
+  $("texto").value = j.texto || "";
+  if ("foto" in j) { $("foto_url").value = j.foto || ""; $("foto").value = ""; fotoLocal = ""; }
+  if ("botao_texto" in j) $("botao_texto").value = j.botao_texto || "";
+  if ("botao_url" in j) $("botao_url").value = j.botao_url || "";
+  previa(); return true;
+}
+async function ocupado(botao, texto, tarefa) {
+  const antes = botao.innerHTML; botao.disabled = true; botao.innerHTML = `<span class="girando"></span>${texto}`;
+  try { return await tarefa(); } catch (e) {} finally { botao.disabled = false; botao.innerHTML = antes; }
+}
+async function montarAmazon() {
+  if (!$("am_link").value.trim()) { toast("Cole o link do produto."); return; }
+  if ($("texto").value.trim() && !confirm("Trocar o texto que já está escrito?")) return;
+  await ocupado($("am_btn"), "Lendo a Amazon...", async () => {
+    const j = await api("/api/criar/amazon", { link: $("am_link").value, ia: $("am_ia").checked });
+    preencher(j); $("texto").scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+}
+async function escreverIA() {
+  if ($("texto").value.trim() && !confirm("Trocar o texto que já está escrito?")) return;
+  await ocupado($("ia_btn"), "Escrevendo...", async () => {
+    const formato = document.querySelector("input[name=ia_formato]:checked").value;
+    const j = await api("/api/criar/ia", { tema: $("ia_tema").value, formato, nicho: $("ia_nicho").value });
+    preencher({ texto: j.texto }); $("texto").scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+}
+
+const MODELOS = [
+  { em: "⚡", nome: "Oferta relâmpago", desc: "Produto com desconto", botao: "🛒 VER OFERTA",
+    texto: "⚡ **OFERTA RELÂMPAGO**\n\n**Nome do produto**\n\nPara quem é e o principal benefício, em 1 ou 2 frases.\n\n💰 De ~~R$ 000,00~~ por **R$ 000,00**\n⏳ Só enquanto durar o estoque\n\n#oferta #promocao" },
+  { em: "🎟️", nome: "Cupom de desconto", desc: "Código para usar na loja", botao: "🛍️ USAR O CUPOM",
+    texto: "🎟️ **CUPOM DE DESCONTO**\n\nLoja ou produto: **00% OFF**\n\nCódigo: **CUPOM**\nVálido até dd/mm\n\n👇 Garanta antes que acabe\n\n#cupom #desconto" },
+  { em: "📖", nome: "Livro grátis", desc: "E-book de graça por tempo limitado", botao: "📲 BAIXAR GRÁTIS NA AMAZON",
+    texto: "📖 **Título do livro**\n✍️ Autor\n\nDuas frases que dão vontade de ler, sem spoiler.\n\n📄 000 páginas\n\n💰 De ~~R$ 00,00~~ por **R$ 0,00**\n🕐 **GRÁTIS POR TEMPO LIMITADO** 🔥\n\n#ebookgratis #kindle" },
+  { em: "📋", nome: "Lista de indicações", desc: "Top 3 ou top 5 do nicho", botao: "",
+    texto: "📋 **3 indicações de TEMA**\n\n1. **Item um**, por que vale a pena\n2. **Item dois**, por que vale a pena\n3. **Item três**, por que vale a pena\n\n🔖 Salve para não perder" },
+  { em: "💡", nome: "Dica rápida", desc: "Conteúdo útil do nicho", botao: "",
+    texto: "💡 **DICA DO DIA**\n\nFrase de gancho que prende a atenção.\n\nExplique a dica em 2 ou 3 linhas curtas.\n\n👉 Mande para alguém que precisa ver isso" },
+  { em: "💬", nome: "Pergunta", desc: "Para o público comentar", botao: "",
+    texto: "💬 **PERGUNTA DO DIA**\n\nSua pergunta aqui?\n\nResponde nos comentários 👇" },
+  { em: "📢", nome: "Aviso do canal", desc: "Recado para os seguidores", botao: "",
+    texto: "📢 **AVISO**\n\nSeu recado aqui, curto e direto.\n\nObrigado por estar com a gente 💙" },
+  { em: "🆕", nome: "Lançamento", desc: "Novidade ou pré-venda", botao: "👀 VER LANÇAMENTO",
+    texto: "🆕 **ACABOU DE CHEGAR**\n\n**Nome do lançamento**\n\nO que tem de novo, em 1 ou 2 frases.\n\n📅 Disponível a partir de dd/mm\n\n#lancamento #novidade" },
+];
+$("lista_modelos").innerHTML = MODELOS.map((m, i) => `<button class="modelo" data-i="${i}"><span class="em">${m.em}</span><b>${esc(m.nome)}</b><span>${esc(m.desc)}</span></button>`).join("");
+$("lista_modelos").addEventListener("click", e => {
+  const b = e.target.closest(".modelo"); if (!b) return; const m = MODELOS[+b.dataset.i];
+  if (preencher({ texto: m.texto, botao_texto: m.botao }, false)) { toast("Modelo aplicado. Troque os trechos de exemplo."); $("texto").focus(); }
+});
+
+// ---------- quando ----------
+$("modos").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return; modo = b.dataset.modo;
+  document.querySelectorAll("#modos button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  $("campo_quando").classList.toggle("oculto", modo !== "agendar");
+  $("enviar").querySelector("span").textContent = { agora: "Postar agora", agendar: "Agendar", fila: "Pôr na fila" }[modo];
+});
+async function criarPost() {
+  const ids = [...document.querySelectorAll("#escolha_canais input:checked")].map(i => i.value);
+  if (modo === "agora" && ids.length && !confirm(`Postar agora em ${ids.length} canal(is)?`)) return;
+  const f = new FormData();
+  ["texto", "foto_url", "botao_texto", "botao_url", "quando"].forEach(id => f.append(id, $(id).value));
+  if ($("foto").files[0]) f.append("foto", $("foto").files[0]);
+  f.append("canais", ids.join(",")); f.append("modo", modo); f.append("expira_horas", $("expira").value);
+  await ocupado($("enviar"), modo === "agora" ? "Postando..." : "Salvando...", async () => { await api("/api/posts", f); limpar(true); carregar(); });
+}
+function limpar(semPerguntar) {
+  if (!semPerguntar && $("texto").value.trim() && !confirm("Apagar o que está escrito?")) return;
+  ["texto", "foto_url", "botao_texto", "botao_url", "quando", "expira", "am_link"].forEach(id => $(id).value = "");
+  $("foto").value = ""; fotoLocal = ""; previa();
+}
+
+// ---------- listas ----------
+const STATUS = { fila: ["na fila", "azul"], agendado: ["agendado", "azul"], postado: ["postado", "ok"], cancelado: ["cancelado", ""],
+  expirou: ["promoção acabou", "aviso"], erro: ["erro", "perigo"], publicando: ["postando", "aviso"] };
+function capa(p) { return p.foto && p.foto.startsWith("http") ? `<img class="capa" src="${esc(p.foto)}" alt="" loading="lazy">` : `<div class="capa">${ico(p.origem === "oferta" ? "carrinho" : p.origem === "livro" ? "folha" : "criar")}</div>`; }
+function itemPost(p, botoes) {
+  const tipo = { manual: "✍️ manual", livro: "📖 livro", oferta: "🛒 oferta" }[p.origem] || p.origem;
+  const [st, cor] = STATUS[p.status] || [p.status, ""];
+  return `<div class="item">${capa(p)}<div class="corpo">
+    <div class="tit">${esc(p.titulo || "(sem título)")}</div>
+    <div class="meta"><span class="badge">${tipo}</span><span class="badge ${cor}">${esc(st)}</span>${p.agendado_para ? `<span>🕐 ${dataBR(p.agendado_para)}</span>` : ""}${p.expira_horas ? `<span>apaga em ${p.expira_horas}h</span>` : ""}</div>
+    ${p.erro ? `<div class="erro">${esc(p.erro)}</div>` : ""}
+    ${botoes ? `<div class="botoes">${botoes}</div>` : ""}</div></div>`;
+}
+const vazio = (t) => `<div class="vazio">${t}</div>`;
+const acoesPost = (p) => `<button class="btn peq" onclick="agora(${p.id})">${ico("foguete")}Postar agora</button><button class="btn peq perigo" onclick="cancelar(${p.id})">Cancelar</button>`;
+function linkMsg(e) { return e.chat.startsWith("@") ? `https://t.me/${e.chat.slice(1)}/${e.message_id}` : `https://t.me/c/${e.chat.replace("-100", "")}/${e.message_id}`; }
+
+function render() {
+  const d = dados, a = d.ajustes;
+  const livros = d.fila.filter(p => p.origem === "livro").length, ofertas = d.fila.filter(p => p.origem === "oferta").length;
+  $("status").className = "pilula " + (a.pausado ? "pausa" : "ok");
+  $("status_txt").innerHTML = a.garimpando ? "Garimpando" : a.pausado ? 'Pausado<span class="txt-longo"> · automático</span>' : `No ar<span class="txt-longo"> · próximo ${esc(d.proxima)}</span>`;
+
+  const h = new Date().getHours();
+  $("saudacao").textContent = (h < 12 ? "Bom dia" : h < 18 ? "Boa tarde" : "Boa noite") + ", Manoel";
+  $("hero_pt").classList.toggle("pausa", a.pausado);
+  $("hero_k").textContent = a.pausado ? "Automático pausado" : (a.aprovacao ? "Automático ligado · com aprovação" : "Automático ligado");
+  $("hero_h").textContent = a.pausado ? `${d.fila.length} posts esperando na fila` : `Próximo post às ${d.proxima}`;
+  $("hero_p").textContent = a.pausado ? "Nada sai sozinho enquanto estiver pausado. Você ainda pode postar na hora ou agendar."
+    : `${d.fila.length} posts na fila (${livros} livros e ${ofertas} ofertas). Um sai em cada horário.`;
+  $("hero_pausa").innerHTML = a.pausado ? ico("play") + "Ligar automático" : ico("pausa") + "Pausar automático";
+  $("hero_proximo").disabled = !d.fila.length;
+  $("k_fila").textContent = d.fila.length; $("k_fila_l").textContent = `na fila · ${livros} livros, ${ofertas} ofertas`;
+  $("k_agenda").textContent = d.agendados.length; $("k_noar").textContent = d.no_ar.length; $("k_postados").textContent = d.postados;
+  $("ini_fila").innerHTML = d.fila.slice(0, 4).map(p => itemPost(p)).join("") || vazio("Fila vazia. Use “Garimpar” em Ajustes.");
+  const recentes = d.historico.filter(p => p.status === "postado").slice(0, 4);
+  $("ini_hist").innerHTML = recentes.map(p => itemPost(p)).join("") || vazio("Nada postado ainda.");
+
+  const marcados = new Set([...document.querySelectorAll("#escolha_canais input:checked")].map(i => i.value));
+  const primeira = !$("escolha_canais").children.length;
+  $("escolha_canais").innerHTML = d.canais.map(c => `<label class="chip"><input type="checkbox" value="${c.id}" ${(primeira ? c.auto : marcados.has(String(c.id))) ? "checked" : ""}><span class="ck"></span>${esc(c.nome)}${c.nicho ? ` <span style="font-weight:500">· ${esc(c.nicho)}</span>` : ""}</label>`).join("") || vazio("Adicione um canal em Canais.");
+  const nichos = [...new Set(d.canais.map(c => (c.nicho || "").trim()).filter(Boolean))];
+  $("lista_nichos").innerHTML = nichos.map(n => `<option value="${esc(n)}">`).join("");
+  $("escolha_nichos").innerHTML = nichos.length ? `<span class="dica" style="margin:0 4px 0 0;align-self:center">Marcar nicho:</span>` + nichos.map(n => `<button class="chip" data-nicho="${esc(n)}">${esc(n)}</button>`).join("") : "";
+
+  $("c_agendados").textContent = d.agendados.length || ""; $("c_fila").textContent = d.fila.length ? `${livros} livros · ${ofertas} ofertas` : "";
+  $("lista_agendados").innerHTML = d.agendados.map(p => itemPost(p, acoesPost(p))).join("") || vazio("Nada agendado.");
+  $("lista_fila").innerHTML = d.fila.map(p => itemPost(p, acoesPost(p))).join("") || vazio("Fila vazia. Use “Garimpar” em Ajustes.");
+  $("lista_historico").innerHTML = d.historico.map(p => itemPost(p)).join("") || vazio("Nada ainda.");
+
+  $("c_noar").textContent = d.no_ar.length || "";
+  $("lista_noar").innerHTML = d.no_ar.map(e => `<div class="item"><div class="capa">${ico("noar")}</div><div class="corpo">
+      <div class="tit">${esc(e.titulo || "post #" + e.post_id)}</div>
+      <div class="meta"><span class="badge azul">${esc(e.canal_nome || e.chat)}</span><span>${dataBR(e.enviado_em)}</span>${e.expira_em ? `<span>some em ${dataBR(e.expira_em)}</span>` : ""}</div>
+      <div class="botoes"><a class="btn peq" target="_blank" rel="noopener" href="${linkMsg(e)}">Ver no Telegram</a>
+        <button class="btn peq perigo" onclick="apagarEnvio(${e.id})">${ico("lixo")}Apagar</button></div></div></div>`).join("") || vazio("Nenhum post do robô no ar.");
+
+  if (!document.querySelector("#lista_canais :focus")) $("lista_canais").innerHTML = d.canais.map(c => {
+    const rec = (c.recebe ?? "livro,oferta").split(",");
+    const proprios = (c.horarios || "").trim(), gerais = (a.horarios || []).join(" ");
+    const selo = !c.auto ? '<span class="badge">automático desligado</span>'
+      : a.pausado ? '<span class="badge aviso">automático pausado geral</span>'
+      : `<span class="badge ok">automático · ${proprios ? proprios.split(" ").length + " horários próprios" : "horários gerais"}</span>`;
+    return `<div class="card canal-c" data-canal="${c.id}">
+      <div class="cab"><div class="av">${esc(c.nome.trim().charAt(0).toUpperCase())}</div><div style="min-width:150px;flex:1"><b>${esc(c.nome)}</b><small>${esc(c.chat)}</small></div>${selo}</div>
+      <div class="linha">
+        <div><label class="rot">Nicho</label><input name="nicho" list="lista_nichos" value="${esc(c.nicho)}" placeholder="ex.: livros, tecnologia"></div>
+        <div><label class="rot">@ na assinatura</label><input name="assinatura" value="${esc(c.assinatura)}" placeholder="${esc(c.chat.startsWith("@") ? c.chat : "@seucanal")}"></div>
+      </div>
+      <label class="rot">Hashtags próprias</label><input name="tags" value="${esc(c.tags)}" placeholder="#tecnologia #ofertas">
+      <div class="fonte" style="margin-top:16px">
+        <div class="secao" style="margin-bottom:8px">Automático deste canal</div>
+        <div class="chips">
+          <label class="chip"><input type="checkbox" name="auto" ${c.auto ? "checked" : ""}><span class="ck"></span>Postar sozinho</label>
+          <label class="chip"><input type="checkbox" name="livro" ${rec.includes("livro") ? "checked" : ""}><span class="ck"></span>📖 Livros</label>
+          <label class="chip"><input type="checkbox" name="oferta" ${rec.includes("oferta") ? "checked" : ""}><span class="ck"></span>🛒 Ofertas</label>
+        </div>
+        <label class="rot">Horários deste canal</label>
+        <input name="horarios" value="${esc(proprios)}" placeholder="ex.: 09:00 13:00 19:00">
+        <p class="dica" style="margin-bottom:0">Um post em cada horário. Em branco, segue os horários gerais de Ajustes${gerais ? ` (${esc(gerais)})` : ""}. Também saem aqui os posts que você manda para a fila com este canal marcado.</p>
+      </div>
+      <div class="acoes"><button class="btn pri peq" onclick="salvarCanal(${c.id})">Salvar</button>
+        <button class="btn perigo peq" onclick="removerCanal(${c.id})">Tirar do painel</button></div></div>`;
+  }).join("") || `<div class="card">${vazio("Nenhum canal.")}</div>`;
+
+  $("ch_auto").setAttribute("aria-checked", !a.pausado); $("ch_aprov").setAttribute("aria-checked", a.aprovacao);
+  $("botao_garimpo").disabled = a.garimpando;
+  if (document.activeElement !== $("horarios")) $("horarios").value = (a.horarios || []).join(" ");
+  if (document.activeElement !== $("expira_auto")) $("expira_auto").value = a.expira_auto_horas ?? "";
+  $("link_internet").innerHTML = a.painel_url
+    ? `Endereço de agora (muda quando o robô reinicia): <a href="${esc(a.painel_url)}" target="_blank" rel="noopener">${esc(a.painel_url)}</a>. No Telegram, use o botão “Painel” do robô.`
+    : "O painel está só no PC (o túnel da Cloudflare não está ligado).";
+  previa();
+}
+$("escolha_nichos").addEventListener("click", e => {
+  const b = e.target.closest("[data-nicho]"); if (!b) return;
+  const ids = dados.canais.filter(c => (c.nicho || "").trim() === b.dataset.nicho).map(c => String(c.id));
+  document.querySelectorAll("#escolha_canais input").forEach(i => i.checked = ids.includes(i.value)); previa();
+});
+
+async function carregar() { try { dados = await api("/api/resumo"); $("app").classList.remove("oculto"); render(); } catch (e) {} }
+async function agora(id) { if (confirm("Postar agora nos canais?")) { try { await api(`/api/posts/${id}/agora`, {}); } catch (e) {} carregar(); } }
+async function postarProximo() { if (dados && dados.fila[0]) agora(dados.fila[0].id); }
+async function cancelar(id) { try { await api(`/api/posts/${id}/cancelar`, {}); } catch (e) {} carregar(); }
+async function apagarEnvio(id) { if (confirm("Apagar este post do canal? Não dá para desfazer.")) { try { await api(`/api/envios/${id}/apagar`, {}); } catch (e) {} carregar(); } }
+async function apagarLink() { if ($("link_apagar").value && confirm("Apagar essa mensagem do canal? Não dá para desfazer.")) { try { await api("/api/apagar-link", { link: $("link_apagar").value }); $("link_apagar").value = ""; } catch (e) {} carregar(); } }
+async function addCanal() { try { await api("/api/canais", { chat: $("novo_canal").value }); $("novo_canal").value = ""; } catch (e) {} carregar(); }
+async function salvarCanal(id) {
+  const box = document.querySelector(`[data-canal="${id}"]`), v = (n) => box.querySelector(`[name=${n}]`);
+  const recebe = ["livro", "oferta"].filter(t => v(t).checked).join(",");
+  try { await api(`/api/canais/${id}`, { nicho: v("nicho").value.trim(), assinatura: v("assinatura").value, tags: v("tags").value.trim(), auto: v("auto").checked, recebe, horarios: v("horarios").value }); } catch (e) {}
+  document.activeElement && document.activeElement.blur(); carregar();
+}
+async function removerCanal(id) { if (confirm("Tirar este canal do painel? (o canal não é apagado)")) { try { await api(`/api/canais/${id}`, { remover: true }); } catch (e) {} carregar(); } }
+async function alternar(campo) { try { await api("/api/ajustes", { [campo]: !dados.ajustes[campo] }); } catch (e) {} carregar(); }
+async function salvarAjustes() { try { await api("/api/ajustes", { horarios: $("horarios").value, expira_auto_horas: $("expira_auto").value }); } catch (e) {} carregar(); }
+async function garimpar() { try { await api("/api/garimpar", {}); } catch (e) {} carregar(); }
+
+try { const aba = localStorage.getItem("aba"); if (aba && document.querySelector(`[data-pagina="${aba}"]`)) ir(aba); } catch (e) {}
+previa(); entrarPeloTelegram().then(carregar);
+setInterval(() => { if (!document.hidden && dados) carregar(); }, 20000);
+</script>
+</body>
+</html>

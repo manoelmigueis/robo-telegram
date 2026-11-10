@@ -1,0 +1,43 @@
+name: Postar no canal
+
+on:
+  schedule:
+    # 08h às 22h no horário de Manaus (UTC-4) = 12h às 02h UTC
+    - cron: "7 12-23,0-2 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: robo
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  postar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements-nuvem.txt
+      - run: pip install -r requirements-nuvem.txt
+      - run: python -m playwright install --with-deps chromium
+      - name: Postar o próximo
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PYTHONUTF8: "1"
+        run: python nuvem.py postar
+      - name: Guardar a fila e o estado
+        if: always()
+        run: |
+          git config user.name "robo-nuvem"
+          git config user.email "robo-nuvem@users.noreply.github.com"
+          for f in robo.db estado.json garimpo historico_postados.json; do [ -e "$f" ] && git add -A "$f"; done
+          git diff --cached --quiet || git commit -m "robô: postagem $(date -u +%F' '%H:%M)"
+          git pull --rebase -X theirs || true
+          git push

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "painel-robo",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-u", "-X", "utf8", "painel.py"],
+      "port": 8800
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+name: Garimpar livros e ofertas
+
+on:
+  schedule:
+    # 07h30 no horário de Manaus (UTC-4) = 11h30 UTC
+    - cron: "30 11 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: robo
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  garimpar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements-nuvem.txt
+      - run: pip install -r requirements-nuvem.txt
+      - run: python -m playwright install --with-deps chromium
+      - name: Garimpar
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PYTHONUTF8: "1"
+        run: python nuvem.py garimpar
+      - name: Guardar a fila e o estado
+        if: always()
+        run: |
+          git config user.name "robo-nuvem"
+          git config user.email "robo-nuvem@users.noreply.github.com"
+          for f in robo.db estado.json garimpo historico_postados.json; do [ -e "$f" ] && git add -A "$f"; done
+          git diff --cached --quiet || git commit -m "robô: garimpo $(date -u +%F)"
+          git pull --rebase -X theirs || true
+          git push

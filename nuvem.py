@@ -1,0 +1,82 @@
+"""Robô na nuvem (GitHub Actions): roda uma vez e termina.
+
+    python nuvem.py postar    -> chamado toda hora cheia: agendados, validade e o post do horário
+    python nuvem.py garimpar  -> chamado de manhã: garimpa livros e ofertas e enche a fila
+
+O token vem dos "secrets" do GitHub (TELEGRAM_BOT_TOKEN). No PC, vem do .env.
+Sem botões de aprovação aqui: na nuvem o robô posta direto.
+"""
+import sys
+
+import banco
+import postador
+
+
+def garimpar():
+    import garimpeiro
+    postador.mudar_estado(ultimo_garimpo=banco.agora()[:10])
+    garimpeiro.garimpar_tudo()
+    n = postador.encher_fila()
+    print(f"{n} posts novos na fila.")
+    postador.avisar(f"☁️ Garimpo da nuvem: {n} posts novos na fila.")
+    return n
+
+
+def canais_desta_hora(hora_cheia):
+    """Canais no automático com algum horário nesta hora (08:00, 08:30... valem para as 08)."""
+    hh = hora_cheia[:2]
+    return [c for c in banco.canais(so_auto=True)
+            if any(h[:2] == hh for h in postador.horarios_do_canal(c))]
+
+
+def postar():
+    agora_txt = banco.agora()
+    hoje, hh = agora_txt[:10], agora_txt[11:13]
+    marca = f"{hoje} {hh}:00"
+
+    # agendados que já passaram da hora
+    for p in banco.posts(status=("agendado",)):
+        if p["agendado_para"] and p["agendado_para"] <= agora_txt:
+            postador.publicar(p["id"])
+
+    # posts com validade vencida
+    for e in banco.envios_vencidos():
+        try:
+            postador.apagar(e["chat"], e["message_id"])
+            banco.marcar_envio(e["id"], "apagado")
+        except Exception as erro:
+            print(f"[apagar] {erro}")
+            banco.marcar_envio(e["id"], "erro_apagar")
+
+    st = postador.estado()
+    if st.get("pausado"):
+        print("Automático pausado.")
+        return
+    if st.get("ultimo_horario", "")[:13] == marca[:13]:
+        print("Esta hora já foi postada.")
+        return
+    na_hora = canais_desta_hora(f"{hh}:00")
+    if not na_hora:
+        print(f"Nenhum canal tem horário às {hh}h.")
+        return
+
+    postador.mudar_estado(ultimo_horario=marca)
+    p = postador.proximo_automatico(na_hora)
+    if not p:  # fila vazia: garimpa agora mesmo e tenta de novo
+        print("Fila vazia, garimpando...")
+        garimpar()
+    for _ in range(10):  # se um item não vale mais, tenta o próximo
+        p = postador.proximo_automatico(na_hora)
+        if not p:
+            postador.avisar("☁️ A fila acabou e o garimpo não achou nada novo.")
+            return
+        if postador.publicar(p["id"], so_canais=na_hora):
+            postador.mudar_estado(ultimo_tipo=p["origem"])
+            print(f"Postado: {p.get('titulo') or p['id']}")
+            return
+
+
+if __name__ == "__main__":
+    postador.carregar_env()
+    acao = sys.argv[1] if len(sys.argv) > 1 else "postar"
+    {"postar": postar, "garimpar": garimpar}[acao]()
