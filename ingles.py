@@ -9,7 +9,8 @@ Campos de cada item em posts.json:
   id, tipo, titulo, imagens [..], corpo (HTML rico), tags [3 a 5, sem #]
   quiz: {pergunta, opcoes, correta, explicacao, descricao}
 
-    python ingles.py proximo            -> posta o próximo no canal
+    python ingles.py proximo            -> posta o próximo no canal (agora, sem olhar a hora)
+    python ingles.py agendado           -> só posta se um horário da grade venceu sem post (usado pela nuvem)
     python ingles.py previa 185039128   -> manda os próximos 6 só para esse chat (não marca como postado)
 
 Estilo e regras de conteúdo: ingles/ESTILO.md
@@ -18,6 +19,7 @@ import html
 import json
 import sys
 from contextlib import ExitStack
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import postador
@@ -142,6 +144,40 @@ def proximos(n=1):
     return [i for i in banco() if i["id"] not in feitos][:n]
 
 
+def horario_devido(agora=None):
+    """Último horário da grade (Manaus) que já passou e ainda não foi postado, ou None.
+
+    O agendamento do GitHub atrasa e às vezes pula execuções. Por isso a nuvem roda de hora
+    em hora e só posta quando um horário venceu sem post: um horário perdido sai na rodada seguinte.
+    """
+    fuso = timezone(timedelta(hours=-4))  # Manaus, sem horário de verão
+    agora = (agora or datetime.now(timezone.utc)).astimezone(fuso)
+    grade = []
+    for dia in (agora.date() - timedelta(days=1), agora.date()):
+        for h in CFG.get("horarios", ["09:00", "13:00", "19:00"]):
+            hh, mm = map(int, h.split(":"))
+            grade.append(datetime(dia.year, dia.month, dia.day, hh, mm, tzinfo=fuso))
+    vencidos = [g for g in grade if g <= agora]
+    if not vencidos:
+        return None
+    alvo = max(vencidos)
+    ultimo = estado().get("ultimo")
+    if ultimo and datetime.fromisoformat(ultimo) >= alvo:
+        return None
+    if agora - alvo > timedelta(hours=6):  # tão atrasado que já é madrugada: espera o próximo
+        return None
+    return alvo
+
+
+def postar_se_devido():
+    alvo = horario_devido()
+    if not alvo:
+        print("Nenhum horário de inglês vencido agora.")
+        return False
+    print(f"Horário vencido: {alvo:%d/%m %H:%M} (Manaus).")
+    return postar_proximo()
+
+
 def postar_proximo():
     itens = proximos(1)
     if not itens:
@@ -153,6 +189,7 @@ def postar_proximo():
     com_curso = e["contador"] % int(CFG.get("curso_a_cada", 5)) == 0
     mid = enviar(canal(), itens[0], com_curso)
     e["postados"].append(itens[0]["id"])
+    e["ultimo"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     salvar_estado(e)
     print(f"Inglês postado: {itens[0]['id']} (mensagem {mid})")
     restam = len(proximos(10**6))
@@ -171,5 +208,7 @@ if __name__ == "__main__":
     acao = sys.argv[1] if len(sys.argv) > 1 else "proximo"
     if acao == "previa":
         previa(sys.argv[2] if len(sys.argv) > 2 else postador.estado().get("admin"))
+    elif acao == "agendado":
+        postar_se_devido()
     else:
         postar_proximo()

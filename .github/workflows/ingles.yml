@@ -2,8 +2,10 @@ name: Canal de inglês
 
 on:
   schedule:
-    # 09h, 13h e 19h no horário de Manaus (UTC-4) = 13h, 17h e 23h UTC
-    - cron: "0 13,17,23 * * *"
+    # Roda de hora em hora (das 09h às 21h de Manaus). O ingles.py só posta quando um
+    # horário da grade (09h, 13h, 19h) venceu sem post: se o GitHub atrasar ou pular uma
+    # rodada, o post sai na rodada seguinte. Minuto 23 evita o pico da hora cheia.
+    - cron: "23 13-23,0-1 * * *"
   workflow_dispatch:
 
 concurrency:
@@ -31,7 +33,8 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           PYTHONUTF8: "1"
-        run: python ingles.py proximo
+        # Na mão (Run workflow) posta na hora; no agendamento, só se um horário venceu.
+        run: python ingles.py ${{ github.event_name == 'schedule' && 'agendado' || 'proximo' }}
       - name: Guardar o estado
         run: |
           git config user.name "robo-nuvem"
