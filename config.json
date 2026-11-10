@@ -5,8 +5,8 @@
     6
   ],
   "nota_minima": 4.0,
-  "conferir_ate": 25,
-  "top_do_dia": 12,
+  "conferir_ate": 120,
+  "top_do_dia": 60,
   "horarios": [
     "08:00",
     "09:00",
@@ -49,7 +49,40 @@
   "buscas_livros": [
     "https://www.amazon.com.br/s?bbn=5308307011&rh=n%3A5308307011%2Cp_36%3A5560478011&language=pt_BR"
   ],
-  "paginas_por_busca": 3,
+  "paginas_por_busca": 5,
   "posta_no_pc": true,
-  "link_kindle_unlimited": "https://link.amazon/A08SfufaD"
+  "link_kindle_unlimited": "https://link.amazon/A08SfufaD",
+  "paginas_por_categoria": 1,
+  "categorias_gratis": {
+    "5559990011": "Romance",
+    "5559898011": "Policial, Suspense e Mistério",
+    "5559904011": "Fantasia, Horror e Ficção Científica",
+    "5559953011": "Literatura e Ficção",
+    "5559913011": "Autoajuda",
+    "5559837011": "Administração, Negócios e Economia",
+    "5559976011": "Religião e Espiritualidade",
+    "5559909011": "Saúde e Família",
+    "5559833011": "Biografias e Histórias Reais",
+    "5559928011": "História",
+    "17295692011": "Jovens e Adolescentes",
+    "5559842011": "Infantil",
+    "5559874011": "HQs, Mangás e Graphic Novels",
+    "5559889011": "Gastronomia e Culinária",
+    "5559888011": "Artesanato, Casa e Estilo de Vida",
+    "5559938011": "Crônicas, Humor e Entretenimento",
+    "5559875011": "Computação, Informática e Mídias Digitais",
+    "5559992011": "Ciências",
+    "5560018011": "Sociedade e Ciências Sociais",
+    "5559964011": "Política",
+    "5559948011": "Direito",
+    "5560006011": "Medicina",
+    "5560119011": "Inglês e Outras Línguas",
+    "5559939011": "Língua, Linguística e Redação",
+    "5559973011": "Referência",
+    "5559821011": "Arte, Cinema e Fotografia",
+    "5560026011": "Esportes e Lazer",
+    "5560098011": "Turismo e Viagem",
+    "5559908011": "LGBT",
+    "5559899011": "Erótico"
+  }
 }

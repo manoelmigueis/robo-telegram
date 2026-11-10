@@ -524,7 +524,7 @@ button.chip{font-family:var(--font)}
           <div class="secao">Postagem automática</div>
           <div class="opcao"><div class="t"><b>Automático ligado</b><span>Posta um livro ou oferta da fila em cada horário.</span></div><button class="chave" id="ch_auto" role="switch" aria-label="Automático" onclick="alternar('pausado')"></button></div>
           <div class="opcao"><div class="t"><b>Pedir minha aprovação</b><span>Em cada horário, o robô te manda a prévia no Telegram e espera o “Publicar”.</span></div><button class="chave" id="ch_aprov" role="switch" aria-label="Aprovação" onclick="alternar('aprovacao')"></button></div>
-          <div class="opcao"><div class="t"><b>Garimpar agora</b><span>Busca livros grátis e ofertas novas na Amazon (uns 5 minutos).</span></div><button class="btn peq" id="botao_garimpo" onclick="garimpar()"><svg class="i"><use href="#i-picareta"/></svg>Garimpar</button></div>
+          <div class="opcao"><div class="t"><b>Garimpar agora</b><span>Busca livros grátis e ofertas novas na Amazon (uns 20 minutos).</span></div><button class="btn peq" id="botao_garimpo" onclick="garimpar()"><svg class="i"><use href="#i-picareta"/></svg>Garimpar</button></div>
         </div>
         <div class="card">
           <div class="secao">Horários e validade</div>
@@ -848,9 +848,9 @@ function mostrarGarimpo(ligado) {
   if (!ligado) return;
   const pinta = () => {
     const s = Math.floor((Date.now() - garimpoDesde) / 1000), min = Math.floor(s / 60);
-    const pct = Math.min(95, s / 300 * 100);  // leva uns 5 minutos
+    const pct = Math.min(95, s / 1200 * 100);  // leva uns 20 minutos
     document.querySelectorAll(".gb-enche").forEach(el => el.style.width = pct + "%");
-    document.querySelectorAll(".gb-tempo").forEach(el => el.textContent = (min ? `${min} min ` : "") + `${s % 60} s · leva uns 5 minutos`);
+    document.querySelectorAll(".gb-tempo").forEach(el => el.textContent = (min ? `${min} min ` : "") + `${s % 60} s · leva uns 20 minutos`);
   };
   pinta(); garimpoTimer = setInterval(pinta, 1000);
 }

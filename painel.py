@@ -354,7 +354,7 @@ async def ajustes(request: Request):
 @app.post("/api/garimpar")
 def garimpar():
     ok = postador.garimpar_em_segundo_plano()
-    return {"ok": True, "msg": "Garimpo começou. Leva uns 5 minutos." if ok else "Já está garimpando."}
+    return {"ok": True, "msg": "Garimpo começou. Leva uns 20 minutos." if ok else "Já está garimpando."}
 
 
 def achar_cloudflared():

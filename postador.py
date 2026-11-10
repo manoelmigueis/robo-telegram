@@ -207,6 +207,13 @@ def publicar(pid, conferir=True, so_canais=None, so_gratis=False):
         if p["origem"] == "oferta":
             p["legenda"] = escritor.legenda(p["dados"])
             banco.mudar_post(pid, legenda=p["legenda"], dados=p["dados"])
+        elif p["origem"] == "livro" and p["dados"].pop("sem_conferir", False):
+            # entrou na fila só com os dados da lista: agora que a página foi lida, escreve o texto completo
+            escritor.escrever([p["dados"]])
+            p["legenda"] = escritor.legenda(p["dados"])
+            p["botoes"] = [escritor.botao(p["dados"])]
+            p["foto"] = p["dados"].get("capa") or p["foto"]
+            banco.mudar_post(pid, legenda=p["legenda"], botoes=p["botoes"], foto=p["foto"], dados=p["dados"])
     alvos = alvos_do_post(p, so_canais)
     horas = p["expira_horas"] if p["expira_horas"] is not None else (
         opcao("expira_auto_horas") if p["origem"] != "manual" else None)
@@ -261,7 +268,7 @@ def postar_proximo(canais_lista=None):
         p = proximo_automatico(canais_lista)
         if not p:
             if garimpar_em_segundo_plano():  # fila vazia: já busca livros e ofertas novos
-                avisar("A fila acabou. Já estou garimpando livros e ofertas novos (uns 5 minutos).")
+                avisar("A fila acabou. Já estou garimpando livros e ofertas novos (uns 20 minutos).")
             else:
                 avisar("A fila acabou. Mande /garimpar ou use o painel.")
             return False
@@ -298,7 +305,7 @@ def garimpar_em_segundo_plano():
         _garimpando.set()
         try:
             import garimpeiro
-            avisar("⛏ Garimpando livros e ofertas (uns 5 minutos)...")
+            avisar("⛏ Garimpando livros e ofertas (uns 20 minutos)...")
             garimpeiro.garimpar_tudo()
             n = encher_fila()
             avisar(f"🗂 {n} posts novos na fila.")
@@ -445,7 +452,7 @@ def tratar_botao(cb):
             responder(cb, "✋ Agora eu te mostro cada post antes de sair" if ligada
                       else "⚡ Agora eu posto sozinho nos horários", True)
         elif arg == "garimpar":
-            responder(cb, "⛏ Garimpando (uns 5 minutos)" if garimpar_em_segundo_plano() else "Já estou garimpando")
+            responder(cb, "⛏ Garimpando (uns 20 minutos)" if garimpar_em_segundo_plano() else "Já estou garimpando")
         elif arg == "agora":
             responder(cb, "🚀 Conferindo na Amazon e postando...")
             em_paralelo(lambda: avisar("📣 Postado." if postar_proximo() else "Nada foi postado."))

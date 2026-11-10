@@ -28,6 +28,8 @@ HISTORICO = PASTA / "historico_postados.json"
 SAIDA = PASTA / "garimpo"
 
 TOP_GRATIS = "https://www.amazon.com.br/gp/bestsellers/digital-text/?ie=UTF8&tf=1&pg={pg}"
+# Top grátis de uma categoria (Romance, Autoajuda...): os ids ficam em config.json -> categorias_gratis
+TOP_GRATIS_CATEGORIA = "https://www.amazon.com.br/gp/bestsellers/digital-text/{cat}/?ie=UTF8&tf=1&pg={pg}"
 LIXO = re.compile(
     r"cap[ií]tulo extra|conto extra|cena extra|amostra|degusta[çc][ãa]o|"
     r"trecho|pr[ée]via|sample|preview|excerpt|bonus chapter",
@@ -59,10 +61,16 @@ def bloqueado(pagina):
     return "captcha" in corpo or "digite os caracteres" in corpo
 
 
-def ler_top_gratis(pagina):
+def capa_do_card(card):
+    img = card.query_selector("img")
+    src = (img.get_attribute("src") or "") if img else ""
+    return re.sub(r"\._[^/]*_\.(jpg|png)$", r".\1", src)  # tira o "._AC_UL300_" = imagem grande
+
+
+def ler_top_gratis(pagina, url=TOP_GRATIS, paginas=(1, 2), nome="Top grátis"):
     livros = []
-    for pg in (1, 2):
-        pagina.goto(TOP_GRATIS.format(pg=pg), timeout=60000)
+    for pg in paginas:
+        pagina.goto(url.format(pg=pg), timeout=60000)
         for _ in range(8):  # a lista carrega rolando
             pagina.mouse.wheel(0, 3000)
             pagina.wait_for_timeout(500)
@@ -85,8 +93,9 @@ def ler_top_gratis(pagina):
                 "autor": sem_rank[1] if len(sem_rank) > 1 else "",
                 "nota": nota,
                 "avaliacoes": avaliacoes,
+                "capa": capa_do_card(card),
             })
-        print(f"Top grátis página {pg}: {len(livros)} livros até agora")
+        print(f"{nome} página {pg}: {len(livros)} livros até agora")
         pausa()
     return livros
 
@@ -296,6 +305,7 @@ def ler_buscas(pagina):
                     "autor": autor,
                     "nota": nota,
                     "avaliacoes": avaliacoes,
+                    "capa": capa_do_card(card),
                 })
             print(f"Busca grátis página {pg}: {len(livros)} livros até agora")
             pausa()
@@ -305,11 +315,26 @@ def ler_buscas(pagina):
 # ---------------- livros ----------------
 def garimpar_livros(pagina):
     postados = set(json.loads(HISTORICO.read_text(encoding="utf-8"))) if HISTORICO.exists() else set()
+    try:  # livros que já estão no robô (na fila ou já postados) nem são conferidos de novo
+        import banco
+        postados |= banco.asins_conhecidos()
+    except Exception as e:
+        print(f"[aviso] não li o banco: {e}")
     lista = ler_top_gratis(pagina)
     try:
         lista += ler_buscas(pagina)
     except RuntimeError as e:
         print(f"[aviso] {e}")
+    paginas_cat = tuple(range(1, CONFIG.get("paginas_por_categoria", 1) + 1))
+    for cat in CONFIG.get("categorias_gratis", {}):
+        try:
+            lista += ler_top_gratis(pagina, TOP_GRATIS_CATEGORIA.replace("{cat}", str(cat)), paginas_cat,
+                                    CONFIG["categorias_gratis"][cat])
+        except RuntimeError as e:
+            print(f"[aviso] {e}")
+            break
+        except Exception as e:  # categoria fora do ar: segue para a próxima
+            print(f"[pulei categoria] {cat}: {e}")
     unicos = {}
     for l in lista:  # mesmo livro nas duas fontes: fica a melhor posição
         if l["asin"] not in unicos or l["posicao"] < unicos[l["asin"]]["posicao"]:
@@ -327,7 +352,13 @@ def garimpar_livros(pagina):
         try:
             ainda_gratis = conferir_livro(pagina, livro)
         except RuntimeError as e:
-            print(f"[aviso] {e}")
+            # captcha: os que faltam entram com os dados da lista (lá já aparecem a R$ 0,00).
+            # Antes de postar, o robô abre a página do livro, confere e completa o texto.
+            print(f"[aviso] {e} Os outros {len(candidatos) - n + 1} entram sem conferir agora.")
+            for l in candidatos[n - 1:]:
+                l.update({"preco": 0, "preco_sugerido": 0, "kindle_unlimited": False, "paginas": 0,
+                          "idioma": "", "publicado": "", "descricao": "", "sem_conferir": True})
+                aprovados.append(l)
             break
         except Exception as e:  # página fora do padrão: pula o livro
             print(f"[pulei] {livro['asin']}: {e}")
