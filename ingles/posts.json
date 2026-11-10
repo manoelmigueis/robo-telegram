@@ -3,74 +3,316 @@
     "id": "001-break-the-ice",
     "tipo": "palavra",
     "titulo": "🇺🇸 Expressão do dia: Break the ice",
-    "imagens": ["img/01-break-the-ice.png"],
+    "imagens": [
+      "img/01-break-the-ice.png"
+    ],
     "corpo": "<p>🧊 Significa <b>quebrar o gelo</b>: puxar conversa para acabar com aquele silêncio constrangedor.</p><blockquote><i>He told a joke to break the ice.</i><br/>Ele contou uma piada para quebrar o gelo.</blockquote>",
-    "tags": ["ingles", "expressoesemingles", "aprenderingles"]
+    "tags": [
+      "ingles",
+      "expressoesemingles",
+      "aprenderingles"
+    ]
   },
   {
     "id": "007-common-mistakes",
     "tipo": "lista",
     "titulo": "❌ Common mistakes: 6 erros que brasileiro comete",
-    "imagens": ["img/07-common-mistakes.png"],
+    "imagens": [
+      "img/07-common-mistakes.png"
+    ],
     "corpo": "<p>Quantos desses você já falou? Seja sincero 😅</p><table><tr><th>❌ Errado</th><th>✅ Certo</th></tr><tr><td>I have 25 years.</td><td>I am 25 years old.</td></tr><tr><td>I'm agree.</td><td>I agree.</td></tr><tr><td>Explain me.</td><td>Explain to me.</td></tr><tr><td>I lost the bus.</td><td>I missed the bus.</td></tr><tr><td>People is happy.</td><td>People are happy.</td></tr><tr><td>It depends of you.</td><td>It depends on you.</td></tr></table><details><summary>👀 Por que \"I'm agree\" está errado?</summary><p>Em inglês, <b>agree</b> já é verbo (concordar). Não precisa do <i>am</i>: é só <b>I agree</b>.</p></details><p>🔁 Mande para aquele amigo que fala \"I have 25 years\".</p>",
-    "tags": ["ingles", "commonmistakes", "errosdeingles", "aprenderingles", "inglesonline"]
+    "tags": [
+      "ingles",
+      "commonmistakes",
+      "errosdeingles",
+      "aprenderingles",
+      "inglesonline"
+    ]
   },
   {
     "id": "002-make-vs-do",
     "tipo": "aula",
     "titulo": "📘 Mini-aula: MAKE ou DO?",
-    "imagens": ["img/02-make-vs-do.png", "img/02b-make.png", "img/02c-do.png"],
+    "imagens": [
+      "img/02-make-vs-do.png",
+      "img/02b-make.png",
+      "img/02c-do.png"
+    ],
     "corpo": "<p>As duas viram \"fazer\" em português, mas não são a mesma coisa.</p><table><tr><th>🔴 MAKE: criar, produzir</th><th>🔵 DO: tarefa, atividade</th></tr><tr><td>make a cake</td><td>do homework</td></tr><tr><td>make a mistake</td><td>do the dishes</td></tr><tr><td>make a decision</td><td>do your best</td></tr></table><p>💡 <b>Dica:</b> se dá para \"pegar na mão\" o resultado, geralmente é <b>MAKE</b>.</p><details><summary>🧠 Desafio: \"fazer exercício\" é make ou do?</summary><p><b>Do exercise.</b> É uma atividade, não cria nada.</p></details>",
-    "tags": ["ingles", "makeordo", "gramaticainglesa", "aprenderingles"]
+    "tags": [
+      "ingles",
+      "makeordo",
+      "gramaticainglesa",
+      "aprenderingles"
+    ]
   },
   {
     "id": "003-quiz-goes",
     "tipo": "quiz",
-    "imagens": ["img/03-quiz-gym.png"],
+    "imagens": [
+      "img/03-quiz-gym.png"
+    ],
     "quiz": {
       "pergunta": "Complete: \"She ___ to the gym every day.\"",
-      "opcoes": ["go", "goes", "going", "gone"],
+      "opcoes": [
+        "go",
+        "goes",
+        "going",
+        "gone"
+      ],
       "correta": 1,
       "explicacao": "Com he/she/it no presente simples, o verbo ganha -s ou -es: she goes, he works, it rains.",
       "descricao": "🧠 Quiz de inglês: vote e veja se acertou!"
     },
-    "tags": ["ingles", "quizdeingles", "presentsimple", "aprenderingles"]
+    "tags": [
+      "ingles",
+      "quizdeingles",
+      "presentsimple",
+      "aprenderingles"
+    ]
   },
   {
     "id": "008-phone-conversation",
     "tipo": "lista",
     "titulo": "📞 Phone conversation: frases para falar ao telefone",
-    "imagens": ["img/08-phone-conversation.png"],
+    "imagens": [
+      "img/08-phone-conversation.png"
+    ],
     "corpo": "<p>Salve este post para a próxima ligação em inglês 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Hello, this is Ana speaking.</td><td>Alô, aqui é a Ana.</td></tr><tr><td>Can I speak to John, please?</td><td>Posso falar com o John, por favor?</td></tr><tr><td>Hold on a second, please.</td><td>Aguarde um segundo, por favor.</td></tr><tr><td>Could you speak up, please?</td><td>Pode falar mais alto, por favor?</td></tr><tr><td>Can I take a message?</td><td>Quer deixar recado?</td></tr><tr><td>I'll call you back later.</td><td>Eu te ligo mais tarde.</td></tr></table>",
-    "tags": ["ingles", "inglesparatrabalho", "businessenglish", "aprenderingles"]
+    "tags": [
+      "ingles",
+      "inglesparatrabalho",
+      "businessenglish",
+      "aprenderingles"
+    ]
   },
   {
     "id": "004-actually",
     "tipo": "palavra",
     "titulo": "⚠️ Falso amigo: Actually",
-    "imagens": ["img/04-actually.png"],
+    "imagens": [
+      "img/04-actually.png"
+    ],
     "corpo": "<p>Parece \"atualmente\", mas <b>não é</b>!</p><table><tr><th>Inglês</th><th>Significa</th></tr><tr><td>✅ actually</td><td>na verdade</td></tr><tr><td>✅ currently / nowadays</td><td>atualmente</td></tr></table><blockquote><i>I thought he was American. Actually, he's Canadian.</i><br/>Achei que ele era americano. Na verdade, ele é canadense.</blockquote><p>🔁 Mande para alguém que ainda confunde!</p>",
-    "tags": ["ingles", "falsoscognatos", "falsoamigo", "aprenderingles"]
+    "tags": [
+      "ingles",
+      "falsoscognatos",
+      "falsoamigo",
+      "aprenderingles"
+    ]
   },
   {
     "id": "005-in-on-at",
     "tipo": "aula",
     "titulo": "📘 Mini-aula: IN, ON, AT para tempo",
-    "imagens": ["img/05-in-on-at.png", "img/05b-funil.png", "img/05c-exemplo.png"],
+    "imagens": [
+      "img/05-in-on-at.png",
+      "img/05b-funil.png",
+      "img/05c-exemplo.png"
+    ],
     "corpo": "<p>Pense num funil: do mais amplo para o mais exato.</p><table><tr><th>Preposição</th><th>Quando usar</th><th>Exemplos</th></tr><tr><td><b>IN</b></td><td>meses, anos, estações</td><td>in July, in 2026</td></tr><tr><td><b>ON</b></td><td>dias e datas</td><td>on Monday, on May 5th</td></tr><tr><td><b>AT</b></td><td>horário exato</td><td>at 7 pm, at noon</td></tr></table><details><summary>🧠 Desafio: \"de manhã\" é in, on ou at?</summary><p><b>In the morning.</b> Mas atenção: à noite é <b>at night</b>.</p></details>",
-    "tags": ["ingles", "preposicoes", "gramaticainglesa", "aprenderingles"]
+    "tags": [
+      "ingles",
+      "preposicoes",
+      "gramaticainglesa",
+      "aprenderingles"
+    ]
   },
   {
     "id": "006-quiz-pretend",
     "tipo": "quiz",
-    "imagens": ["img/06-quiz-pretend.png"],
+    "imagens": [
+      "img/06-quiz-pretend.png"
+    ],
     "quiz": {
       "pergunta": "O que significa \"pretend\" em inglês?",
-      "opcoes": ["Pretender", "Fingir", "Prender", "Prevenir"],
+      "opcoes": [
+        "Pretender",
+        "Fingir",
+        "Prender",
+        "Prevenir"
+      ],
       "correta": 1,
       "explicacao": "Falso amigo! Pretend = fingir. Ex.: He pretended to be sick. Para \"pretender\" (ter a intenção), use intend ou plan.",
       "descricao": "⚠️ Quiz do falso amigo: muita gente erra essa!"
     },
-    "tags": ["ingles", "quizdeingles", "falsoscognatos", "aprenderingles"]
+    "tags": [
+      "ingles",
+      "quizdeingles",
+      "falsoscognatos",
+      "aprenderingles"
+    ]
+  },
+  {
+    "id": "009-common-mistakes-2",
+    "tipo": "lista",
+    "titulo": "❌ Common mistakes parte 2: mais 6 erros clássicos",
+    "imagens": [
+      "img/09-common-mistakes-2.png"
+    ],
+    "corpo": "<p>Mais uma rodada de erros que todo brasileiro já cometeu. Quantos você acerta? 😅</p><table><tr><th>❌ Errado</th><th>✅ Certo</th></tr><tr><td>I'm with hunger.</td><td>I'm hungry.</td></tr><tr><td>Make a question.</td><td>Ask a question.</td></tr><tr><td>I'm going to home.</td><td>I'm going home.</td></tr><tr><td>She said me.</td><td>She told me.</td></tr><tr><td>I didn't went.</td><td>I didn't go.</td></tr><tr><td>Can you borrow me your pen?</td><td>Can you lend me your pen?</td></tr></table><details><summary>👀 Borrow ou lend?</summary><p><b>Lend</b> = emprestar (dar). <b>Borrow</b> = pegar emprestado. <i>Can I borrow your pen?</i> = Posso pegar sua caneta emprestada?</p></details><p>🔁 Mande para aquele amigo que fala \"I'm with hunger\".</p>",
+    "tags": [
+      "ingles",
+      "commonmistakes",
+      "errosdeingles",
+      "aprenderingles"
+    ]
+  },
+  {
+    "id": "016-quiz-since-for",
+    "tipo": "quiz",
+    "imagens": [
+      "img/16-quiz-since-for.png"
+    ],
+    "quiz": {
+      "pergunta": "Complete: \"I have lived here ___ 2020.\"",
+      "opcoes": [
+        "since",
+        "for",
+        "from",
+        "in"
+      ],
+      "correta": 0,
+      "explicacao": "SINCE = desde (um ponto no tempo: since 2020, since Monday). FOR = por/há (um período: for 5 years).",
+      "descricao": "🧠 Quiz de inglês: since ou for? Vote e veja se acertou!"
+    },
+    "tags": [
+      "ingles",
+      "quizdeingles",
+      "presentperfect",
+      "aprenderingles"
+    ]
+  },
+  {
+    "id": "010-job-interview",
+    "tipo": "lista",
+    "titulo": "💼 Job interview: frases para entrevista de emprego",
+    "imagens": [
+      "img/10-job-interview.png"
+    ],
+    "corpo": "<p>Salve este post antes da próxima entrevista em inglês 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Tell me about yourself.</td><td>Fale sobre você.</td></tr><tr><td>Why do you want to work here?</td><td>Por que quer trabalhar aqui?</td></tr><tr><td>What are your strengths?</td><td>Quais são seus pontos fortes?</td></tr><tr><td>I'm a team player.</td><td>Trabalho bem em equipe.</td></tr><tr><td>I work well under pressure.</td><td>Trabalho bem sob pressão.</td></tr><tr><td>Where do you see yourself in five years?</td><td>Onde você se vê daqui a cinco anos?</td></tr></table><details><summary>💡 Como responder \"Tell me about yourself\"?</summary><p>Fale em 3 partes: o que faz hoje, o que já fez e por que quer a vaga. Ex.: <i>I'm a sales assistant with three years of experience, and I'm looking for new challenges.</i></p></details>",
+    "tags": [
+      "ingles",
+      "businessenglish",
+      "inglesparatrabalho",
+      "aprenderingles"
+    ]
+  },
+  {
+    "id": "015-much-vs-many",
+    "tipo": "aula",
+    "titulo": "📘 Mini-aula: MUCH ou MANY?",
+    "imagens": [
+      "img/15-much-vs-many.png",
+      "img/15b-much.png",
+      "img/15c-many.png"
+    ],
+    "corpo": "<p>Os dois viram \"muito\" ou \"quanto\" em português. A diferença é se dá para contar.</p><table><tr><th>🔴 MUCH: não dá para contar</th><th>🔵 MANY: dá para contar</th></tr><tr><td>much water</td><td>many books</td></tr><tr><td>much money</td><td>many people</td></tr><tr><td>much time</td><td>many apples</td></tr></table><p>💡 <b>Dica:</b> se dá para pôr um número na frente (3 books, 10 people), é <b>MANY</b>.</p><details><summary>🧠 Desafio: \"How ___ coffee do you drink?\"</summary><p><b>Much.</b> Café não se conta (você conta as xícaras: <i>how many cups of coffee</i>).</p></details>",
+    "tags": [
+      "ingles",
+      "gramaticainglesa",
+      "muchormany",
+      "aprenderingles"
+    ]
+  },
+  {
+    "id": "011-at-the-doctor",
+    "tipo": "lista",
+    "titulo": "🩺 At the doctor: frases para usar no médico",
+    "imagens": [
+      "img/11-at-the-doctor.png"
+    ],
+    "corpo": "<p>Para não passar aperto numa consulta lá fora. Salve 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>I have a headache.</td><td>Estou com dor de cabeça.</td></tr><tr><td>I have a sore throat.</td><td>Estou com dor de garganta.</td></tr><tr><td>I have a fever.</td><td>Estou com febre.</td></tr><tr><td>I feel dizzy.</td><td>Estou tonto(a).</td></tr><tr><td>I have a stomachache.</td><td>Estou com dor de barriga.</td></tr><tr><td>I need a prescription.</td><td>Preciso de uma receita.</td></tr></table><details><summary>👀 Truque do \"-ache\"</summary><p><b>-ache</b> = dor. head<b>ache</b> (cabeça), stomach<b>ache</b> (barriga), tooth<b>ache</b> (dente), back<b>ache</b> (costas).</p></details>",
+    "tags": [
+      "ingles",
+      "vocabulario",
+      "inglesparaviagem",
+      "aprenderingles"
+    ]
+  },
+  {
+    "id": "018-piece-of-cake",
+    "tipo": "palavra",
+    "titulo": "🇺🇸 Expressão do dia: Piece of cake",
+    "imagens": [
+      "img/18-piece-of-cake.png"
+    ],
+    "corpo": "<p>🍰 Ao pé da letra é \"pedaço de bolo\", mas significa <b>muito fácil</b>, moleza.</p><blockquote><i>The test was a piece of cake.</i><br/>A prova foi moleza.</blockquote><p>🔁 Mande para alguém que precisa ouvir que inglês pode ser um piece of cake.</p>",
+    "tags": [
+      "ingles",
+      "expressoesemingles",
+      "idioms",
+      "aprenderingles"
+    ]
+  },
+  {
+    "id": "012-american-slang",
+    "tipo": "lista",
+    "titulo": "😎 American slang: 6 gírias que os americanos usam",
+    "imagens": [
+      "img/12-american-slang.png"
+    ],
+    "corpo": "<p>Você não aprende isso na escola, mas ouve em toda série 🍿</p><table><tr><th>🇺🇸 Gíria</th><th>🇧🇷 Significa</th></tr><tr><td>What's up?</td><td>E aí?</td></tr><tr><td>No cap</td><td>Sem mentira, papo reto</td></tr><tr><td>I'm down</td><td>Tô dentro</td></tr><tr><td>Hang out</td><td>Sair junto, ficar de boa</td></tr><tr><td>Chill</td><td>Relaxa, de boa</td></tr><tr><td>My bad</td><td>Foi mal</td></tr></table><details><summary>👀 Como responder \"What's up?\"</summary><p>Não precisa contar a vida! Responda <b>Not much</b> ou <b>Nothing much, you?</b></p></details><p>🔁 Mande para o amigo que maratona série com você.</p>",
+    "tags": [
+      "ingles",
+      "giriasemingles",
+      "slang",
+      "aprenderingles"
+    ]
+  },
+  {
+    "id": "017-quiz-bored",
+    "tipo": "quiz",
+    "imagens": [
+      "img/17-quiz-bored.png"
+    ],
+    "quiz": {
+      "pergunta": "Você está entediado(a) em casa. Como fala?",
+      "opcoes": [
+        "I'm boring.",
+        "I'm bored.",
+        "I'm boredom.",
+        "I'm bore."
+      ],
+      "correta": 1,
+      "explicacao": "BORED = entediado (como você se sente). BORING = chato, que entedia. \"I'm boring\" quer dizer \"eu sou chato\" 😅",
+      "descricao": "⚠️ Quiz: muita gente erra essa e se chama de chato sem querer!"
+    },
+    "tags": [
+      "ingles",
+      "quizdeingles",
+      "commonmistakes",
+      "aprenderingles"
+    ]
+  },
+  {
+    "id": "013-at-the-airport",
+    "tipo": "lista",
+    "titulo": "✈️ At the airport: frases para usar no aeroporto",
+    "imagens": [
+      "img/13-at-the-airport.png"
+    ],
+    "corpo": "<p>Vai viajar? Salve este post e use no check-in 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Where is the check-in counter?</td><td>Onde fica o balcão de check-in?</td></tr><tr><td>I'd like a window seat, please.</td><td>Quero um assento na janela, por favor.</td></tr><tr><td>Is this flight on time?</td><td>Este voo está no horário?</td></tr><tr><td>Where is gate 12?</td><td>Onde fica o portão 12?</td></tr><tr><td>I have one carry-on bag.</td><td>Tenho uma mala de mão.</td></tr><tr><td>Where can I get a taxi?</td><td>Onde pego um táxi?</td></tr></table><details><summary>👀 E se eu quiser corredor?</summary><p><b>I'd like an aisle seat, please.</b> (aisle se fala \"ail\", o S é mudo.)</p></details>",
+    "tags": [
+      "ingles",
+      "inglesparaviagem",
+      "viagem",
+      "aprenderingles"
+    ]
+  },
+  {
+    "id": "014-thank-you",
+    "tipo": "lista",
+    "titulo": "🙏 Ways to say thank you: 6 jeitos além do \"thanks\"",
+    "imagens": [
+      "img/14-thank-you.png"
+    ],
+    "corpo": "<p>Pare de usar só \"thank you\" e soe mais natural 👇</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Thanks a lot.</td><td>Muito obrigado.</td></tr><tr><td>Thank you so much.</td><td>Muitíssimo obrigado.</td></tr><tr><td>I really appreciate it.</td><td>Agradeço de verdade.</td></tr><tr><td>Thanks a million.</td><td>Mil vezes obrigado.</td></tr><tr><td>I owe you one.</td><td>Fico te devendo essa.</td></tr><tr><td>Much appreciated.</td><td>Muito agradecido.</td></tr></table><details><summary>👀 E para responder um \"thank you\"?</summary><p><b>You're welcome</b>, <b>No problem</b>, <b>Anytime</b> ou <b>My pleasure</b>.</p></details><p>🔁 Mande para alguém a quem você deve um \"I owe you one\".</p>",
+    "tags": [
+      "ingles",
+      "vocabulario",
+      "expressoesemingles",
+      "aprenderingles"
+    ]
   }
 ]
