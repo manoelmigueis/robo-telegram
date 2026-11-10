@@ -148,7 +148,10 @@ def _tags(item, extras):
     return " ".join(todas[:10])
 
 
-IDIOMAS = {"português": "🇧🇷 Português", "inglês": "🇺🇸 Inglês", "espanhol": "🇪🇸 Espanhol"}
+IDIOMAS = {"português": "🇧🇷 Português", "português de portugal": "🇵🇹 Português de Portugal",
+           "inglês": "🇺🇸 Livro em inglês", "espanhol": "🇪🇸 Livro em espanhol"}
+TAGS_IDIOMA = {"inglês": ["#livrosemingles", "#englishbooks"], "espanhol": ["#livrosemespanhol", "#librosgratis"],
+               "português de portugal": ["#portugal"]}
 
 
 def legenda_livro(l):
@@ -185,7 +188,7 @@ def legenda_livro(l):
         linhas.append(f'🕐 <a href="{e(l["link"], quote=True)}"><b>GRÁTIS POR TEMPO LIMITADO</b></a> 🔥')
     else:
         linhas.append("🕐 <b>GRÁTIS POR TEMPO LIMITADO</b> 🔥")
-    tags = _tags(l, ["#ebook", "#leitura"])
+    tags = _tags(l, TAGS_IDIOMA.get(l.get("idioma"), []) + ["#ebook", "#leitura"])
     if pago:  # livro pago não leva hashtag de grátis
         tags = " ".join(t for t in tags.split() if "gratis" not in t)
     linhas += ["", f"📚: {CONFIG['canal_assinatura']}", "", tags]

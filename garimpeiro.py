@@ -144,6 +144,46 @@ def pontuar(livro):
     return round(p, 1)
 
 
+# A Amazon chama tudo de "Português". Palavras que só se usam em Portugal denunciam o livro de lá.
+PT_PORTUGAL = re.compile(
+    r"\b(telem[óo]vel|equipa|autocarro|comboio|pequeno-almo[çc]o|casa de banho|rapariga|ecr[ãa]|"
+    r"utilizador|facto|frigor[íi]fico|sumo|talho|portagem|apanhar o comboio|miúdos)\b", re.I)
+
+
+def marcar_portugal(livro):
+    if livro.get("idioma") == "português":
+        texto = f"{livro.get('titulo', '')} {livro.get('descricao', '')}"
+        if len(PT_PORTUGAL.findall(texto)) >= 2:
+            livro["idioma"] = "português de portugal"
+
+
+def misturar_idiomas(livros):
+    """Escolhe o top do dia com uma cota por idioma e intercala na ordem da fila,
+    para os livros em inglês e espanhol não ficarem todos no fim."""
+    cotas = CONFIG.get("cota_idiomas", {})
+    total = CONFIG["top_do_dia"]
+    por_idioma = {}
+    for l in livros:  # já vêm do melhor para o pior
+        por_idioma.setdefault(l.get("idioma") or "português", []).append(l)
+    estrangeiros = [l for idioma, cota in cotas.items() for l in por_idioma.get(idioma, [])[:cota]]
+    escolhidos_ids = {id(l) for l in estrangeiros}
+    resto = [l for l in livros if id(l) not in escolhidos_ids][: max(total - len(estrangeiros), 0)]
+    estrangeiros.sort(key=lambda l: l["pontos"], reverse=True)
+    if not estrangeiros:
+        return resto
+    # espalha por igual: o k-ésimo estrangeiro entra depois de k*(len(resto)/(n+1)) livros em português
+    n = len(estrangeiros)
+    pontos_de_entrada = {round((k + 1) * len(resto) / (n + 1)): k for k in range(n)}
+    mistura = []
+    for i in range(len(resto) + 1):
+        if i in pontos_de_entrada:
+            mistura.append(estrangeiros[pontos_de_entrada[i]])
+        if i < len(resto):
+            mistura.append(resto[i])
+    usados = {id(l) for l in mistura}
+    return (mistura + [l for l in estrangeiros if id(l) not in usados])[:total]
+
+
 def link_afiliado(asin):
     """Mesmo formato do link que o SiteStripe gera. A comissão vem do 'tag='."""
     tag = CONFIG.get("tag_afiliado_br") or ""
@@ -272,12 +312,12 @@ def tirar_tag(url):
     return re.sub(r"[&?](tag|linkCode|linkId|ref|qid)=[^&]*", "", url)
 
 
-def ler_buscas(pagina):
+def ler_buscas(pagina, buscas=None, paginas=None):
     """Lê as buscas da Amazon do config (ex.: eBooks Kindle de R$ 0)."""
     livros = []
-    for base in CONFIG.get("buscas_livros", []):
+    for base in (CONFIG.get("buscas_livros", []) if buscas is None else buscas):
         base = tirar_tag(base)
-        for pg in range(1, CONFIG.get("paginas_por_busca", 3) + 1):
+        for pg in range(1, (paginas or CONFIG.get("paginas_por_busca", 3)) + 1):
             pagina.goto(f"{base}&page={pg}", timeout=60000)
             pagina.wait_for_timeout(2000)
             if bloqueado(pagina):
@@ -335,6 +375,25 @@ def garimpar_livros(pagina):
             break
         except Exception as e:  # categoria fora do ar: segue para a próxima
             print(f"[pulei categoria] {cat}: {e}")
+    # buscas por idioma (inglês, espanhol): cada uma tem a sua vaga garantida de conferência
+    extras = []
+    for idioma, url in CONFIG.get("buscas_idiomas", {}).items():
+        try:
+            achados = ler_buscas(pagina, [url], CONFIG.get("paginas_por_idioma", 2))
+        except RuntimeError as e:
+            print(f"[aviso] {e}")
+            break
+        except Exception as e:
+            print(f"[pulei busca em {idioma}] {e}")
+            continue
+        vagas = CONFIG.get("cota_idiomas", {}).get(idioma, 5) * 2
+        novos_idioma = [l for l in achados if l["asin"] not in postados
+                        and not LIXO.search(unicodedata.normalize("NFC", l["titulo"]))
+                        and (l["avaliacoes"] < 5 or l["nota"] >= CONFIG["nota_minima"])][:vagas]
+        for l in novos_idioma:
+            l["idioma_busca"] = idioma
+        print(f"Busca em {idioma}: {len(achados)} achados, {len(novos_idioma)} para conferir")
+        extras += novos_idioma
     unicos = {}
     for l in lista:  # mesmo livro nas duas fontes: fica a melhor posição
         if l["asin"] not in unicos or l["posicao"] < unicos[l["asin"]]["posicao"]:
@@ -346,6 +405,8 @@ def garimpar_livros(pagina):
         and not LIXO.search(unicodedata.normalize("NFC", l["titulo"]))
         and (l["avaliacoes"] < 5 or l["nota"] >= CONFIG["nota_minima"])
     ][: CONFIG["conferir_ate"]]
+    ja = {l["asin"] for l in candidatos}
+    candidatos += [l for l in extras if l["asin"] not in ja and not ja.add(l["asin"])]
 
     aprovados = []
     for n, livro in enumerate(candidatos, 1):
@@ -357,7 +418,8 @@ def garimpar_livros(pagina):
             print(f"[aviso] {e} Os outros {len(candidatos) - n + 1} entram sem conferir agora.")
             for l in candidatos[n - 1:]:
                 l.update({"preco": 0, "preco_sugerido": 0, "kindle_unlimited": False, "paginas": 0,
-                          "idioma": "", "publicado": "", "descricao": "", "sem_conferir": True})
+                          "idioma": l.get("idioma_busca", ""), "publicado": "", "descricao": "",
+                          "sem_conferir": True})
                 aprovados.append(l)
             break
         except Exception as e:  # página fora do padrão: pula o livro
@@ -369,12 +431,15 @@ def garimpar_livros(pagina):
         pausa()
 
     for l in aprovados:
+        if not l.get("idioma") and l.get("idioma_busca"):
+            l["idioma"] = l["idioma_busca"]
+        marcar_portugal(l)
         l["tipo"] = "livro"
         l["promocao"] = l["preco_sugerido"] > 0
         l["pontos"] = pontuar(l)
         l["link"] = link_afiliado(l["asin"])
     aprovados.sort(key=lambda l: l["pontos"], reverse=True)
-    arquivo = salvar(aprovados[: CONFIG["top_do_dia"]], len(lista), len(candidatos))
+    arquivo = salvar(misturar_idiomas(aprovados), len(lista), len(candidatos))
     print(f"Livros salvos: {arquivo}")
 
 

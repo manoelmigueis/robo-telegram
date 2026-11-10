@@ -87,8 +87,21 @@
   },
   "ingles": {
     "canal": "@inglescomia",
-    "horarios": ["09:00", "13:00", "19:00"],
+    "horarios": [
+      "09:00",
+      "13:00",
+      "19:00"
+    ],
     "link_curso": "",
     "curso_a_cada": 5
+  },
+  "buscas_idiomas": {
+    "inglês": "https://www.amazon.com.br/s?bbn=5308307011&rh=n%3A5308307011%2Cp_36%3A5560478011%2Cp_n_feature_browse-bin%3A6406077011&language=pt_BR",
+    "espanhol": "https://www.amazon.com.br/s?bbn=5308307011&rh=n%3A5308307011%2Cp_36%3A5560478011%2Cp_n_feature_browse-bin%3A12636744011&language=pt_BR"
+  },
+  "paginas_por_idioma": 2,
+  "cota_idiomas": {
+    "inglês": 10,
+    "espanhol": 8
   }
 }

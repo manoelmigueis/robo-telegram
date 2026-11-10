@@ -351,6 +351,72 @@ async def ajustes(request: Request):
     return {"ok": True, "msg": "Ajustes salvos."}
 
 
+# ---------- canal de inglês (quem posta é a nuvem; o painel mostra a fila e manda prévias) ----------
+ESPELHO = PASTA / "nuvem-espelho.git"
+_ingles_cache = {"hora": 0, "estado": None, "fonte": ""}
+
+
+def estado_ingles_nuvem():
+    """O estado.json do inglês que está no GitHub (a nuvem é quem posta). Guarda por 2 minutos."""
+    import ingles
+    if time.time() - _ingles_cache["hora"] < 120 and _ingles_cache["estado"] is not None:
+        return _ingles_cache["estado"], _ingles_cache["fonte"]
+    estado, fonte = ingles.estado(), "pc"
+    if ESPELHO.exists():
+        try:
+            git = ["git", f"--git-dir={ESPELHO}"]
+            subprocess.run(git + ["fetch", "-q", "origin", "main"], timeout=40, check=True,
+                           env={**os.environ, "GIT_TERMINAL_PROMPT": "0"}, capture_output=True)
+            texto = subprocess.run(git + ["show", "FETCH_HEAD:ingles/estado.json"], timeout=20, check=True,
+                                   capture_output=True, encoding="utf-8").stdout
+            estado, fonte = json.loads(texto), "nuvem"
+        except Exception as e:
+            print(f"[inglês] não li o estado da nuvem: {e}")
+    _ingles_cache.update(hora=time.time(), estado=estado, fonte=fonte)
+    return estado, fonte
+
+
+@app.get("/api/ingles")
+def ingles_resumo():
+    import ingles
+    estado, fonte = estado_ingles_nuvem()
+    feitos = set(estado.get("postados", []))
+    itens = ingles.banco()
+    fila = [{"id": i["id"], "tipo": i["tipo"], "titulo": i.get("titulo") or i.get("quiz", {}).get("pergunta", ""),
+             "imagem": Path((i.get("imagens") or [""])[0]).name, "slides": len(i.get("imagens", []))}
+            for i in itens if i["id"] not in feitos]
+    return {"canal": ingles.canal(), "horarios": ingles.CFG.get("horarios", []), "fonte": fonte,
+            "postados": len(feitos), "ultimo": estado.get("ultimo"), "fila": fila,
+            "dias": round(len(fila) / max(len(ingles.CFG.get("horarios", [])) or 3, 1), 1),
+            "acoes": "https://github.com/manoelmigueis/robo-telegram/actions/workflows/ingles.yml"}
+
+
+@app.get("/api/ingles/img/{nome}")
+def ingles_img(nome: str):
+    import ingles
+    arquivo = (ingles.PASTA / "img" / nome).resolve()
+    if arquivo.parent != (ingles.PASTA / "img").resolve() or not arquivo.exists():
+        erro("Imagem não encontrada.", 404)
+    return FileResponse(arquivo, headers={"Cache-Control": "max-age=86400"})
+
+
+@app.post("/api/ingles/previa")
+def ingles_previa(dados: dict = Body(default={})):
+    import ingles
+    admin = postador.estado().get("admin")
+    if not admin:
+        erro("O robô ainda não sabe quem é o dono. Mande /start para ele no Telegram.")
+    estado, _ = estado_ingles_nuvem()
+    feitos = set(estado.get("postados", []))
+    escolha = dados.get("id")
+    itens = [i for i in ingles.banco() if i["id"] not in feitos and (not escolha or i["id"] == escolha)][:1 if escolha else 3]
+    if itens:
+        postador.avisar("👀 Prévia do canal de inglês. Não precisa fazer nada: já está na agenda e sai sozinho no canal.")
+    for i in itens:
+        ingles.enviar(admin, i)
+    return {"ok": True, "msg": f"Mandei {len(itens)} prévia(s) no seu privado do Telegram."}
+
+
 @app.post("/api/garimpar")
 def garimpar():
     ok = postador.garimpar_em_segundo_plano()
