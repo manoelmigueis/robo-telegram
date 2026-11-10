@@ -70,7 +70,8 @@ async def mostrar_erro(_, e):
 # ---------- páginas ----------
 @app.get("/")
 def pagina():
-    return FileResponse(PASTA / "painel.html")
+    # sem cache: o navegador e o Telegram sempre pegam a versão nova do painel
+    return FileResponse(PASTA / "painel.html", headers={"Cache-Control": "no-store, max-age=0"})
 
 
 @app.post("/api/login")
