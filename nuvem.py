@@ -6,6 +6,7 @@
 O token vem dos "secrets" do GitHub (TELEGRAM_BOT_TOKEN). No PC, vem do .env.
 Sem botões de aprovação aqui: na nuvem o robô posta direto.
 """
+import os
 import sys
 
 import banco
@@ -48,14 +49,18 @@ def postar():
             print(f"[apagar] {erro}")
             banco.marcar_envio(e["id"], "erro_apagar")
 
+    # "Run workflow" apertado na mão = postar agora, mesmo pausado ou com a hora já postada
+    na_mao = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
     st = postador.estado()
-    if st.get("pausado"):
+    if st.get("pausado") and not na_mao:
         print("Automático pausado.")
         return
-    if st.get("ultimo_horario", "")[:13] == marca[:13]:
+    if st.get("ultimo_horario", "")[:13] == marca[:13] and not na_mao:
         print("Esta hora já foi postada.")
         return
     na_hora = canais_desta_hora(f"{hh}:00")
+    if na_mao and not na_hora:
+        na_hora = list(banco.canais(so_auto=True))
     if not na_hora:
         print(f"Nenhum canal tem horário às {hh}h.")
         return
