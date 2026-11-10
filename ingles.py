@@ -1,18 +1,23 @@
 """Canal de inglês (@inglescomia): posta o próximo item do banco ingles/posts.json.
 
-Tipos de item:
-  palavra  -> imagem + legenda (palavra/expressão do dia)
-  aula     -> imagem + legenda (mini-aula)
-  quiz     -> enquete-quiz do Telegram (mostra a resposta certa e a explicação)
+Formato rico do Telegram (sendRichMessage, Bot API 10.1+):
+  palavra / aula / lista -> título + carrossel de imagens (slideshow) + texto com tabela,
+                            "toque para ver" (details) + hashtags + botão do curso
+  quiz                   -> enquete-quiz com imagem e descrição com hashtags
+
+Campos de cada item em posts.json:
+  id, tipo, titulo, imagens [..], corpo (HTML rico), tags [3 a 5, sem #]
+  quiz: {pergunta, opcoes, correta, explicacao, descricao}
 
     python ingles.py proximo            -> posta o próximo no canal
     python ingles.py previa 185039128   -> manda os próximos 6 só para esse chat (não marca como postado)
 
-De vez em quando (a cada N posts, config "ingles.curso_a_cada") a legenda ganha o convite do curso.
+Estilo e regras de conteúdo: ingles/ESTILO.md
 """
 import html
 import json
 import sys
+from contextlib import ExitStack
 from pathlib import Path
 
 import postador
@@ -35,39 +40,101 @@ def salvar_estado(e):
     ESTADO.write_text(json.dumps(e, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
-def convite_curso():
-    link = CFG.get("link_curso")
-    if not link:
-        return ""
+def canal():
+    return CFG.get("canal", "@inglescomia")
+
+
+def hashtags(item):
+    return " ".join("#" + t.lstrip("#") for t in item.get("tags", [])[:5])
+
+
+def link_curso():
+    return CFG.get("link_curso") or ""
+
+
+def html_rico(item, ids, com_curso):
+    """Monta o HTML do sendRichMessage. ids = ids das fotos anexadas, na ordem."""
     e = html.escape
-    return (f'\n\n🇺🇸 <b>Quer falar inglês de verdade?</b> Curso completo com 9 e-books + professor de IA '
-            f'por R$ 29,90 👉 <a href="{e(link, quote=True)}"><b>QUERO APRENDER</b></a>')
+    partes = [f"<h2>{e(item['titulo'])}</h2>"]
+    if len(ids) > 1:
+        fotos = "".join(f'<img src="tg://photo?id={i}"/>' for i in ids)
+        partes.append(f"<tg-slideshow>{fotos}<figcaption>Arraste para o lado 👉</figcaption></tg-slideshow>")
+    elif ids:
+        partes.append(f'<img src="tg://photo?id={ids[0]}"/>')
+    partes.append(item.get("corpo", ""))
+    if item.get("tags"):
+        partes.append(f"<p>{e(hashtags(item))}</p>")
+    botoes = [f'<tg-button type="url" url="https://t.me/{canal().lstrip("@")}">📲 {e(canal())}</tg-button>']
+    if com_curso and link_curso():
+        partes.append("<p>🇺🇸 <b>Quer falar inglês de verdade?</b> Curso completo com 9 e-books + professor de IA por R$ 29,90.</p>")
+        botoes.insert(0, f'<tg-button type="url" style="success" url="{e(link_curso(), quote=True)}">QUERO APRENDER</tg-button>')
+    partes.append(f'<tg-button-row align="center">{"".join(botoes)}</tg-button-row>')
+    return "\n".join(partes)
 
 
-def assinatura():
-    return f"\n\n📲 {CFG.get('canal', '@inglescomia')}"
+def legenda_simples(item, com_curso):
+    """Plano B (se o formato rico falhar): legenda curta no estilo antigo do canal."""
+    e = html.escape
+    txt = f"<b>{e(item['titulo'])}</b>"
+    if item.get("tags"):
+        txt += f"\n\n{e(hashtags(item))}"
+    if com_curso and link_curso():
+        txt += f'\n\n🇺🇸 Curso completo de inglês 👉 <a href="{e(link_curso(), quote=True)}"><b>QUERO APRENDER</b></a>'
+    return txt + f"\n\n📲 {canal()}"
+
+
+def enviar_quiz(chat, item, com_curso):
+    q = item["quiz"]
+    img = PASTA / item["imagens"][0] if item.get("imagens") else None
+    desc = (q.get("descricao", "") + ("\n" + hashtags(item) if item.get("tags") else "")).strip()
+    base = dict(chat_id=chat, question=q["pergunta"], options=[{"text": o} for o in q["opcoes"]],
+                type="quiz", explanation=q.get("explicacao", "")[:200], is_anonymous=True)
+    try:
+        with ExitStack() as pilha:
+            arquivos = {}
+            extra = {"correct_option_ids": [q["correta"]], "description": desc[:1024]}
+            if img and img.exists():
+                arquivos["capa"] = pilha.enter_context(open(img, "rb"))
+                extra["media"] = {"type": "photo", "media": "attach://capa"}
+            r = postador.tg("sendPoll", arquivos=arquivos or None, **base, **extra)
+    except RuntimeError as erro:  # plano B: enquete simples
+        print(f"Enquete rica falhou ({erro}); mandando a simples.")
+        r = postador.tg("sendPoll", **base, correct_option_id=q["correta"])
+    if com_curso and link_curso():
+        postador.tg("sendMessage", chat_id=chat, parse_mode="HTML", link_preview_options={"is_disabled": True},
+                    text=f'🇺🇸 <b>Quer falar inglês de verdade?</b> Curso completo com 9 e-books + professor de IA '
+                         f'por R$ 29,90 👉 <a href="{html.escape(link_curso(), quote=True)}"><b>QUERO APRENDER</b></a>')
+    return r["message_id"]
 
 
 def enviar(chat, item, com_curso=False):
     """Manda um item. Devolve o message_id."""
     if item["tipo"] == "quiz":
-        q = item["quiz"]
-        r = postador.tg("sendPoll", chat_id=chat, question=q["pergunta"], options=q["opcoes"],
-                        type="quiz", correct_option_id=q["correta"], explanation=q.get("explicacao", "")[:200],
-                        is_anonymous=True)
-        if com_curso and convite_curso():  # enquete não tem legenda: o convite vai numa mensagem depois
-            postador.tg("sendMessage", chat_id=chat, text=convite_curso().strip(), parse_mode="HTML",
-                        link_preview_options={"is_disabled": True})
+        return enviar_quiz(chat, item, com_curso)
+    imagens = [PASTA / i for i in item.get("imagens", []) if (PASTA / i).exists()]
+    ids = [f"f{n}" for n in range(len(imagens))]
+    try:
+        with ExitStack() as pilha:
+            arquivos = {i: pilha.enter_context(open(p, "rb")) for i, p in zip(ids, imagens)}
+            media = [{"id": i, "media": {"type": "photo", "media": f"attach://{i}"}} for i in ids]
+            rico = {"html": html_rico(item, ids, com_curso)}
+            if media:
+                rico["media"] = media
+            r = postador.tg("sendRichMessage", arquivos=arquivos or None, chat_id=chat, rich_message=rico)
         return r["message_id"]
-    legenda = item["texto"] + (convite_curso() if com_curso else "") + assinatura()
-    imagem = PASTA / item["imagem"] if item.get("imagem") else None
-    if imagem and imagem.exists():
-        with open(imagem, "rb") as f:
-            r = postador.tg("sendPhoto", arquivos={"photo": f}, chat_id=chat, caption=legenda, parse_mode="HTML")
-    else:
-        r = postador.tg("sendMessage", chat_id=chat, text=legenda, parse_mode="HTML",
-                        link_preview_options={"is_disabled": True})
-    return r["message_id"]
+    except RuntimeError as erro:  # plano B: foto (ou álbum) com legenda curta
+        print(f"Post rico falhou ({erro}); mandando no formato simples.")
+    legenda = legenda_simples(item, com_curso)
+    if not imagens:
+        return postador.tg("sendMessage", chat_id=chat, text=legenda, parse_mode="HTML")["message_id"]
+    with ExitStack() as pilha:
+        arquivos = {f"a{n}": pilha.enter_context(open(p, "rb")) for n, p in enumerate(imagens)}
+        if len(imagens) == 1:
+            return postador.tg("sendPhoto", arquivos={"photo": arquivos["a0"]}, chat_id=chat,
+                               caption=legenda, parse_mode="HTML")["message_id"]
+        grupo = [{"type": "photo", "media": f"attach://a{n}"} for n in range(len(imagens))]
+        grupo[0].update(caption=legenda, parse_mode="HTML")
+        return postador.tg("sendMediaGroup", arquivos=arquivos, chat_id=chat, media=grupo)[0]["message_id"]
 
 
 def proximos(n=1):
@@ -84,7 +151,7 @@ def postar_proximo():
     e = estado()
     e["contador"] = e.get("contador", 0) + 1
     com_curso = e["contador"] % int(CFG.get("curso_a_cada", 5)) == 0
-    mid = enviar(CFG.get("canal", "@inglescomia"), itens[0], com_curso)
+    mid = enviar(canal(), itens[0], com_curso)
     e["postados"].append(itens[0]["id"])
     salvar_estado(e)
     print(f"Inglês postado: {itens[0]['id']} (mensagem {mid})")

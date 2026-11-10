@@ -2,45 +2,75 @@
   {
     "id": "001-break-the-ice",
     "tipo": "palavra",
-    "imagem": "img/01-break-the-ice.png",
-    "texto": "🇺🇸 <b>EXPRESSÃO DO DIA: Break the ice</b>\n\n🧊 Significa <b>quebrar o gelo</b>: puxar conversa para acabar com aquele silêncio constrangedor.\n\n💬 <i>He told a joke to break the ice.</i>\n👉 Ele contou uma piada para quebrar o gelo.\n\n💬 <i>Games are a great way to break the ice.</i>\n👉 Jogos são um ótimo jeito de quebrar o gelo.\n\n✍️ Escreva nos comentários uma frase sua usando <b>break the ice</b>!"
+    "titulo": "🇺🇸 Expressão do dia: Break the ice",
+    "imagens": ["img/01-break-the-ice.png"],
+    "corpo": "<p>🧊 Significa <b>quebrar o gelo</b>: puxar conversa para acabar com aquele silêncio constrangedor.</p><blockquote><i>He told a joke to break the ice.</i><br/>Ele contou uma piada para quebrar o gelo.</blockquote>",
+    "tags": ["ingles", "expressoesemingles", "aprenderingles"]
+  },
+  {
+    "id": "007-common-mistakes",
+    "tipo": "lista",
+    "titulo": "❌ Common mistakes: 6 erros que brasileiro comete",
+    "imagens": ["img/07-common-mistakes.png"],
+    "corpo": "<p>Quantos desses você já falou? Seja sincero 😅</p><table><tr><th>❌ Errado</th><th>✅ Certo</th></tr><tr><td>I have 25 years.</td><td>I am 25 years old.</td></tr><tr><td>I'm agree.</td><td>I agree.</td></tr><tr><td>Explain me.</td><td>Explain to me.</td></tr><tr><td>I lost the bus.</td><td>I missed the bus.</td></tr><tr><td>People is happy.</td><td>People are happy.</td></tr><tr><td>It depends of you.</td><td>It depends on you.</td></tr></table><details><summary>👀 Por que \"I'm agree\" está errado?</summary><p>Em inglês, <b>agree</b> já é verbo (concordar). Não precisa do <i>am</i>: é só <b>I agree</b>.</p></details><p>🔁 Mande para aquele amigo que fala \"I have 25 years\".</p>",
+    "tags": ["ingles", "commonmistakes", "errosdeingles", "aprenderingles", "inglesonline"]
   },
   {
     "id": "002-make-vs-do",
     "tipo": "aula",
-    "imagem": "img/02-make-vs-do.png",
-    "texto": "📘 <b>MINI-AULA: MAKE ou DO?</b>\n\nAs duas podem virar \"fazer\" em português, mas não são a mesma coisa.\n\n🔴 <b>MAKE</b> = criar, produzir algo que não existia\n• make <b>a cake</b> (fazer um bolo)\n• make <b>a mistake</b> (cometer um erro)\n• make <b>a decision</b> (tomar uma decisão)\n\n🔵 <b>DO</b> = realizar uma tarefa, uma atividade\n• do <b>homework</b> (fazer a lição de casa)\n• do <b>the dishes</b> (lavar a louça)\n• do <b>your best</b> (fazer o seu melhor)\n\n💡 Dica: se dá para \"pegar na mão\" o resultado, geralmente é <b>MAKE</b>."
+    "titulo": "📘 Mini-aula: MAKE ou DO?",
+    "imagens": ["img/02-make-vs-do.png", "img/02b-make.png", "img/02c-do.png"],
+    "corpo": "<p>As duas viram \"fazer\" em português, mas não são a mesma coisa.</p><table><tr><th>🔴 MAKE: criar, produzir</th><th>🔵 DO: tarefa, atividade</th></tr><tr><td>make a cake</td><td>do homework</td></tr><tr><td>make a mistake</td><td>do the dishes</td></tr><tr><td>make a decision</td><td>do your best</td></tr></table><p>💡 <b>Dica:</b> se dá para \"pegar na mão\" o resultado, geralmente é <b>MAKE</b>.</p><details><summary>🧠 Desafio: \"fazer exercício\" é make ou do?</summary><p><b>Do exercise.</b> É uma atividade, não cria nada.</p></details>",
+    "tags": ["ingles", "makeordo", "gramaticainglesa", "aprenderingles"]
   },
   {
     "id": "003-quiz-goes",
     "tipo": "quiz",
+    "imagens": ["img/03-quiz-gym.png"],
     "quiz": {
       "pergunta": "Complete: \"She ___ to the gym every day.\"",
       "opcoes": ["go", "goes", "going", "gone"],
       "correta": 1,
-      "explicacao": "Com he/she/it no presente simples, o verbo ganha -s ou -es: she goes, he works, it rains."
-    }
+      "explicacao": "Com he/she/it no presente simples, o verbo ganha -s ou -es: she goes, he works, it rains.",
+      "descricao": "🧠 Quiz de inglês: vote e veja se acertou!"
+    },
+    "tags": ["ingles", "quizdeingles", "presentsimple", "aprenderingles"]
+  },
+  {
+    "id": "008-phone-conversation",
+    "tipo": "lista",
+    "titulo": "📞 Phone conversation: frases para falar ao telefone",
+    "imagens": ["img/08-phone-conversation.png"],
+    "corpo": "<p>Salve este post para a próxima ligação em inglês 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Hello, this is Ana speaking.</td><td>Alô, aqui é a Ana.</td></tr><tr><td>Can I speak to John, please?</td><td>Posso falar com o John, por favor?</td></tr><tr><td>Hold on a second, please.</td><td>Aguarde um segundo, por favor.</td></tr><tr><td>Could you speak up, please?</td><td>Pode falar mais alto, por favor?</td></tr><tr><td>Can I take a message?</td><td>Quer deixar recado?</td></tr><tr><td>I'll call you back later.</td><td>Eu te ligo mais tarde.</td></tr></table>",
+    "tags": ["ingles", "inglesparatrabalho", "businessenglish", "aprenderingles"]
   },
   {
     "id": "004-actually",
     "tipo": "palavra",
-    "imagem": "img/04-actually.png",
-    "texto": "⚠️ <b>FALSO AMIGO: Actually</b>\n\nParece \"atualmente\", mas <b>não é</b>!\n\n✅ <b>Actually</b> = na verdade, na realidade\n💬 <i>I thought he was American. Actually, he's Canadian.</i>\n👉 Achei que ele era americano. Na verdade, ele é canadense.\n\n❌ Para dizer <b>atualmente</b>, use <b>currently</b> ou <b>nowadays</b>:\n💬 <i>I currently live in Manaus.</i>\n👉 Atualmente eu moro em Manaus.\n\n🔁 Mande para alguém que ainda confunde!"
+    "titulo": "⚠️ Falso amigo: Actually",
+    "imagens": ["img/04-actually.png"],
+    "corpo": "<p>Parece \"atualmente\", mas <b>não é</b>!</p><table><tr><th>Inglês</th><th>Significa</th></tr><tr><td>✅ actually</td><td>na verdade</td></tr><tr><td>✅ currently / nowadays</td><td>atualmente</td></tr></table><blockquote><i>I thought he was American. Actually, he's Canadian.</i><br/>Achei que ele era americano. Na verdade, ele é canadense.</blockquote><p>🔁 Mande para alguém que ainda confunde!</p>",
+    "tags": ["ingles", "falsoscognatos", "falsoamigo", "aprenderingles"]
   },
   {
     "id": "005-in-on-at",
     "tipo": "aula",
-    "imagem": "img/05-in-on-at.png",
-    "texto": "📘 <b>MINI-AULA: IN, ON, AT para tempo</b>\n\nPense num funil: do mais exato para o mais amplo.\n\n🔴 <b>AT</b> = horário exato\n• at 7 pm • at noon • at night\n\n🔵 <b>ON</b> = dias e datas\n• on Monday • on May 5th • on my birthday\n\n⚫ <b>IN</b> = meses, anos, estações, períodos longos\n• in July • in 2026 • in the summer • in the morning\n\n💬 <i>I'll see you on Friday at 8 pm.</i>\n👉 Te vejo na sexta, às 20h."
+    "titulo": "📘 Mini-aula: IN, ON, AT para tempo",
+    "imagens": ["img/05-in-on-at.png", "img/05b-funil.png", "img/05c-exemplo.png"],
+    "corpo": "<p>Pense num funil: do mais amplo para o mais exato.</p><table><tr><th>Preposição</th><th>Quando usar</th><th>Exemplos</th></tr><tr><td><b>IN</b></td><td>meses, anos, estações</td><td>in July, in 2026</td></tr><tr><td><b>ON</b></td><td>dias e datas</td><td>on Monday, on May 5th</td></tr><tr><td><b>AT</b></td><td>horário exato</td><td>at 7 pm, at noon</td></tr></table><details><summary>🧠 Desafio: \"de manhã\" é in, on ou at?</summary><p><b>In the morning.</b> Mas atenção: à noite é <b>at night</b>.</p></details>",
+    "tags": ["ingles", "preposicoes", "gramaticainglesa", "aprenderingles"]
   },
   {
     "id": "006-quiz-pretend",
     "tipo": "quiz",
+    "imagens": ["img/06-quiz-pretend.png"],
     "quiz": {
       "pergunta": "O que significa \"pretend\" em inglês?",
       "opcoes": ["Pretender", "Fingir", "Prender", "Prevenir"],
       "correta": 1,
-      "explicacao": "Falso amigo! Pretend = fingir. Ex.: He pretended to be sick. Para \"pretender\" (ter a intenção), use intend ou plan."
-    }
+      "explicacao": "Falso amigo! Pretend = fingir. Ex.: He pretended to be sick. Para \"pretender\" (ter a intenção), use intend ou plan.",
+      "descricao": "⚠️ Quiz do falso amigo: muita gente erra essa!"
+    },
+    "tags": ["ingles", "quizdeingles", "falsoscognatos", "aprenderingles"]
   }
 ]
