@@ -19,6 +19,8 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main  # sempre a fila mais nova, mesmo se esperou outro rodar
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
