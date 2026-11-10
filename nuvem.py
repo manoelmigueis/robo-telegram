@@ -70,12 +70,12 @@ def postar():
     if not p:  # fila vazia: garimpa agora mesmo e tenta de novo
         print("Fila vazia, garimpando...")
         garimpar()
-    for _ in range(10):  # se um item não vale mais, tenta o próximo
+    for _ in range(20):  # se um item não vale mais (ou saiu do grátis), tenta o próximo
         p = postador.proximo_automatico(na_hora)
         if not p:
             postador.avisar("☁️ A fila acabou e o garimpo não achou nada novo.")
             return
-        if postador.publicar(p["id"], so_canais=na_hora):
+        if postador.publicar(p["id"], so_canais=na_hora, so_gratis=postador.gratis_nos_dados(p)):
             postador.mudar_estado(ultimo_tipo=p["origem"])
             print(f"Postado: {p.get('titulo') or p['id']}")
             return

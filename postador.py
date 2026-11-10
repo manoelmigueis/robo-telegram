@@ -184,13 +184,18 @@ def proxima_hora():
     return next((h for h in todos if h > hora), todos[0] if todos else "")
 
 
-def publicar(pid, conferir=True, so_canais=None):
-    """Publica o post nos canais dele (ou só em so_canais). Devolve quantos receberam."""
+def publicar(pid, conferir=True, so_canais=None, so_gratis=False):
+    """Publica o post nos canais dele (ou só em so_canais). Devolve quantos receberam.
+    so_gratis: livro que saiu do grátis volta para o fim da fila em vez de ser postado."""
     p = banco.post(pid)
     if not p or p["status"] in ("postado", "cancelado"):
         return 0
     if p["origem"] in ("livro", "oferta") and conferir:
         ok = ainda_vale(p["dados"])
+        if not ok and p["origem"] == "livro" and (p["dados"].get("preco") or 0) > 0 and so_gratis:
+            banco.mudar_post(pid, dados=p["dados"])  # guarda o preço novo: fica atrás dos grátis
+            print(f"[fila] #{pid} saiu do grátis, fica para depois: {p['titulo'][:50]}")
+            return 0
         if not ok and p["origem"] == "livro" and (p["dados"].get("preco") or 0) > 0:
             # saiu do grátis: posta mesmo assim (o link tem a tag), com o preço de agora e sem "GRÁTIS"
             p["legenda"] = escritor.legenda(p["dados"])
@@ -225,6 +230,11 @@ def publicar(pid, conferir=True, so_canais=None):
     return enviados
 
 
+def gratis_nos_dados(p):
+    """Livro que, pela última conferência, ainda está de graça."""
+    return p["origem"] == "livro" and not ((p.get("dados") or {}).get("preco") or 0)
+
+
 def proximo_automatico(canais_lista=None):
     """Escolhe o próximo da fila: livro, ou às vezes uma oferta (nunca duas seguidas).
     Com canais_lista, só vale post que vai para algum desses canais."""
@@ -237,6 +247,7 @@ def proximo_automatico(canais_lista=None):
     if canais_lista is not None:
         fila = [p for p in fila if alvos_do_post(p, canais_lista)]
     livros = [p for p in fila if p["origem"] in ("livro", "manual")]
+    livros.sort(key=lambda p: 0 if p["origem"] == "manual" or gratis_nos_dados(p) else 1)  # grátis primeiro
     ofertas = [p for p in fila if p["origem"] == "oferta"] if CONFIG.get("tag_afiliado_br") else []
     if not livros:  # sem livro na fila: oferta mesmo que a última tenha sido oferta
         return ofertas[0] if ofertas else None
@@ -254,7 +265,7 @@ def postar_proximo(canais_lista=None):
             else:
                 avisar("A fila acabou. Mande /garimpar ou use o painel.")
             return False
-        if publicar_seguro(p["id"], so_canais=canais_lista):
+        if publicar_seguro(p["id"], so_canais=canais_lista, so_gratis=gratis_nos_dados(p)):
             mudar_estado(ultimo_tipo=p["origem"])
             return True
 
@@ -303,9 +314,9 @@ def garimpar_em_segundo_plano():
 _publicando = threading.Lock()  # nunca dois "publicar" ao mesmo tempo (evita post duplicado)
 
 
-def publicar_seguro(pid, conferir=True, so_canais=None):
+def publicar_seguro(pid, conferir=True, so_canais=None, so_gratis=False):
     with _publicando:
-        return publicar(pid, conferir, so_canais)
+        return publicar(pid, conferir, so_canais, so_gratis)
 
 
 def em_paralelo(funcao, *args):
