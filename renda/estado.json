@@ -4,13 +4,14 @@
     "002-cursos-gratis",
     "003-quiz-golpe",
     "004-sinais-golpe",
-    "005-vender-usados"
+    "005-vender-usados",
+    "006-freelancer"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
     "cisco abre inscrições para cursos gratuitos em ia inglês e alfabetização digital"
   ],
-  "contador": 5,
-  "ultimo": "2026-11-11T19:52:28+00:00",
+  "contador": 6,
+  "ultimo": "2026-11-11T23:25:37+00:00",
   "pulados": []
 }
