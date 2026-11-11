@@ -370,7 +370,10 @@ def postar_se_devido():
 # ---------------- prévia com botões ----------------
 # Quem escuta os cliques é o robô do PC (painel.py). Quem posta no horário é a nuvem.
 # Por isso, depois de um clique, o estado.json vai para o GitHub: a nuvem não repete nem posta o que foi tirado.
+# No PC: cópia leve do GitHub ao lado. Na nuvem (GitHub Actions): o próprio repositório baixado.
 ESPELHO = Path(__file__).parent / "nuvem-espelho.git"
+if not ESPELHO.exists():
+    ESPELHO = Path(__file__).parent / ".git"
 
 
 def _git(*args, entrada=None, env=None):
@@ -405,8 +408,9 @@ def mudar_estado_nuvem(mudar, msg):
             _git("read-tree", base, env=idx)
             _git("update-index", "--cacheinfo", f"100644,{blob},renda/estado.json", env=idx)
             arvore = _git("write-tree", env=idx)
-            quem = {"GIT_AUTHOR_NAME": "robo-pc", "GIT_AUTHOR_EMAIL": "robo-pc@users.noreply.github.com",
-                    "GIT_COMMITTER_NAME": "robo-pc", "GIT_COMMITTER_EMAIL": "robo-pc@users.noreply.github.com"}
+            nome = "robo-nuvem" if os.environ.get("GITHUB_ACTIONS") else "robo-pc"
+            quem = {"GIT_AUTHOR_NAME": nome, "GIT_AUTHOR_EMAIL": f"{nome}@users.noreply.github.com",
+                    "GIT_COMMITTER_NAME": nome, "GIT_COMMITTER_EMAIL": f"{nome}@users.noreply.github.com"}
             commit = _git("commit-tree", arvore, "-p", base, "-m", msg, env=quem)
             _git("push", "-q", "origin", f"{commit}:refs/heads/main")
             ESTADO.write_text(texto, encoding="utf-8")
@@ -434,10 +438,9 @@ def previa(chat, n=3):
     if noticias:
         n = noticias[0]
         enviar_noticia(chat, n)
-        e = estado()
-        e["previa_noticia"] = n  # guarda a notícia para o botão postar exatamente esta
-        e["previa_noticia"]["quando"] = str(n.get("quando", ""))
-        salvar_estado(e)
+        guardada = {**n, "quando": str(n.get("quando", ""))}
+        # guarda a notícia no GitHub, para o botão (no PC ou na nuvem) postar exatamente esta
+        mudar_estado_nuvem(lambda e: e.update(previa_noticia=guardada), "renda extra: prévia de notícia")
         postador.tg("sendMessage", chat_id=chat, text=f"👆 Notícia: {n['titulo'][:200]}",
                     reply_markup=_botoes("n", chave(n["titulo"])[:40]))
 
@@ -460,14 +463,15 @@ def tratar_botao(cb, arg):
 
             def marcar(e):
                 e["postados"].append(item["id"]); e["contador"] += 1; e["ultimo"] = agora
-            mudar_estado_nuvem(marcar, f"robô PC: dica {item['id'][:3]} postada pelo botão")
+            mudar_estado_nuvem(marcar, f"robô: dica {item['id'][:3]} postada pelo botão")
             postador.trocar_botoes(cb, "✅ Postada no canal")
         elif acao == "dx":
             mudar_estado_nuvem(lambda e: e["pulados"].append(alvo) if alvo not in e["pulados"] else None,
-                               f"robô PC: dica {alvo[:3]} tirada da fila")
+                               f"robô: dica {alvo[:3]} tirada da fila")
             postador.trocar_botoes(cb, "🗑 Tirada da fila")
         elif acao in ("np", "nx"):
-            n = estado().get("previa_noticia")
+            _git("fetch", "-q", "origin", "main")
+            n = json.loads(_git("show", "FETCH_HEAD:renda/estado.json")).get("previa_noticia")
             if not n or chave(n["titulo"])[:40] != alvo:
                 return postador.trocar_botoes(cb, "Essa prévia de notícia é antiga")
             if acao == "np":
@@ -478,7 +482,7 @@ def tratar_botao(cb, arg):
                 e["noticias"].append(chave(n["titulo"]))
                 if acao == "np":
                     e["ultimo"] = agora
-            mudar_estado_nuvem(marcar_noticia, "robô PC: notícia " + ("postada" if acao == "np" else "tirada"))
+            mudar_estado_nuvem(marcar_noticia, "robô: notícia " + ("postada" if acao == "np" else "tirada"))
             postador.trocar_botoes(cb, "✅ Postada no canal" if acao == "np" else "🗑 Tirada da fila")
     except Exception as erro:
         print(f"[renda] botão falhou: {erro}")

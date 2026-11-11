@@ -1,0 +1,49 @@
+name: Botões e comandos do Telegram
+
+# Quem chama é a ponte na Vercel, a cada clique ou comando do dono no Telegram (24 horas).
+on:
+  repository_dispatch:
+    types: [telegram]
+
+# Cliques que mexem na fila de livros esperam o robô de postar terminar ("robo").
+# O resto (renda extra, ver prévia, menu) roda na hora, cada um no seu canto.
+concurrency:
+  group: ${{ github.event.client_payload.grupo == 'robo' && 'robo' || format('bot-{0}', github.event.client_payload.update.update_id) }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  botao:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements-nuvem.txt
+      - run: pip install -r requirements-nuvem.txt
+      - if: github.event.client_payload.navegador
+        run: python -m playwright install --with-deps chromium
+      - name: Tratar o clique ou comando
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PYTHONUTF8: "1"
+        run: python bot_nuvem.py
+      - name: Guardar a fila e o estado
+        if: always() && github.event.client_payload.grupo == 'robo'
+        run: |
+          git config user.name "robo-nuvem"
+          git config user.email "robo-nuvem@users.noreply.github.com"
+          for f in robo.db estado.json historico_postados.json; do [ -e "$f" ] && git add -A "$f"; done
+          git diff --cached --quiet || git commit -m "robô: botão do Telegram $(date -u +%F' '%H:%M)"
+          git pull --rebase -X theirs || true
+          git push

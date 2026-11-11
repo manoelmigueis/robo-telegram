@@ -629,6 +629,12 @@ def rodar():
             print(f"[rede] {e}. Tento de novo em 15 s.")
             time.sleep(15)
         except Exception as e:  # o robô nunca cai por causa de um erro
+            if "webhook" in str(e).lower():
+                # Os cliques agora chegam pela Vercel e são tratados na nuvem, 24 horas.
+                # O PC só olha de novo daqui a 10 minutos, caso o webhook seja desligado.
+                print("[telegram] Botões e comandos estão na nuvem (webhook ligado). O PC não escuta o Telegram.")
+                time.sleep(600)
+                continue
             print(f"[erro] {type(e).__name__}: {e}")
             time.sleep(5)
 
