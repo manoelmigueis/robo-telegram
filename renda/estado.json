@@ -6,13 +6,14 @@
     "004-sinais-golpe",
     "005-vender-usados",
     "006-freelancer",
-    "007-primeiro-cliente"
+    "007-primeiro-cliente",
+    "008-celular"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
     "cisco abre inscrições para cursos gratuitos em ia inglês e alfabetização digital"
   ],
-  "contador": 7,
-  "ultimo": "2026-11-11T23:25:44+00:00",
+  "contador": 8,
+  "ultimo": "2026-11-11T23:25:55+00:00",
   "pulados": []
 }
