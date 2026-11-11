@@ -131,6 +131,8 @@ def legenda_do_canal(p, canal):
     if assinatura and padrao and padrao in legenda:
         legenda = legenda.replace(f"📚: {padrao}", f"📚: {assinatura}")
     tags = " ".join(t if t.startswith("#") else "#" + t for t in (canal.get("tags") or "").split() if t.strip("#"))
+    if escritor.estrangeiro(p.get("dados") or {}):
+        tags = ""  # livro em outro idioma: as tags do canal são em português, ficam de fora
     limite = 1024 if p.get("foto") else 4096
     if tags and len(legenda) + len(tags) + 2 <= limite:
         legenda = legenda.rstrip() + ("\n\n" if "\n#" not in legenda[-300:] else " ") + tags
@@ -214,6 +216,12 @@ def publicar(pid, conferir=True, so_canais=None, so_gratis=False):
             p["botoes"] = [escritor.botao(p["dados"])]
             p["foto"] = p["dados"].get("capa") or p["foto"]
             banco.mudar_post(pid, legenda=p["legenda"], botoes=p["botoes"], foto=p["foto"], dados=p["dados"])
+    if p["origem"] == "livro" and escritor.estrangeiro(p["dados"]) and p["botoes"] != [escritor.botao(p["dados"])]:
+        # livro em outro idioma que entrou na fila com o texto antigo (em português): reescreve tudo no idioma dele
+        escritor.escrever([p["dados"]])
+        p["legenda"] = escritor.legenda(p["dados"])
+        p["botoes"] = [escritor.botao(p["dados"])]
+        banco.mudar_post(pid, legenda=p["legenda"], botoes=p["botoes"], dados=p["dados"])
     alvos = alvos_do_post(p, so_canais)
     horas = p["expira_horas"] if p["expira_horas"] is not None else (
         opcao("expira_auto_horas") if p["origem"] != "manual" else None)

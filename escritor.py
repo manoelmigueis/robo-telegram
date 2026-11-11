@@ -25,15 +25,18 @@ INSTRUCOES = """Você escreve posts para o canal de Telegram "Free Kindle Books"
 que indica e-books grátis da Amazon e, às vezes, ofertas de produtos da Amazon.
 
 Para cada item da lista, devolva:
-- "descricao": 2 frases curtas, no máximo 220 caracteres no total, em português do Brasil.
+- "descricao": 2 frases curtas, no máximo 220 caracteres no total, NO IDIOMA DO ITEM (campo "idioma"):
+  inglês = em inglês; espanhol = em espanhol; português de portugal = em português europeu;
+  qualquer outro caso = em português do Brasil.
   Livro: crie curiosidade sobre a história, sem spoiler, como um amigo indicando.
   Oferta: diga para quem o produto é bom e o principal benefício.
   Reescreva com suas palavras, não copie a descrição. Não invente nada que não esteja no texto.
   Pode terminar com 1 emoji. Não use travessão.
 - "titulo_curto": só para ofertas, nome do produto em até 45 caracteres (marca + o que é). Para livros, "".
-- "tags": de 4 a 6 hashtags em português, sem acento, ligadas ao tema
-  (gênero do livro, público, tipo de produto). Ex.: #romance #suspense #fone #gamer.
-  Não repita estas, que já entram sozinhas: {fixas}.
+- "tags": de 4 a 6 hashtags no mesmo idioma da descrição, sem acento, ligadas ao tema
+  (gênero do livro, público, tipo de produto). Ex.: #romance #suspense #fone #gamer;
+  em inglês #thriller #fantasy #selfhelp; em espanhol #novela #suspenso #autoayuda.
+  Não repita as genéricas de e-book grátis, Kindle e Amazon, que já entram sozinhas.
 
 Responda SÓ com um JSON válido, uma lista na mesma ordem: [{{"asin": "...", "descricao": "...", "titulo_curto": "...", "tags": ["#...", "..."]}}]
 
@@ -50,10 +53,10 @@ def _montar_pedido(itens):
             "asin": i["asin"],
             "tipo": i.get("tipo", "livro"),
             "titulo": i.get("titulo") or i.get("titulo_completo", ""),
+            "idioma": i.get("idioma") or "português",
             "texto": texto[:900],
         })
-    return INSTRUCOES.format(fixas=" ".join(CONFIG["tags_fixas"]),
-                             itens=json.dumps(resumo, ensure_ascii=False, indent=1))
+    return INSTRUCOES.format(itens=json.dumps(resumo, ensure_ascii=False, indent=1))
 
 
 def _ler_json(texto):
@@ -140,7 +143,7 @@ def _milhar(n):
 
 def _tags(item, extras):
     todas = []
-    fixas = CONFIG["tags_fixas"] if item.get("tipo") != "oferta" else ["#amazon"]
+    fixas = _lingua(item)["fixas"] if item.get("tipo") != "oferta" else ["#amazon"]
     for t in list(item.get("tags", [])) + extras + fixas:
         t = re.sub(r"[^\w#]", "", t.lower())
         if len(t) > 1 and t not in todas:
@@ -148,49 +151,96 @@ def _tags(item, extras):
     return " ".join(todas[:10])
 
 
-IDIOMAS = {"português": "🇧🇷 Português", "português de portugal": "🇵🇹 Português de Portugal",
-           "inglês": "🇺🇸 Livro em inglês", "espanhol": "🇪🇸 Livro em espanhol"}
-TAGS_IDIOMA = {"inglês": ["#livrosemingles", "#englishbooks"], "espanhol": ["#livrosemespanhol", "#librosgratis"],
-               "português de portugal": ["#portugal"]}
+# Tudo o que o post de livro escreve, em cada idioma. Livro de fora sai 100% no idioma dele
+# (texto, preço, aviso do Kindle Unlimited, botão e hashtags), para o canal crescer fora do Brasil.
+LINGUAS = {
+    "português": {
+        "selo": "🇧🇷 Português", "paginas": "páginas", "decimal": ",",
+        "por": "💰 Por <b>{p}</b> no Kindle", "de_por": "💰 De <s>{a}</s> por <b>{z}</b>",
+        "ku": "Grátis para quem assina o {ku}", "ver": "VER NA AMAZON", "gratis": "GRÁTIS POR TEMPO LIMITADO",
+        "botao_gratis": "📲 BAIXAR GRÁTIS NA AMAZON", "botao_pago": "📲 VER O LIVRO NA AMAZON",
+        "fixas": CONFIG["tags_fixas"], "extras": ["#ebook", "#leitura"],
+    },
+    "português de portugal": {
+        "selo": "🇵🇹 Português de Portugal", "paginas": "páginas", "decimal": ",",
+        "por": "💰 Por <b>{p}</b> no Kindle", "de_por": "💰 De <s>{a}</s> por <b>{z}</b>",
+        "ku": "Grátis para assinantes do {ku}", "ver": "VER NA AMAZON", "gratis": "GRÁTIS POR TEMPO LIMITADO",
+        "botao_gratis": "📲 DESCARREGAR GRÁTIS NA AMAZON", "botao_pago": "📲 VER O LIVRO NA AMAZON",
+        "fixas": ["#ebookgratis", "#kindle", "#livrosgratuitos", "#amazon"],
+        "extras": ["#ebook", "#leitura", "#portugal", "#livrosportugueses"],
+    },
+    "inglês": {
+        "selo": "🇺🇸 English", "paginas": "pages", "decimal": ".",
+        "por": "💰 Now <b>{p}</b> on Kindle", "de_por": "💰 Was <s>{a}</s>, now <b>{z}</b>",
+        "ku": "Free with {ku}", "ver": "SEE IT ON AMAZON", "gratis": "FREE FOR A LIMITED TIME",
+        "botao_gratis": "📲 GET IT FREE ON AMAZON", "botao_pago": "📲 SEE THE BOOK ON AMAZON",
+        "fixas": ["#freekindlebooks", "#kindle", "#freeebooks", "#amazon"],
+        "extras": ["#ebook", "#reading", "#englishbooks", "#booklovers"],
+    },
+    "espanhol": {
+        "selo": "🇪🇸 Español", "paginas": "páginas", "decimal": ",",
+        "por": "💰 Ahora <b>{p}</b> en Kindle", "de_por": "💰 Antes <s>{a}</s>, ahora <b>{z}</b>",
+        "ku": "Gratis con {ku}", "ver": "VER EN AMAZON", "gratis": "GRATIS POR TIEMPO LIMITADO",
+        "botao_gratis": "📲 DESCÁRGALO GRATIS EN AMAZON", "botao_pago": "📲 VER EL LIBRO EN AMAZON",
+        "fixas": ["#librosgratis", "#kindle", "#ebookgratis", "#amazon"],
+        "extras": ["#ebook", "#lectura", "#librosenespanol", "#leer"],
+    },
+}
+PALAVRAS_GRATIS = ("gratis", "free", "gratuit")  # livro pago não leva hashtag de grátis
+
+
+def _lingua(item):
+    return LINGUAS.get(item.get("idioma") or "português", LINGUAS["português"])
+
+
+def _preco(valor, lingua):
+    texto = _reais(valor)
+    return texto.replace(".", "X").replace(",", ".").replace("X", ",") if lingua["decimal"] == "." else texto
+
+
+def estrangeiro(item):
+    """Livro em outro idioma (não sai com as tags em português do canal)."""
+    return item.get("tipo") != "oferta" and (item.get("idioma") or "português") in LINGUAS \
+        and item.get("idioma") not in ("", "português")
 
 
 def legenda_livro(l):
     e = html.escape
+    t = _lingua(l)
     linhas = [f"📖 <b>{e(l['titulo'])}</b>"]
     if l.get("autor"):
         linhas.append(f"✍️ {e(l['autor'])}")
     if l.get("texto_post"):
         linhas += ["", e(l["texto_post"])]
     info = []
-    if l.get("idioma") in IDIOMAS:
-        info.append(IDIOMAS[l["idioma"]])
+    if l.get("idioma") in LINGUAS:
+        info.append(t["selo"])
     if l.get("paginas"):
-        info.append(f"📄 {_milhar(l['paginas'])} páginas")
+        n = _milhar(l["paginas"])
+        info.append(f"📄 {n.replace('.', ',') if t['decimal'] == '.' else n} {t['paginas']}")
     if info:
         linhas += ["", " · ".join(info)]
     linhas.append("")
     pago = (l.get("preco") or 0) > 0  # saiu da promoção grátis: mostra o preço de agora
     if pago:
-        linhas.append(f"💰 Por <b>{_reais(l['preco'])}</b> no Kindle")
+        linhas.append(t["por"].format(p=_preco(l["preco"], t)))
         if l.get("kindle_unlimited"):
             ku = CONFIG.get("link_kindle_unlimited")  # link de afiliado do Manoel para o KU
-            if ku:
-                linhas.append(f'📚 <b>Grátis para quem assina o <a href="{e(ku, quote=True)}">Kindle Unlimited</a></b>')
-            else:
-                linhas.append("📚 <b>Grátis para quem assina o Kindle Unlimited</b>")
+            nome = f'<a href="{e(ku, quote=True)}">Kindle Unlimited</a>' if ku else "Kindle Unlimited"
+            linhas.append(f"📚 <b>{t['ku'].format(ku=nome)}</b>")
         if l.get("link"):
-            linhas.append(f'👉 <a href="{e(l["link"], quote=True)}"><b>VER NA AMAZON</b></a>')
+            linhas.append(f'👉 <a href="{e(l["link"], quote=True)}"><b>{t["ver"]}</b></a>')
     elif l.get("preco_sugerido"):
-        linhas.append(f"💰 De <s>{_reais(l['preco_sugerido'])}</s> por <b>R$ 0,00</b>")
+        linhas.append(t["de_por"].format(a=_preco(l["preco_sugerido"], t), z=_preco(0, t)))
     if pago:
         pass
     elif l.get("link"):  # o texto vira link (com a tag de afiliado)
-        linhas.append(f'🕐 <a href="{e(l["link"], quote=True)}"><b>GRÁTIS POR TEMPO LIMITADO</b></a> 🔥')
+        linhas.append(f'🕐 <a href="{e(l["link"], quote=True)}"><b>{t["gratis"]}</b></a> 🔥')
     else:
-        linhas.append("🕐 <b>GRÁTIS POR TEMPO LIMITADO</b> 🔥")
-    tags = _tags(l, TAGS_IDIOMA.get(l.get("idioma"), []) + ["#ebook", "#leitura"])
-    if pago:  # livro pago não leva hashtag de grátis
-        tags = " ".join(t for t in tags.split() if "gratis" not in t)
+        linhas.append(f"🕐 <b>{t['gratis']}</b> 🔥")
+    tags = _tags(l, t["extras"])
+    if pago:
+        tags = " ".join(x for x in tags.split() if not any(g in x for g in PALAVRAS_GRATIS))
     linhas += ["", f"📚: {CONFIG['canal_assinatura']}", "", tags]
     return _cortar("\n".join(linhas), l, legenda_livro)
 
@@ -270,9 +320,9 @@ def botao(item):
     if item.get("tipo") == "oferta":
         texto = "🛒 VER OFERTA NA AMAZON"
     elif (item.get("preco") or 0) > 0:
-        texto = "📲 VER O LIVRO NA AMAZON"
+        texto = _lingua(item)["botao_pago"]
     else:
-        texto = "📲 BAIXAR GRÁTIS NA AMAZON"
+        texto = _lingua(item)["botao_gratis"]
     return [{"text": texto, "url": item["link"]}]
 
 
