@@ -1,6 +1,8 @@
 {
   "postados": [
-    "001-break-the-ice"
+    "001-break-the-ice",
+    "007-common-mistakes"
   ],
-  "contador": 1
+  "contador": 2,
+  "ultimo": "2026-11-11T00:00:42+00:00"
 }
