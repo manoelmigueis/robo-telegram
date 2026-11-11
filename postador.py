@@ -449,6 +449,11 @@ def tratar_botao(cb):
 
     if acao == "x":
         return responder(cb)
+    if acao == "r":  # botões da prévia do canal de renda extra
+        import renda
+        responder(cb, "⏳ Um instante...")
+        em_paralelo(renda.tratar_botao, cb, arg)
+        return
     if acao == "m":
         if arg == "pausa":
             pausado = not estado().get("pausado")
