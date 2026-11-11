@@ -88,8 +88,75 @@ def montar(arte, quiz):
     return pagina
 
 
-def desenhar(tudo=False):
+# ---------------- visual 2: ilustração + pattern (usado quando existe renda/ilustra/NNN.png) ----------------
+PATTERN = ("data:image/svg+xml;utf8,"
+           "<svg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'>"
+           "<g fill='none' stroke='%230E3B2E' stroke-width='1.2' opacity='.10'>"
+           "<circle cx='0' cy='0' r='36'/><circle cx='72' cy='0' r='36'/><circle cx='0' cy='72' r='36'/>"
+           "<circle cx='72' cy='72' r='36'/><circle cx='36' cy='36' r='36'/></g></svg>")
+
+MODELO2 = """<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=DM+Serif+Display&display=block" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1350px;background:#F7F3E8 url("__PATTERN__");color:#0E3B2E;font-family:Montserrat,"Segoe UI",sans-serif;
+  display:flex;flex-direction:column;overflow:hidden}
+.topo{display:flex;justify-content:space-between;align-items:center;padding:48px 64px 26px}
+.selo{background:#0E3B2E;color:#F2C14E;font-weight:800;font-size:22px;letter-spacing:4px;padding:10px 22px;border-radius:999px}
+.num{font-family:"DM Serif Display",serif;font-size:32px;color:#C8643B}
+.quadro{margin:0 78px 0 64px;height:__ALT__px;border-radius:30px;overflow:hidden;flex:none;
+  box-shadow:14px 14px 0 #F2C14E;border:3px solid #0E3B2E}
+.quadro img{width:100%;height:100%;object-fit:cover;object-position:center __FOCO__;display:block}
+.txt{flex:1;padding:44px 64px 30px;display:flex;flex-direction:column}
+h1{font-family:"DM Serif Display",Georgia,serif;font-weight:400;font-size:__TAM__px;line-height:1.04;letter-spacing:-.5px}
+h1 em{font-style:normal;color:#C8643B}
+.sub{font-size:28px;line-height:1.3;font-weight:600;margin-top:14px;color:#3E5F52}
+.lista{margin-top:auto;display:flex;flex-direction:column}
+.it{display:flex;align-items:center;gap:22px;padding:__PAD__px 0;border-top:2px solid rgba(14,59,46,.16);font-size:__ITEM__px;font-weight:700}
+.it:last-child{border-bottom:2px solid rgba(14,59,46,.16)}
+.it b{flex:none;width:__BOLA__px;height:__BOLA__px;border-radius:50%;border:2.5px solid #0E3B2E;display:grid;place-items:center;
+  font-size:__NUMF__px;font-weight:800;background:#F2C14E}
+.rod{background:#0E3B2E;color:#F7F3E8;padding:26px 64px;display:flex;justify-content:space-between;font-size:27px;font-weight:700}
+.rod span:last-child{color:#F2C14E}
+</style></head><body>
+<div class="topo"><div class="selo">RENDA EXTRA</div><div class="num">__ROTULO__</div></div>
+<div class="quadro"><img src="__IMG__"></div>
+<div class="txt"><h1>__TITULO__</h1>__SUB__<div class="lista">__CORPO__</div></div>
+<div class="rod"><span>@rendaextraparatodos</span><span>Salve e compartilhe</span></div>
+</body></html>"""
+
+
+def montar2(arte, quiz, ilustra):
+    import base64
+    itens = arte.get("itens", [])
+    n = len(itens)
+    t = arte["titulo"]
+    tam = 76 if len(t) < 32 else 66 if len(t) < 48 else 58
+    letra = "ABCD" if quiz else None
+    corpo = "".join(f'<div class="it"><b>{letra[i] if quiz else i + 1}</b>{html.escape(x)}</div>' for i, x in enumerate(itens))
+    # (altura da ilustração, fonte do item, espaço, bola, fonte do número)
+    med = {4: (540, 38, 18, 56, 26), 5: (490, 36, 15, 52, 24), 6: (450, 34, 12, 48, 22), 7: (390, 31, 10, 44, 20)}
+    alt, item, pad, bola, numf = med.get(n, med[7] if n > 7 else med[4])
+    if quiz:
+        alt -= 60
+    sub = f'<p class="sub">{html.escape(arte["sub"])}</p>' if arte.get("sub") else ""
+    img = "data:image/png;base64," + base64.b64encode(Path(ilustra).read_bytes()).decode()
+    trocas = {"__PATTERN__": PATTERN, "__IMG__": img, "__TITULO__": titulo_html(t), "__SUB__": sub, "__CORPO__": corpo,
+              "__ROTULO__": "Quiz" if quiz else f"{n} dicas", "__TAM__": str(tam), "__ALT__": str(alt),
+              "__ITEM__": str(item), "__PAD__": str(pad), "__BOLA__": str(bola), "__NUMF__": str(numf),
+              "__FOCO__": arte.get("foco", "45%")}
+    pagina = MODELO2
+    for k, v in trocas.items():
+        pagina = pagina.replace(k, v)
+    return pagina
+
+
+def desenhar(tudo=False, so=None):
+    """so = lista de números ('006', '017') para redesenhar só esses."""
     posts = json.loads((PASTA / "posts.json").read_text(encoding="utf-8"))
+    if so:
+        posts = [x for x in posts if x["id"][:3] in so]
+        tudo = True
     (PASTA / "img").mkdir(exist_ok=True)
     feitos = 0
     with sync_playwright() as p:
@@ -99,7 +166,12 @@ def desenhar(tudo=False):
             destino = PASTA / post["imagens"][0]
             if "arte" not in post or (destino.exists() and not tudo):
                 continue
-            pag.set_content(montar(post["arte"], post["tipo"] == "quiz"))
+            ilustra = PASTA / "ilustra" / Path(post["imagens"][0]).name
+            if ilustra.exists():
+                pag.set_content(montar2(post["arte"], post["tipo"] == "quiz", ilustra), wait_until="networkidle")
+                pag.evaluate("document.fonts.ready")
+            else:
+                pag.set_content(montar(post["arte"], post["tipo"] == "quiz"))
             pag.screenshot(path=str(destino))
             feitos += 1
         nav.close()
@@ -107,7 +179,8 @@ def desenhar(tudo=False):
 
 
 if __name__ == "__main__":
-    desenhar(len(sys.argv) > 1 and sys.argv[1] == "tudo")
+    args = sys.argv[1:]
+    desenhar(bool(args) and args[0] == "tudo", [a for a in args if a.isdigit()] or None)
 
 
 # ---------------- capa das notícias (roda no PC e na nuvem) ----------------

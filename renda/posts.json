@@ -552,41 +552,39 @@
   ]
  },
  {
-  "id": "017-quiz-pix",
-  "tipo": "quiz",
-  "titulo": "Um cliente diz que mandou Pix a mais e pede para você devolver a diferença. O que fazer?",
+  "id": "017-cursos-profissionalizantes",
+  "tipo": "lista",
+  "titulo": "🛠️ 6 cursos profissionalizantes que abrem portas rápido",
   "imagens": [
    "img/017.png"
   ],
   "arte": {
-   "titulo": "Pix a mais?",
-   "sub": "Um cliente diz que mandou Pix a mais e pede para você devolver a diferença. O que fazer?",
+   "titulo": "6 cursos profissionalizantes que abrem portas rápido",
+   "sub": "",
    "itens": [
-    "Devolver na hora",
-    "Olhar o comprovante",
-    "Conferir no app do banco",
-    "Devolver metade"
+    "Eletricista residencial",
+    "Auxiliar administrativo",
+    "Cuidador de idosos",
+    "Confeitaria",
+    "Manicure e sobrancelha",
+    "Ar-condicionado"
    ],
-   "icone": "🚨",
-   "icones": []
+   "icone": "🛠️",
+   "icones": [
+    "⚡",
+    "📋",
+    "🧓",
+    "🎂",
+    "💅",
+    "❄️"
+   ]
   },
-  "quiz": {
-   "pergunta": "Um cliente diz que mandou Pix a mais e pede para você devolver a diferença. O que fazer?",
-   "opcoes": [
-    "Devolver na hora",
-    "Olhar o comprovante",
-    "Conferir no app do banco",
-    "Devolver metade"
-   ],
-   "correta": 2,
-   "explicacao": "Comprovante pode ser falso. Só confie no que aparece no extrato do seu banco.",
-   "descricao": "🚨 Golpe do Pix a mais: o golpista manda print falso e espera você devolver um dinheiro que nunca entrou."
-  },
+  "corpo": "<p>São cursos curtos, muitos deles grátis no Senai, no Senac e nos Institutos Federais, e que ensinam um serviço que sempre tem procura:</p><p><b>1.</b> <b>Eletricista residencial</b>: instalação de tomada, chuveiro e iluminação.<br/><b>2.</b> <b>Auxiliar administrativo</b>: rotina de escritório, planilha e atendimento.<br/><b>3.</b> <b>Cuidador de idosos</b>: cuidados do dia a dia, com cada vez mais procura.<br/><b>4.</b> <b>Confeitaria</b>: bolos e doces para vender por encomenda.<br/><b>5.</b> <b>Manicure e sobrancelha</b>: atender em casa ou num salão parceiro.<br/><b>6.</b> <b>Ar-condicionado</b>: instalação e limpeza, serviço que lota no calor.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Antes de escolher, repare quais serviços têm fila de espera no seu bairro. Esse é o curso que dá retorno mais rápido.</p></details><p>📌 Salve e procure a turma mais perto de você.</p>",
   "tags": [
    "rendaextra",
-   "golpe",
-   "pix",
-   "seguranca"
+   "cursosprofissionalizantes",
+   "cursosgratuitos",
+   "qualificacao"
   ]
  },
  {
@@ -724,41 +722,37 @@
   ]
  },
  {
-  "id": "022-quiz-promessa",
-  "tipo": "quiz",
-  "titulo": "Um perfil promete R$ 500 por dia e vende um curso para ensinar como. Qual é o maior sinal de alerta?",
+  "id": "022-onde-curso-gratis",
+  "tipo": "lista",
+  "titulo": "🏫 Onde achar curso profissionalizante grátis",
   "imagens": [
    "img/022.png"
   ],
   "arte": {
-   "titulo": "Sinal de alerta",
-   "sub": "Um perfil promete R$ 500 por dia e vende um curso para ensinar como. Qual é o maior sinal de alerta?",
+   "titulo": "Onde achar curso profissionalizante grátis",
+   "sub": "",
    "itens": [
-    "O preço do curso",
-    "A promessa de ganho garantido",
-    "O perfil ter muitos seguidores",
-    "O curso ser online"
+    "Institutos Federais",
+    "Senac",
+    "Senai",
+    "Sebrae",
+    "Prefeitura e Sine"
    ],
-   "icone": "🚩",
-   "icones": []
+   "icone": "🏫",
+   "icones": [
+    "🏛️",
+    "🧑‍🍳",
+    "🏭",
+    "📈",
+    "🏢"
+   ]
   },
-  "quiz": {
-   "pergunta": "Um perfil promete R$ 500 por dia e vende um curso para ensinar como. Qual é o maior sinal de alerta?",
-   "opcoes": [
-    "O preço do curso",
-    "A promessa de ganho garantido",
-    "O perfil ter muitos seguidores",
-    "O curso ser online"
-   ],
-   "correta": 1,
-   "explicacao": "Ninguém sério garante quanto você vai ganhar por dia. Renda extra de verdade depende de trabalho e cliente.",
-   "descricao": "🚩 Promessa de valor fixo por dia é o sinal mais comum de golpe ou de curso que não entrega."
-  },
+  "corpo": "<p>Curso bom e de graça existe, mas as vagas acabam rápido. Estes são os lugares para ficar de olho:</p><p><b>1.</b> <b>Institutos Federais</b>: cursos curtos (FIC), gratuitos, com certificado.<br/><b>2.</b> <b>Senac</b>: tem vagas gratuitas para quem tem renda baixa.<br/><b>3.</b> <b>Senai</b>: cursos gratuitos presenciais e online, de indústria e tecnologia.<br/><b>4.</b> <b>Sebrae</b>: cursos grátis de gestão para quem quer o próprio negócio.<br/><b>5.</b> <b>Prefeitura e Sine</b>: cursos e vagas da sua cidade.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Siga nas redes a unidade da SUA cidade (do IF, do Senai, do Senac). As inscrições costumam ser anunciadas ali primeiro.</p></details><p>🔁 Mande para quem está procurando emprego.</p>",
   "tags": [
    "rendaextra",
-   "golpe",
-   "seguranca",
-   "rendaextraonline"
+   "cursosprofissionalizantes",
+   "cursosgratuitos",
+   "emprego"
   ]
  },
  {
