@@ -103,5 +103,14 @@
   "cota_idiomas": {
     "inglês": 10,
     "espanhol": 8
+  },
+  "renda": {
+    "canal": "@rendaextraparatodos",
+    "grade": {
+      "08:00": "dica",
+      "12:00": "dica",
+      "15:00": "noticia",
+      "19:00": "dica"
+    }
   }
 }

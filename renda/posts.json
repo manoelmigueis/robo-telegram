@@ -1,0 +1,488 @@
+[
+  {
+    "id": "001-habilidades",
+    "tipo": "lista",
+    "titulo": "💡 7 habilidades que você já tem e dá para vender",
+    "imagens": [
+      "img/001.png"
+    ],
+    "arte": {
+      "titulo": "7 habilidades que você já tem e pode vender",
+      "sub": "",
+      "itens": [
+        "Escrever bem",
+        "Mexer no Canva",
+        "Editar vídeo no celular",
+        "Organizar planilhas",
+        "Responder rápido",
+        "Explicar matéria",
+        "Falar outro idioma"
+      ],
+      "icone": "💡",
+      "icones": [
+        "✍️",
+        "🎨",
+        "🎬",
+        "📊",
+        "💬",
+        "📚",
+        "🌎"
+      ]
+    },
+    "corpo": "<p>Nem toda renda extra começa com uma ideia genial. Quase sempre começa com algo que você já sabe fazer e alguém precisa:</p><p><b>1.</b> <b>Escrever bem</b>: revisar textos, currículos e trabalhos.<br/><b>2.</b> <b>Mexer no Canva</b>: artes para comércio do bairro, cardápios e convites.<br/><b>3.</b> <b>Editar vídeo no celular</b>: Reels curtos para lojas e profissionais.<br/><b>4.</b> <b>Organizar planilhas</b>: controle de estoque, caixa e clientes.<br/><b>5.</b> <b>Responder rápido</b>: atendimento de WhatsApp para pequenos negócios.<br/><b>6.</b> <b>Explicar matéria</b>: aula particular online ou reforço escolar.<br/><b>7.</b> <b>Falar outro idioma</b>: tradução simples e conversação.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Escolha UMA habilidade, faça 3 exemplos de graça para conhecidos e use isso como portfólio. Com portfólio, cobrar fica muito mais fácil.</p></details><p>📌 Salve este post e mande para aquele amigo que vive dizendo que não sabe fazer nada.</p>",
+    "tags": [
+      "rendaextra",
+      "rendaextraonline",
+      "habilidades",
+      "trabalhehomeoffice"
+    ]
+  },
+  {
+    "id": "002-cursos-gratis",
+    "tipo": "lista",
+    "titulo": "🎓 6 sites de cursos grátis com certificado",
+    "imagens": [
+      "img/002.png"
+    ],
+    "arte": {
+      "titulo": "6 sites de cursos grátis com certificado",
+      "sub": "",
+      "itens": [
+        "Escola Virtual.Gov (EV.G)",
+        "Aprenda Mais (MEC)",
+        "Sebrae",
+        "SENAI",
+        "Fundação Bradesco (Escola Virtual)",
+        "Google Ateliê Digital"
+      ],
+      "icone": "🎓",
+      "icones": [
+        "🏛️",
+        "📘",
+        "🚀",
+        "🛠️",
+        "💻",
+        "🔎"
+      ]
+    },
+    "corpo": "<p>Quer aprender algo que dá dinheiro sem gastar nada? Esses são oficiais e gratuitos:</p><p><b>1.</b> <b>Escola Virtual.Gov (EV.G)</b>: cursos do governo federal, com certificado.<br/><b>2.</b> <b>Aprenda Mais (MEC)</b>: cursos curtos online em várias áreas.<br/><b>3.</b> <b>Sebrae</b>: vendas, finanças, marketing e como abrir o seu MEI.<br/><b>4.</b> <b>SENAI</b>: cursos EAD gratuitos de tecnologia e indústria.<br/><b>5.</b> <b>Fundação Bradesco (Escola Virtual)</b>: informática, gestão e Excel.<br/><b>6.</b> <b>Google Ateliê Digital</b>: marketing digital e ferramentas do Google.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>No currículo, ponha os cursos ligados à vaga que você quer. Cinco cursos certos valem mais que trinta aleatórios.</p></details><p>📌 Salve para fazer um por semana.</p>",
+    "tags": [
+      "rendaextra",
+      "rendaextraonline",
+      "cursosgratuitos",
+      "certificado"
+    ]
+  },
+  {
+    "id": "003-quiz-golpe",
+    "tipo": "quiz",
+    "titulo": "Uma vaga pede R$ 49 para \"liberar o acesso\" ao trabalho. O que fazer?",
+    "imagens": [
+      "img/003.png"
+    ],
+    "arte": {
+      "titulo": "Isso é golpe ou não?",
+      "sub": "Uma vaga pede R$ 49 para \"liberar o acesso\" ao trabalho. O que fazer?",
+      "itens": [
+        "Pagar, é investimento",
+        "Pagar só metade",
+        "Não pagar: é golpe",
+        "Pedir desconto"
+      ],
+      "icone": "🚨",
+      "icones": []
+    },
+    "quiz": {
+      "pergunta": "Uma vaga pede R$ 49 para \"liberar o acesso\" ao trabalho. O que fazer?",
+      "opcoes": [
+        "Pagar, é investimento",
+        "Pagar só metade",
+        "Não pagar: é golpe",
+        "Pedir desconto"
+      ],
+      "correta": 2,
+      "explicacao": "Trabalho de verdade paga você. Quem cobra para você começar a trabalhar está aplicando golpe.",
+      "descricao": "🚨 Regra de ouro: se pedem dinheiro para liberar vaga, saque ou tarefa, é golpe."
+    },
+    "tags": [
+      "rendaextra",
+      "rendaextraonline",
+      "golpe",
+      "seguranca"
+    ]
+  },
+  {
+    "id": "004-sinais-golpe",
+    "tipo": "lista",
+    "titulo": "🚨 6 sinais de golpe de renda extra",
+    "imagens": [
+      "img/004.png"
+    ],
+    "arte": {
+      "titulo": "6 sinais de golpe de renda extra",
+      "sub": "",
+      "itens": [
+        "Pede dinheiro para começar",
+        "Promete valor fixo por dia",
+        "Tarefa de curtir vídeo",
+        "Pede PIX para liberar saque",
+        "Só ganha quem indica",
+        "Pressa"
+      ],
+      "icone": "🚨",
+      "icones": [
+        "💸",
+        "🎰",
+        "👍",
+        "🔓",
+        "🔺",
+        "⏳"
+      ]
+    },
+    "corpo": "<p>Antes de entrar em qualquer \"oportunidade\", confira. Se aparecer um destes sinais, saia:</p><p><b>1.</b> <b>Pede dinheiro para começar</b>: taxa de cadastro, kit ou \"liberação\".<br/><b>2.</b> <b>Promete valor fixo por dia</b>: ganho garantido sem esforço não existe.<br/><b>3.</b> <b>Tarefa de curtir vídeo</b>: começa pagando centavos e depois pede depósito.<br/><b>4.</b> <b>Pede PIX para liberar saque</b>: o saldo é falso e o dinheiro some.<br/><b>5.</b> <b>Só ganha quem indica</b>: é pirâmide, cai quando param de entrar pessoas.<br/><b>6.</b> <b>Pressa</b>: \"só hoje\", \"últimas vagas\". Pressa é para você não pensar.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Pesquise o nome da empresa + \"golpe\" e + \"Reclame Aqui\" antes de passar qualquer dado ou PIX.</p></details><p>🔁 Compartilhe: esse post pode salvar o dinheiro de alguém da sua família.</p>",
+    "tags": [
+      "rendaextra",
+      "rendaextraonline",
+      "golpe",
+      "seguranca"
+    ]
+  },
+  {
+    "id": "005-vender-usados",
+    "tipo": "lista",
+    "titulo": "📦 Venda o que está parado na sua casa",
+    "imagens": [
+      "img/005.png"
+    ],
+    "arte": {
+      "titulo": "Venda o que está parado na sua casa",
+      "sub": "",
+      "itens": [
+        "Separe",
+        "Foto com luz natural",
+        "Preço",
+        "Título com marca e estado",
+        "Onde",
+        "Segurança"
+      ],
+      "icone": "📦",
+      "icones": [
+        "🧺",
+        "📸",
+        "🏷️",
+        "✏️",
+        "🛒",
+        "🔒"
+      ]
+    },
+    "corpo": "<p>O jeito mais rápido de fazer dinheiro extra é vender o que você não usa. Faça assim:</p><p><b>1.</b> <b>Separe</b>: roupas, eletrônicos, móveis e brinquedos sem uso há 6 meses.<br/><b>2.</b> <b>Foto com luz natural</b>: perto da janela, fundo limpo, 4 ângulos.<br/><b>3.</b> <b>Preço</b>: pesquise o mesmo item e anuncie um pouco abaixo da média.<br/><b>4.</b> <b>Título com marca e estado</b>: \"Tênis Nike 40, pouco uso\".<br/><b>5.</b> <b>Onde</b>: OLX, Facebook Marketplace, Enjoei e Mercado Livre.<br/><b>6.</b> <b>Segurança</b>: entregue em lugar público e só depois do PIX confirmado no app do banco.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Anuncie no domingo à noite: é quando mais gente está olhando o celular com calma.</p></details><p>📌 Salve e comece hoje por um cômodo só.</p>",
+    "tags": [
+      "rendaextra",
+      "rendaextraonline",
+      "desapego",
+      "vendasonline"
+    ]
+  },
+  {
+    "id": "006-freelancer",
+    "tipo": "lista",
+    "titulo": "💻 4 sites para pegar trabalho freelancer",
+    "imagens": [
+      "img/006.png"
+    ],
+    "arte": {
+      "titulo": "4 sites para pegar trabalho freelancer",
+      "sub": "",
+      "itens": [
+        "Workana",
+        "99Freelas",
+        "GetNinjas",
+        "Fiverr"
+      ],
+      "icone": "💻",
+      "icones": [
+        "🧑‍💻",
+        "💼",
+        "🔧",
+        "🌍"
+      ]
+    },
+    "corpo": "<p>Para quem quer trabalhar de casa por projeto, estes são os mais usados no Brasil:</p><p><b>1.</b> <b>Workana</b>: textos, design, programação e marketing.<br/><b>2.</b> <b>99Freelas</b>: projetos de brasileiros, bom para começar.<br/><b>3.</b> <b>GetNinjas</b>: serviços locais e online, de aula a reforma.<br/><b>4.</b> <b>Fiverr</b>: você cria um pacote fixo e vende para o mundo todo.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>No perfil, troque \"faço de tudo\" por uma coisa só: \"Edito Reels para restaurantes\". Perfil específico ganha mais propostas.</p></details><p>📌 Salve e crie o seu perfil ainda esta semana.</p>",
+    "tags": [
+      "rendaextra",
+      "rendaextraonline",
+      "freelancer",
+      "trabalhehomeoffice"
+    ]
+  },
+  {
+    "id": "007-primeiro-cliente",
+    "tipo": "lista",
+    "titulo": "🤝 Seu primeiro cliente em 5 passos",
+    "imagens": [
+      "img/007.png"
+    ],
+    "arte": {
+      "titulo": "Seu primeiro cliente em 5 passos",
+      "sub": "",
+      "itens": [
+        "Defina o serviço",
+        "Faça 3 exemplos",
+        "Poste no status",
+        "Chame 10 conhecidos",
+        "Peça indicação"
+      ],
+      "icone": "🤝",
+      "icones": [
+        "🎯",
+        "🖼️",
+        "📲",
+        "💬",
+        "🔁"
+      ]
+    },
+    "corpo": "<p>Não precisa de site nem de anúncio. O primeiro cliente quase sempre vem do seu WhatsApp:</p><p><b>1.</b> <b>Defina o serviço</b>: uma frase só, simples e clara.<br/><b>2.</b> <b>Faça 3 exemplos</b>: o seu portfólio cabe no celular.<br/><b>3.</b> <b>Poste no status</b>: \"Estou fazendo X, quem precisar me chama\".<br/><b>4.</b> <b>Chame 10 conhecidos</b>: mensagem curta, sem textão.<br/><b>5.</b> <b>Peça indicação</b>: depois de entregar, peça para indicar alguém.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Ofereça um preço de lançamento para os 3 primeiros clientes em troca de um depoimento. Depoimento vende mais que propaganda.</p></details><p>🔁 Mande para quem está querendo começar.</p>",
+    "tags": [
+      "rendaextra",
+      "rendaextraonline",
+      "empreender",
+      "vendas"
+    ]
+  },
+  {
+    "id": "008-celular",
+    "tipo": "lista",
+    "titulo": "📱 5 rendas extras só com o celular",
+    "imagens": [
+      "img/008.png"
+    ],
+    "arte": {
+      "titulo": "5 rendas extras só com o celular",
+      "sub": "",
+      "itens": [
+        "Editar Reels",
+        "Cuidar do Instagram de lojas",
+        "Fotografar produtos",
+        "Atender no WhatsApp",
+        "Criar artes no Canva"
+      ],
+      "icone": "📱",
+      "icones": [
+        "🎬",
+        "📸",
+        "📷",
+        "💬",
+        "🎨"
+      ]
+    },
+    "corpo": "<p>Você não precisa de computador para começar. Dá para fazer tudo isso pelo celular:</p><p><b>1.</b> <b>Editar Reels</b>: para lojas, salões e restaurantes, usando o CapCut.<br/><b>2.</b> <b>Cuidar do Instagram</b> de um comércio do bairro.<br/><b>3.</b> <b>Fotografar produtos</b> para lojas e vendedores online.<br/><b>4.</b> <b>Atender no WhatsApp</b> para pequenos negócios.<br/><b>5.</b> <b>Criar artes no Canva</b>: posts, cardápios e convites.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Comece pelos negócios do seu bairro: eles precisam disso, quase ninguém oferece e você pode mostrar o trabalho pessoalmente.</p></details><p>📌 Salve este post para não esquecer.</p>",
+    "tags": [
+      "rendaextra",
+      "rendaextraonline",
+      "rendaextracelular",
+      "trabalhehomeoffice"
+    ]
+  },
+  {
+    "id": "009-quiz-preco",
+    "tipo": "quiz",
+    "titulo": "Qual é o melhor jeito de definir o preço do seu primeiro serviço?",
+    "imagens": [
+      "img/009.png"
+    ],
+    "arte": {
+      "titulo": "Quanto cobrar?",
+      "sub": "Qual é o melhor jeito de definir o preço do seu primeiro serviço?",
+      "itens": [
+        "Cobrar o mínimo possível",
+        "Copiar o mais caro",
+        "Pesquisar e somar seu custo",
+        "Cobrar o que o cliente quiser"
+      ],
+      "icone": "💰",
+      "icones": []
+    },
+    "quiz": {
+      "pergunta": "Qual é o melhor jeito de definir o preço do seu primeiro serviço?",
+      "opcoes": [
+        "Cobrar o mínimo possível",
+        "Copiar o mais caro",
+        "Pesquisar e somar seu custo",
+        "Cobrar o que o cliente quiser"
+      ],
+      "correta": 2,
+      "explicacao": "Pesquise quanto cobram pelo mesmo serviço e confira se o valor paga o seu tempo e os seus custos.",
+      "descricao": "💰 Preço baixo demais cansa você e afasta cliente bom."
+    },
+    "tags": [
+      "rendaextra",
+      "rendaextraonline",
+      "precificacao",
+      "empreender"
+    ]
+  },
+  {
+    "id": "010-comida",
+    "tipo": "lista",
+    "titulo": "🍰 5 rendas extras com comida em casa",
+    "imagens": [
+      "img/010.png"
+    ],
+    "arte": {
+      "titulo": "5 rendas extras com comida em casa",
+      "sub": "",
+      "itens": [
+        "Bolo de pote",
+        "Marmita congelada",
+        "Salgado congelado",
+        "Doces de festa",
+        "Café da manhã por encomenda"
+      ],
+      "icone": "🍰",
+      "icones": [
+        "🍮",
+        "🍱",
+        "🥟",
+        "🍫",
+        "☕"
+      ]
+    },
+    "corpo": "<p>Comida boa sempre vende. Estas dão para começar na sua cozinha:</p><p><b>1.</b> <b>Bolo de pote</b>: custo baixo e vende bem no trabalho e na escola.<br/><b>2.</b> <b>Marmita congelada</b>: semanal, com pedido fechado.<br/><b>3.</b> <b>Salgado congelado</b>: para festas e para quem quer praticidade.<br/><b>4.</b> <b>Doces de festa</b>: brigadeiro gourmet, com encomenda antecipada.<br/><b>5.</b> <b>Café da manhã por encomenda</b>: em datas como Dia das Mães.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Venda por encomenda com pedido fechado até um dia antes. Assim você não perde comida e sabe exatamente quanto comprar.</p></details><p>🔁 Mande para aquela pessoa que cozinha muito bem.</p>",
+    "tags": [
+      "rendaextra",
+      "rendaextraonline",
+      "vendercomida",
+      "empreender"
+    ]
+  },
+  {
+    "id": "011-mei",
+    "tipo": "lista",
+    "titulo": "🧾 4 motivos para virar MEI",
+    "imagens": [
+      "img/011.png"
+    ],
+    "arte": {
+      "titulo": "4 motivos para virar MEI",
+      "sub": "",
+      "itens": [
+        "CNPJ",
+        "INSS",
+        "Conta PJ",
+        "Taxa mensal baixa"
+      ],
+      "icone": "🧾",
+      "icones": [
+        "🏢",
+        "🛡️",
+        "🏦",
+        "📄"
+      ]
+    },
+    "corpo": "<p>Começou a ganhar com a renda extra? Formalizar como MEI abre portas:</p><p><b>1.</b> <b>CNPJ</b>: você emite nota fiscal e atende empresas.<br/><b>2.</b> <b>INSS</b>: conta para a aposentadoria e dá direito a auxílio-doença.<br/><b>3.</b> <b>Conta PJ</b>: separa o dinheiro do negócio do seu dinheiro pessoal.<br/><b>4.</b> <b>Taxa mensal baixa</b>: um boleto só por mês, o DAS.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Abra pelo site oficial gov.br. É de graça! Desconfie de quem cobra para abrir MEI.</p></details><p>📌 Salve para quando chegar a hora.</p>",
+    "tags": [
+      "rendaextra",
+      "rendaextraonline",
+      "mei",
+      "empreender"
+    ]
+  },
+  {
+    "id": "012-organizar",
+    "tipo": "lista",
+    "titulo": "🗂️ Como organizar o dinheiro da renda extra",
+    "imagens": [
+      "img/012.png"
+    ],
+    "arte": {
+      "titulo": "Organize o dinheiro da renda extra",
+      "sub": "",
+      "itens": [
+        "Pague o negócio",
+        "Guarde uma reserva",
+        "Pague dívidas caras",
+        "Reinvista"
+      ],
+      "icone": "🗂️",
+      "icones": [
+        "🧰",
+        "🐷",
+        "💳",
+        "📈"
+      ]
+    },
+    "corpo": "<p>Não adianta ganhar mais se o dinheiro some. Divida assim, toda vez que receber:</p><p><b>1.</b> <b>Pague o negócio</b>: material, internet e ferramentas.<br/><b>2.</b> <b>Guarde uma reserva</b>: para os meses fracos.<br/><b>3.</b> <b>Pague dívidas caras</b>: cartão e cheque especial primeiro.<br/><b>4.</b> <b>Reinvista</b>: um curso ou uma ferramenta que faça você ganhar mais.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Abra uma conta digital só para a renda extra. Quando o dinheiro fica separado, você enxerga quanto ganhou de verdade.</p></details><p>📌 Salve e aplique já no próximo pagamento.</p>",
+    "tags": [
+      "rendaextra",
+      "rendaextraonline",
+      "educacaofinanceira",
+      "dinheiro"
+    ]
+  },
+  {
+    "id": "013-aulas",
+    "tipo": "lista",
+    "titulo": "👩‍🏫 Dar aula online: como começar",
+    "imagens": [
+      "img/013.png"
+    ],
+    "arte": {
+      "titulo": "Dar aula online: como começar",
+      "sub": "",
+      "itens": [
+        "Escolha o assunto",
+        "Defina o público",
+        "Use o que já tem",
+        "Pacote de 4 aulas",
+        "Divulgue em grupos"
+      ],
+      "icone": "👩‍🏫",
+      "icones": [
+        "📚",
+        "👥",
+        "🎥",
+        "📦",
+        "📣"
+      ]
+    },
+    "corpo": "<p>Se você sabe algo que os outros querem aprender, já tem uma renda extra:</p><p><b>1.</b> <b>Escolha o assunto</b>: reforço escolar, idioma, instrumento, Excel.<br/><b>2.</b> <b>Defina o público</b>: crianças, vestibulandos ou adultos.<br/><b>3.</b> <b>Use o que já tem</b>: Google Meet e um caderno bastam.<br/><b>4.</b> <b>Pacote de 4 aulas</b>: vende mais que uma aula solta.<br/><b>5.</b> <b>Divulgue em grupos</b> do bairro e da escola.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Grave um vídeo de 1 minuto explicando algo simples do seu assunto. Ele vira a sua vitrine no status e nos grupos.</p></details><p>🔁 Mande para aquele amigo que explica tudo muito bem.</p>",
+    "tags": [
+      "rendaextra",
+      "rendaextraonline",
+      "aulaonline",
+      "professor"
+    ]
+  },
+  {
+    "id": "014-tempo",
+    "tipo": "lista",
+    "titulo": "⏰ Renda extra com pouco tempo livre",
+    "imagens": [
+      "img/014.png"
+    ],
+    "arte": {
+      "titulo": "Renda extra com pouco tempo livre",
+      "sub": "",
+      "itens": [
+        "Escolha uma coisa só",
+        "Bloqueie um horário",
+        "Use o fim de semana",
+        "Corte o tempo perdido"
+      ],
+      "icone": "⏰",
+      "icones": [
+        "🎯",
+        "📅",
+        "🗓️",
+        "✂️"
+      ]
+    },
+    "corpo": "<p>Trabalha o dia todo? Dá para começar com 1 hora por dia:</p><p><b>1.</b> <b>Escolha uma coisa só</b>: foco rende mais que 5 ideias pela metade.<br/><b>2.</b> <b>Bloqueie um horário</b>: o mesmo todo dia, como um compromisso.<br/><b>3.</b> <b>Use o fim de semana</b>: para entregas maiores.<br/><b>4.</b> <b>Corte o tempo perdido</b>: 1 hora de rede social já é a sua hora.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Meta da primeira semana: um serviço anunciado e 10 pessoas avisadas. Pequeno, mas feito.</p></details><p>📌 Salve e comece hoje à noite.</p>",
+    "tags": [
+      "rendaextra",
+      "rendaextraonline",
+      "produtividade",
+      "foco"
+    ]
+  }
+]
