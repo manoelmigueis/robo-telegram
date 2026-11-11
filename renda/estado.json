@@ -1,5 +1,14 @@
 {
-  "postados": [],
-  "noticias": [],
-  "contador": 0
+  "postados": [
+    "001-habilidades",
+    "002-cursos-gratis",
+    "003-quiz-golpe",
+    "004-sinais-golpe",
+    "005-vender-usados"
+  ],
+  "noticias": [
+    "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas"
+  ],
+  "contador": 5,
+  "ultimo": "2026-11-11T18:56:47+00:00"
 }
