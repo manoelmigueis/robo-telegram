@@ -520,35 +520,39 @@
   ]
  },
  {
-  "id": "016-cashback",
+  "id": "016-onde-curriculo",
   "tipo": "lista",
-  "titulo": "💸 4 jeitos de recuperar parte do que você gasta",
+  "titulo": "📄 6 lugares para deixar o seu currículo",
   "imagens": [
    "img/016.png"
   ],
   "arte": {
-   "titulo": "4 jeitos de recuperar parte do que você gasta",
+   "titulo": "6 lugares para deixar o seu currículo",
    "sub": "",
    "itens": [
-    "App de cashback",
-    "Cashback do banco",
-    "Pontos do cartão",
-    "CPF na nota"
+    "LinkedIn",
+    "Gupy",
+    "Indeed",
+    "InfoJobs",
+    "Catho",
+    "Carteira de Trabalho Digital"
    ],
-   "icone": "💸",
+   "icone": "📄",
    "icones": [
-    "🔁",
-    "🏦",
-    "💳",
-    "🧾"
+    "💼",
+    "🟣",
+    "🔎",
+    "🗂️",
+    "📊",
+    "📱"
    ]
   },
-  "corpo": "<p>Não é renda nova, mas é dinheiro que volta para o seu bolso nas compras que você já ia fazer:</p><p><b>1.</b> <b>App de cashback</b>: sites como o Méliuz devolvem uma parte de compras em lojas parceiras.<br/><b>2.</b> <b>Cashback do banco</b>: vários bancos digitais devolvem um pouco em compras no cartão ou na loja do app.<br/><b>3.</b> <b>Pontos do cartão</b>: confira se o seu cartão junta pontos e troque antes de vencer.<br/><b>4.</b> <b>CPF na nota</b>: alguns estados têm programa que devolve imposto ou sorteia prêmios para quem pede nota com CPF.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Cashback só vale para o que você já ia comprar. Comprar algo só para ganhar cashback é gastar, não economizar.</p></details><p>🔁 Mande para quem vive reclamando que o dinheiro some.</p>",
+  "corpo": "<p>Quem procura emprego precisa estar onde as empresas procuram gente. Cadastre o currículo nestes:</p><p><b>1.</b> <b>LinkedIn</b>: o perfil funciona como currículo e recrutador procura gente por ali.<br/><b>2.</b> <b>Gupy</b>: muitas empresas grandes fazem a seleção por esta plataforma.<br/><b>3.</b> <b>Indeed</b>: junta vagas de vários sites num lugar só.<br/><b>4.</b> <b>InfoJobs</b>: vagas de todo o Brasil, com filtro por cidade e área.<br/><b>5.</b> <b>Catho</b>: o cadastro do currículo é grátis.<br/><b>6.</b> <b>Carteira de Trabalho Digital</b>: no app do governo dá para ver vagas do Sine.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Ative o alerta de vagas em todos eles. Quem se candidata nos primeiros dias tem mais chance de ser chamado.</p></details><p>📌 Salve e cadastre um por dia.</p>",
   "tags": [
    "rendaextra",
-   "economia",
-   "cashback",
-   "dinheiro"
+   "emprego",
+   "curriculo",
+   "vagas"
   ]
  },
  {
@@ -588,37 +592,37 @@
   ]
  },
  {
-  "id": "018-alugar",
+  "id": "018-aprender-ia",
   "tipo": "lista",
-  "titulo": "🔑 5 coisas que você pode alugar",
+  "titulo": "🤖 5 coisas de IA que valem dinheiro aprender",
   "imagens": [
    "img/018.png"
   ],
   "arte": {
-   "titulo": "5 coisas que você pode alugar",
+   "titulo": "5 coisas de IA que valem dinheiro aprender",
    "sub": "",
    "itens": [
-    "Vaga de garagem",
-    "Ferramentas",
-    "Roupa de festa",
-    "Itens de festa",
-    "Videogame e jogos"
+    "Escrever bons pedidos",
+    "Criar imagens",
+    "Resumir documentos",
+    "Planilhas com IA",
+    "Automatizar tarefas"
    ],
-   "icone": "🔑",
+   "icone": "🤖",
    "icones": [
-    "🚗",
-    "🛠️",
-    "👗",
-    "🎉",
-    "🎮"
+    "💬",
+    "🖼️",
+    "📑",
+    "📊",
+    "⚙️"
    ]
   },
-  "corpo": "<p>Tem coisa parada em casa que outras pessoas precisam só por um dia. Dá para alugar:</p><p><b>1.</b> <b>Vaga de garagem</b>: quem mora perto de centro, faculdade ou hospital costuma ter procura.<br/><b>2.</b> <b>Ferramentas</b>: furadeira, escada e lavadora de alta pressão.<br/><b>3.</b> <b>Roupa de festa</b>: vestido e terno que foram usados uma vez só.<br/><b>4.</b> <b>Itens de festa</b>: mesa, cadeira, caixa de som e decoração.<br/><b>5.</b> <b>Videogame e jogos</b>: para festa de criança ou fim de semana.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Faça um contrato simples por escrito e tire foto do item antes de entregar. Peça um valor de caução para devolver quando o item voltar inteiro.</p></details><p>📌 Salve e olhe hoje o que está parado aí.</p>",
+  "corpo": "<p>Empresa pequena quer usar IA e não sabe por onde começar. Quem aprende isso primeiro sai na frente:</p><p><b>1.</b> <b>Escrever bons pedidos</b>: explicar para a IA o que você quer, com contexto e exemplo.<br/><b>2.</b> <b>Criar imagens</b>: artes para loja, cardápio e post.<br/><b>3.</b> <b>Resumir documentos</b>: transformar texto longo em pontos claros.<br/><b>4.</b> <b>Planilhas com IA</b>: pedir fórmula e organizar dados.<br/><b>5.</b> <b>Automatizar tarefas</b>: respostas e rotinas que se repetem todo dia.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Treine resolvendo um problema de verdade: ajude uma loja conhecida com uma coisa só. Isso vira o seu primeiro exemplo para mostrar.</p></details><p>🔁 Mande para quem quer aprender algo novo este mês.</p>",
   "tags": [
    "rendaextra",
-   "rendaextraemcasa",
-   "aluguel",
-   "economia"
+   "inteligenciaartificial",
+   "qualificacao",
+   "rendaextraonline"
   ]
  },
  {
@@ -656,35 +660,37 @@
   ]
  },
  {
-  "id": "020-pets",
+  "id": "020-curriculo-robo",
   "tipo": "lista",
-  "titulo": "🐶 4 rendas extras para quem ama bicho",
+  "titulo": "✅ 5 dicas para o currículo passar na triagem",
   "imagens": [
    "img/020.png"
   ],
   "arte": {
-   "titulo": "4 rendas extras para quem ama bicho",
+   "titulo": "5 dicas para o currículo passar na triagem",
    "sub": "",
    "itens": [
-    "Passear com cães",
-    "Cuidar nas férias",
-    "Adestramento básico",
-    "Fotos de pet"
+    "Use palavras da vaga",
+    "Formato simples",
+    "Resumo de 3 linhas",
+    "Resultados com números",
+    "Cursos certos"
    ],
-   "icone": "🐶",
+   "icone": "✅",
    "icones": [
-    "🦮",
-    "🏠",
-    "🎓",
-    "📸"
+    "🔑",
+    "📄",
+    "✍️",
+    "📈",
+    "🎓"
    ]
   },
-  "corpo": "<p>Muita gente trabalha o dia todo e não tem com quem deixar o pet. Isso vira serviço:</p><p><b>1.</b> <b>Passear com cães</b>: passeios de 30 minutos, por pacote semanal.<br/><b>2.</b> <b>Cuidar nas férias</b>: visitar ou hospedar o pet quando o dono viaja.<br/><b>3.</b> <b>Adestramento básico</b>: depois de fazer um curso, ensinar comandos simples.<br/><b>4.</b> <b>Fotos de pet</b>: ensaio no parque com o celular.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Comece com os vizinhos e peça para eles marcarem você nos stories. Quem tem pet conhece outras pessoas que têm pet.</p></details><p>📌 Salve e mande para um amigo que é apaixonado por bicho.</p>",
+  "corpo": "<p>Muitas empresas usam sistema que lê o currículo antes de uma pessoa ver. Faça o seu passar:</p><p><b>1.</b> <b>Use palavras da vaga</b>: repita os termos que aparecem no anúncio.<br/><b>2.</b> <b>Formato simples</b>: PDF limpo, sem tabela, sem foto e sem coluna dupla.<br/><b>3.</b> <b>Resumo de 3 linhas</b>: quem você é e o que sabe fazer, logo no começo.<br/><b>4.</b> <b>Resultados com números</b>: \"atendi 40 clientes por dia\" vale mais que \"atendimento\".<br/><b>5.</b> <b>Cursos certos</b>: coloque os cursos ligados à vaga, com a carga horária.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Tenha um currículo base e ajuste o resumo e as palavras para cada vaga. Leva 10 minutos e aumenta muito as chamadas.</p></details><p>📌 Salve e revise o seu hoje.</p>",
   "tags": [
    "rendaextra",
-   "rendaextraemcasa",
-   "pets",
-   "servicos"
+   "curriculo",
+   "emprego",
+   "vagas"
   ]
  },
  {

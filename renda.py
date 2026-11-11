@@ -37,19 +37,21 @@ FUSO = timezone(timedelta(hours=-4))  # Manaus
 # Buscas do garimpo de notícias: (tema, busca no Google Notícias)
 BUSCAS = CFG.get("buscas") or [
     ["curso", '"cursos gratuitos" certificado online'],
+    ["curso", '"cursos profissionalizantes" gratuitos inscrições'],
+    ["ia", '"inteligência artificial" curso gratuito'],
     ["vaga", '"home office" vagas abertas'],
-    ["vaga", '"trabalho remoto" vagas inscrições'],
-    ["renda", '"renda extra" como ganhar'],
-    ["golpe", 'golpe "renda extra" OR "falsa vaga" alerta'],
+    ["vaga", 'vagas emprego "inscrições abertas" empresa'],
 ]
 CHAMADA = {
     "curso": "🎓 Aprender de graça e turbinar o currículo. Confira como se inscrever:",
     "vaga": "💼 Vaga para trabalhar de casa. Veja os requisitos e como se candidatar:",
     "renda": "💡 Mais uma ideia de renda extra para você avaliar com calma:",
     "golpe": "🚨 Fique atento e avise quem você ama. Saiba como o golpe funciona:",
+    "ia": "🤖 Aprender IA agora é sair na frente no trabalho. Veja como participar:",
 }
 TAGS = {"curso": "#cursosgratuitos #certificado", "vaga": "#vagas #homeoffice",
-        "renda": "#rendaextra #dinheiro", "golpe": "#golpe #seguranca"}
+        "renda": "#rendaextra #dinheiro", "golpe": "#golpe #seguranca",
+        "ia": "#inteligenciaartificial #cursosgratuitos"}
 # Nada de aposta, cassino, pirâmide ou promessa de dinheiro fácil no canal.
 PROIBIDO = re.compile(r"\b(bet|bets|aposta\w*|cassino|tigrinho|jogo do bicho|loteria|mega-sena|pir[âa]mide|"
                       r"cripto\w*|bitcoin|forex|day ?trade|sem sair de casa ganhe|ganhe r\$)\b", re.I)
@@ -178,7 +180,7 @@ def parecida(k, outras):
 def pontos(n):
     t = n["titulo"]
     p = 3 * bool(ONLINE.search(t)) + 3 * bool(NACIONAL.search(t)) - 4 * bool(LOCAL.search(t))
-    p += {"curso": 2, "vaga": 2, "renda": 1, "golpe": 0}.get(n["tema"], 0)
+    p += {"curso": 2, "vaga": 2, "ia": 2, "renda": 1, "golpe": 0}.get(n["tema"], 0)
     horas = (datetime.now(timezone.utc) - n["quando"]).total_seconds() / 3600
     return p - horas / 24  # perde 1 ponto por dia de idade
 
@@ -197,7 +199,7 @@ def garimpar_noticias():
             t = n["titulo"]
             if PROIBIDO.search(t) or len(t) < 25:
                 continue
-            if tema in ("curso", "vaga") and not ONLINE.search(t) and not NACIONAL.search(t):
+            if tema in ("curso", "vaga", "ia") and not ONLINE.search(t) and not NACIONAL.search(t):
                 continue  # curso ou vaga presencial de uma cidade só não serve para o Brasil todo
             n["pontos"] = pontos(n)
             escolhidas.append(n)

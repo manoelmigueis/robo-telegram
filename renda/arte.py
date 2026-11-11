@@ -185,7 +185,7 @@ if __name__ == "__main__":
 
 # ---------------- capa das notícias (roda no PC e na nuvem) ----------------
 SELOS = {"curso": ("🎓", "CURSO GRÁTIS"), "vaga": ("💼", "VAGA HOME OFFICE"),
-         "renda": ("💡", "RENDA EXTRA"), "golpe": ("🚨", "ALERTA DE GOLPE")}
+         "renda": ("💡", "RENDA EXTRA"), "golpe": ("🚨", "ALERTA DE GOLPE"), "ia": ("🤖", "CURSO DE IA")}
 
 CAPA = """<!doctype html><html><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Noto+Color+Emoji&display=block" rel="stylesheet">
