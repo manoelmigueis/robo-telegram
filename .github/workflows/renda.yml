@@ -29,6 +29,8 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-nuvem.txt
       - run: pip install -r requirements-nuvem.txt
+      # Chromium desenha a capa das notícias (foto da matéria + título).
+      - run: python -m playwright install --with-deps chromium
       - name: Postar dica ou notícia de renda extra
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}

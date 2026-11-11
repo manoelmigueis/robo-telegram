@@ -108,3 +108,59 @@ def desenhar(tudo=False):
 
 if __name__ == "__main__":
     desenhar(len(sys.argv) > 1 and sys.argv[1] == "tudo")
+
+
+# ---------------- capa das notícias (roda no PC e na nuvem) ----------------
+SELOS = {"curso": ("🎓", "CURSO GRÁTIS"), "vaga": ("💼", "VAGA HOME OFFICE"),
+         "renda": ("💡", "RENDA EXTRA"), "golpe": ("🚨", "ALERTA DE GOLPE")}
+
+CAPA = """<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Noto+Color+Emoji&display=block" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1350px;background:#0E3B2E;color:#F7F3E8;font-family:Montserrat,"Segoe UI",Arial,sans-serif;
+  display:flex;flex-direction:column;overflow:hidden;position:relative}
+.e{font-family:"Noto Color Emoji","Segoe UI Emoji","Apple Color Emoji",sans-serif;font-weight:400}
+.foto{height:700px;position:relative;background:#0B2F25;overflow:hidden}
+.foto img{width:100%;height:100%;object-fit:cover;display:block}
+.vazio{height:100%;display:grid;place-items:center;position:relative}
+.vazio .cif{position:absolute;inset:-100px;font-family:Georgia,serif;font-weight:700;font-size:64px;color:#F2C14E;opacity:.07;
+  line-height:120px;letter-spacing:70px;word-break:break-all;transform:rotate(-12deg)}
+.vazio .bola{width:380px;height:380px;border-radius:50%;background:#F2C14E;display:grid;place-items:center;font-size:220px;
+  box-shadow:0 0 0 22px rgba(242,193,78,.18),0 0 0 46px rgba(242,193,78,.08);position:relative}
+.selo{position:absolute;left:56px;top:664px;z-index:5;background:#F2C14E;color:#0E3B2E;font-weight:800;font-size:34px;letter-spacing:2px;
+  padding:14px 30px;border-radius:999px;display:flex;gap:14px;align-items:center;box-shadow:0 8px 0 rgba(0,0,0,.25)}
+.tipo{position:absolute;right:40px;top:40px;background:#0E3B2E;color:#F7F3E8;font-weight:800;font-size:26px;letter-spacing:3px;
+  padding:10px 22px;border-radius:999px;display:flex;gap:10px;align-items:center}
+.txt{flex:1;padding:86px 56px 30px;display:flex;flex-direction:column}
+h1{font-size:__TAM__px;line-height:1.12;font-weight:800;letter-spacing:-.5px}
+.fonte{margin-top:auto;display:flex;justify-content:space-between;font-size:28px;font-weight:600;color:#F2C14E}
+.rod{background:#F2C14E;color:#0E3B2E;padding:26px 56px;display:flex;justify-content:space-between;font-size:30px;font-weight:800}
+</style></head><body>
+<div class="foto">__FOTO__<div class="tipo"><span class="e">📰</span>NOTÍCIA</div>
+</div><div class="selo"><span class="e">__ICONE__</span>__SELO__</div>
+<div class="txt"><h1>__TITULO__</h1><div class="fonte"><span>__FONTE__</span><span><span class="e">👉</span> Link na legenda</span></div></div>
+<div class="rod"><span><span class="e">📲</span> __CANAL__</span><span><span class="e">🔁</span> Mande para um amigo</span></div>
+</body></html>"""
+
+
+def capa_noticia(titulo, tema, fonte, destino, foto=None, foto_tipo="image/jpeg"):
+    """Desenha a capa 4:5 de uma notícia. foto = bytes da imagem da matéria (ou None: capa ilustrada)."""
+    import base64
+    icone, selo = SELOS.get(tema, SELOS["renda"])
+    if foto:
+        topo = f'<img src="data:{foto_tipo};base64,{base64.b64encode(foto).decode()}">'
+    else:
+        topo = f'<div class="vazio"><div class="cif">{"$ " * 300}</div><div class="bola e">{icone}</div></div>'
+    tam = 70 if len(titulo) < 70 else 62 if len(titulo) < 95 else 54 if len(titulo) < 125 else 48
+    pagina = (CAPA.replace("__FOTO__", topo).replace("__ICONE__", icone).replace("__SELO__", selo)
+              .replace("__TITULO__", html.escape(titulo)).replace("__FONTE__", html.escape(f"Fonte: {fonte}" if fonte else ""))
+              .replace("__CANAL__", CANAL).replace("__TAM__", str(tam)))
+    with sync_playwright() as p:
+        nav = p.chromium.launch()
+        pag = nav.new_page(viewport={"width": 1080, "height": 1350})
+        pag.set_content(pagina, wait_until="networkidle", timeout=40000)
+        pag.evaluate("document.fonts.ready")
+        pag.screenshot(path=str(destino), type="jpeg", quality=90)
+        nav.close()
+    return destino

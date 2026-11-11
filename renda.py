@@ -220,9 +220,80 @@ def texto_noticia(n):
             + f"\n\n{TAGS.get(n['tema'], '#rendaextra')} #rendaextra\n📲 {canal()}")
 
 
+NAVEGADOR = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+             "Chrome/130 Safari/537.36"}
+
+
+def link_real(link):
+    """O Google Notícias esconde o endereço da matéria; isto pede o endereço verdadeiro ao próprio Google."""
+    if "news.google.com" not in link or "/articles/" not in link:
+        return link
+    art = link.split("/articles/")[1].split("?")[0]
+    pag = requests.get(f"https://news.google.com/articles/{art}", headers=NAVEGADOR, timeout=20).text
+    sg = re.search(r'data-n-a-sg="([^"]+)"', pag).group(1)
+    ts = re.search(r'data-n-a-ts="([^"]+)"', pag).group(1)
+    req = [[["Fbv4je", json.dumps(["garturlreq", [["X", "X", ["X", "X"], None, None, 1, 1, "US:en", None, 1, None, None,
+                                                    None, None, None, 0, 1], "X", "X", 1, [1, 1, 1], 1, 1, None, 0, 0,
+                                                   None, 0], art, int(ts), sg])]]]
+    r = requests.post("https://news.google.com/_/DotsSplashUi/data/batchexecute", data={"f.req": json.dumps(req)},
+                      headers={**NAVEGADOR, "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"}, timeout=20)
+    dados = json.loads(r.text.split("\n\n")[1])[:-2]
+    return json.loads(dados[0][2])[1]
+
+
+def foto_da_materia(url):
+    """Endereço da imagem de capa que o próprio site da matéria indica (og:image)."""
+    pag = requests.get(url, headers=NAVEGADOR, timeout=20).text
+    for padrao in (r'<meta[^>]+property=["\']og:image(?::secure_url)?["\'][^>]+content=["\']([^"\']+)',
+                   r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:image',
+                   r'<meta[^>]+name=["\']twitter:image["\'][^>]+content=["\']([^"\']+)'):
+        m = re.search(padrao, pag, re.I)
+        if m and m.group(1).startswith("http"):
+            return html.unescape(m.group(1))
+
+
+def baixar_foto(url):
+    r = requests.get(url, headers=NAVEGADOR, timeout=25)
+    tipo = r.headers.get("Content-Type", "").split(";")[0]
+    if r.ok and tipo.startswith("image/") and 8_000 < len(r.content) < 15_000_000:
+        return r.content, tipo
+    return None, None
+
+
 def enviar_noticia(chat, n):
-    return postador.tg("sendMessage", chat_id=chat, text=texto_noticia(n), parse_mode="HTML",
-                       link_preview_options={"url": n["link"], "prefer_large_media": True})["message_id"]
+    """Sempre com imagem: capa do canal com a foto da matéria; sem foto, capa ilustrada; nunca só texto."""
+    foto_url = foto = None
+    tipo = "image/jpeg"
+    try:
+        n["link"] = link_real(n["link"])
+    except Exception as erro:
+        print(f"[notícia] não achei o link real: {erro}")
+    try:
+        foto_url = foto_da_materia(n["link"])
+        if foto_url:
+            foto, tipo = baixar_foto(foto_url)
+    except Exception as erro:
+        print(f"[notícia] não achei a foto da matéria: {erro}")
+    legenda = texto_noticia(n)
+    try:
+        sys.path.insert(0, str(PASTA))
+        import arte
+        capa = PASTA / "capa-noticia.jpg"
+        arte.capa_noticia(n["titulo"], n["tema"], n["fonte"], capa, foto, tipo or "image/jpeg")
+        with open(capa, "rb") as f:
+            return postador.tg("sendPhoto", arquivos={"photo": f}, chat_id=chat, caption=legenda,
+                               parse_mode="HTML")["message_id"]
+    except Exception as erro:
+        print(f"[notícia] a capa falhou: {erro}")
+    if foto_url:
+        try:
+            return postador.tg("sendPhoto", chat_id=chat, photo=foto_url, caption=legenda, parse_mode="HTML")["message_id"]
+        except Exception as erro:
+            print(f"[notícia] a foto do site falhou: {erro}")
+    # último recurso: texto com a prévia grande do site em cima
+    return postador.tg("sendMessage", chat_id=chat, text=legenda, parse_mode="HTML",
+                       link_preview_options={"url": n["link"], "prefer_large_media": True,
+                                             "show_above_text": True})["message_id"]
 
 
 # ---------------- postar ----------------
