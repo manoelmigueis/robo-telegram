@@ -244,7 +244,40 @@ button.chip{font-family:var(--font)}
 .cx-ag{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:9px}
 .cx-ag input{max-width:230px}
 .cx-criar .linha input{flex:1 1 260px}
-@media (max-width:640px){.cx-quando{min-width:70px}.cx-cab .dir{margin-left:0}}
+.cx-it{flex-wrap:wrap}
+.cx-it .tit{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.cx-bts,.cx-it .cx-ag{flex-basis:100%;display:flex;gap:6px;flex-wrap:wrap;padding-left:66px;margin-top:-2px}
+.cx-it:has(.cx-quando) .cx-bts,.cx-it:has(.cx-quando) .cx-ag{padding-left:172px}
+.cx-cab .cx-av+div{flex:1;min-width:0}
+@media (max-width:760px){
+  .cx-cab{gap:12px;margin:4px 0 14px;flex-wrap:nowrap;align-items:flex-start}
+  .cx-av{width:46px;height:46px;border-radius:15px;font-size:24px}
+  .cx-cab h1{font-size:26px}
+  .cx-cab p{font-size:13px}
+  .cx-cab .dir{margin-left:0}
+  .cx-cab .dir .btn{padding:0 11px}
+  .cx-cab .dir .rt{display:none}
+  [id^="central_"] .kpis{gap:10px;margin-bottom:14px}
+  [id^="central_"] .kpi{padding:12px;gap:10px;border-radius:18px}
+  [id^="central_"] .kpi .ic{width:34px;height:34px}
+  [id^="central_"] .kpi .n{font-size:21px}
+  [id^="central_"] .kpi .l{font-size:12px}
+  .cx-criar .seg{flex-wrap:wrap}
+  .cx-criar .seg button{flex:1 1 calc(50% - 4px)}
+  .cx-criar .linha{flex-direction:column;align-items:stretch}
+  .cx-criar .linha input{flex:none;width:100%}
+  .cx-criar .linha .btn{width:100%;justify-content:center}
+  .cx-thumb{width:44px;height:55px}
+  .cx-quando{min-width:0;width:64px;font-size:12px}
+  .cx-bts,.cx-it .cx-ag,.cx-it:has(.cx-quando) .cx-bts,.cx-it:has(.cx-quando) .cx-ag{padding-left:0;margin-top:2px}
+  .cx-bts .btn{flex:1 1 calc(50% - 3px);justify-content:center;min-height:40px}
+  .cx-bts .btn:first-child:nth-last-child(odd){flex-basis:100%}
+  .cx-ag input{max-width:none;flex:1 1 100%}
+  .cx-ag .btn{flex:1}
+  .dock button{min-width:0;padding:0 1px}
+  .dock .rot{font-size:10px;white-space:nowrap;letter-spacing:-.01em}
+  .dock button svg.i{width:20px;height:20px}
+}
 .ing-fila{display:flex;gap:10px;overflow-x:auto;padding:4px 0 8px}
 .ing-item{flex:0 0 112px;font-size:12px;line-height:1.3}
 .ing-item img{width:112px;aspect-ratio:4/5;object-fit:cover;border-radius:10px;background:var(--soft);display:block;margin-bottom:6px}
@@ -356,7 +389,7 @@ button.chip{font-family:var(--font)}
     <button data-aba="noar"><svg class="i"><use href="#i-noar"/></svg><span class="rot">No ar</span></button>
     <hr>
     <button data-aba="ingles"><svg class="i"><use href="#i-globo"/></svg><span class="rot">Inglês</span></button>
-    <button data-aba="renda"><svg class="i"><use href="#i-moeda"/></svg><span class="rot">Renda extra</span></button>
+    <button data-aba="renda"><svg class="i"><use href="#i-moeda"/></svg><span class="rot">Renda</span></button>
     <hr>
     <button data-aba="canais"><svg class="i"><use href="#i-canais"/></svg><span class="rot">Canais</span></button>
     <button data-aba="ajustes"><svg class="i"><use href="#i-ajustes"/></svg><span class="rot">Ajustes</span></button>
@@ -894,9 +927,9 @@ function cxThumb(n, i) {
   return `<img class="cx-thumb" loading="lazy" alt="" src="/api/central/${n}/img/${encodeURIComponent(i.imagem)}">`;
 }
 function cxItem(n, i, botoes, extra) {
-  return `<div class="item">${extra || ""}${cxThumb(n, i)}<div class="corpo"><div class="tit">${esc(i.titulo)}</div>
+  return `<div class="item cx-it">${extra || ""}${cxThumb(n, i)}<div class="corpo"><div class="tit">${esc(i.titulo)}</div>
     <div class="meta"><span class="badge">${esc(i.nome_tipo || "")}</span>${i.slides > 1 ? `<span>${i.slides} fotos</span>` : ""}</div>
-    ${i.texto ? `<div class="cx-txt">${esc(i.texto)}</div>` : ""}${botoes ? `<div class="botoes">${botoes}</div>` : ""}</div></div>`;
+    ${i.texto ? `<div class="cx-txt">${esc(i.texto)}</div>` : ""}</div>${botoes ? `<div class="cx-bts">${botoes}</div>` : ""}</div>`;
 }
 function renderCentral(n) {
   const el = $(`central_${n}`); if (!el) return;
@@ -913,7 +946,7 @@ function renderCentral(n) {
   el.innerHTML = `
     <div class="cx-cab"><div class="cx-av">${g.emoji}</div>
       <div><h1>${esc(g.nome)}</h1><p><a href="${esc(g.link)}" target="_blank" rel="noopener">${esc(g.canal)}</a> · posta sozinho pela nuvem, mesmo com o PC desligado</p></div>
-      <div class="dir"><button class="btn peq" onclick="carregarCentral('${n}')">Atualizar</button></div></div>
+      <div class="dir"><button class="btn peq" aria-label="Atualizar" onclick="carregarCentral('${n}')">↻<span class="rt"> Atualizar</span></button></div></div>
     <div class="kpis">
       <div class="kpi"><div class="ic">${ico("fila")}</div><div><div class="n">${g.fila.length}</div><div class="l">na fila</div></div></div>
       <div class="kpi"><div class="ic">${ico("agenda")}</div><div><div class="n">${String(g.dias).replace(".", ",")}</div><div class="l">dias de posts</div></div></div>
@@ -930,7 +963,7 @@ function renderCentral(n) {
     </div>
     <div class="grade">
       <div class="card"><div class="secao">${ico("relogio")} Próximos horários <span class="conta-s">${esc(horas)}</span></div>
-        ${g.agenda.map(a => `<div class="item"><div class="cx-quando">${esc(a.quando)}</div>${cxThumb(n, a)}<div class="corpo"><div class="tit">${esc(a.titulo)}</div>${a.nome_tipo ? `<div class="meta"><span class="badge">${esc(a.nome_tipo)}</span></div>` : ""}</div></div>`).join("") || vazio("Nenhum horário.")}</div>
+        ${g.agenda.map(a => `<div class="item cx-it"><div class="cx-quando">${esc(a.quando)}</div>${cxThumb(n, a)}<div class="corpo"><div class="tit">${esc(a.titulo)}</div>${a.nome_tipo ? `<div class="meta"><span class="badge">${esc(a.nome_tipo)}</span></div>` : ""}</div></div>`).join("") || vazio("Nenhum horário.")}</div>
       <div class="card"><div class="secao">${ico("agenda")} Agendados <span class="conta-s">${g.agendados.length}</span></div>
         ${g.agendados.map(i => cxItem(n, i, `<button class="btn peq" onclick='cxAcao("${n}","agendar",${id(i)},"Desfazer o agendamento?",{quando:""})'>Desfazer</button>
           <button class="btn pri peq" onclick='cxAcao("${n}","postar",${id(i)},"Postar agora no canal?")'>Postar agora</button>`, `<div class="cx-quando">${esc(i.quando)}</div>`)).join("") || vazio("Nada agendado. Use “Agendar” em um post da fila.")}
@@ -952,7 +985,7 @@ async function cxAcao(n, acao, pid, pergunta, extra) {
   carregarCentral(n);
 }
 function cxAgendar(n, pid, bt) {
-  const caixa = bt.closest(".corpo"); if (caixa.querySelector(".cx-ag")) return;
+  const caixa = bt.closest(".item"); if (caixa.querySelector(".cx-ag")) return;
   const amanha = new Date(Date.now() + 86400000);
   const padrao = new Date(amanha.getTime() - amanha.getTimezoneOffset() * 60000).toISOString().slice(0, 11) + "10:00";
   const d = document.createElement("div"); d.className = "cx-ag";
