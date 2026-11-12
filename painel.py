@@ -493,7 +493,9 @@ def ligar():
     fechar_tuneis_velhos(porta)
     postador.preparar_primeira_vez()
     threading.Thread(target=postador.rodar, daemon=True).start()
-    ligar_tunel(porta)
+    # o painel da internet agora mora na nuvem (Vercel), aberto 24h; o do PC fica só no PC
+    if os.environ.get("PAINEL_TUNEL") == "1":
+        ligar_tunel(porta)
     print(f"Painel em http://localhost:{porta}  ({datetime.now():%d/%m %H:%M})")
     uvicorn.run(app, host=os.environ.get("HOST", "127.0.0.1"), port=porta, log_level="warning")
 

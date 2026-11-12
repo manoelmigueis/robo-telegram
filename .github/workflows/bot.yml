@@ -8,7 +8,7 @@ on:
 # Cliques que mexem na fila de livros esperam o robô de postar terminar ("robo").
 # O resto (renda extra, ver prévia, menu) roda na hora, cada um no seu canto.
 concurrency:
-  group: ${{ github.event.client_payload.grupo == 'robo' && 'robo' || format('bot-{0}', github.event.client_payload.update.update_id) }}
+  group: ${{ github.event.client_payload.grupo == 'robo' && 'robo' || format('bot-{0}{1}', github.event.client_payload.update.update_id, github.event.client_payload.painel.id) }}
   cancel-in-progress: false
 
 permissions:
@@ -29,6 +29,8 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-nuvem.txt
       - run: pip install -r requirements-nuvem.txt
+      - if: github.event.client_payload.painel
+        run: pip install fastapi uvicorn python-multipart httpx
       - if: github.event.client_payload.navegador
         run: python -m playwright install --with-deps chromium
       - name: Tratar o clique ou comando
@@ -47,3 +49,9 @@ jobs:
           git diff --cached --quiet || git commit -m "robô: botão do Telegram $(date -u +%F' '%H:%M)"
           git pull --rebase -X theirs || true
           git push
+      - name: Responder ao painel
+        if: always() && github.event.client_payload.painel.id
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PYTHONUTF8: "1"
+        run: python bot_nuvem.py responder

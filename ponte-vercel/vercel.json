@@ -1,0 +1,20 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/api/painel" },
+    { "source": "/api/login", "destination": "/api/painel" },
+    { "source": "/api/login-telegram", "destination": "/api/painel" },
+    { "source": "/api/resumo", "destination": "/api/painel" },
+    { "source": "/api/resposta/:id", "destination": "/api/painel" },
+    { "source": "/api/ingles", "destination": "/api/painel" },
+    { "source": "/api/ingles/:r*", "destination": "/api/painel" },
+    { "source": "/api/posts", "destination": "/api/painel" },
+    { "source": "/api/posts/:r*", "destination": "/api/painel" },
+    { "source": "/api/criar/:r*", "destination": "/api/painel" },
+    { "source": "/api/envios/:r*", "destination": "/api/painel" },
+    { "source": "/api/apagar-link", "destination": "/api/painel" },
+    { "source": "/api/canais", "destination": "/api/painel" },
+    { "source": "/api/canais/:r*", "destination": "/api/painel" },
+    { "source": "/api/ajustes", "destination": "/api/painel" },
+    { "source": "/api/garimpar", "destination": "/api/painel" }
+  ]
+}

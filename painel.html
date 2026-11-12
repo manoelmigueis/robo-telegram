@@ -578,8 +578,26 @@ async function api(caminho, corpo) {
   const j = await r.json().catch(() => ({}));
   if (r.status === 401 && caminho !== "/api/login") { mostrarLogin(); throw new Error("login"); }
   if (!r.ok) { toast(j.erro || "Deu erro."); throw new Error(j.erro); }
+  if (j.espera) return esperarNuvem(j.espera);
   if (j.msg) toast(j.msg);
   return j;
+}
+// painel da nuvem: quem faz o trabalho é o GitHub; a página espera a resposta (uns 30 a 90 segundos)
+async function esperarNuvem(id) {
+  toast("⏳ Fazendo na nuvem. Leva menos de 2 minutos...");
+  const fim = Date.now() + 6 * 60000;
+  while (Date.now() < fim) {
+    await new Promise(ok => setTimeout(ok, 4000));
+    let j = {};
+    try { j = await (await fetch(`/api/resposta/${id}`, { headers: chave ? { "X-Painel": chave } : {} })).json(); } catch (e) { continue; }
+    if (!j.pronto) continue;
+    const res = j.json || {};
+    if (j.status >= 400) { toast(res.erro || "Deu erro."); throw new Error(res.erro); }
+    if (res.msg) toast(res.msg);
+    return res;
+  }
+  toast("A nuvem está demorando. Confira daqui a pouco.");
+  throw new Error("demorou");
 }
 function mostrarLogin() { $("app").classList.add("oculto"); $("entrar").classList.remove("oculto"); $("senha").focus(); }
 async function entrar() { try { guardarChave(await api("/api/login", { senha: $("senha").value })); $("entrar").classList.add("oculto"); carregar(); } catch (e) {} }
