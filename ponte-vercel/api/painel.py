@@ -2,8 +2,10 @@
 
 - Para MOSTRAR: baixa do GitHub o código e os dados do robô (robo.db, estado.json...) e usa as
   mesmas funções do painel do PC (painel.py). Sempre a versão mais nova do GitHub.
-- Para FAZER (postar, cancelar, mudar canal, ajustes...): pede ao GitHub Actions (bot.yml), que roda
-  o painel.py de verdade e guarda a resposta no ramo "painel-respostas". A página espera a resposta.
+- Para FAZER (postar, cancelar, mudar canal, ajustes...): deixa o pedido na fila (ramo "painel-respostas",
+  pasta pedidos/) e chama o GitHub Actions (bot.yml). Ele roda o painel.py de verdade, atende todos os
+  pedidos da fila e guarda as respostas em respostas/. A página espera a resposta. Assim nenhum clique
+  se perde, mesmo quando o GitHub descarta uma chamada repetida.
 
 Senhas aqui: só o "resumo" da senha do painel (PAINEL_HASH) e uma chave de sessão própria
 (SESSAO_SEGREDO). O token do robô do Telegram NÃO fica aqui.
@@ -54,6 +56,24 @@ def github(caminho, metodo="GET", corpo=None, bruto=False):
     with urllib.request.urlopen(req, timeout=15) as r:
         dados = r.read()
         return dados if bruto else (json.loads(dados) if dados else {})
+
+
+def ramo_por(caminho, conteudo, mensagem):
+    """Grava um arquivo no ramo painel-respostas (tenta de novo se outro gravou junto)."""
+    for tentativa in range(4):
+        try:
+            return github(f"/repos/{REPO}/contents/{caminho}", "PUT", {
+                "message": mensagem, "branch": "painel-respostas",
+                "content": base64.b64encode(conteudo).decode()})
+        except urllib.error.HTTPError as e:
+            if e.code not in (409, 422) or tentativa == 3:
+                raise
+            time.sleep(1 + tentativa)
+
+
+def chamar_nuvem(rid, grupo, navegador):
+    github(f"/repos/{REPO}/dispatches", "POST", {"event_type": "telegram", "client_payload": {
+        "painel": {"id": rid}, "grupo": grupo, "navegador": navegador}})
 
 
 def baixar(sha, arquivo):
@@ -194,6 +214,21 @@ def guardar_foto(arquivo):
     return caminho, ext
 
 
+@app.post("/api/empurrar/{rid}")
+def empurrar(rid: str):
+    """A página esperou demais: chama a nuvem de novo para atender a fila (não repete nada já feito)."""
+    if not re.fullmatch(r"[a-f0-9]{32}", rid):
+        return JSONResponse({"erro": "Pedido não existe."}, status_code=404)
+    try:
+        dados = json.loads(github(f"/repos/{REPO}/contents/pedidos/{rid}.json?ref=painel-respostas", bruto=True))
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            return {"ok": True}
+        raise
+    chamar_nuvem(rid, dados.get("grupo", "robo"), bool(dados.get("navegador")))
+    return {"ok": True}
+
+
 @app.post("/api/{resto:path}")
 async def fazer(resto: str, request: Request):
     caminho = "/api/" + resto
@@ -221,9 +256,11 @@ async def fazer(resto: str, request: Request):
         except Exception:
             pedido["corpo"] = {}
     grupo = "robo" if caminho.startswith(ESCREVE) else "solto"
+    navegador = bool(NAVEGADOR.match(caminho))
     try:
-        github(f"/repos/{REPO}/dispatches", "POST", {"event_type": "telegram", "client_payload": {
-            "painel": pedido, "grupo": grupo, "navegador": bool(NAVEGADOR.match(caminho))}})
+        ramo_por(f"pedidos/{rid}.json", json.dumps(
+            {"pedido": pedido, "grupo": grupo, "navegador": navegador}, ensure_ascii=False).encode(), "painel: pedido")
+        chamar_nuvem(rid, grupo, navegador)
     except Exception as erro:
         detalhe = erro.read().decode()[:300] if hasattr(erro, "read") else ""
         print(f"[painel] GitHub recusou: {erro} {detalhe}")

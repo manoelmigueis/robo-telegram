@@ -5,6 +5,7 @@
     { "source": "/api/login-telegram", "destination": "/api/painel" },
     { "source": "/api/resumo", "destination": "/api/painel" },
     { "source": "/api/resposta/:id", "destination": "/api/painel" },
+    { "source": "/api/empurrar/:id", "destination": "/api/painel" },
     { "source": "/api/ingles", "destination": "/api/painel" },
     { "source": "/api/ingles/:r*", "destination": "/api/painel" },
     { "source": "/api/posts", "destination": "/api/painel" },

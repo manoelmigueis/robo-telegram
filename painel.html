@@ -582,21 +582,27 @@ async function api(caminho, corpo) {
   if (j.msg) toast(j.msg);
   return j;
 }
-// painel da nuvem: quem faz o trabalho é o GitHub; a página espera a resposta (uns 30 a 90 segundos)
+// painel da nuvem: quem faz o trabalho é o GitHub; a página espera a resposta.
+// O pedido fica numa fila: se o robô estiver postando ou garimpando, ele é feito logo depois.
 async function esperarNuvem(id) {
-  toast("⏳ Fazendo na nuvem. Leva menos de 2 minutos...");
-  const fim = Date.now() + 6 * 60000;
-  while (Date.now() < fim) {
+  toast("⏳ Fazendo na nuvem. Leva de 30 segundos a 2 minutos...");
+  const inicio = Date.now(); let empurrou = 0, avisou = Date.now();
+  const cab = chave ? { "X-Painel": chave } : {};
+  while (Date.now() - inicio < 25 * 60000) {
     await new Promise(ok => setTimeout(ok, 4000));
     let j = {};
-    try { j = await (await fetch(`/api/resposta/${id}`, { headers: chave ? { "X-Painel": chave } : {} })).json(); } catch (e) { continue; }
-    if (!j.pronto) continue;
-    const res = j.json || {};
-    if (j.status >= 400) { toast(res.erro || "Deu erro."); throw new Error(res.erro); }
-    if (res.msg) toast(res.msg);
-    return res;
+    try { j = await (await fetch(`/api/resposta/${id}`, { headers: cab })).json(); } catch (e) { continue; }
+    if (j.pronto) {
+      const res = j.json || {};
+      if (j.status >= 400) { toast(res.erro || "Deu erro."); throw new Error(res.erro); }
+      if (res.msg) toast("✅ " + res.msg);
+      return res;
+    }
+    const passou = Date.now() - inicio;
+    if (passou > 75000 && Date.now() - empurrou > 150000) { empurrou = Date.now(); fetch(`/api/empurrar/${id}`, { method: "POST", headers: cab }).catch(() => {}); }
+    if (Date.now() - avisou > 20000) { avisou = Date.now(); toast(passou > 150000 ? "⏳ O robô está ocupado postando ou garimpando. Seu pedido está na fila e sai logo depois." : "⏳ Ainda fazendo na nuvem..."); }
   }
-  toast("A nuvem está demorando. Confira daqui a pouco.");
+  toast("Seu pedido está na fila e vai ser feito. Pode fechar o painel.");
   throw new Error("demorou");
 }
 function mostrarLogin() { $("app").classList.add("oculto"); $("entrar").classList.remove("oculto"); $("senha").focus(); }
@@ -870,7 +876,11 @@ function renderIngles() {
 async function carregarIngles() { try { ingles = await api("/api/ingles"); } catch (e) {} renderIngles(); }
 async function previaIngles() { try { await api("/api/ingles/previa", {}); } catch (e) {} }
 async function carregar() { try { dados = await api("/api/resumo"); $("app").classList.remove("oculto"); render(); if (!ingles || Date.now() - (ingles._t || 0) > 120000) { renderIngles(); carregarIngles().then(() => { if (ingles) ingles._t = Date.now(); }); } } catch (e) {} }
-async function agora(id) { if (confirm("Postar agora nos canais?")) { try { await api(`/api/posts/${id}/agora`, {}); } catch (e) {} carregar(); } }
+const indo = new Set();
+async function agora(id) {
+  if (indo.has(id)) { toast("Esse post já está indo para o canal. Aguarde."); return; }
+  if (confirm("Postar agora nos canais?")) { indo.add(id); try { await api(`/api/posts/${id}/agora`, {}); } catch (e) {} finally { indo.delete(id); } carregar(); }
+}
 async function postarProximo() { if (dados && dados.fila[0]) agora(dados.fila[0].id); }
 async function cancelar(id) { try { await api(`/api/posts/${id}/cancelar`, {}); } catch (e) {} carregar(); }
 async function apagarEnvio(id) { if (confirm("Apagar este post do canal? Não dá para desfazer.")) { try { await api(`/api/envios/${id}/apagar`, {}); } catch (e) {} carregar(); } }

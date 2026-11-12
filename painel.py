@@ -257,6 +257,8 @@ def cancelar(pid: int):
 @app.post("/api/posts/{pid}/agora")
 def postar_agora(pid: int):
     p = banco.post(pid) or erro("Post não existe.", 404)
+    if p["status"] in ("postado", "publicando"):
+        return {"ok": True, "msg": "Esse post já foi para o canal."}
     n = postador.publicar_seguro(pid, conferir=p["origem"] != "manual")
     if not n:
         p = banco.post(pid)
