@@ -66,7 +66,9 @@ class handler(BaseHTTPRequestHandler):
         navegador = dado.startswith(NAVEGADOR) or cmd == "/agora"
         try:
             ok = chamar_github(update, grupo, navegador)
-        except Exception:
+        except Exception as erro:
+            detalhe = erro.read().decode()[:300] if hasattr(erro, "read") else ""
+            print(f"[ponte] GitHub recusou: {erro} {detalhe}")
             ok = False
         if cb:
             return responder_clique("⏳ Recebi! Fica pronto em menos de 1 minuto." if ok
