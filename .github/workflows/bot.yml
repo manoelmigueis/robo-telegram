@@ -47,7 +47,7 @@ jobs:
           git config user.email "robo-nuvem@users.noreply.github.com"
           for f in robo.db estado.json historico_postados.json; do [ -e "$f" ] && git add -A "$f"; done
           git diff --cached --quiet || git commit -m "robô: botão do Telegram $(date -u +%F' '%H:%M)"
-          git pull --rebase -X theirs || true
+          git pull --rebase --autostash -X theirs || true
           git push
       - name: Responder ao painel
         if: always() && github.event.client_payload.painel.id

@@ -419,6 +419,71 @@ def ingles_previa(dados: dict = Body(default={})):
     return {"ok": True, "msg": f"Mandei {len(itens)} prévia(s) no seu privado do Telegram."}
 
 
+# ---------- central dos canais de conteúdo (inglês e renda extra) ----------
+def _central(funcao, *args):
+    import central
+    try:
+        return funcao(*args)
+    except central.Erro as x:
+        erro(str(x))
+
+
+@app.get("/api/central/{nicho}")
+def central_resumo(nicho: str):
+    import central
+    return _central(central.resumo, nicho)
+
+
+@app.get("/api/central/{nicho}/img/{nome}")
+def central_img(nicho: str, nome: str):
+    import central
+    m = _central(central.modulo, nicho)
+    arquivo = (m.PASTA / "img" / nome).resolve()
+    if arquivo.parent != (m.PASTA / "img").resolve() or not arquivo.exists():
+        erro("Imagem não encontrada.", 404)
+    return FileResponse(arquivo, headers={"Cache-Control": "max-age=86400"})
+
+
+@app.post("/api/central/{nicho}/{acao}")
+def central_acao(nicho: str, acao: str, dados: dict = Body(default={})):
+    import central
+    pid = str(dados.get("id", ""))
+    if acao == "postar":
+        item, mid = _central(central.postar, nicho, pid or None)
+        if not item:
+            erro("A fila está vazia.")
+        return {"ok": True, "msg": "Postado no canal." if mid else "Esse post já tinha saído no canal."}
+    if acao == "tirar":
+        _central(central.tirar, nicho, pid)
+        return {"ok": True, "msg": "Tirado da fila."}
+    if acao == "voltar":
+        _central(central.voltar, nicho, pid)
+        return {"ok": True, "msg": "Voltou para a fila."}
+    if acao == "proximo":
+        _central(central.proximo, nicho, pid)
+        return {"ok": True, "msg": "Agora ele é o próximo a sair."}
+    if acao == "agendar":
+        iso = _central(central.agendar, nicho, pid, dados.get("quando", ""))
+        return {"ok": True, "msg": "Agendado. Sai na primeira rodada depois da hora marcada (até 1 hora depois)."
+                if iso else "Agendamento desfeito. Ele voltou para a fila."}
+    if acao == "apagar":
+        _central(central.apagar, nicho, pid)
+        return {"ok": True, "msg": "Apagado do canal."}
+    if acao == "previa":
+        admin = postador.estado().get("admin")
+        if not admin:
+            erro("O robô ainda não sabe quem é o dono. Mande /start para ele no Telegram.")
+        _central(central.previa, nicho, pid, admin)
+        return {"ok": True, "msg": "Mandei a prévia no seu privado do Telegram, com os botões."}
+    if acao == "criar":
+        item = _central(central.criar, nicho, str(dados.get("tema", ""))[:300], str(dados.get("tipo", "lista")))
+        return {"ok": True, "msg": f"Post novo criado e posto no fim da fila: {item.get('titulo', '')}", "item": item["id"]}
+    if acao == "noticia":
+        titulo = _central(central.postar_noticia, nicho)
+        return {"ok": True, "msg": f"Notícia postada: {titulo[:120]}"}
+    erro("Ação desconhecida.", 404)
+
+
 @app.post("/api/garimpar")
 def garimpar():
     ok = postador.garimpar_em_segundo_plano()

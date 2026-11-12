@@ -140,8 +140,8 @@ def enviar(chat, item, com_curso=False):
 
 
 def proximos(n=1):
-    feitos = set(estado()["postados"])
-    return [i for i in banco() if i["id"] not in feitos][:n]
+    import central  # fila da central: respeita "pôr como próximo", tirados e agendados
+    return central.fila("ingles", estado(), banco())[:n]
 
 
 def horario_devido(agora=None):
@@ -170,6 +170,9 @@ def horario_devido(agora=None):
 
 
 def postar_se_devido():
+    import central
+    if central.postar_agendados("ingles"):  # agendados pela central saem primeiro
+        return True
     alvo = horario_devido()
     if not alvo:
         print("Nenhum horário de inglês vencido agora.")
@@ -179,19 +182,13 @@ def postar_se_devido():
 
 
 def postar_proximo():
-    itens = proximos(1)
-    if not itens:
+    import central  # posta e já grava no GitHub (com o número da mensagem, para poder apagar depois)
+    item, mid = central.postar("ingles")
+    if not item:
         postador.avisar("🇺🇸 O banco de posts de inglês acabou. Peça ao Claude um lote novo.")
         print("Banco de inglês vazio.")
         return False
-    e = estado()
-    e["contador"] = e.get("contador", 0) + 1
-    com_curso = e["contador"] % int(CFG.get("curso_a_cada", 5)) == 0
-    mid = enviar(canal(), itens[0], com_curso)
-    e["postados"].append(itens[0]["id"])
-    e["ultimo"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    salvar_estado(e)
-    print(f"Inglês postado: {itens[0]['id']} (mensagem {mid})")
+    print(f"Inglês postado: {item['id']} (mensagem {mid})")
     restam = len(proximos(10**6))
     if restam in (9, 3):  # avisa antes de acabar (3 posts por dia)
         postador.avisar(f"🇺🇸 Restam {restam} posts de inglês no banco. Peça ao Claude um lote novo.")

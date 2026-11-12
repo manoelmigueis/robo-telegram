@@ -78,9 +78,8 @@ def canal():
 
 
 def proximas(n=1):
-    e = estado()
-    feitos = set(e["postados"]) | set(e.get("pulados", []))
-    return [i for i in banco() if i["id"] not in feitos][:n]
+    import central  # fila da central: respeita "pôr como próximo", tirados e agendados
+    return central.fila("renda", estado(), banco())[:n]
 
 
 # ---------------- envio das dicas (mesmo formato rico do canal de inglês) ----------------
@@ -301,17 +300,13 @@ def enviar_noticia(chat, n):
 
 # ---------------- postar ----------------
 def postar_dica():
-    itens = proximas(1)
-    if not itens:
+    import central  # posta e já grava no GitHub (com o número da mensagem, para poder apagar depois)
+    if not proximas(1):
         postador.avisar("💵 O banco de dicas de renda extra acabou. Peça ao Claude um lote novo.")
         print("Banco de dicas vazio; postando uma notícia no lugar.")
         return postar_noticia(sem_dica=True)
-    e = estado()
-    mid = enviar_dica(canal(), itens[0])
-    e["postados"].append(itens[0]["id"]); e["contador"] += 1
-    e["ultimo"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    salvar_estado(e)
-    print(f"Dica postada: {itens[0]['id']} (mensagem {mid})")
+    item, mid = central.postar("renda")
+    print(f"Dica postada: {item['id']} (mensagem {mid})")
     restam = len(proximas(10**6))
     if restam in (9, 3):
         postador.avisar(f"💵 Restam {restam} dicas de renda extra no banco. Peça ao Claude um lote novo.")
@@ -359,6 +354,9 @@ def horario_devido(agora=None):
 
 
 def postar_se_devido():
+    import central
+    if central.postar_agendados("renda"):  # agendados pela central saem primeiro
+        return True
     devido = horario_devido()
     if not devido:
         print("Nenhum horário de renda extra vencido agora.")

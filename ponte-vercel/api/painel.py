@@ -32,14 +32,15 @@ from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 
 REPO = os.environ.get("REPO", "manoelmigueis/robo-telegram")
 PASTA = Path("/tmp/robo")
-ARQUIVOS = ["banco.py", "postador.py", "escritor.py", "ingles.py", "painel.py", "painel.html",
-            "config.json", "robo.db", "estado.json", "ingles/posts.json", "ingles/estado.json"]
+ARQUIVOS = ["banco.py", "postador.py", "escritor.py", "ingles.py", "renda.py", "central.py", "painel.py",
+            "painel.html", "config.json", "robo.db", "estado.json", "ingles/posts.json", "ingles/estado.json",
+            "renda/posts.json", "renda/estado.json"]
 # chave pública do Telegram para conferir a assinatura do Mini App sem precisar do token do robô
 TELEGRAM_CHAVE = "e7bf03a2fa4602af4580703d88dda5bb59f32ed8b02a56c187fe7d34caed242a"
 
 # o que mexe na fila de livros espera o robô de postar terminar
 ESCREVE = ("/api/posts", "/api/envios/", "/api/apagar-link", "/api/canais", "/api/ajustes")
-NAVEGADOR = re.compile(r"^/api/(criar/amazon|posts/\d+/agora)$")
+NAVEGADOR = re.compile(r"^/api/(criar/amazon|posts/\d+/agora|central/renda/(criar|noticia))$")
 
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 _trava = threading.Lock()
@@ -191,6 +192,20 @@ def ingles_img(nome: str):
     if not re.fullmatch(r"[\w.-]+", nome):
         return JSONResponse({"erro": "Imagem não encontrada."}, status_code=404)
     return RedirectResponse(f"https://raw.githubusercontent.com/{REPO}/main/ingles/img/{nome}")
+
+
+@app.get("/api/central/{nicho}")
+def central_resumo(nicho: str):
+    if nicho not in ("ingles", "renda"):
+        return JSONResponse({"erro": "Esse canal não existe."}, status_code=404)
+    return painel().central_resumo(nicho)
+
+
+@app.get("/api/central/{nicho}/img/{nome}")
+def central_img(nicho: str, nome: str):
+    if nicho not in ("ingles", "renda") or not re.fullmatch(r"[\w.-]+", nome):
+        return JSONResponse({"erro": "Imagem não encontrada."}, status_code=404)
+    return RedirectResponse(f"https://raw.githubusercontent.com/{REPO}/main/{nicho}/img/{nome}")
 
 
 @app.get("/api/resposta/{rid}")

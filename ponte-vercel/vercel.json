@@ -8,6 +8,7 @@
     { "source": "/api/empurrar/:id", "destination": "/api/painel" },
     { "source": "/api/ingles", "destination": "/api/painel" },
     { "source": "/api/ingles/:r*", "destination": "/api/painel" },
+    { "source": "/api/central/:r*", "destination": "/api/painel" },
     { "source": "/api/posts", "destination": "/api/painel" },
     { "source": "/api/posts/:r*", "destination": "/api/painel" },
     { "source": "/api/criar/:r*", "destination": "/api/painel" },

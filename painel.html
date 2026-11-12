@@ -233,6 +233,18 @@ button.chip{font-family:var(--font)}
 /* ---------- canais ---------- */
 .canais-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
 .canal-c{margin:0}
+.cx-cab{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:8px 0 18px}
+.cx-av{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;font-size:28px;flex:none;background:var(--acento-soft)}
+.cx-cab h1{font-size:clamp(26px,3.2vw,38px);line-height:1.05;letter-spacing:-.03em;font-weight:700}
+.cx-cab p{color:var(--muted);font-size:14px;margin-top:3px}
+.cx-cab .dir{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.cx-thumb{width:52px;height:65px;border-radius:10px;object-fit:cover;background:var(--soft);flex:none;display:grid;place-items:center;font-size:22px}
+.cx-quando{flex:none;min-width:92px;font-weight:700;font-size:13.5px;padding-top:2px}
+.cx-txt{font-size:13px;color:var(--muted);margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cx-ag{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:9px}
+.cx-ag input{max-width:230px}
+.cx-criar .linha input{flex:1 1 260px}
+@media (max-width:640px){.cx-quando{min-width:70px}.cx-cab .dir{margin-left:0}}
 .ing-fila{display:flex;gap:10px;overflow-x:auto;padding:4px 0 8px}
 .ing-item{flex:0 0 112px;font-size:12px;line-height:1.3}
 .ing-item img{width:112px;aspect-ratio:4/5;object-fit:cover;border-radius:10px;background:var(--soft);display:block;margin-bottom:6px}
@@ -310,6 +322,8 @@ button.chip{font-family:var(--font)}
   <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5v14l11-7Z"/></symbol>
   <symbol id="i-lixo" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></symbol>
   <symbol id="i-mais" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-globo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+  <symbol id="i-moeda" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .8-3 2s1.3 1.7 3 2 3 .8 3 2-1.3 2-3 2c-1.4 0-2.5-.5-3-1.5M12 6.5V8M12 16v1.5"/></symbol>
   <symbol id="i-picareta" viewBox="0 0 24 24"><path d="M14 4c3 0 6 2 7 5-3-1.5-6-2-9-1.5"/><path d="M13.5 6.5 4 20"/></symbol>
 </svg>
 
@@ -340,6 +354,9 @@ button.chip{font-family:var(--font)}
     <button data-aba="criar"><svg class="i"><use href="#i-criar"/></svg><span class="rot">Criar</span></button>
     <button data-aba="agenda"><svg class="i"><use href="#i-agenda"/></svg><span class="rot">Agenda</span></button>
     <button data-aba="noar"><svg class="i"><use href="#i-noar"/></svg><span class="rot">No ar</span></button>
+    <hr>
+    <button data-aba="ingles"><svg class="i"><use href="#i-globo"/></svg><span class="rot">Inglês</span></button>
+    <button data-aba="renda"><svg class="i"><use href="#i-moeda"/></svg><span class="rot">Renda extra</span></button>
     <hr>
     <button data-aba="canais"><svg class="i"><use href="#i-canais"/></svg><span class="rot">Canais</span></button>
     <button data-aba="ajustes"><svg class="i"><use href="#i-ajustes"/></svg><span class="rot">Ajustes</span></button>
@@ -505,6 +522,10 @@ button.chip{font-family:var(--font)}
       <div class="card"><div class="secao">Postados pelo robô <span class="conta-s" id="c_noar"></span></div><div id="lista_noar"></div></div>
     </section>
 
+    <!-- CANAL DE INGLÊS e CANAL DE RENDA EXTRA (central) -->
+    <section data-pagina="ingles" class="oculto"><div id="central_ingles"></div></section>
+    <section data-pagina="renda" class="oculto"><div id="central_renda"></div></section>
+
     <!-- CANAIS -->
     <section data-pagina="canais" class="oculto">
       <div class="titulo"><div><h1>Canais</h1><p>Cada canal tem o seu nicho, o seu @ na assinatura e as suas hashtags.</p></div></div>
@@ -516,7 +537,7 @@ button.chip{font-family:var(--font)}
         </div>
         <p class="dica">Antes, ponha o robô como administrador do canal, com permissão de <b>postar</b> e de <b>apagar mensagens</b>.</p>
       </div>
-      <div class="card" id="card_ingles"></div>
+      <p class="dica" style="margin:-6px 0 16px">Os canais de <b>inglês</b> e de <b>renda extra</b> têm abas próprias no menu, com fila, horários e criação com IA.</p>
       <div class="canais-grade" id="lista_canais"></div>
       <datalist id="lista_nichos"></datalist>
     </section>
@@ -619,6 +640,7 @@ function ir(aba) {
   document.querySelectorAll("#abas button").forEach(b => { if (b.dataset.aba === aba) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current"); });
   document.querySelectorAll("[data-pagina]").forEach(s => s.classList.toggle("oculto", s.dataset.pagina !== aba));
   try { localStorage.setItem("aba", aba); } catch (e) {}
+  if (aba === "ingles" || aba === "renda") carregarCentral(aba);
   scrollTo({ top: 0 });
 }
 $("abas").addEventListener("click", e => { const b = e.target.closest("button"); if (b) ir(b.dataset.aba); });
@@ -852,30 +874,99 @@ $("escolha_nichos").addEventListener("click", e => {
 });
 
 
-// ---------- canal de inglês (quem posta é a nuvem do GitHub) ----------
-let ingles = null;
 function horaManaus(iso) { try { return new Date(iso).toLocaleString("pt-BR", { timeZone: "America/Manaus", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } }
-function renderIngles() {
-  const el = $("card_ingles"); if (!el) return;
-  if (!ingles) { el.innerHTML = '<div class="secao">🇺🇸 Canal de inglês</div><p class="dica">Carregando…</p>'; return; }
-  const g = ingles, tipos = { palavra: "Expressão", lista: "Lista", aula: "Aula", quiz: "Quiz" };
-  const selo = g.fila.length ? `<span class="badge ok">automático · ${esc(g.horarios.join(" · "))}</span>` : '<span class="badge aviso">fila vazia</span>';
-  el.innerHTML = `<div class="cab" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px">
-      <div class="av" style="width:42px;height:42px;border-radius:50%;background:#1f3f8f;display:grid;place-items:center;color:#fff;font-weight:700;flex:none">🇺🇸</div>
-      <div style="flex:1;min-width:150px"><b style="font-size:16px">Canal de inglês</b><small style="display:block">${esc(g.canal)} · posta pela nuvem, mesmo com o PC desligado</small></div>${selo}</div>
-    <p class="dica">Já saíram <b>${g.postados}</b> posts. Na fila: <b>${g.fila.length}</b> (dá uns <b>${String(g.dias).replace(".", ",")}</b> dias, 3 por dia).
-      ${g.ultimo ? `Último post: ${esc(horaManaus(g.ultimo))}.` : ""} ${g.fonte === "pc" ? "<br>⚠️ Não consegui ler a nuvem agora; mostrando o que está no PC." : ""}</p>
-    <div class="secao" style="margin-bottom:6px">Próximos posts</div>
-    <div class="ing-fila">${g.fila.slice(0, 12).map((i, n) => `<div class="ing-item">
-      ${i.tipo === "quiz" || !i.imagem ? '<div class="q">❓</div>' : `<img loading="lazy" alt="" src="/api/ingles/img/${encodeURIComponent(i.imagem)}">`}
-      <b>${n + 1}. ${esc(tipos[i.tipo] || i.tipo)}</b>${i.slides > 1 ? ` · ${i.slides} fotos` : ""}<br>${esc(i.titulo.replace(/^🇺🇸\s*/, "")).slice(0, 60)}</div>`).join("") || vazio("Acabaram os posts. Peça um lote novo ao Claude.")}</div>
-    <div class="acoes"><button class="btn pri peq" onclick="previaIngles()">Ver prévia no meu privado</button>
-      <a class="btn peq" target="_blank" rel="noopener" href="${esc(g.acoes)}">Postar agora (GitHub)</a></div>
-    <p class="dica" style="margin-bottom:0">A prévia manda os 3 próximos só para você. No GitHub, toque em “Run workflow” para soltar o próximo post na hora.</p>`;
+async function carregar() { try { dados = await api("/api/resumo"); $("app").classList.remove("oculto"); render(); const aba = document.querySelector("#abas [aria-current]"); if (aba && CENTRAL[aba.dataset.aba] !== undefined) carregarCentral(aba.dataset.aba); } catch (e) {} }
+
+// ---------- central dos canais de inglês e de renda extra (quem posta nos horários é a nuvem) ----------
+const CENTRAL = { ingles: null, renda: null };
+const TIPOS_IA = { ingles: [["lista", "Lista de frases"], ["aula", "Mini-aula"], ["palavra", "Expressão do dia"], ["quiz", "Quiz"]],
+                   renda: [["lista", "Dica em lista"], ["quiz", "Quiz"]] };
+const tipoIA = { ingles: "lista", renda: "lista" };
+async function carregarCentral(n) {
+  if (!CENTRAL[n]) renderCentral(n);
+  try { CENTRAL[n] = await api(`/api/central/${n}`); } catch (e) {}
+  renderCentral(n);
 }
-async function carregarIngles() { try { ingles = await api("/api/ingles"); } catch (e) {} renderIngles(); }
-async function previaIngles() { try { await api("/api/ingles/previa", {}); } catch (e) {} }
-async function carregar() { try { dados = await api("/api/resumo"); $("app").classList.remove("oculto"); render(); if (!ingles || Date.now() - (ingles._t || 0) > 120000) { renderIngles(); carregarIngles().then(() => { if (ingles) ingles._t = Date.now(); }); } } catch (e) {} }
+function cxThumb(n, i) {
+  if (i.tipo === "noticia") return '<div class="cx-thumb">📰</div>';
+  if (i.tipo === "vazio") return '<div class="cx-thumb">⏳</div>';
+  if (!i.imagem) return `<div class="cx-thumb">${i.tipo === "quiz" ? "❓" : "📝"}</div>`;
+  return `<img class="cx-thumb" loading="lazy" alt="" src="/api/central/${n}/img/${encodeURIComponent(i.imagem)}">`;
+}
+function cxItem(n, i, botoes, extra) {
+  return `<div class="item">${extra || ""}${cxThumb(n, i)}<div class="corpo"><div class="tit">${esc(i.titulo)}</div>
+    <div class="meta"><span class="badge">${esc(i.nome_tipo || "")}</span>${i.slides > 1 ? `<span>${i.slides} fotos</span>` : ""}</div>
+    ${i.texto ? `<div class="cx-txt">${esc(i.texto)}</div>` : ""}${botoes ? `<div class="botoes">${botoes}</div>` : ""}</div></div>`;
+}
+function renderCentral(n) {
+  const el = $(`central_${n}`); if (!el) return;
+  const g = CENTRAL[n];
+  if (!g) { el.innerHTML = `<div class="card"><p class="vazio">Carregando o canal…</p></div>`; return; }
+  const id = i => esc(JSON.stringify(i.id));
+  const bFila = i => `<button class="btn pri peq" onclick='cxAcao("${n}","postar",${id(i)},"Postar agora no canal?")'>${ico("foguete")}Postar agora</button>
+    <button class="btn peq" onclick='cxAcao("${n}","previa",${id(i)})'>Prévia no privado</button>
+    <button class="btn peq" onclick='cxAcao("${n}","proximo",${id(i)})'>Pôr como próximo</button>
+    <button class="btn peq" onclick='cxAgendar("${n}",${id(i)},this)'>${ico("relogio")}Agendar</button>
+    <button class="btn perigo peq" onclick='cxAcao("${n}","tirar",${id(i)},"Tirar da fila? Ele não sai mais (dá para voltar depois).")'>${ico("lixo")}Tirar</button>`;
+  const horas = g.grade.map(h => `${h.hora}${n === "renda" ? " " + h.tipo.toLowerCase() : ""}`).join(" · ");
+  const ultimo = g.ultimo ? horaManaus(g.ultimo) : "—";
+  el.innerHTML = `
+    <div class="cx-cab"><div class="cx-av">${g.emoji}</div>
+      <div><h1>${esc(g.nome)}</h1><p><a href="${esc(g.link)}" target="_blank" rel="noopener">${esc(g.canal)}</a> · posta sozinho pela nuvem, mesmo com o PC desligado</p></div>
+      <div class="dir"><button class="btn peq" onclick="carregarCentral('${n}')">Atualizar</button></div></div>
+    <div class="kpis">
+      <div class="kpi"><div class="ic">${ico("fila")}</div><div><div class="n">${g.fila.length}</div><div class="l">na fila</div></div></div>
+      <div class="kpi"><div class="ic">${ico("agenda")}</div><div><div class="n">${String(g.dias).replace(".", ",")}</div><div class="l">dias de posts</div></div></div>
+      <div class="kpi"><div class="ic">${ico("check")}</div><div><div class="n">${g.total_postados}</div><div class="l">já saíram</div></div></div>
+      <div class="kpi"><div class="ic">${ico("relogio")}</div><div><div class="n" style="font-size:17px">${esc(ultimo)}</div><div class="l">último post</div></div></div>
+    </div>
+    ${g.fila.length <= 9 ? `<div class="card" style="padding:14px 22px"><span class="badge aviso">⚠️ ${g.fila.length ? `Só dá para ${String(g.dias).replace(".", ",")} dias.` : "A fila acabou."} Crie posts novos aqui embaixo.</span></div>` : ""}
+    <div class="card cx-criar"><div class="secao">${ico("brilho")} Criar post com IA</div>
+      <div class="seg" role="group" aria-label="Tipo de post">${TIPOS_IA[n].map(([v, r]) => `<button aria-pressed="${tipoIA[n] === v}" onclick="tipoIA['${n}']='${v}';renderCentral('${n}')">${r}</button>`).join("")}</div>
+      <div class="linha" style="margin-top:12px"><input id="cx_tema_${n}" placeholder="${n === "ingles" ? "Tema (ex.: frases para entrevista de emprego)" : "Tema (ex.: cursos grátis de Excel com certificado)"}" aria-label="Tema do post">
+        <button class="btn pri" style="flex:0 0 auto" onclick="cxCriar('${n}')">${ico("brilho")}Criar com IA</button></div>
+      <p class="dica">A IA escreve no estilo do canal${n === "renda" ? " e desenha a arte" : ""}. O post entra no fim da fila; depois você pode postar agora, mandar a prévia ou agendar. Leva de 1 a 3 minutos.</p>
+      ${g.noticias ? `<div class="acoes" style="margin-top:12px"><button class="btn peq" onclick='cxAcao("${n}","noticia","","Garimpar e postar uma notícia agora no canal?")'>📰 Postar uma notícia agora</button></div>` : ""}
+    </div>
+    <div class="grade">
+      <div class="card"><div class="secao">${ico("relogio")} Próximos horários <span class="conta-s">${esc(horas)}</span></div>
+        ${g.agenda.map(a => `<div class="item"><div class="cx-quando">${esc(a.quando)}</div>${cxThumb(n, a)}<div class="corpo"><div class="tit">${esc(a.titulo)}</div>${a.nome_tipo ? `<div class="meta"><span class="badge">${esc(a.nome_tipo)}</span></div>` : ""}</div></div>`).join("") || vazio("Nenhum horário.")}</div>
+      <div class="card"><div class="secao">${ico("agenda")} Agendados <span class="conta-s">${g.agendados.length}</span></div>
+        ${g.agendados.map(i => cxItem(n, i, `<button class="btn peq" onclick='cxAcao("${n}","agendar",${id(i)},"Desfazer o agendamento?",{quando:""})'>Desfazer</button>
+          <button class="btn pri peq" onclick='cxAcao("${n}","postar",${id(i)},"Postar agora no canal?")'>Postar agora</button>`, `<div class="cx-quando">${esc(i.quando)}</div>`)).join("") || vazio("Nada agendado. Use “Agendar” em um post da fila.")}
+        <p class="dica">O agendado sai na primeira rodada da nuvem depois da hora marcada (até 1 hora depois), entre 8h e 21h.</p></div>
+    </div>
+    <div class="card"><div class="secao">${ico("fila")} Fila <span class="conta-s">${g.fila.length} posts, nesta ordem</span></div>
+      ${g.fila.map(i => cxItem(n, i, bFila(i))).join("") || vazio("A fila acabou. Crie posts novos com a IA aqui em cima.")}</div>
+    <div class="card"><div class="secao">${ico("check")} Já saíram <span class="conta-s">últimos ${g.postados.length}</span></div>
+      ${g.postados.map(i => cxItem(n, i, i.apagado ? `<span class="badge perigo">apagado do canal</span><button class="btn peq" onclick='cxAcao("${n}","voltar",${id(i)})'>Voltar para a fila</button>`
+        : i.apagavel ? `<button class="btn perigo peq" onclick='cxAcao("${n}","apagar",${id(i)},"Apagar este post do canal? Não dá para desfazer.")'>${ico("lixo")}Apagar do canal</button>` : "",
+        i.quando ? `<div class="cx-quando">${esc(i.quando)}</div>` : "")).join("") || vazio("Nada postado ainda.")}
+      <p class="dica">Só dá para apagar daqui os posts que saíram depois da central. Os mais antigos: segure o dedo no post no Telegram e toque em Apagar.</p></div>
+    ${g.pulados.length ? `<div class="card"><div class="secao">${ico("lixo")} Tirados da fila <span class="conta-s">${g.pulados.length}</span></div>
+      ${g.pulados.map(i => cxItem(n, i, `<button class="btn peq" onclick='cxAcao("${n}","voltar",${id(i)})'>Voltar para a fila</button>`)).join("")}</div>` : ""}`;
+}
+async function cxAcao(n, acao, pid, pergunta, extra) {
+  if (pergunta && !confirm(pergunta)) return;
+  try { await api(`/api/central/${n}/${acao}`, { id: pid, ...(extra || {}) }); } catch (e) {}
+  carregarCentral(n);
+}
+function cxAgendar(n, pid, bt) {
+  const caixa = bt.closest(".corpo"); if (caixa.querySelector(".cx-ag")) return;
+  const amanha = new Date(Date.now() + 86400000);
+  const padrao = new Date(amanha.getTime() - amanha.getTimezoneOffset() * 60000).toISOString().slice(0, 11) + "10:00";
+  const d = document.createElement("div"); d.className = "cx-ag";
+  d.innerHTML = `<input type="datetime-local" value="${padrao}" aria-label="Data e hora (Manaus)"><button class="btn pri peq">Confirmar</button><button class="btn peq">Cancelar</button><span class="dica" style="margin:0">horário de Manaus</span>`;
+  const [inp, ok, nao] = [d.querySelector("input"), ...d.querySelectorAll("button")];
+  ok.onclick = () => cxAcao(n, "agendar", pid, "", { quando: inp.value });
+  nao.onclick = () => d.remove();
+  caixa.appendChild(d); inp.focus();
+}
+async function cxCriar(n) {
+  const tema = $(`cx_tema_${n}`).value.trim();
+  try { await api(`/api/central/${n}/criar`, { tema, tipo: tipoIA[n] }); $(`cx_tema_${n}`).value = ""; } catch (e) {}
+  carregarCentral(n);
+}
 const indo = new Set();
 async function agora(id) {
   if (indo.has(id)) { toast("Esse post já está indo para o canal. Aguarde."); return; }

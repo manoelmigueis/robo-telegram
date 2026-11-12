@@ -449,6 +449,11 @@ def tratar_botao(cb):
 
     if acao == "x":
         return responder(cb)
+    if acao == "c":  # botões da prévia da central (inglês e renda extra)
+        import central
+        responder(cb, "⏳ Um instante...")
+        em_paralelo(central.tratar_botao, cb, arg)
+        return
     if acao == "r":  # botões da prévia do canal de renda extra
         import renda
         responder(cb, "⏳ Um instante...")
