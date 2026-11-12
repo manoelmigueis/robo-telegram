@@ -4,10 +4,14 @@ O Telegram manda cada clique/comando para cá. A ponte:
   1. confere a senha secreta do webhook e se quem clicou é o dono;
   2. responde ao clique na hora ("⏳ Recebi...");
   3. pede ao GitHub para rodar o bot.yml com o clique, que faz o trabalho de verdade.
-Não guarda nada e não tem o token do robô.
+Cliques que mexem na fila de livros ficam guardados na fila de pedidos (ramo "painel-respostas"),
+a mesma do painel: assim nenhum clique se perde quando o GitHub descarta uma chamada repetida.
+Não tem o token do robô.
 """
+import base64
 import json
 import os
+import uuid
 import urllib.request
 from http.server import BaseHTTPRequestHandler
 
@@ -18,15 +22,28 @@ ESCREVE_CMD = ("/pausar", "/continuar", "/agora", "/aprovacao")
 NAVEGADOR = ("p:", "m:agora", "r:np")
 
 
-def chamar_github(update, grupo, navegador):
-    corpo = json.dumps({"event_type": "telegram", "client_payload": {
-        "update": update, "grupo": grupo, "navegador": navegador}}).encode()
+def github(caminho, metodo, dados):
     req = urllib.request.Request(
-        f"https://api.github.com/repos/{os.environ['REPO']}/dispatches", data=corpo, method="POST",
+        f"https://api.github.com/repos/{os.environ['REPO']}{caminho}", data=json.dumps(dados).encode(), method=metodo,
         headers={"Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}",
                  "Accept": "application/vnd.github+json", "User-Agent": "ponte-robo"})
     with urllib.request.urlopen(req, timeout=8) as r:
         return r.status < 300
+
+
+def chamar_github(update, grupo, navegador):
+    if grupo == "robo":
+        rid = uuid.uuid4().hex
+        try:  # guarda o clique na fila; quem rodar depois atende todos
+            github(f"/contents/pedidos/{rid}.json", "PUT", {
+                "message": "telegram: pedido", "branch": "painel-respostas", "content": base64.b64encode(
+                    json.dumps({"update": update, "grupo": grupo, "navegador": navegador}).encode()).decode()})
+            return github("/dispatches", "POST", {"event_type": "telegram", "client_payload": {
+                "painel": {"id": rid}, "grupo": grupo, "navegador": navegador}})
+        except Exception as erro:
+            print(f"[ponte] fila falhou, chamando direto: {erro}")
+    return github("/dispatches", "POST", {"event_type": "telegram", "client_payload": {
+        "update": update, "grupo": grupo, "navegador": navegador}})
 
 
 class handler(BaseHTTPRequestHandler):

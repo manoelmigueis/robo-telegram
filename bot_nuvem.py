@@ -43,13 +43,28 @@ def ler_pedido(rid):
     return json.loads(base64.b64decode(r.json()["content"])), r.json()["sha"]
 
 
+def preparar_postador():
+    # aqui o programa termina depois do clique, então tudo roda até o fim, sem segundo plano
+    postador.em_paralelo = lambda funcao, *args: funcao(*args)
+    postador.garimpar_em_segundo_plano = disparar_garimpo
+
+
+def tratar_update(upd):
+    if upd.get("callback_query"):
+        postador.tratar_botao(upd["callback_query"])
+    elif (upd.get("message") or {}).get("text"):
+        m = upd["message"]
+        postador.tratar_comando(m["text"], m["chat"]["id"])
+
+
 def tratar_painel(carga):
     """Botões do painel da nuvem (Vercel): atende o pedido desta chamada e, na fila do robô,
     também os que ficaram para trás (o GitHub descarta chamadas repetidas). Roda o painel.py de verdade."""
     import subprocess
     import painel
     from fastapi.testclient import TestClient
-    ids = [carga["painel"]["id"]]
+    preparar_postador()
+    ids = [carga["painel"]["id"]] if carga.get("painel") else []
     if carga.get("grupo") == "robo":
         r = gh("GET", f"/contents/pedidos?ref={RAMO}")
         if r.status_code == 200:
@@ -66,10 +81,22 @@ def tratar_painel(carga):
         dados, _ = ler_pedido(rid)
         if not dados or (rid != ids[0] and dados.get("grupo") != "robo"):
             continue
-        pedido = dados["pedido"]
         if dados.get("navegador") and not navegador:
             subprocess.run([sys.executable, "-m", "playwright", "install", "--with-deps", "chromium"], check=False)
             navegador = True
+        if dados.get("update"):  # clique ou comando do Telegram que estava na fila
+            print("telegram:", (dados["update"].get("callback_query") or {}).get("data")
+                  or (dados["update"].get("message") or {}).get("text"))
+            try:
+                tratar_update(dados["update"])
+                status = 200
+            except Exception as erro:
+                print("[telegram] erro:", erro)
+                status = 500
+            with open(os.path.join(RESPOSTAS, f"{rid}.json"), "w", encoding="utf-8") as f:
+                json.dump({"pronto": True, "status": status, "json": {}}, f)
+            continue
+        pedido = dados["pedido"]
         print("painel:", pedido["caminho"])
         if pedido.get("form") is not None:
             r = cliente.post(pedido["caminho"], data=pedido["form"], headers=cab)
@@ -88,7 +115,7 @@ def responder_painel(rid):
     import base64
     import time
     prontos = {n[:-5] for n in os.listdir(RESPOSTAS)} if os.path.isdir(RESPOSTAS) else set()
-    if rid not in prontos and ler_pedido(rid)[0]:  # deu erro antes de responder
+    if rid and rid not in prontos and ler_pedido(rid)[0]:  # deu erro antes de responder
         os.makedirs(RESPOSTAS, exist_ok=True)
         with open(os.path.join(RESPOSTAS, f"{rid}.json"), "w", encoding="utf-8") as f:
             json.dump({"pronto": True, "status": 500, "json": {"erro": "A nuvem deu erro. Tente de novo."}}, f)
@@ -115,21 +142,17 @@ def responder_painel(rid):
 
 
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "fila":  # fim do postar/garimpar: atende o que ficou na fila
+        tratar_painel({"grupo": "robo"})
+        return responder_painel(None)
     with open(os.environ["GITHUB_EVENT_PATH"], encoding="utf-8") as f:
         carga = json.load(f)["client_payload"]
     if len(sys.argv) > 1 and sys.argv[1] == "responder":
         return responder_painel(carga["painel"]["id"])
     if carga.get("painel"):
         return tratar_painel(carga)
-    upd = carga["update"]
-    # aqui o programa termina depois do clique, então tudo roda até o fim, sem segundo plano
-    postador.em_paralelo = lambda funcao, *args: funcao(*args)
-    postador.garimpar_em_segundo_plano = disparar_garimpo
-    if upd.get("callback_query"):
-        postador.tratar_botao(upd["callback_query"])
-    elif (upd.get("message") or {}).get("text"):
-        m = upd["message"]
-        postador.tratar_comando(m["text"], m["chat"]["id"])
+    preparar_postador()
+    tratar_update(carga["update"])
 
 
 if __name__ == "__main__":
