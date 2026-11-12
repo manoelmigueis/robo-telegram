@@ -3,8 +3,22 @@
     "001-break-the-ice",
     "007-common-mistakes",
     "002-make-vs-do",
-    "003-quiz-goes"
+    "003-quiz-goes",
+    "008-phone-conversation"
   ],
-  "contador": 4,
-  "ultimo": "2026-11-12T01:57:26+00:00"
+  "contador": 5,
+  "ultimo": "2026-11-12T03:13:29+00:00",
+  "pulados": [],
+  "frente": [],
+  "apagados": [],
+  "noticias": [],
+  "agendados": {},
+  "quando": {
+    "008-phone-conversation": "2026-11-12T03:13:29+00:00"
+  },
+  "mensagens": {
+    "008-phone-conversation": [
+      8379
+    ]
+  }
 }
