@@ -12,10 +12,11 @@
     "010-job-interview",
     "012-american-slang",
     "013-at-the-airport",
-    "016-quiz-since-for"
+    "016-quiz-since-for",
+    "011-at-the-doctor"
   ],
-  "contador": 13,
-  "ultimo": "2026-11-13T14:54:51+00:00",
+  "contador": 14,
+  "ultimo": "2026-11-13T14:54:52+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -30,7 +31,8 @@
     "010-job-interview": "2026-11-13T02:39:49+00:00",
     "012-american-slang": "2026-11-13T02:39:57+00:00",
     "013-at-the-airport": "2026-11-13T02:40:07+00:00",
-    "016-quiz-since-for": "2026-11-13T14:54:51+00:00"
+    "016-quiz-since-for": "2026-11-13T14:54:51+00:00",
+    "011-at-the-doctor": "2026-11-13T14:54:52+00:00"
   },
   "mensagens": {
     "008-phone-conversation": [
@@ -59,6 +61,9 @@
     ],
     "016-quiz-since-for": [
       8388
+    ],
+    "011-at-the-doctor": [
+      8389
     ]
   }
 }
