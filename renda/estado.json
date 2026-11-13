@@ -15,14 +15,15 @@
     "016-onde-curriculo",
     "017-cursos-profissionalizantes",
     "014-tempo",
-    "027-fotos-produto"
+    "027-fotos-produto",
+    "028-divulgar"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
     "cisco abre inscrições para cursos gratuitos em ia inglês e alfabetização digital",
     "ministério da cultura oferece curso de extensão on line e gratuito em cultura di"
   ],
-  "contador": 16,
+  "contador": 17,
   "ultimo": "2026-11-13T16:05:32+00:00",
   "pulados": [],
   "frente": [],
@@ -36,7 +37,8 @@
     "016-onde-curriculo": "2026-11-13T02:40:40+00:00",
     "017-cursos-profissionalizantes": "2026-11-13T02:40:42+00:00",
     "014-tempo": "2026-11-13T02:40:43+00:00",
-    "027-fotos-produto": "2026-11-13T16:05:32+00:00"
+    "027-fotos-produto": "2026-11-13T16:05:32+00:00",
+    "028-divulgar": "2026-11-13T16:05:32+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -62,6 +64,9 @@
     ],
     "027-fotos-produto": [
       8778
+    ],
+    "028-divulgar": [
+      8777
     ]
   }
 }
