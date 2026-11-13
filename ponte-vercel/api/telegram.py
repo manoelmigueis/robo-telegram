@@ -11,6 +11,7 @@ Não tem o token do robô.
 import base64
 import json
 import os
+import time
 import uuid
 import urllib.request
 from http.server import BaseHTTPRequestHandler
@@ -62,6 +63,20 @@ class handler(BaseHTTPRequestHandler):
         if self.headers.get("X-Telegram-Bot-Api-Secret-Token") != os.environ.get("WEBHOOK_SECRET"):
             return self._responder(401, {"ok": False})
         update = json.loads(self.rfile.read(int(self.headers.get("Content-Length") or 0)) or b"{}")
+        reacao = update.get("message_reaction_count")
+        if reacao:
+            # o Telegram avisa quantas reações um post do canal tem agora; o robô soma depois
+            chat = reacao.get("chat") or {}
+            chave = chat.get("username") or chat.get("id")
+            total = sum(r.get("total_count", 0) for r in reacao.get("reactions") or [])
+            nome = f"r~{chave}~{reacao.get('message_id')}~{total}~{int(time.time())}~{uuid.uuid4().hex[:8]}"
+            try:
+                github(f"/contents/metricas/{nome}.json", "PUT", {
+                    "message": "reação", "branch": "painel-respostas",
+                    "content": base64.b64encode(b"{}").decode()})
+            except Exception as erro:
+                print(f"[ponte] não anotei a reação: {erro}")
+            return self._responder(200, {})
         cb = update.get("callback_query")
         msg = update.get("message") or {}
         quem = (cb or msg).get("from", {}).get("id")

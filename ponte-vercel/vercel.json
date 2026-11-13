@@ -1,6 +1,7 @@
 {
   "rewrites": [
     { "source": "/", "destination": "/api/painel" },
+    { "source": "/r/:r*", "destination": "/api/clique" },
     { "source": "/api/login", "destination": "/api/painel" },
     { "source": "/api/login-telegram", "destination": "/api/painel" },
     { "source": "/api/resumo", "destination": "/api/painel" },

@@ -620,6 +620,7 @@ button.chip{font-family:var(--font)}
     <!-- NO AR -->
     <section data-pagina="noar" class="oculto">
       <div class="titulo"><div><h1>No ar</h1><p>Os posts do robô que estão nos canais agora. Dá para apagar qualquer um.</p></div></div>
+      <div class="card"><div class="secao">Desempenho dos últimos 7 dias</div><div id="desempenho"></div></div>
       <div class="card"><div class="secao">Posts em vários canais <span class="conta-s" id="c_lotes"></span></div>
         <p class="dica" style="margin-top:0">Cada post que você escreveu aparece uma vez só, mesmo estando em vários canais. Editar, fixar ou apagar aqui vale para todos os canais dele de uma vez.</p>
         <div id="lista_lotes"></div>
@@ -965,11 +966,11 @@ function render() {
   $("lista_fila").innerHTML = d.fila.map(p => itemPost(p, acoesPost(p))).join("") || vazio("Fila vazia. Use “Garimpar” em Ajustes.");
   $("lista_historico").innerHTML = d.historico.map(p => itemPost(p)).join("") || vazio("Nada ainda.");
 
-  renderLotes();
+  renderLotes(); renderDesempenho(d.desempenho);
   $("c_noar").textContent = d.no_ar.length || ""; $("c_noar_mais").textContent = d.no_ar.length || "";
   $("lista_noar").innerHTML = d.no_ar.map(e => `<div class="item"><div class="capa">${ico("noar")}</div><div class="corpo">
       <div class="tit">${esc(e.titulo || "post #" + e.post_id)}</div>
-      <div class="meta"><span class="badge azul">${esc(e.canal_nome || e.chat)}</span><span>${dataBR(e.enviado_em)}</span>${e.expira_em ? `<span>some em ${dataBR(e.expira_em)}</span>` : ""}</div>
+      <div class="meta"><span class="badge azul">${esc(e.canal_nome || e.chat)}</span><span>${dataBR(e.enviado_em)}</span>${e.expira_em ? `<span>some em ${dataBR(e.expira_em)}</span>` : ""}<span>👆 ${e.cliques || 0} cliques · ❤️ ${e.reacoes || 0} reações</span></div>
       <div class="botoes"><a class="btn peq" target="_blank" rel="noopener" href="${linkMsg(e)}">Ver no Telegram</a>
         <button class="btn peq perigo" onclick="apagarEnvio(${e.id})">${ico("lixo")}Apagar</button></div></div></div>`).join("") || vazio("Nenhum post do robô no ar.");
 
@@ -1224,6 +1225,17 @@ async function pausaTotal(sim) {
   try { await api("/api/ajustes", { pausa_total: sim }); } catch (e) {} carregar();
 }
 const loteAberto = new Set();
+function renderDesempenho(m) {
+  if (!m) { $("desempenho").innerHTML = vazio("Sem números ainda."); return; }
+  const canais = (m.por_canal || []).map(c => `<span class="badge azul">${esc(c.nome || c.chat)}: ${c.cliques} cliques</span>`).join(" ");
+  const top = (m.melhores || []).map((p, i) => `<div class="item"><div class="capa">${i + 1}º</div><div class="corpo">
+      <div class="tit">${esc(p.titulo || "post #" + p.id)}</div>
+      <div class="meta"><span>👆 ${p.cliques} cliques</span><span>❤️ ${p.reacoes} reações</span></div></div></div>`).join("");
+  $("desempenho").innerHTML = `<div class="meta" style="font-size:1.05em;margin-bottom:8px"><span>👆 <b>${m.cliques}</b> cliques nos links</span><span>❤️ <b>${m.reacoes}</b> reações</span></div>
+    ${canais ? `<div class="meta" style="flex-wrap:wrap;margin-bottom:8px">${canais}</div>` : ""}
+    ${top ? `<div class="secao" style="margin-top:6px">Posts que mais funcionaram</div>${top}` : `<p class="dica">Os números começam a aparecer quando o pessoal clicar nos links e reagir aos posts novos.</p>`}`;
+}
+
 function renderLotes() {
   const L = dados.lotes || [];
   $("c_lotes").textContent = L.length || "";

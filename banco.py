@@ -44,8 +44,13 @@ for _col, _tipo in (("nicho", "TEXT DEFAULT ''"), ("recebe", "TEXT DEFAULT 'livr
                     ("horarios", "TEXT DEFAULT ''")):
     if _col not in _tem:
         _con.execute(f"ALTER TABLE canais ADD COLUMN {_col} {_tipo}")
-if "fixado" not in {l[1] for l in _con.execute("PRAGMA table_info(envios)")}:
-    _con.execute("ALTER TABLE envios ADD COLUMN fixado INTEGER DEFAULT 0")
+_cols_envios = {l[1] for l in _con.execute("PRAGMA table_info(envios)")}
+for _col in ("fixado", "cliques", "reacoes"):
+    if _col not in _cols_envios:
+        _con.execute(f"ALTER TABLE envios ADD COLUMN {_col} INTEGER DEFAULT 0")
+# cada clique e cada aviso de reação, para os números do painel e para não contar nada duas vezes
+_con.execute("CREATE TABLE IF NOT EXISTS eventos (nome TEXT PRIMARY KEY, tipo TEXT, post_id INTEGER, "
+             "canal_id INTEGER, envio_id INTEGER, quando TEXT, valor INTEGER)")
 _con.commit()
 
 

@@ -22,6 +22,7 @@ from pathlib import Path
 import requests
 
 import banco
+import metricas
 import escritor
 
 PASTA = Path(__file__).parent
@@ -122,8 +123,8 @@ def fixar(chat, message_id, sim=True):
 
 def editar_envio(e, p, canal):
     """Troca o texto e o botão de um post que já está no canal."""
-    teclado = {"inline_keyboard": p["botoes"] or []}
-    legenda = legenda_do_canal(p, canal)
+    legenda, botoes = metricas.links_rastreados(p, canal, legenda_do_canal(p, canal), p["botoes"])
+    teclado = {"inline_keyboard": botoes or []}
     try:
         if p.get("foto"):
             tg("editMessageCaption", chat_id=e["chat"], message_id=int(e["message_id"]), caption=legenda,
@@ -216,7 +217,7 @@ def alvos_do_post(p, canais_lista=None):
         alvos = [c for c in banco.canais() if c["id"] in p["canais"]]
     else:  # automático: só os canais que recebem esse tipo (livro / oferta)
         alvos = [c for c in banco.canais(so_auto=True)
-                 if p["origem"] == "manual" or p["origem"] in (c.get("recebe") or "livro,oferta").split(",")]
+                 if p["origem"] == "manual" or p["origem"] in (c["recebe"] if c.get("recebe") is not None else "livro,oferta").split(",")]
     if canais_lista is not None:
         ids = {c["id"] for c in canais_lista}
         alvos = [c for c in alvos if c["id"] in ids]
@@ -288,7 +289,8 @@ def publicar(pid, conferir=True, so_canais=None, so_gratis=False):
     enviados, erros = 0, []
     for canal in alvos:
         try:
-            mid, file_id = enviar(canal["chat"], {**p, "legenda": legenda_do_canal(p, canal)})
+            leg, bts = metricas.links_rastreados(p, canal, legenda_do_canal(p, canal), p["botoes"])
+            mid, file_id = enviar(canal["chat"], {**p, "legenda": leg, "botoes": bts})
             if file_id and p["foto"].startswith("uploads/"):
                 p["foto"] = file_id  # depois da 1ª vez, reaproveita a foto já enviada
                 banco.mudar_post(pid, foto=file_id)

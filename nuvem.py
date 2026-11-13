@@ -33,6 +33,11 @@ def canais_desta_hora(hora_cheia):
 def relogio(so_manuais=True):
     """Entradas e saídas com hora marcada. Roda a cada 10 minutos (relogio.yml) e também na hora cheia.
     so_manuais: na rodada de 10 minutos não há navegador, então livros e ofertas ficam para a hora cheia."""
+    try:
+        import metricas
+        metricas.coletar()
+    except Exception as x:
+        print(f"[métricas] {x}")
     agora_txt = banco.agora()
     if not postador.pausa_total():
         for p in banco.posts(status=("agendado",)):

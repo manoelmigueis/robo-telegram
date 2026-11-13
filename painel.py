@@ -25,6 +25,7 @@ from fastapi import Body, FastAPI, File, Form, HTTPException, Request, UploadFil
 from fastapi.responses import FileResponse, JSONResponse
 
 import banco
+import metricas
 import postador
 
 PASTA = Path(__file__).parent
@@ -143,6 +144,7 @@ def resumo():
         "historico": [p for p in banco.posts(limite=60) if p["status"] not in ("fila", "agendado")],
         "no_ar": banco.envios_no_ar(),
         "lotes": lotes(),
+        "desempenho": metricas.resumo(),
         "ajustes": {
             "pausado": bool(e.get("pausado")),
             "pausa_total": bool(e.get("pausa_total")),
