@@ -6,10 +6,11 @@
     "003-quiz-goes",
     "008-phone-conversation",
     "004-actually",
-    "005-in-on-at"
+    "005-in-on-at",
+    "006-quiz-pretend"
   ],
-  "contador": 7,
-  "ultimo": "2026-11-13T01:58:38+00:00",
+  "contador": 8,
+  "ultimo": "2026-11-13T02:34:14+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -18,7 +19,8 @@
   "quando": {
     "008-phone-conversation": "2026-11-12T03:13:29+00:00",
     "004-actually": "2026-11-12T20:57:44+00:00",
-    "005-in-on-at": "2026-11-13T01:58:38+00:00"
+    "005-in-on-at": "2026-11-13T01:58:38+00:00",
+    "006-quiz-pretend": "2026-11-13T02:34:14+00:00"
   },
   "mensagens": {
     "008-phone-conversation": [
@@ -29,6 +31,9 @@
     ],
     "005-in-on-at": [
       8381
+    ],
+    "006-quiz-pretend": [
+      8382
     ]
   }
 }
