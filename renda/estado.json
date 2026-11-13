@@ -10,15 +10,16 @@
     "008-celular",
     "009-quiz-preco",
     "010-comida",
-    "012-organizar"
+    "012-organizar",
+    "013-aulas"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
     "cisco abre inscrições para cursos gratuitos em ia inglês e alfabetização digital",
     "ministério da cultura oferece curso de extensão on line e gratuito em cultura di"
   ],
-  "contador": 11,
-  "ultimo": "2026-11-13T02:34:57+00:00",
+  "contador": 12,
+  "ultimo": "2026-11-13T02:40:30+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -26,7 +27,8 @@
   "quando": {
     "009-quiz-preco": "2026-11-12T21:14:24+00:00",
     "010-comida": "2026-11-13T01:29:11+00:00",
-    "012-organizar": "2026-11-13T02:34:57+00:00"
+    "012-organizar": "2026-11-13T02:34:57+00:00",
+    "013-aulas": "2026-11-13T02:40:30+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -37,6 +39,9 @@
     ],
     "012-organizar": [
       8772
+    ],
+    "013-aulas": [
+      8773
     ]
   }
 }
