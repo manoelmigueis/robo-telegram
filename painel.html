@@ -274,9 +274,6 @@ button.chip{font-family:var(--font)}
   .cx-bts .btn:first-child:nth-last-child(odd){flex-basis:100%}
   .cx-ag input{max-width:none;flex:1 1 100%}
   .cx-ag .btn{flex:1}
-  .dock button{min-width:0;padding:0 1px}
-  .dock .rot{font-size:10px;white-space:nowrap;letter-spacing:-.01em}
-  .dock button svg.i{width:20px;height:20px}
 }
 .ing-fila{display:flex;gap:10px;overflow-x:auto;padding:4px 0 8px}
 .ing-item{flex:0 0 112px;font-size:12px;line-height:1.3}
@@ -287,6 +284,49 @@ button.chip{font-family:var(--font)}
 .canal-c .cab{flex-wrap:wrap}
 .canal-c .cab b{display:block;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .canal-c .cab small{color:var(--muted)}
+
+/* ---------- página Canais (busca + grade que cresce) ---------- */
+.so-cel{display:none!important}
+.busca{position:relative;flex:1;min-width:0}
+.busca svg.i{position:absolute;left:15px;top:50%;width:18px;height:18px;margin-top:-9px;color:var(--faint);pointer-events:none}
+.busca input{padding-left:42px}
+.hub-ferr{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+.hub-ferr .busca{flex:1 1 280px}
+.hub-ferr .seg{flex:0 1 auto}
+.hub-ferr .seg .n{opacity:.6;margin-left:4px;font-weight:500}
+.hub-grupo{font:700 12px var(--font);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:20px 4px 10px}
+.hub-grupo:first-child{margin-top:0}
+.hub-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.hub-c{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:14px 14px 14px 16px;border-radius:var(--r-tile);border:1px solid var(--rim);background:var(--glass-2);box-shadow:var(--shadow);color:var(--ink);font:inherit;cursor:pointer;transition:transform .15s var(--ease),border-color .15s}
+.hub-c:hover{transform:translateY(-1px);border-color:var(--acento)}
+.hub-c:focus-visible{outline:none;box-shadow:0 0 0 4px var(--acento-soft);border-color:var(--acento)}
+.hub-av{width:44px;height:44px;border-radius:14px;flex:none;display:grid;place-items:center;font-size:22px;font-weight:700;color:#fff;background:linear-gradient(140deg,#2f86f6,#1a4fb8)}
+.hub-av.emo{background:var(--soft)}
+.hub-tx{flex:1;min-width:0}
+.hub-tx b{display:block;font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hub-tx small{display:block;color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hub-tx .badge{margin-top:6px}
+.hub-c>svg.i{width:18px;height:18px;color:var(--faint);flex:none}
+#canal_corpo .canal-c .cab>.av,#canal_corpo .canal-c .cab>div{display:none}
+.hub-vazio{padding:28px;text-align:center;color:var(--muted)}
+.canal-barra{display:flex;gap:10px;align-items:center;margin:4px 0 18px}
+.canal-barra .btn{flex:none}
+.troca-bt{flex:1;min-width:0;display:flex;align-items:center;gap:10px;border:1px solid var(--line-2);background:var(--glass-3);border-radius:999px;padding:6px 14px 6px 6px;color:var(--ink);font:600 14.5px var(--font);cursor:pointer}
+.troca-bt .hub-av{width:30px;height:30px;border-radius:50%;font-size:15px}
+.troca-bt span.nm{flex:1;min-width:0;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.troca-bt svg.i{width:18px;height:18px;color:var(--muted);flex:none}
+.troca{position:fixed;inset:0;z-index:60;background:rgba(8,15,28,.42);display:flex;justify-content:center;align-items:flex-start;padding:calc(var(--topo) + 14px) 16px 16px}
+.troca-box{width:min(520px,100%);max-height:min(560px,calc(100vh - var(--topo) - 40px));display:flex;flex-direction:column;background:var(--glass-3);border:1px solid var(--rim);border-radius:24px;box-shadow:var(--shadow-pop);padding:12px;backdrop-filter:blur(24px)}
+.troca-lista{overflow-y:auto;margin-top:10px;display:flex;flex-direction:column;gap:2px;overscroll-behavior:contain}
+.troca-lista button{display:flex;align-items:center;gap:12px;width:100%;border:0;background:transparent;border-radius:14px;padding:8px 10px;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.troca-lista button:hover,.troca-lista button.sel{background:var(--soft)}
+.troca-lista button[aria-current="true"]{background:var(--acento-soft)}
+.troca-lista .hub-av{width:34px;height:34px;border-radius:11px;font-size:17px}
+.folha{position:fixed;z-index:30;right:12px;bottom:calc(80px + env(safe-area-inset-bottom));min-width:200px;background:#0f1d33;border-radius:20px;padding:6px;box-shadow:var(--shadow-pop);display:flex;flex-direction:column}
+.folha button{display:flex;align-items:center;gap:12px;border:0;background:transparent;color:#f3f7fd;font:600 15px var(--font);padding:13px 14px;border-radius:14px;cursor:pointer;text-align:left}
+.folha button:hover,.folha button[aria-current="page"]{background:rgba(255,255,255,.12)}
+.folha .cnt{margin-left:auto;font-size:12px;background:rgba(255,255,255,.16);border-radius:999px;padding:1px 8px}
+.folha .cnt:empty{display:none}
 
 /* ---------- interruptores ---------- */
 .opcao{display:flex;align-items:center;gap:14px;padding:14px 0;border-top:1px solid var(--line)}
@@ -323,6 +363,17 @@ button.chip{font-family:var(--font)}
   .dock button{width:auto;flex:1;height:54px;border-radius:18px;display:flex;flex-direction:column;gap:2px;justify-content:center}
   .dock button[aria-current="page"]::after{display:none}
   .dock .rot{position:static;opacity:1;transform:none;background:none;padding:0;font-size:11px;color:inherit}
+  .dock .no-cel{display:none!important}
+  .dock .so-cel{display:flex!important}
+  .hub-ferr{gap:10px}
+  .hub-ferr .busca,.hub-ferr .seg{flex:1 1 100%}
+  .hub-ferr .seg{flex-wrap:nowrap}
+  .hub-ferr .seg button{padding:8px 6px;font-size:12.5px;flex:1 1 0;min-width:0;white-space:nowrap}
+  .hub-grade{grid-template-columns:minmax(0,1fr);gap:8px}
+  .hub-c{padding:12px;box-shadow:none}
+  .troca{align-items:flex-end;padding:0}
+  .troca-box{width:100%;max-height:78vh;border-radius:24px 24px 0 0;padding:12px 12px calc(12px + env(safe-area-inset-bottom))}
+  .canal-barra{margin-bottom:14px}
   .card{padding:18px;border-radius:22px}
   .hero{padding:24px 22px;border-radius:26px}
   .canais-grade{grid-template-columns:minmax(0,1fr)}
@@ -357,6 +408,11 @@ button.chip{font-family:var(--font)}
   <symbol id="i-mais" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-globo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
   <symbol id="i-moeda" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .8-3 2s1.3 1.7 3 2 3 .8 3 2-1.3 2-3 2c-1.4 0-2.5-.5-3-1.5M12 6.5V8M12 16v1.5"/></symbol>
+  <symbol id="i-pontos" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></symbol>
+  <symbol id="i-busca" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></symbol>
+  <symbol id="i-volta" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-seta" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-baixo" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
   <symbol id="i-picareta" viewBox="0 0 24 24"><path d="M14 4c3 0 6 2 7 5-3-1.5-6-2-9-1.5"/><path d="M13.5 6.5 4 20"/></symbol>
 </svg>
 
@@ -386,14 +442,22 @@ button.chip{font-family:var(--font)}
     <button data-aba="inicio" aria-current="page"><svg class="i"><use href="#i-casa"/></svg><span class="rot">Início</span></button>
     <button data-aba="criar"><svg class="i"><use href="#i-criar"/></svg><span class="rot">Criar</span></button>
     <button data-aba="agenda"><svg class="i"><use href="#i-agenda"/></svg><span class="rot">Agenda</span></button>
-    <button data-aba="noar"><svg class="i"><use href="#i-noar"/></svg><span class="rot">No ar</span></button>
-    <hr>
-    <button data-aba="ingles"><svg class="i"><use href="#i-globo"/></svg><span class="rot">Inglês</span></button>
-    <button data-aba="renda"><svg class="i"><use href="#i-moeda"/></svg><span class="rot">Renda</span></button>
+    <button data-aba="noar" class="no-cel"><svg class="i"><use href="#i-noar"/></svg><span class="rot">No ar</span></button>
     <hr>
     <button data-aba="canais"><svg class="i"><use href="#i-canais"/></svg><span class="rot">Canais</span></button>
-    <button data-aba="ajustes"><svg class="i"><use href="#i-ajustes"/></svg><span class="rot">Ajustes</span></button>
+    <button data-aba="ajustes" class="no-cel"><svg class="i"><use href="#i-ajustes"/></svg><span class="rot">Ajustes</span></button>
+    <button data-aba="mais" class="so-cel" aria-haspopup="true"><svg class="i"><use href="#i-pontos"/></svg><span class="rot">Mais</span></button>
   </nav>
+  <div class="folha oculto" id="folha_mais" role="menu" aria-label="Mais seções">
+    <button role="menuitem" data-ir="noar"><svg class="i"><use href="#i-noar"/></svg>No ar<span class="cnt" id="c_noar_mais"></span></button>
+    <button role="menuitem" data-ir="ajustes"><svg class="i"><use href="#i-ajustes"/></svg>Ajustes</button>
+  </div>
+  <div class="troca oculto" id="troca" role="dialog" aria-modal="true" aria-label="Trocar de canal">
+    <div class="troca-box">
+      <div class="busca"><svg class="i"><use href="#i-busca"/></svg><input id="troca_busca" placeholder="Buscar canal…" aria-label="Buscar canal" autocomplete="off"></div>
+      <div class="troca-lista" id="troca_lista"></div>
+    </div>
+  </div>
 
   <main class="wrap">
 
@@ -555,14 +619,24 @@ button.chip{font-family:var(--font)}
       <div class="card"><div class="secao">Postados pelo robô <span class="conta-s" id="c_noar"></span></div><div id="lista_noar"></div></div>
     </section>
 
-    <!-- CANAL DE INGLÊS e CANAL DE RENDA EXTRA (central) -->
-    <section data-pagina="ingles" class="oculto"><div id="central_ingles"></div></section>
-    <section data-pagina="renda" class="oculto"><div id="central_renda"></div></section>
+    <!-- UM CANAL (abre pela página Canais) -->
+    <section data-pagina="canal" class="oculto">
+      <div class="canal-barra">
+        <button class="btn peq" onclick="ir('canais')"><svg class="i"><use href="#i-volta"/></svg>Canais</button>
+        <button class="troca-bt" id="troca_bt" onclick="abrirTroca()" aria-haspopup="dialog"></button>
+      </div>
+      <div id="canal_corpo"></div>
+    </section>
 
     <!-- CANAIS -->
     <section data-pagina="canais" class="oculto">
-      <div class="titulo"><div><h1>Canais</h1><p>Cada canal tem o seu nicho, o seu @ na assinatura e as suas hashtags.</p></div></div>
-      <div class="card">
+      <div class="titulo"><div><h1>Canais</h1><p id="hub_resumo">Toque num canal para ver a fila, os horários e os ajustes dele.</p></div></div>
+      <div class="hub-ferr">
+        <div class="busca"><svg class="i"><use href="#i-busca"/></svg><input id="hub_busca" placeholder="Buscar por nome, @ ou nicho" aria-label="Buscar canal" autocomplete="off"></div>
+        <div class="seg" id="hub_filtro" role="group" aria-label="Tipo de canal"></div>
+      </div>
+      <div id="hub_canais"></div>
+      <div class="card" style="margin-top:22px">
         <div class="secao">Adicionar canal</div>
         <div class="linha">
           <input id="novo_canal" placeholder="@meucanal ou https://t.me/meucanal" aria-label="Canal novo">
@@ -570,8 +644,6 @@ button.chip{font-family:var(--font)}
         </div>
         <p class="dica">Antes, ponha o robô como administrador do canal, com permissão de <b>postar</b> e de <b>apagar mensagens</b>.</p>
       </div>
-      <p class="dica" style="margin:-6px 0 16px">Os canais de <b>inglês</b> e de <b>renda extra</b> têm abas próprias no menu, com fila, horários e criação com IA.</p>
-      <div class="canais-grade" id="lista_canais"></div>
       <datalist id="lista_nichos"></datalist>
     </section>
 
@@ -669,14 +741,29 @@ async function entrarPeloTelegram() {
 $("senha").addEventListener("keydown", e => { if (e.key === "Enter") entrar(); });
 
 // ---------- navegação ----------
+let abaAtual = "inicio", canalAtual = "";
+try { canalAtual = localStorage.getItem("canal") || ""; } catch (e) {}
 function ir(aba) {
-  document.querySelectorAll("#abas button").forEach(b => { if (b.dataset.aba === aba) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current"); });
+  if (aba === "ingles" || aba === "renda") { canalAtual = "c:" + aba; aba = "canal"; }   // abas antigas
+  if (aba === "canal" && !canalAtual) aba = "canais";
+  abaAtual = aba; fecharMais();
+  const marcado = aba === "canal" ? "canais" : aba;
+  document.querySelectorAll("#abas button, #folha_mais button").forEach(b => {
+    const alvo = b.dataset.aba || b.dataset.ir;
+    const sim = alvo === marcado || (alvo === "mais" && (marcado === "noar" || marcado === "ajustes"));
+    if (sim) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
+  });
   document.querySelectorAll("[data-pagina]").forEach(s => s.classList.toggle("oculto", s.dataset.pagina !== aba));
   try { localStorage.setItem("aba", aba); } catch (e) {}
-  if (aba === "ingles" || aba === "renda") carregarCentral(aba);
+  if (aba === "canal") mostrarCanal();
+  if (aba === "canais") { renderHub(); buscarCentrais(); }
   scrollTo({ top: 0 });
 }
-$("abas").addEventListener("click", e => { const b = e.target.closest("button"); if (b) ir(b.dataset.aba); });
+function abrirMais() { const f = $("folha_mais"), abre = f.classList.contains("oculto"); f.classList.toggle("oculto", !abre); }
+function fecharMais() { $("folha_mais").classList.add("oculto"); }
+$("abas").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; if (b.dataset.aba === "mais") abrirMais(); else ir(b.dataset.aba); });
+$("folha_mais").addEventListener("click", e => { const b = e.target.closest("button"); if (b) ir(b.dataset.ir); });
+document.addEventListener("click", e => { if (!e.target.closest("#folha_mais, [data-aba=mais]")) fecharMais(); });
 
 // ---------- texto do post ----------
 function md(t) {
@@ -855,16 +942,44 @@ function render() {
   $("lista_fila").innerHTML = d.fila.map(p => itemPost(p, acoesPost(p))).join("") || vazio("Fila vazia. Use “Garimpar” em Ajustes.");
   $("lista_historico").innerHTML = d.historico.map(p => itemPost(p)).join("") || vazio("Nada ainda.");
 
-  $("c_noar").textContent = d.no_ar.length || "";
+  $("c_noar").textContent = d.no_ar.length || ""; $("c_noar_mais").textContent = d.no_ar.length || "";
   $("lista_noar").innerHTML = d.no_ar.map(e => `<div class="item"><div class="capa">${ico("noar")}</div><div class="corpo">
       <div class="tit">${esc(e.titulo || "post #" + e.post_id)}</div>
       <div class="meta"><span class="badge azul">${esc(e.canal_nome || e.chat)}</span><span>${dataBR(e.enviado_em)}</span>${e.expira_em ? `<span>some em ${dataBR(e.expira_em)}</span>` : ""}</div>
       <div class="botoes"><a class="btn peq" target="_blank" rel="noopener" href="${linkMsg(e)}">Ver no Telegram</a>
         <button class="btn peq perigo" onclick="apagarEnvio(${e.id})">${ico("lixo")}Apagar</button></div></div></div>`).join("") || vazio("Nenhum post do robô no ar.");
 
-  if (!document.querySelector("#lista_canais :focus")) $("lista_canais").innerHTML = d.canais.map(c => {
+  renderHub(); if (abaAtual === "canais") buscarCentrais();
+  if (abaAtual === "canal" && canalAtual.startsWith("b:") && !document.querySelector("#canal_corpo :focus")) mostrarCanal();
+
+  $("ch_auto").setAttribute("aria-checked", !a.pausado); $("ch_aprov").setAttribute("aria-checked", a.aprovacao);
+  $("botao_garimpo").disabled = a.garimpando;
+  mostrarGarimpo(a.garimpando);
+  if (document.activeElement !== $("horarios")) $("horarios").value = (a.horarios || []).join(" ");
+  if (document.activeElement !== $("expira_auto")) $("expira_auto").value = a.expira_auto_horas ?? "";
+  $("link_internet").innerHTML = a.painel_url
+    ? `Endereço de agora (muda quando o robô reinicia): <a href="${esc(a.painel_url)}" target="_blank" rel="noopener">${esc(a.painel_url)}</a>. No Telegram, use o botão “Painel” do robô.`
+    : "O painel está só no PC (o túnel da Cloudflare não está ligado).";
+  previa();
+}
+$("escolha_nichos").addEventListener("click", e => {
+  const b = e.target.closest("[data-nicho]"); if (!b) return;
+  const ids = dados.canais.filter(c => (c.nicho || "").trim() === b.dataset.nicho).map(c => String(c.id));
+  document.querySelectorAll("#escolha_canais input").forEach(i => i.checked = ids.includes(i.value)); previa();
+});
+
+
+function horaManaus(iso) { try { return new Date(iso).toLocaleString("pt-BR", { timeZone: "America/Manaus", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } }
+async function carregar() { try { dados = await api("/api/resumo"); $("app").classList.remove("oculto"); render(); if (abaAtual === "canal" && canalAtual.startsWith("c:")) carregarCentral(canalAtual.slice(2)); } catch (e) {} }
+
+// ---------- central dos canais de inglês e de renda extra (quem posta nos horários é a nuvem) ----------
+const CENTRAL = { ingles: null, renda: null };
+const TIPOS_IA = { ingles: [["lista", "Lista de frases"], ["aula", "Mini-aula"], ["palavra", "Expressão do dia"], ["quiz", "Quiz"]],
+                   renda: [["lista", "Dica em lista"], ["quiz", "Quiz"]] };
+const tipoIA = { ingles: "lista", renda: "lista" };
+function formCanal(c) {
     const rec = (c.recebe ?? "livro,oferta").split(",");
-    const proprios = (c.horarios || "").trim(), gerais = (a.horarios || []).join(" ");
+    const a = dados.ajustes || {}, proprios = (c.horarios || "").trim(), gerais = (a.horarios || []).join(" ");
     const selo = !c.auto ? '<span class="badge">automático desligado</span>'
       : a.pausado ? '<span class="badge aviso">automático pausado geral</span>'
       : `<span class="badge ok">automático · ${proprios ? proprios.split(" ").length + " horários próprios" : "horários gerais"}</span>`;
@@ -888,37 +1003,96 @@ function render() {
       </div>
       <div class="acoes"><button class="btn pri peq" onclick="salvarCanal(${c.id})">Salvar</button>
         <button class="btn perigo peq" onclick="removerCanal(${c.id})">Tirar do painel</button></div></div>`;
-  }).join("") || `<div class="card">${vazio("Nenhum canal.")}</div>`;
+  }
 
-  $("ch_auto").setAttribute("aria-checked", !a.pausado); $("ch_aprov").setAttribute("aria-checked", a.aprovacao);
-  $("botao_garimpo").disabled = a.garimpando;
-  mostrarGarimpo(a.garimpando);
-  if (document.activeElement !== $("horarios")) $("horarios").value = (a.horarios || []).join(" ");
-  if (document.activeElement !== $("expira_auto")) $("expira_auto").value = a.expira_auto_horas ?? "";
-  $("link_internet").innerHTML = a.painel_url
-    ? `Endereço de agora (muda quando o robô reinicia): <a href="${esc(a.painel_url)}" target="_blank" rel="noopener">${esc(a.painel_url)}</a>. No Telegram, use o botão “Painel” do robô.`
-    : "O painel está só no PC (o túnel da Cloudflare não está ligado).";
-  previa();
+// todos os canais numa lista só: os de conteúdo (central) e os de livros/ofertas (Amazon)
+const CONTEUDO = { ingles: { nome: "Inglês", emoji: "🇺🇸" }, renda: { nome: "Renda extra", emoji: "💰" } };
+let hubFiltro = "todos";
+try { hubFiltro = localStorage.getItem("hubFiltro") || "todos"; } catch (e) {}
+function semAcento(s) { return String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); }
+function listaCanais() {
+  const out = Object.keys(CONTEUDO).map(n => {
+    const g = CENTRAL[n], base = CONTEUDO[n];
+    let status = "", cor = "";
+    if (g) { status = `${g.fila.length} na fila · ${String(g.dias).replace(".", ",")} dias`; cor = g.fila.length <= 9 ? "aviso" : "ok"; }
+    return { chave: "c:" + n, tipo: "conteudo", nome: g ? g.nome : base.nome, sub: g ? g.canal : "posta sozinho pela nuvem",
+             emoji: g ? g.emoji : base.emoji, nicho: n, status, cor };
+  });
+  const a = (dados && dados.ajustes) || {};
+  ((dados && dados.canais) || []).forEach(c => {
+    const status = !c.auto ? "automático desligado" : a.pausado ? "automático pausado" : "automático ligado";
+    out.push({ chave: "b:" + c.id, tipo: "livros", nome: c.nome, sub: [c.chat, c.nicho].filter(Boolean).join(" · "),
+               inicial: (c.nome || "?").trim().charAt(0).toUpperCase(), nicho: c.nicho, status, cor: !c.auto ? "" : a.pausado ? "aviso" : "ok" });
+  });
+  return out.sort((x, y) => x.nome.localeCompare(y.nome, "pt-BR"));
 }
-$("escolha_nichos").addEventListener("click", e => {
-  const b = e.target.closest("[data-nicho]"); if (!b) return;
-  const ids = dados.canais.filter(c => (c.nicho || "").trim() === b.dataset.nicho).map(c => String(c.id));
-  document.querySelectorAll("#escolha_canais input").forEach(i => i.checked = ids.includes(i.value)); previa();
+function avatar(c) { return c.emoji ? `<span class="hub-av emo">${c.emoji}</span>` : `<span class="hub-av">${esc(c.inicial)}</span>`; }
+function filtrar(lista, q) {
+  q = semAcento(q).trim(); if (!q) return lista;
+  const ps = q.split(/\s+/), comeca = c => (" " + semAcento(c.nome)).includes(" " + ps[0]) ? 0 : 1;
+  return lista.filter(c => ps.every(p => semAcento(`${c.nome} ${c.sub} ${c.nicho}`).includes(p))).sort((x, y) => comeca(x) - comeca(y));
+}
+const GRUPOS = [["conteudo", "Conteúdo com IA"], ["livros", "Livros e ofertas"]];
+function renderHub() {
+  if (!$("hub_canais")) return;
+  const todos = listaCanais(), q = $("hub_busca").value;
+  const conta = k => todos.filter(c => k === "todos" || c.tipo === k).length;
+  $("hub_filtro").innerHTML = [["todos", "Todos"], ...GRUPOS].map(([k, r]) =>
+    `<button aria-pressed="${hubFiltro === k}" onclick="hubFiltro='${k}';try{localStorage.setItem('hubFiltro','${k}')}catch(e){};renderHub()">${r}<span class="n">${conta(k)}</span></button>`).join("");
+  $("hub_resumo").textContent = `${todos.length} ${todos.length === 1 ? "canal" : "canais"}. Toque num canal para ver a fila, os horários e os ajustes dele.`;
+  const vis = filtrar(todos.filter(c => hubFiltro === "todos" || c.tipo === hubFiltro), q);
+  const card = c => `<button class="hub-c" onclick="abrirCanal('${c.chave}')">${avatar(c)}<span class="hub-tx"><b>${esc(c.nome)}</b><small>${esc(c.sub)}</small>${c.status ? `<span class="badge ${c.cor}">${esc(c.status)}</span>` : ""}</span><svg class="i"><use href="#i-seta"/></svg></button>`;
+  if (!vis.length) { $("hub_canais").innerHTML = `<div class="card hub-vazio">${q ? `Nenhum canal com “${esc(q)}”.` : "Nenhum canal aqui ainda."}</div>`; return; }
+  $("hub_canais").innerHTML = GRUPOS.map(([k, r]) => {
+    const g = vis.filter(c => c.tipo === k); if (!g.length) return "";
+    return `${hubFiltro === "todos" ? `<div class="hub-grupo">${r} · ${g.length}</div>` : ""}<div class="hub-grade">${g.map(card).join("")}</div>`;
+  }).join("");
+}
+$("hub_busca").addEventListener("input", renderHub);
+$("hub_busca").addEventListener("keydown", e => { if (e.key === "Enter") { const b = document.querySelector("#hub_canais .hub-c"); if (b) b.click(); } });
+function buscarCentrais() { Object.keys(CONTEUDO).forEach(n => { if (!CENTRAL[n]) api(`/api/central/${n}`).then(g => { CENTRAL[n] = g; renderHub(); }).catch(() => {}); }); }
+function abrirCanal(chave) { canalAtual = chave; try { localStorage.setItem("canal", chave); } catch (e) {} fecharTroca(); ir("canal"); }
+function mostrarCanal() {
+  const c = listaCanais().find(x => x.chave === canalAtual);
+  if (!c) { if (canalAtual.startsWith("b:") && !dados) return; ir("canais"); return; }
+  $("troca_bt").innerHTML = `${avatar(c)}<span class="nm">${esc(c.nome)}</span><svg class="i"><use href="#i-baixo"/></svg>`;
+  $("troca_bt").setAttribute("aria-label", `Canal aberto: ${c.nome}. Trocar de canal`);
+  if (c.tipo === "conteudo") {
+    const n = canalAtual.slice(2);
+    if (!$(`central_${n}`)) $("canal_corpo").innerHTML = `<div id="central_${n}"></div>`;
+    carregarCentral(n);
+  } else {
+    const b = dados.canais.find(x => "b:" + x.id === canalAtual);
+    $("canal_corpo").innerHTML = `<div class="cx-cab"><div class="cx-av" style="background:linear-gradient(140deg,#2f86f6,#1a4fb8);color:#fff">${esc(c.inicial)}</div>
+      <div><h1>${esc(b.nome)}</h1><p>${esc(b.chat)} · livros e ofertas da Amazon</p></div></div>` + formCanal(b);
+  }
+}
+// trocar de canal sem voltar para a lista
+let trocaSel = 0;
+function abrirTroca() { $("troca").classList.remove("oculto"); $("troca_busca").value = ""; renderTroca(); setTimeout(() => $("troca_busca").focus(), 30); }
+function fecharTroca() { $("troca").classList.add("oculto"); }
+function renderTroca() {
+  const vis = filtrar(listaCanais(), $("troca_busca").value);
+  trocaSel = Math.max(0, Math.min(trocaSel, vis.length - 1));
+  $("troca_lista").innerHTML = vis.map((c, i) => `<button data-chave="${c.chave}" class="${i === trocaSel ? "sel" : ""}" aria-current="${c.chave === canalAtual}">${avatar(c)}<span class="hub-tx"><b>${esc(c.nome)}</b><small>${esc(c.sub)}</small></span></button>`).join("")
+    || `<p class="hub-vazio" style="margin:0">Nenhum canal com esse nome.</p>`;
+}
+$("troca_busca").addEventListener("input", () => { trocaSel = 0; renderTroca(); });
+$("troca_busca").addEventListener("keydown", e => {
+  const n = $("troca_lista").querySelectorAll("button").length;
+  if (e.key === "ArrowDown") { trocaSel = Math.min(n - 1, trocaSel + 1); renderTroca(); e.preventDefault(); }
+  else if (e.key === "ArrowUp") { trocaSel = Math.max(0, trocaSel - 1); renderTroca(); e.preventDefault(); }
+  else if (e.key === "Enter") { const b = $("troca_lista").querySelectorAll("button")[trocaSel]; if (b) abrirCanal(b.dataset.chave); }
 });
+$("troca_lista").addEventListener("click", e => { const b = e.target.closest("button[data-chave]"); if (b) abrirCanal(b.dataset.chave); });
+$("troca").addEventListener("click", e => { if (e.target === $("troca")) fecharTroca(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") { fecharTroca(); fecharMais(); } });
 
-
-function horaManaus(iso) { try { return new Date(iso).toLocaleString("pt-BR", { timeZone: "America/Manaus", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } }
-async function carregar() { try { dados = await api("/api/resumo"); $("app").classList.remove("oculto"); render(); const aba = document.querySelector("#abas [aria-current]"); if (aba && CENTRAL[aba.dataset.aba] !== undefined) carregarCentral(aba.dataset.aba); } catch (e) {} }
-
-// ---------- central dos canais de inglês e de renda extra (quem posta nos horários é a nuvem) ----------
-const CENTRAL = { ingles: null, renda: null };
-const TIPOS_IA = { ingles: [["lista", "Lista de frases"], ["aula", "Mini-aula"], ["palavra", "Expressão do dia"], ["quiz", "Quiz"]],
-                   renda: [["lista", "Dica em lista"], ["quiz", "Quiz"]] };
-const tipoIA = { ingles: "lista", renda: "lista" };
 async function carregarCentral(n) {
   if (!CENTRAL[n]) renderCentral(n);
   try { CENTRAL[n] = await api(`/api/central/${n}`); } catch (e) {}
   renderCentral(n);
+  if (abaAtual === "canal" && canalAtual === "c:" + n) { const c = listaCanais().find(x => x.chave === canalAtual); if (c) $("troca_bt").innerHTML = `${avatar(c)}<span class="nm">${esc(c.nome)}</span><svg class="i"><use href="#i-baixo"/></svg>`; }
 }
 function cxThumb(n, i) {
   if (i.tipo === "noticia") return '<div class="cx-thumb">📰</div>';
@@ -1041,7 +1215,7 @@ async function garimpar() {
   carregar();
 }
 
-try { const aba = localStorage.getItem("aba"); if (aba && document.querySelector(`[data-pagina="${aba}"]`)) ir(aba); } catch (e) {}
+try { const aba = localStorage.getItem("aba"); if (aba === "ingles" || aba === "renda" || (aba && document.querySelector(`[data-pagina="${aba}"]`))) ir(aba); } catch (e) {}
 previa(); entrarPeloTelegram().then(carregar);
 setInterval(() => { if (!document.hidden && dados) carregar(); }, 20000);
 setInterval(() => { if (!document.hidden && dados && garimpoDesde) carregar(); }, 5000);
