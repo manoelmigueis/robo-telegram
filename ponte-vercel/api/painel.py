@@ -32,7 +32,7 @@ from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 
 REPO = os.environ.get("REPO", "manoelmigueis/robo-telegram")
 PASTA = Path("/tmp/robo")
-ARQUIVOS = ["banco.py", "postador.py", "escritor.py", "ingles.py", "renda.py", "central.py", "painel.py",
+ARQUIVOS = ["banco.py", "metricas.py", "postador.py", "escritor.py", "ingles.py", "renda.py", "central.py", "painel.py",
             "painel.html", "config.json", "robo.db", "estado.json", "ingles/posts.json", "ingles/estado.json",
             "renda/posts.json", "renda/estado.json"]
 # chave pública do Telegram para conferir a assinatura do Mini App sem precisar do token do robô
