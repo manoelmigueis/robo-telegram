@@ -206,6 +206,9 @@ button.chip{font-family:var(--font)}
 .barra-h .trilho span{display:block;height:100%;background:var(--acento);border-radius:5px}
 .barra-h .valor{grid-column:2;font-size:12px;color:var(--muted)}
 .tabela{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}.tabela th,.tabela td{text-align:left;padding:4px 6px;border-bottom:1px solid var(--line)}
+.ini-canais{margin-bottom:16px}
+.cx-acoes{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 16px}
+.cx-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:16px}
 .kpi{background:var(--glass);border:1px solid var(--rim);box-shadow:var(--shadow);backdrop-filter:blur(18px);border-radius:var(--r-tile);padding:16px 18px;display:flex;gap:14px;align-items:center}
 .kpi .ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--acento-soft);color:var(--acento-ink);flex:none}
 .kpi .n{font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1.05}
@@ -493,6 +496,8 @@ button.chip{font-family:var(--font)}
           <button class="btn" id="hero_pausa" onclick="alternar('pausado')"></button>
         </div>
       </div>
+      <div class="card ini-canais"><div class="secao">Seus canais <a class="conta-s" href="#" onclick="ir('canais');return false">ver todos</a></div>
+        <p class="dica" style="margin-top:0">Toque num canal para criar, agendar e ver os posts só dele.</p><div class="hub-grade" id="ini_canais"></div></div>
       <div class="kpis">
         <div class="kpi"><div class="ic"><svg class="i"><use href="#i-fila"/></svg></div><div><div class="n" id="k_fila">0</div><div class="l" id="k_fila_l">na fila</div></div></div>
         <div class="kpi"><div class="ic"><svg class="i"><use href="#i-agenda"/></svg></div><div><div class="n" id="k_agenda">0</div><div class="l">agendados</div></div></div>
@@ -500,7 +505,7 @@ button.chip{font-family:var(--font)}
         <div class="kpi"><div class="ic"><svg class="i"><use href="#i-check"/></svg></div><div><div class="n" id="k_postados">0</div><div class="l">já postados</div></div></div>
       </div>
       <div class="grade g2">
-        <div class="card"><div class="secao">Próximos da fila <a class="conta-s" href="#" onclick="ir('agenda');return false">ver tudo</a></div><div class="linha-garimpo"><button class="btn pri peq bt-garimpo" onclick="garimpar()"><svg class="i"><use href="#i-picareta"/></svg>Garimpar novos</button></div><div class="garimpo-barra oculto"><div class="gb-t"><b>⛏ Garimpando livros e ofertas na Amazon…</b><span class="gb-tempo"></span></div><div class="gb-trilho"><div class="gb-enche"></div></div></div><div id="ini_fila"></div></div>
+        <div class="card"><div class="secao">Próximos da fila de livros e ofertas <a class="conta-s" href="#" onclick="ir('agenda');return false">ver tudo</a></div><div class="linha-garimpo"><button class="btn pri peq bt-garimpo" onclick="garimpar()"><svg class="i"><use href="#i-picareta"/></svg>Garimpar novos</button></div><div class="garimpo-barra oculto"><div class="gb-t"><b>⛏ Garimpando livros e ofertas na Amazon…</b><span class="gb-tempo"></span></div><div class="gb-trilho"><div class="gb-enche"></div></div></div><div id="ini_fila"></div></div>
         <div class="card"><div class="secao">Postados há pouco <a class="conta-s" href="#" onclick="ir('noar');return false">ver no ar</a></div><div id="ini_hist"></div></div>
       </div>
     </section>
@@ -988,7 +993,7 @@ function render() {
       <div class="botoes"><a class="btn peq" target="_blank" rel="noopener" href="${linkMsg(e)}">Ver no Telegram</a>
         <button class="btn peq perigo" onclick="apagarEnvio(${e.id})">${ico("lixo")}Apagar</button></div></div></div>`).join("") || vazio("Nenhum post do robô no ar.");
 
-  renderHub(); if (abaAtual === "canais") buscarCentrais();
+  renderHub(); buscarCentrais();
   if (abaAtual === "canal" && canalAtual.startsWith("b:") && !document.querySelector("#canal_corpo :focus")) mostrarCanal();
 
   $("ch_auto").setAttribute("aria-checked", !a.pausado); $("ch_aprov").setAttribute("aria-checked", a.aprovacao);
@@ -1030,8 +1035,8 @@ function formCanal(c) {
         <div><label class="rot">@ na assinatura</label><input name="assinatura" value="${esc(c.assinatura)}" placeholder="${esc(c.chat.startsWith("@") ? c.chat : "@seucanal")}"></div>
       </div>
       <label class="rot">Hashtags próprias</label><input name="tags" value="${esc(c.tags)}" placeholder="#tecnologia #ofertas">
-      <div class="fonte" style="margin-top:16px">
-        <div class="secao" style="margin-bottom:8px">Livros e ofertas da Amazon neste canal</div>
+      <details class="fonte" style="margin-top:16px" ${amazon(c) ? "open" : ""}>
+        <summary class="secao" style="margin-bottom:8px;cursor:pointer">Livros e ofertas da Amazon neste canal${amazon(c) ? "" : " (desligado)"}</summary>
         <p class="dica" style="margin-top:0">Só ligue em canal de livros ou de ofertas. Canal de outro tema (inglês, cursos...) deixe desligado.</p>
         <div class="chips">
           <label class="chip"><input type="checkbox" name="auto" ${c.auto ? "checked" : ""}><span class="ck"></span>Receber da fila sozinho</label>
@@ -1041,7 +1046,7 @@ function formCanal(c) {
         <label class="rot">Horários deste canal</label>
         <input name="horarios" value="${esc(proprios)}" placeholder="ex.: 09:00 13:00 19:00">
         <p class="dica" style="margin-bottom:0">Um post em cada horário. Em branco, segue os horários gerais de Ajustes${gerais ? ` (${esc(gerais)})` : ""}. Também saem aqui os posts que você manda para a fila com este canal marcado.</p>
-      </div>
+      </details>
       <div class="acoes"><button class="btn pri peq" onclick="salvarCanal(${c.id})">Salvar</button>
         <button class="btn perigo peq" onclick="removerCanal(${c.id})">Tirar do painel</button></div></div>`;
   }
@@ -1055,15 +1060,17 @@ function listaCanais() {
   const out = Object.keys(CONTEUDO).map(n => {
     const g = CENTRAL[n], base = CONTEUDO[n];
     let status = "", cor = "";
-    if (g) { status = `${g.fila.length} na fila · ${String(g.dias).replace(".", ",")} dias`; cor = g.fila.length <= 9 ? "aviso" : "ok"; }
+    if (g && g.fila) { status = `${g.fila.length} na fila · ${String(g.dias).replace(".", ",")} dias`; cor = g.fila.length <= 9 ? "aviso" : "ok"; }
     return { chave: "c:" + n, tipo: "conteudo", nome: g ? g.nome : base.nome, sub: g ? g.canal : "posta sozinho pela nuvem",
              emoji: g ? g.emoji : base.emoji, nicho: n, status, cor };
   });
   const a = (dados && dados.ajustes) || {};
   ((dados && dados.canais) || []).forEach(c => {
     const status = !c.auto ? "automático desligado" : a.pausado ? "automático pausado" : "automático ligado";
-    out.push({ chave: "b:" + c.id, tipo: "livros", nome: c.nome, sub: [c.chat, c.nicho].filter(Boolean).join(" · "),
-               inicial: (c.nome || "?").trim().charAt(0).toUpperCase(), nicho: c.nicho, status, cor: !c.auto ? "" : a.pausado ? "aviso" : "ok" });
+    const am = amazon(c), nf = postsDoCanal(c).fila.length;
+    out.push({ chave: "b:" + c.id, tipo: am ? "livros" : "outros", nome: c.nome, sub: [c.chat, c.nicho].filter(Boolean).join(" · "),
+               inicial: ((c.nome || "").replace(/^[^\p{L}\p{N}]+/u, "") || "?").charAt(0).toUpperCase(), nicho: c.nicho,
+               status: am ? status : nf ? `${nf} na fila` : "você cria os posts", cor: am ? (!c.auto ? "" : a.pausado ? "aviso" : "ok") : "" });
   });
   return out.sort((x, y) => x.nome.localeCompare(y.nome, "pt-BR"));
 }
@@ -1073,8 +1080,13 @@ function filtrar(lista, q) {
   const ps = q.split(/\s+/), comeca = c => (" " + semAcento(c.nome)).includes(" " + ps[0]) ? 0 : 1;
   return lista.filter(c => ps.every(p => semAcento(`${c.nome} ${c.sub} ${c.nicho}`).includes(p))).sort((x, y) => comeca(x) - comeca(y));
 }
-const GRUPOS = [["conteudo", "Conteúdo com IA"], ["livros", "Livros e ofertas"]];
+const GRUPOS = [["conteudo", "Conteúdo com IA"], ["livros", "Livros e ofertas"], ["outros", "Outros canais"]];
+function renderIniCanais() {
+  if (!$("ini_canais")) return;
+  $("ini_canais").innerHTML = listaCanais().map(c => `<button class="hub-c" onclick="abrirCanal('${c.chave}')">${avatar(c)}<span class="hub-tx"><b>${esc(c.nome)}</b><small>${esc(c.sub)}</small>${c.status ? `<span class="badge ${c.cor}">${esc(c.status)}</span>` : ""}</span><svg class="i"><use href="#i-seta"/></svg></button>`).join("") || vazio("Adicione um canal em Canais.");
+}
 function renderHub() {
+  renderIniCanais();
   if (!$("hub_canais")) return;
   const todos = listaCanais(), q = $("hub_busca").value;
   const conta = k => todos.filter(c => k === "todos" || c.tipo === k).length;
@@ -1091,7 +1103,7 @@ function renderHub() {
 }
 $("hub_busca").addEventListener("input", renderHub);
 $("hub_busca").addEventListener("keydown", e => { if (e.key === "Enter") { const b = document.querySelector("#hub_canais .hub-c"); if (b) b.click(); } });
-function buscarCentrais() { Object.keys(CONTEUDO).forEach(n => { if (!CENTRAL[n]) api(`/api/central/${n}`).then(g => { CENTRAL[n] = g; renderHub(); }).catch(() => {}); }); }
+function buscarCentrais() { Object.keys(CONTEUDO).forEach(n => { if (!CENTRAL[n]) api(`/api/central/${n}`).then(g => { if (g && Array.isArray(g.fila)) { CENTRAL[n] = g; renderHub(); } }).catch(() => {}); }); }
 function abrirCanal(chave) { canalAtual = chave; try { localStorage.setItem("canal", chave); } catch (e) {} fecharTroca(); ir("canal"); }
 function mostrarCanal() {
   const c = listaCanais().find(x => x.chave === canalAtual);
@@ -1104,9 +1116,55 @@ function mostrarCanal() {
     carregarCentral(n);
   } else {
     const b = dados.canais.find(x => "b:" + x.id === canalAtual);
-    $("canal_corpo").innerHTML = `<div class="cx-cab"><div class="cx-av" style="background:linear-gradient(140deg,#2f86f6,#1a4fb8);color:#fff">${esc(c.inicial)}</div>
-      <div><h1>${esc(b.nome)}</h1><p>${esc(b.chat)} · livros e ofertas da Amazon</p></div></div>` + formCanal(b);
+    $("canal_corpo").innerHTML = paginaCanal(b, c);
   }
+}
+// posts de um canal: os marcados para ele, e os da fila geral se ele recebe livros/ofertas sozinho
+function amazon(c) { return !!(c && (c.recebe || "").trim()); }
+function doCanal(p, c) {
+  const ids = p.canais;
+  if (ids && ids.length) return ids.map(String).includes(String(c.id));
+  return !!c.auto && (c.recebe || "").split(",").includes(p.origem);
+}
+function postsDoCanal(c) {
+  if (!dados) return { fila: [], agendados: [], no_ar: [] };
+  return { fila: dados.fila.filter(p => doCanal(p, c)), agendados: dados.agendados.filter(p => doCanal(p, c)),
+           no_ar: dados.no_ar.filter(e => String(e.canal_id) === String(c.id)) };
+}
+function paginaCanal(b, c) {
+  const am = amazon(b), ps = postsDoCanal(b);
+  const cl = ((dados.desempenho || {}).por_canal || []).find(x => x.chat === b.chat || x.nome === b.nome);
+  const tile = (n, l) => `<div class="kpi"><div><div class="n">${n}</div><div class="l">${l}</div></div></div>`;
+  const noAr = ps.no_ar.slice(0, 6).map(e => `<div class="item"><div class="capa">${ico(e.origem === "oferta" ? "carrinho" : e.origem === "livro" ? "folha" : "criar")}</div><div class="corpo">
+      <div class="tit">${esc(e.titulo || "(sem título)")}</div>
+      <div class="meta"><span>${dataBR(e.enviado_em)}</span><span>👆 ${e.cliques || 0}</span><span>❤️ ${e.reacoes || 0}</span></div>
+      <div class="botoes"><a class="btn peq" href="${esc(linkMsg(e))}" target="_blank" rel="noopener">Abrir no Telegram</a></div></div></div>`).join("");
+  return `<div class="cx-cab"><div class="cx-av" style="background:linear-gradient(140deg,#2f86f6,#1a4fb8);color:#fff">${esc(c.inicial)}</div>
+      <div><h1>${esc(b.nome)}</h1><p>${esc(b.chat)} · ${am ? "livros e ofertas da Amazon" : esc(b.nicho || "posts feitos por você")}</p></div></div>
+    <div class="cx-acoes">
+      <button class="btn acento" onclick="criarPara(${b.id}, 'branco')">${ico("criar")}Escrever post</button>
+      <button class="btn" onclick="criarPara(${b.id}, 'ia')">${ico("brilho")}Criar com IA</button>
+      <button class="btn" onclick="criarPara(${b.id}, 'modelos')">${ico("modelo")}Usar um modelo</button>
+      ${am ? `<button class="btn" onclick="criarPara(${b.id}, 'amazon')">${ico("carrinho")}Link da Amazon</button>` : ""}
+    </div>
+    <div class="cx-tiles">${tile(ps.fila.length, "na fila")}${tile(ps.agendados.length, "agendados")}${tile(ps.no_ar.length, "no ar agora")}${tile(cl ? cl.cliques : 0, "cliques (7 dias)")}</div>
+    <div class="grade g2">
+      <div class="card"><div class="secao">Agendados</div>${ps.agendados.map(p => itemPost(p, acoesPost(p))).join("") || vazio("Nada agendado. Use “Escrever post” e escolha Agendar.")}</div>
+      <div class="card"><div class="secao">Próximos da fila${ps.fila.length > 5 ? ` <a class="conta-s" href="#" onclick="ir('agenda');return false">ver todos (${ps.fila.length})</a>` : ""}</div>${ps.fila.slice(0, 5).map(p => itemPost(p, acoesPost(p))).join("") || vazio(am ? "Fila vazia." : "Nada na fila. Ao criar, escolha “Próximo horário livre”.")}</div>
+    </div>
+    <div class="card" style="margin-top:16px"><div class="secao">No ar agora${ps.no_ar.length > 6 ? ` <a class="conta-s" href="#" onclick="ir('noar');return false">ver todos (${ps.no_ar.length})</a>` : ""}</div>${noAr || vazio("Nenhum post no ar neste canal.")}</div>
+    <div class="secao" style="margin-top:20px">Ajustes do canal</div>` + formCanal(b);
+}
+// abre Criar já com só este canal marcado e o jeito de começar escolhido
+function criarPara(id, fonte) {
+  ir("criar");
+  setTimeout(() => {
+    document.querySelectorAll("#escolha_canais input").forEach(i => i.checked = i.value === String(id));
+    const bt = document.querySelector(`[data-fonte="${fonte}"]`); if (bt) bt.click();
+    const c = dados.canais.find(x => String(x.id) === String(id));
+    if (fonte === "ia" && c && $("ia_nicho")) $("ia_nicho").value = c.nicho || "";
+    previa(); window.scrollTo({ top: 0 });
+  }, 60);
 }
 // trocar de canal sem voltar para a lista
 let trocaSel = 0;
