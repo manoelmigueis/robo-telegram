@@ -150,9 +150,21 @@ def main():
     if len(sys.argv) > 1 and sys.argv[1] == "responder":
         return responder_painel(carga["painel"]["id"])
     if carga.get("painel"):
-        return tratar_painel(carga)
-    preparar_postador()
-    tratar_update(carga["update"])
+        tratar_painel(carga)
+    else:
+        preparar_postador()
+        tratar_update(carga["update"])
+    relogio_de_carona()
+
+
+def relogio_de_carona():
+    """O GitHub atrasa as rodadas marcadas. Toda vez que você usa o painel ou o bot,
+    aproveita a rodada para soltar agendados e tirar do ar o que venceu."""
+    try:
+        import nuvem
+        nuvem.relogio()
+    except Exception as x:
+        print(f"[relógio] {x}")
 
 
 if __name__ == "__main__":
