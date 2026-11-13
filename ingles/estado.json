@@ -9,10 +9,11 @@
     "005-in-on-at",
     "006-quiz-pretend",
     "009-common-mistakes-2",
-    "010-job-interview"
+    "010-job-interview",
+    "012-american-slang"
   ],
-  "contador": 10,
-  "ultimo": "2026-11-13T02:39:49+00:00",
+  "contador": 11,
+  "ultimo": "2026-11-13T02:39:57+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -24,7 +25,8 @@
     "005-in-on-at": "2026-11-13T01:58:38+00:00",
     "006-quiz-pretend": "2026-11-13T02:34:14+00:00",
     "009-common-mistakes-2": "2026-11-13T02:34:25+00:00",
-    "010-job-interview": "2026-11-13T02:39:49+00:00"
+    "010-job-interview": "2026-11-13T02:39:49+00:00",
+    "012-american-slang": "2026-11-13T02:39:57+00:00"
   },
   "mensagens": {
     "008-phone-conversation": [
@@ -44,6 +46,9 @@
     ],
     "010-job-interview": [
       8384
+    ],
+    "012-american-slang": [
+      8385
     ]
   }
 }
