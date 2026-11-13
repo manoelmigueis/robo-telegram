@@ -12,15 +12,16 @@
     "010-comida",
     "012-organizar",
     "013-aulas",
-    "016-onde-curriculo"
+    "016-onde-curriculo",
+    "017-cursos-profissionalizantes"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
     "cisco abre inscrições para cursos gratuitos em ia inglês e alfabetização digital",
     "ministério da cultura oferece curso de extensão on line e gratuito em cultura di"
   ],
-  "contador": 13,
-  "ultimo": "2026-11-13T02:40:40+00:00",
+  "contador": 14,
+  "ultimo": "2026-11-13T02:40:42+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -30,7 +31,8 @@
     "010-comida": "2026-11-13T01:29:11+00:00",
     "012-organizar": "2026-11-13T02:34:57+00:00",
     "013-aulas": "2026-11-13T02:40:30+00:00",
-    "016-onde-curriculo": "2026-11-13T02:40:40+00:00"
+    "016-onde-curriculo": "2026-11-13T02:40:40+00:00",
+    "017-cursos-profissionalizantes": "2026-11-13T02:40:42+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -47,6 +49,9 @@
     ],
     "016-onde-curriculo": [
       8774
+    ],
+    "017-cursos-profissionalizantes": [
+      8775
     ]
   }
 }
