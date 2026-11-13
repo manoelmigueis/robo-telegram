@@ -129,16 +129,69 @@ def coletar():
 
 
 # ---------- números para o painel ----------
-def resumo(dias=7):
+TIPOS = {"livro": "Livros", "oferta": "Ofertas", "manual": "Escritos por você", "ingles": "Inglês", "renda": "Renda"}
+
+
+def _desde(dias):
     from datetime import timedelta
-    desde = (datetime.now(banco.FUSO) - timedelta(days=dias)).strftime("%Y-%m-%d %H:%M")
-    cliques = banco.sql("SELECT COUNT(*) n FROM eventos WHERE tipo='clique' AND quando>=?", (desde,), um=True)["n"]
-    reacoes = banco.sql("SELECT COALESCE(SUM(reacoes),0) n FROM envios WHERE enviado_em>=?", (desde,), um=True)["n"]
+    return (datetime.now(banco.FUSO) - timedelta(days=dias)).strftime("%Y-%m-%d %H:%M")
+
+
+def _semana(de, ate):
+    """Cliques, reações e posts entre 'de' dias atrás e 'ate' dias atrás."""
+    a, b = _desde(de), (_desde(ate) if ate else "9999")
+    cli = banco.sql("SELECT COUNT(*) n FROM eventos WHERE tipo='clique' AND quando>=? AND quando<?", (a, b), um=True)["n"]
+    env = banco.sql("SELECT COUNT(*) n, COALESCE(SUM(reacoes),0) r FROM envios WHERE enviado_em>=? AND enviado_em<?",
+                    (a, b), um=True)
+    return {"cliques": cli, "reacoes": env["r"], "posts": env["n"]}
+
+
+def _conclusao(por_hora, por_tipo):
+    """O que funcionou melhor, em palavras. Só fala quando já tem post suficiente para comparar."""
+    frases = []
+    horas = [h for h in por_hora if h["posts"] >= 3 and (h["cliques"] + h["reacoes"]) > 0]
+    if len(horas) >= 2:
+        h = max(horas, key=lambda x: x["media"])
+        frases.append(f"Os posts das {int(h['hora'])}h são os que mais recebem cliques e reações.")
+    tipos = [t for t in por_tipo if t["posts"] >= 3 and (t["cliques"] + t["reacoes"]) > 0]
+    if len(tipos) >= 2:
+        t = max(tipos, key=lambda x: x["media"])
+        frases.append(f"O tipo de post que mais funciona é: {t['nome']}.")
+    return " ".join(frases) or None
+
+
+def resumo(dias=30):
+    from datetime import timedelta
+    desde = _desde(dias)
+    hoje = datetime.now(banco.FUSO).date()
+    datas = [(hoje - timedelta(days=n)).isoformat() for n in range(dias - 1, -1, -1)]
+    cli_dia = {r["d"]: r["n"] for r in banco.sql(
+        "SELECT substr(quando,1,10) d, COUNT(*) n FROM eventos WHERE tipo='clique' AND quando>=? GROUP BY d", (desde,))}
+    rea_dia = {r["d"]: r["n"] for r in banco.sql(
+        "SELECT substr(enviado_em,1,10) d, COALESCE(SUM(reacoes),0) n FROM envios WHERE enviado_em>=? GROUP BY d", (desde,))}
+    por_dia = [{"dia": d, "cliques": cli_dia.get(d, 0), "reacoes": rea_dia.get(d, 0)} for d in datas]
+
+    def com_media(linhas):
+        for l in linhas:
+            l["media"] = round((l["cliques"] + l["reacoes"]) / l["posts"], 2) if l["posts"] else 0
+        return linhas
+
+    por_hora = com_media(banco.sql(
+        "SELECT substr(enviado_em,12,2) hora, COUNT(*) posts, COALESCE(SUM(cliques),0) cliques, "
+        "COALESCE(SUM(reacoes),0) reacoes FROM envios WHERE enviado_em>=? GROUP BY hora ORDER BY hora", (desde,)))
+    por_tipo = com_media(banco.sql(
+        "SELECT p.origem tipo, COUNT(*) posts, COALESCE(SUM(v.cliques),0) cliques, COALESCE(SUM(v.reacoes),0) reacoes "
+        "FROM envios v JOIN posts p ON p.id=v.post_id WHERE v.enviado_em>=? GROUP BY p.origem", (desde,)))
+    for t in por_tipo:
+        t["nome"] = TIPOS.get(t["tipo"], t["tipo"])
     por_canal = banco.sql(
         "SELECT c.nome, c.chat, COUNT(e.nome) cliques FROM eventos e JOIN canais c ON c.id=e.canal_id "
-        "WHERE e.tipo='clique' AND e.quando>=? GROUP BY c.id ORDER BY cliques DESC", (desde,))
+        "WHERE e.tipo='clique' AND e.quando>=? GROUP BY c.id ORDER BY cliques DESC", (_desde(7),))
     melhores = banco.sql(
         "SELECT p.id, p.titulo, p.origem, SUM(COALESCE(v.cliques,0)) cliques, SUM(COALESCE(v.reacoes,0)) reacoes "
         "FROM envios v JOIN posts p ON p.id=v.post_id WHERE v.enviado_em>=? "
-        "GROUP BY p.id HAVING cliques>0 OR reacoes>0 ORDER BY cliques DESC, reacoes DESC LIMIT 5", (desde,))
-    return {"dias": dias, "cliques": cliques, "reacoes": reacoes, "por_canal": por_canal, "melhores": melhores}
+        "GROUP BY p.id HAVING cliques>0 OR reacoes>0 ORDER BY cliques DESC, reacoes DESC LIMIT 5", (_desde(7),))
+    esta, antes = _semana(7, 0), _semana(14, 7)
+    return {"dias": dias, "cliques": esta["cliques"], "reacoes": esta["reacoes"], "semana": esta, "semana_antes": antes,
+            "por_dia": por_dia, "por_hora": por_hora, "por_tipo": por_tipo, "por_canal": por_canal,
+            "melhores": melhores, "conclusao": _conclusao(por_hora, por_tipo)}

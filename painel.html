@@ -195,6 +195,17 @@ button.chip{font-family:var(--font)}
 .hero .btn:hover{background:rgba(255,255,255,.2)}
 .hero .btn.acento{background:#2f86f6;border-color:#2f86f6;color:#fff}
 .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}
+.graf{width:100%;height:auto;display:block;overflow:visible}
+.graf text{font-size:12px;fill:var(--faint);font-family:var(--font)}
+.graf .eixo{stroke:var(--line-2);stroke-width:1}.graf .grade{stroke:var(--line-2);stroke-dasharray:3 4}
+.graf .col:hover path{opacity:.75}
+@media (max-width:600px){.graf text{font-size:19px}}
+#dica_graf{position:fixed;display:none;z-index:99;background:var(--glass-3);color:var(--ink);border:1px solid var(--line-2);border-radius:10px;padding:6px 10px;font-size:13px;box-shadow:var(--shadow-pop);pointer-events:none}
+.barra-h{display:grid;grid-template-columns:130px 1fr;gap:4px 10px;align-items:center;margin:8px 0}
+.barra-h .nome{font-weight:600}.barra-h .trilho{height:10px;border-radius:5px;background:var(--soft);overflow:hidden}
+.barra-h .trilho span{display:block;height:100%;background:var(--acento);border-radius:5px}
+.barra-h .valor{grid-column:2;font-size:12px;color:var(--muted)}
+.tabela{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}.tabela th,.tabela td{text-align:left;padding:4px 6px;border-bottom:1px solid var(--line)}
 .kpi{background:var(--glass);border:1px solid var(--rim);box-shadow:var(--shadow);backdrop-filter:blur(18px);border-radius:var(--r-tile);padding:16px 18px;display:flex;gap:14px;align-items:center}
 .kpi .ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--acento-soft);color:var(--acento-ink);flex:none}
 .kpi .n{font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1.05}
@@ -620,7 +631,7 @@ button.chip{font-family:var(--font)}
     <!-- NO AR -->
     <section data-pagina="noar" class="oculto">
       <div class="titulo"><div><h1>No ar</h1><p>Os posts do robô que estão nos canais agora. Dá para apagar qualquer um.</p></div></div>
-      <div class="card"><div class="secao">Desempenho dos últimos 7 dias</div><div id="desempenho"></div></div>
+      <div class="card"><div class="secao">Desempenho</div><div id="desempenho"></div></div>
       <div class="card"><div class="secao">Posts em vários canais <span class="conta-s" id="c_lotes"></span></div>
         <p class="dica" style="margin-top:0">Cada post que você escreveu aparece uma vez só, mesmo estando em vários canais. Editar, fixar ou apagar aqui vale para todos os canais dele de uma vez.</p>
         <div id="lista_lotes"></div>
@@ -1225,15 +1236,78 @@ async function pausaTotal(sim) {
   try { await api("/api/ajustes", { pausa_total: sim }); } catch (e) {} carregar();
 }
 const loteAberto = new Set();
+function comparar(agora, antes) {
+  if (agora === antes) return agora ? "igual à semana passada" : "nada ainda";
+  return agora > antes ? `▲ subiu: eram ${antes} na semana passada` : `▼ caiu: eram ${antes} na semana passada`;
+}
+
+// gráfico de barras simples (uma série só): colunas finas, ponta arredondada, valor ao passar o dedo
+function barras(dados, rotulo, valor, dica, cada) {
+  const L = 640, A = 150, base = A - 22, topo = 14, n = dados.length || 1;
+  const max = Math.max(1, ...dados.map(valor)), passo = L / n, larg = Math.max(3, Math.min(22, passo - 2));
+  const y = v => base - (base - topo) * v / max;
+  const cols = dados.map((d, i) => {
+    const v = valor(d), x = i * passo + (passo - larg) / 2, yt = y(v), r = Math.min(4, larg / 2, base - yt);
+    const barra = v > 0 ? `<path d="M${x},${base} V${yt + r} Q${x},${yt} ${x + r},${yt} H${x + larg - r} Q${x + larg},${yt} ${x + larg},${yt + r} V${base} Z" fill="var(--acento)"/>` : "";
+    const txt = i % cada === 0 || i === n - 1 ? `<text x="${x + larg / 2}" y="${A - 6}" text-anchor="middle">${esc(rotulo(d))}</text>` : "";
+    return `<g class="col" data-dica="${esc(dica(d))}"><rect x="${i * passo}" y="0" width="${passo}" height="${base}" fill="transparent"/>${barra}${txt}</g>`;
+  }).join("");
+  const maxTxt = Number.isInteger(max) ? max : max.toFixed(1).replace(".", ",");
+  return `<svg class="graf" viewBox="0 0 ${L} ${A}" role="img">
+    <line x1="0" x2="${L}" y1="${base}" y2="${base}" class="eixo"/>
+    <line x1="0" x2="${L}" y1="${y(max)}" y2="${y(max)}" class="grade"/>
+    <text x="2" y="${y(max) - 4}">${maxTxt}</text>${cols}</svg>`;
+}
+
+function dicaGraficos(el) {
+  let d = document.getElementById("dica_graf");
+  if (!d) { d = document.createElement("div"); d.id = "dica_graf"; document.body.appendChild(d); }
+  el.querySelectorAll(".col").forEach(c => {
+    const mostra = ev => { d.textContent = c.dataset.dica; d.style.display = "block";
+      const p = ev.touches ? ev.touches[0] : ev; d.style.left = Math.min(innerWidth - 220, p.clientX + 12) + "px"; d.style.top = (p.clientY - 44) + "px"; };
+    c.addEventListener("mousemove", mostra); c.addEventListener("touchstart", mostra, {passive: true});
+    c.addEventListener("mouseleave", () => d.style.display = "none");
+  });
+}
+
 function renderDesempenho(m) {
-  if (!m) { $("desempenho").innerHTML = vazio("Sem números ainda."); return; }
+  const el = $("desempenho");
+  if (!m || !m.por_dia) { el.innerHTML = vazio("Sem números ainda."); return; }
+  const s = m.semana, a = m.semana_antes, diaBR = d => d.slice(8, 10) + "/" + d.slice(5, 7);
+  const tile = (n, l, c) => `<div class="kpi"><div><div class="n">${n}</div><div class="l">${l}</div><div class="l" style="font-size:12px">${c}</div></div></div>`;
+  const vazioTudo = !m.por_dia.some(d => d.cliques || d.reacoes);
+  const horas = (m.por_hora || []).map(h => ({...h, h: +h.hora}));
+  const tipos = (m.por_tipo || []).slice().sort((x, y) => y.media - x.media);
+  const maxT = Math.max(0.01, ...tipos.map(t => t.media));
   const canais = (m.por_canal || []).map(c => `<span class="badge azul">${esc(c.nome || c.chat)}: ${c.cliques} cliques</span>`).join(" ");
   const top = (m.melhores || []).map((p, i) => `<div class="item"><div class="capa">${i + 1}º</div><div class="corpo">
       <div class="tit">${esc(p.titulo || "post #" + p.id)}</div>
       <div class="meta"><span>👆 ${p.cliques} cliques</span><span>❤️ ${p.reacoes} reações</span></div></div></div>`).join("");
-  $("desempenho").innerHTML = `<div class="meta" style="font-size:1.05em;margin-bottom:8px"><span>👆 <b>${m.cliques}</b> cliques nos links</span><span>❤️ <b>${m.reacoes}</b> reações</span></div>
-    ${canais ? `<div class="meta" style="flex-wrap:wrap;margin-bottom:8px">${canais}</div>` : ""}
-    ${top ? `<div class="secao" style="margin-top:6px">Posts que mais funcionaram</div>${top}` : `<p class="dica">Os números começam a aparecer quando o pessoal clicar nos links e reagir aos posts novos.</p>`}`;
+  el.innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:12px">
+      ${tile("👆 " + s.cliques, "cliques nos links (7 dias)", comparar(s.cliques, a.cliques))}
+      ${tile("❤️ " + s.reacoes, "reações (7 dias)", comparar(s.reacoes, a.reacoes))}
+      ${tile("📤 " + s.posts, "posts enviados (7 dias)", comparar(s.posts, a.posts))}
+    </div>
+    ${m.conclusao ? `<p class="dica" style="font-size:15px;color:var(--ink)">💡 ${esc(m.conclusao)}</p>` : ""}
+    ${vazioTudo ? `<p class="dica">Os gráficos se enchem quando o pessoal clicar nos links e reagir aos posts novos.</p>` : ""}
+    <div class="secao" style="margin-top:10px">Cliques por dia (30 dias)</div>
+    ${barras(m.por_dia, d => diaBR(d.dia), d => d.cliques, d => `${diaBR(d.dia)}: ${d.cliques} cliques`, 5)}
+    <div class="secao" style="margin-top:10px">Reações nos posts de cada dia (30 dias)</div>
+    ${barras(m.por_dia, d => diaBR(d.dia), d => d.reacoes, d => `${diaBR(d.dia)}: ${d.reacoes} reações`, 5)}
+    ${horas.length ? `<div class="secao" style="margin-top:10px">Melhor horário para postar</div>
+    <p class="dica" style="margin-top:0">Quanto mais alta a coluna, mais cliques e reações cada post daquele horário recebe, em média.</p>
+    ${barras(horas, h => h.h + "h", h => h.media, h => `${h.h}h: ${h.posts} posts, ${h.cliques} cliques e ${h.reacoes} reações`, horas.length > 12 ? 2 : 1)}` : ""}
+    ${tipos.length ? `<div class="secao" style="margin-top:10px">Que tipo de post funciona mais</div>
+    ${tipos.map(t => `<div class="barra-h" title="${t.posts} posts, ${t.cliques} cliques, ${t.reacoes} reações">
+      <span class="nome">${esc(t.nome)}</span><span class="trilho"><span style="width:${Math.max(2, 100 * t.media / maxT)}%"></span></span>
+      <span class="valor">${t.posts} posts · 👆 ${t.cliques} · ❤️ ${t.reacoes}</span></div>`).join("")}` : ""}
+    ${canais ? `<div class="secao" style="margin-top:10px">Cliques por canal (7 dias)</div><div class="meta" style="flex-wrap:wrap">${canais}</div>` : ""}
+    ${top ? `<div class="secao" style="margin-top:10px">Posts que mais funcionaram (7 dias)</div>${top}` : ""}
+    <details style="margin-top:10px"><summary class="dica">Ver os números em tabela</summary>
+      <table class="tabela"><tr><th>Dia</th><th>Cliques</th><th>Reações</th></tr>
+      ${m.por_dia.slice().reverse().map(d => `<tr><td>${diaBR(d.dia)}</td><td>${d.cliques}</td><td>${d.reacoes}</td></tr>`).join("")}</table></details>`;
+  dicaGraficos(el);
 }
 
 function renderLotes() {
