@@ -103,6 +103,33 @@ async def login_telegram(request: Request):
     return _cookie(JSONResponse({"ok": True, "token": TOKEN}), request)
 
 
+def lotes():
+    """Posts escritos por você (um texto em vários canais): os agendados e os que estão no ar."""
+    nomes = {c["id"]: c["nome"] for c in banco.canais()}
+    saida = []
+    for p in banco.posts(limite=200):
+        if p["origem"] != "manual" or p["status"] not in ("agendado", "postado", "publicando", "erro"):
+            continue
+        no_ar = banco.envios_do_post(p["id"])
+        if p["status"] != "agendado" and not no_ar:
+            continue
+        botao = (p["botoes"] or [[{}]])[0][0] if p["botoes"] else {}
+        saida.append({
+            "id": p["id"], "titulo": p["titulo"], "status": p["status"], "erro": p.get("erro"),
+            "agendado_para": p["agendado_para"], "saida_em": (p["dados"] or {}).get("saida_em")
+            or (no_ar[0]["expira_em"] if no_ar else None),
+            "fixar": bool((p["dados"] or {}).get("fixar")), "fixados": sum(1 for e in no_ar if e.get("fixado")),
+            "texto": para_editor(p["legenda"]), "botao_texto": botao.get("text", ""), "botao_url": botao.get("url", ""),
+            "foto": p["foto"] if str(p["foto"] or "").startswith("http") else "",
+            "canais": [e["canal_nome"] or e["chat"] for e in no_ar] if no_ar
+            else [nomes.get(c, f"canal {c}") for c in (p["canais"] or [])],
+            "no_ar": len(no_ar),
+        })
+        if len(saida) >= 40:
+            break
+    return saida
+
+
 @app.get("/api/resumo")
 def resumo():
     e = postador.estado()
@@ -115,8 +142,10 @@ def resumo():
         "fila": banco.posts(status=("fila",)),
         "historico": [p for p in banco.posts(limite=60) if p["status"] not in ("fila", "agendado")],
         "no_ar": banco.envios_no_ar(),
+        "lotes": lotes(),
         "ajustes": {
             "pausado": bool(e.get("pausado")),
+            "pausa_total": bool(e.get("pausa_total")),
             "aprovacao": bool(postador.opcao("aprovacao")),
             "horarios": postador.opcao("horarios"),
             "expira_auto_horas": postador.opcao("expira_auto_horas"),
@@ -162,6 +191,7 @@ async def criar_post(
     texto: str = Form(""), foto_url: str = Form(""), foto: UploadFile | None = File(None),
     botao_texto: str = Form(""), botao_url: str = Form(""), canais: str = Form(""),
     modo: str = Form("agora"), quando: str = Form(""), expira_horas: str = Form(""),
+    saida: str = Form(""), fixar: str = Form(""),
 ):
     legenda = formatar(texto)
     if not legenda:
@@ -201,16 +231,22 @@ async def criar_post(
         status = "fila"
     else:
         agendado = banco.agora()
+    saida_em = saida.replace("T", " ")[:16] if saida.strip() else None
+    if saida_em and saida_em <= (agendado or banco.agora()):
+        erro("A hora de sair do ar precisa ser depois da hora de entrar.")
+    extra = {k: v for k, v in (("saida_em", saida_em), ("fixar", fixar in ("1", "true", "on"))) if v}
     titulo = re.sub(r"<[^>]+>", "", legenda).split("\n")[0][:80]
     pid = banco.novo_post("manual", legenda, foto=caminho, botoes=botoes, canais_ids=ids,
-                          agendado_para=agendado, expira_horas=horas, status=status, titulo=titulo)
+                          agendado_para=agendado, expira_horas=horas, status=status, titulo=titulo, dados=extra)
     if modo == "agora":
         n = postador.publicar_seguro(pid, conferir=False)
         p = banco.post(pid)
         if not n:
             erro(f"Não consegui postar. {p.get('erro') or ''}")
-        return {"ok": True, "msg": f"Postado em {n} canal(is)."}
-    return {"ok": True, "msg": "Agendado." if modo == "agendar" else "Entrou na fila automática."}
+        aviso = f" Atenção: {p['erro']}" if p.get("erro") else ""
+        return {"ok": True, "msg": f"Postado em {n} canal(is).{aviso}"}
+    pausa = " Tudo está pausado: ele sai quando você religar." if postador.pausa_total() else ""
+    return {"ok": True, "msg": ("Agendado." if modo == "agendar" else "Entrou na fila automática.") + pausa}
 
 
 # ---------- criar conteúdo ----------
@@ -264,6 +300,127 @@ def postar_agora(pid: int):
         p = banco.post(pid)
         erro("Não foi: " + ("a promoção acabou na Amazon." if p["status"] == "expirou" else (p.get("erro") or "")))
     return {"ok": True, "msg": f"Postado em {n} canal(is)."}
+
+
+# ---------- um post em vários canais: editar, fixar, apagar tudo ----------
+def _canal_do_envio(e):
+    return banco.sql("SELECT * FROM canais WHERE id=?", (e["canal_id"],), um=True) or {"chat": e["chat"], "nome": e["chat"]}
+
+
+@app.post("/api/posts/{pid}/editar")
+def editar_post(pid: int, dados: dict = Body(...)):
+    p = banco.post(pid) or erro("Post não existe.", 404)
+    mudar = {}
+    if "texto" in dados:
+        legenda = formatar(str(dados["texto"]))
+        if not legenda:
+            erro("Escreva o texto do post.")
+        limite = 1024 if p["foto"] else 4096
+        if visivel(legenda) > limite:
+            erro(f"Texto grande demais: {visivel(legenda)} caracteres. O Telegram aceita {limite}.")
+        mudar["legenda"] = p["legenda"] = legenda
+        mudar["titulo"] = re.sub(r"<[^>]+>", "", legenda).split("\n")[0][:80]
+    if "botao_texto" in dados or "botao_url" in dados:
+        bt, bu = str(dados.get("botao_texto", "")).strip(), str(dados.get("botao_url", "")).strip()
+        if bt and bu and not bu.startswith(("http://", "https://", "tg://")):
+            erro("O link do botão precisa começar com https://")
+        mudar["botoes"] = p["botoes"] = [[{"text": bt, "url": bu}]] if bt and bu else []
+    if dados.get("quando") and p["status"] == "agendado":
+        q = str(dados["quando"]).replace("T", " ")[:16]
+        if q <= banco.agora():
+            erro("Essa hora de entrar já passou.")
+        mudar["agendado_para"] = q
+    if "saida" in dados:
+        s = str(dados["saida"] or "").replace("T", " ")[:16] or None
+        if s and s <= max(banco.agora(), mudar.get("agendado_para") or p["agendado_para"] or ""):
+            erro("A hora de sair do ar precisa ser depois da hora de entrar.")
+        p["dados"]["saida_em"] = s
+        if not s:
+            p["dados"].pop("saida_em", None)
+        mudar["dados"] = p["dados"]
+        banco.sql("UPDATE envios SET expira_em=? WHERE post_id=? AND status='no_ar'", (s, pid))
+    if mudar:
+        banco.mudar_post(pid, **mudar)
+    feitos, erros = 0, []
+    if "legenda" in mudar or "botoes" in mudar:
+        for e in banco.envios_do_post(pid):
+            try:
+                postador.editar_envio(e, p, _canal_do_envio(e))
+                feitos += 1
+            except RuntimeError as x:
+                erros.append(f"{e['canal_nome'] or e['chat']}: {x}")
+            time.sleep(0.1)
+    msg = f"Salvo. Mudei o post em {feitos} canal(is)." if feitos else "Salvo."
+    if erros:
+        msg += " Não deu em: " + "; ".join(erros[:5])
+    return {"ok": True, "msg": msg}
+
+
+@app.post("/api/posts/{pid}/fixar")
+def fixar_post(pid: int, dados: dict = Body(...)):
+    p = banco.post(pid) or erro("Post não existe.", 404)
+    sim = bool(dados.get("fixar", True))
+    p["dados"]["fixar"] = sim
+    banco.mudar_post(pid, dados=p["dados"])
+    feitos, erros = 0, []
+    for e in banco.envios_do_post(pid):
+        try:
+            postador.fixar(e["chat"], e["message_id"], sim)
+            banco.sql("UPDATE envios SET fixado=? WHERE id=?", (int(sim), e["id"]))
+            feitos += 1
+        except RuntimeError as x:
+            erros.append(f"{e['canal_nome'] or e['chat']}: {x}")
+        time.sleep(0.1)
+    if p["status"] == "agendado" and not feitos:
+        return {"ok": True, "msg": "Vai entrar fixado." if sim else "Vai entrar sem fixar."}
+    msg = f"{'Fixado' if sim else 'Desafixado'} em {feitos} canal(is)."
+    if erros:
+        msg += " Não deu em: " + "; ".join(erros[:5]) + " (o robô precisa da permissão de fixar mensagens)."
+    return {"ok": True, "msg": msg}
+
+
+def _apagar_envios(envios):
+    feitos, erros = 0, []
+    for e in envios:
+        try:
+            postador.apagar(e["chat"], e["message_id"])
+        except RuntimeError as x:
+            if "not found" not in str(x):
+                erros.append(f"{e.get('canal_nome') or e['chat']}: {x}")
+                continue
+        banco.marcar_envio(e["id"], "apagado")
+        feitos += 1
+        time.sleep(0.05)
+    return feitos, erros
+
+
+@app.post("/api/posts/{pid}/apagar")
+def apagar_post(pid: int):
+    p = banco.post(pid) or erro("Post não existe.", 404)
+    if p["status"] in ("agendado", "fila"):
+        banco.mudar_post(pid, status="cancelado")
+    feitos, erros = _apagar_envios(banco.envios_do_post(pid))
+    msg = f"Apagado de {feitos} canal(is)." if feitos else "Cancelado. Ele não vai entrar."
+    if erros:
+        msg += " Não deu em: " + "; ".join(erros[:5])
+    return {"ok": True, "msg": msg}
+
+
+@app.post("/api/envios/apagar-tudo")
+def apagar_tudo(dados: dict = Body(default={})):
+    """Tira do ar TODOS os posts do robô, em todos os canais. Com agendados=true, cancela também os agendados."""
+    feitos, erros = _apagar_envios(banco.envios_no_ar(limite=2000))
+    cancelados = 0
+    if dados.get("agendados"):
+        for p in banco.posts(status=("agendado",)):
+            banco.mudar_post(p["id"], status="cancelado")
+            cancelados += 1
+    msg = f"Apaguei {feitos} post(s) dos canais."
+    if cancelados:
+        msg += f" Cancelei {cancelados} agendado(s)."
+    if erros:
+        msg += f" {len(erros)} não deram: " + "; ".join(erros[:3])
+    return {"ok": True, "msg": msg}
 
 
 # ---------- apagar ----------
@@ -349,8 +506,17 @@ async def ajustes(request: Request):
     if "expira_auto_horas" in d:
         v = str(d["expira_auto_horas"]).strip().replace(",", ".")
         campos["expira_auto_horas"] = float(v) if v else None
+    msg = "Ajustes salvos."
+    if "pausa_total" in d:
+        antes = postador.pausa_total()
+        campos["pausa_total"] = bool(d["pausa_total"])
+        if campos["pausa_total"]:
+            msg = "Tudo pausado. Nada sai até você religar (as saídas do ar continuam)."
     postador.mudar_estado(**campos)
-    return {"ok": True, "msg": "Ajustes salvos."}
+    if "pausa_total" in d and antes and not campos["pausa_total"]:
+        n = postador.soltar_agendados()
+        msg = f"Tudo religado. {n} agendado(s) que passaram da hora entraram agora." if n else "Tudo religado."
+    return {"ok": True, "msg": msg}
 
 
 # ---------- canal de inglês (quem posta é a nuvem; o painel mostra a fila e manda prévias) ----------

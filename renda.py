@@ -355,6 +355,9 @@ def horario_devido(agora=None):
 
 def postar_se_devido():
     import central
+    if postador.pausa_total():
+        print("Tudo pausado (pausa geral do painel).")
+        return False
     if central.postar_agendados("renda"):  # agendados pela central saem primeiro
         return True
     devido = horario_devido()

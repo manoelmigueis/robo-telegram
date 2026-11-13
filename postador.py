@@ -112,6 +112,56 @@ def apagar(chat, message_id):
     tg("deleteMessage", chat_id=chat, message_id=int(message_id))
 
 
+def fixar(chat, message_id, sim=True):
+    """Fixa (ou desafixa) a mensagem no topo do canal, sem tocar o aviso para os membros."""
+    if sim:
+        tg("pinChatMessage", chat_id=chat, message_id=int(message_id), disable_notification=True)
+    else:
+        tg("unpinChatMessage", chat_id=chat, message_id=int(message_id))
+
+
+def editar_envio(e, p, canal):
+    """Troca o texto e o botão de um post que já está no canal."""
+    teclado = {"inline_keyboard": p["botoes"] or []}
+    legenda = legenda_do_canal(p, canal)
+    try:
+        if p.get("foto"):
+            tg("editMessageCaption", chat_id=e["chat"], message_id=int(e["message_id"]), caption=legenda,
+               parse_mode="HTML", reply_markup=teclado)
+        else:
+            tg("editMessageText", chat_id=e["chat"], message_id=int(e["message_id"]), text=legenda,
+               parse_mode="HTML", reply_markup=teclado)
+    except RuntimeError as x:
+        if "not modified" not in str(x):
+            raise
+
+
+def pausa_total():
+    """Tudo pausado: nem automático, nem agendados, nem inglês e renda."""
+    return bool(estado().get("pausa_total"))
+
+
+def soltar_agendados():
+    """Ao tirar a pausa geral: os agendados manuais que passaram da hora saem agora, todos de uma vez.
+    Livros e ofertas agendados saem na próxima rodada da nuvem (ela confere o preço na Amazon)."""
+    agora_txt = banco.agora()
+    feitos = 0
+    for p in banco.posts(status=("agendado",)):
+        if p["agendado_para"] and p["agendado_para"] <= agora_txt and p["origem"] == "manual":
+            if publicar_seguro(p["id"], conferir=False):
+                feitos += 1
+    try:
+        import central
+        for n in ("ingles", "renda"):
+            try:
+                feitos += central.postar_agendados(n)
+            except Exception as x:
+                print(f"[pausa] agendados de {n}: {x}")
+    except Exception as x:
+        print(f"[pausa] central: {x}")
+    return feitos
+
+
 def ler_link(link):
     """t.me/canal/123 ou t.me/c/123456/789  ->  (chat, message_id)"""
     m = re.search(r"t\.me/c/(\d+)/(\d+)", link)
@@ -228,6 +278,13 @@ def publicar(pid, conferir=True, so_canais=None, so_gratis=False):
     expira_em = None
     if horas:
         expira_em = (datetime.now(banco.FUSO) + timedelta(hours=float(horas))).strftime("%Y-%m-%d %H:%M")
+    saida = (p.get("dados") or {}).get("saida_em")
+    if saida:  # hora certa de sair do ar, escolhida no painel
+        if saida <= banco.agora():
+            banco.mudar_post(pid, status="cancelado", erro="A hora de sair do ar já tinha passado.")
+            return 0
+        expira_em = saida
+    fixa = bool((p.get("dados") or {}).get("fixar"))
     enviados, erros = 0, []
     for canal in alvos:
         try:
@@ -235,8 +292,14 @@ def publicar(pid, conferir=True, so_canais=None, so_gratis=False):
             if file_id and p["foto"].startswith("uploads/"):
                 p["foto"] = file_id  # depois da 1ª vez, reaproveita a foto já enviada
                 banco.mudar_post(pid, foto=file_id)
-            banco.novo_envio(pid, canal, mid, expira_em)
+            eid = banco.novo_envio(pid, canal, mid, expira_em)
             enviados += 1
+            if fixa:
+                try:
+                    fixar(canal["chat"], mid)
+                    banco.sql("UPDATE envios SET fixado=1 WHERE id=?", (eid,))
+                except Exception as x:
+                    erros.append(f"{canal['nome']}: postou, mas não fixou ({x})")
         except Exception as e:
             erros.append(f"{canal['nome']}: {e}")
         time.sleep(0.5)
@@ -574,7 +637,7 @@ def botao_do_painel(url):
 def ciclo():
     agora_txt = banco.agora()
     hoje, hora = agora_txt[:10], agora_txt[11:]
-    for p in banco.posts(status=("agendado",)):
+    for p in ([] if pausa_total() else banco.posts(status=("agendado",))):
         if p["agendado_para"] and p["agendado_para"] <= agora_txt:
             publicar_seguro(p["id"])
     for e in banco.envios_vencidos():
@@ -592,7 +655,7 @@ def ciclo():
         mudar_estado(ultimo_garimpo=hoje)
         garimpar_em_segundo_plano()
     na_hora = [c for c in banco.canais(so_auto=True) if hora in horarios_do_canal(c)]
-    if na_hora and st.get("ultimo_horario") != agora_txt and not st.get("pausado"):
+    if na_hora and st.get("ultimo_horario") != agora_txt and not st.get("pausado") and not st.get("pausa_total"):
         mudar_estado(ultimo_horario=agora_txt)
         if st.get("aprovacao") and st.get("admin"):
             p = proximo_automatico(na_hora)

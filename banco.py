@@ -44,6 +44,8 @@ for _col, _tipo in (("nicho", "TEXT DEFAULT ''"), ("recebe", "TEXT DEFAULT 'livr
                     ("horarios", "TEXT DEFAULT ''")):
     if _col not in _tem:
         _con.execute(f"ALTER TABLE canais ADD COLUMN {_col} {_tipo}")
+if "fixado" not in {l[1] for l in _con.execute("PRAGMA table_info(envios)")}:
+    _con.execute("ALTER TABLE envios ADD COLUMN fixado INTEGER DEFAULT 0")
 _con.commit()
 
 
@@ -69,7 +71,9 @@ def canais(so_auto=False):
 
 
 def novo_canal(chat, nome, auto=True):
-    sql("INSERT OR IGNORE INTO canais (chat, nome, auto) VALUES (?,?,?)", (chat, nome, int(auto)))
+    # canal novo não recebe livros nem ofertas da Amazon até você marcar isso na ficha dele
+    sql("INSERT OR IGNORE INTO canais (chat, nome, auto, recebe) VALUES (?,?,?,?)",
+        (chat, nome, int(auto), "livro,oferta" if auto else ""))
     sql("UPDATE canais SET ativo=1 WHERE chat=?", (chat,))  # se tinha sido tirado, volta
 
 
@@ -138,6 +142,12 @@ def envios_no_ar(limite=300):
     return sql("SELECT e.*, p.titulo, p.origem, c.nome AS canal_nome FROM envios e "
                "LEFT JOIN posts p ON p.id=e.post_id LEFT JOIN canais c ON c.id=e.canal_id "
                "WHERE e.status='no_ar' ORDER BY e.id DESC LIMIT ?", (limite,))
+
+
+def envios_do_post(pid):
+    """Envios de um post que ainda estão no ar (um por canal)."""
+    return sql("SELECT e.*, c.nome AS canal_nome FROM envios e LEFT JOIN canais c ON c.id=e.canal_id "
+               "WHERE e.post_id=? AND e.status='no_ar' ORDER BY e.id", (pid,))
 
 
 def envios_vencidos():

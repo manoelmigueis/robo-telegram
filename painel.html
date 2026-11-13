@@ -64,6 +64,13 @@ h1,h2,h3{letter-spacing:-.025em;margin:0}
 a{color:var(--acento-ink)}
 svg.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .oculto{display:none!important}
+.faixa-pausa{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:12px 16px;margin:0 0 16px;border-radius:18px;background:var(--aviso-soft);border:1px solid var(--aviso);color:var(--ink);font-weight:600}
+.faixa-pausa span{flex:1;min-width:200px}
+.lote-ed{margin-top:12px;display:grid;gap:8px}
+.lote-ed textarea{min-height:130px}
+.lote-ed .linha{gap:8px}
+.marca-fixar{display:flex;gap:10px;align-items:center;margin-top:14px;font-weight:600;cursor:pointer}
+.marca-fixar input{width:auto}
 * {scrollbar-width:thin;scrollbar-color:var(--line-2) transparent}
 
 /* ---------- entrar ---------- */
@@ -460,6 +467,7 @@ button.chip{font-family:var(--font)}
   </div>
 
   <main class="wrap">
+    <div class="faixa-pausa oculto" id="faixa_pausa"><span>⏸ <b>Tudo pausado.</b> Nada entra nos canais: nem automático, nem agendados, nem inglês e renda. Ao religar, os agendados que passaram da hora entram na mesma hora.</span><button class="btn acento peq" onclick="pausaTotal(false)">Religar tudo</button></div>
 
     <!-- INÍCIO -->
     <section data-pagina="inicio">
@@ -569,8 +577,12 @@ button.chip{font-family:var(--font)}
               <button data-modo="fila" aria-pressed="false">Próximo horário livre</button>
             </div>
             <div id="campo_quando" class="oculto"><label class="rot" for="quando">Dia e hora</label><input id="quando" type="datetime-local"></div>
-            <label class="rot" for="expira">Apagar sozinho depois de (horas)</label>
+            <label class="rot" for="saida">Sai do ar em (dia e hora)</label>
+            <input id="saida" type="datetime-local">
+            <label class="rot" for="expira">Ou apagar sozinho depois de (horas)</label>
             <input id="expira" type="number" min="0" step="0.5" placeholder="Em branco = nunca apaga">
+            <p class="dica">Com dia e hora de saída, o robô apaga o post de todos os canais nessa hora. Vale o que estiver preenchido em "Sai do ar".</p>
+            <label class="marca-fixar"><input type="checkbox" id="fixar"> 📌 Fixar no topo dos canais</label>
 
             <div class="acoes">
               <button class="btn acento" id="enviar" onclick="criarPost()"><svg class="i"><use href="#i-aviao"/></svg><span>Postar agora</span></button>
@@ -608,6 +620,11 @@ button.chip{font-family:var(--font)}
     <!-- NO AR -->
     <section data-pagina="noar" class="oculto">
       <div class="titulo"><div><h1>No ar</h1><p>Os posts do robô que estão nos canais agora. Dá para apagar qualquer um.</p></div></div>
+      <div class="card"><div class="secao">Posts em vários canais <span class="conta-s" id="c_lotes"></span></div>
+        <p class="dica" style="margin-top:0">Cada post que você escreveu aparece uma vez só, mesmo estando em vários canais. Editar, fixar ou apagar aqui vale para todos os canais dele de uma vez.</p>
+        <div id="lista_lotes"></div>
+        <div class="acoes"><button class="btn perigo" onclick="apagarTudo()"><svg class="i"><use href="#i-lixo"/></svg>Apagar tudo do robô de todos os canais</button></div>
+      </div>
       <div class="card">
         <div class="secao">Apagar qualquer mensagem pelo link</div>
         <div class="linha">
@@ -653,6 +670,7 @@ button.chip{font-family:var(--font)}
       <div class="grade g2">
         <div class="card">
           <div class="secao">Postagem automática</div>
+          <div class="opcao"><div class="t"><b>Pausar tudo</b><span>Nada entra nos canais, nem os agendados, até você religar. Ao religar, os agendados que passaram da hora entram de uma vez.</span></div><button class="chave" id="ch_tudo" role="switch" aria-label="Pausar tudo" onclick="pausaTotal(!dados.ajustes.pausa_total)"></button></div>
           <div class="opcao"><div class="t"><b>Automático ligado</b><span>Posta um livro ou oferta da fila em cada horário.</span></div><button class="chave" id="ch_auto" role="switch" aria-label="Automático" onclick="alternar('pausado')"></button></div>
           <div class="opcao"><div class="t"><b>Pedir minha aprovação</b><span>Em cada horário, o robô te manda a prévia no Telegram e espera o “Publicar”.</span></div><button class="chave" id="ch_aprov" role="switch" aria-label="Aprovação" onclick="alternar('aprovacao')"></button></div>
           <div class="opcao"><div class="t"><b>Garimpar agora</b><span>Busca livros grátis e ofertas novas na Amazon (uns 20 minutos).</span></div><button class="btn peq" id="botao_garimpo" onclick="garimpar()"><svg class="i"><use href="#i-picareta"/></svg>Garimpar</button></div>
@@ -884,11 +902,13 @@ async function criarPost() {
   ["texto", "foto_url", "botao_texto", "botao_url", "quando"].forEach(id => f.append(id, $(id).value));
   if ($("foto").files[0]) f.append("foto", $("foto").files[0]);
   f.append("canais", ids.join(",")); f.append("modo", modo); f.append("expira_horas", $("expira").value);
+  f.append("saida", $("saida").value); f.append("fixar", $("fixar").checked ? "1" : "");
   await ocupado($("enviar"), modo === "agora" ? "Postando..." : "Salvando...", async () => { await api("/api/posts", f); limpar(true); carregar(); });
 }
 function limpar(semPerguntar) {
   if (!semPerguntar && $("texto").value.trim() && !confirm("Apagar o que está escrito?")) return;
-  ["texto", "foto_url", "botao_texto", "botao_url", "quando", "expira", "am_link"].forEach(id => $(id).value = "");
+  ["texto", "foto_url", "botao_texto", "botao_url", "quando", "expira", "saida", "am_link"].forEach(id => $(id).value = "");
+  $("fixar").checked = false;
   $("foto").value = ""; fotoLocal = ""; previa();
 }
 
@@ -912,8 +932,10 @@ function linkMsg(e) { return e.chat.startsWith("@") ? `https://t.me/${e.chat.sli
 function render() {
   const d = dados, a = d.ajustes;
   const livros = d.fila.filter(p => p.origem === "livro").length, ofertas = d.fila.filter(p => p.origem === "oferta").length;
-  $("status").className = "pilula " + (a.pausado ? "pausa" : "ok");
-  $("status_txt").innerHTML = a.garimpando ? "Garimpando" : a.pausado ? 'Pausado<span class="txt-longo"> · automático</span>' : `No ar<span class="txt-longo"> · próximo ${esc(d.proxima)}</span>`;
+  $("faixa_pausa").classList.toggle("oculto", !a.pausa_total);
+  $("ch_tudo").setAttribute("aria-checked", !!a.pausa_total);
+  $("status").className = "pilula " + (a.pausado || a.pausa_total ? "pausa" : "ok");
+  $("status_txt").innerHTML = a.pausa_total ? 'Tudo pausado' : a.garimpando ? "Garimpando" : a.pausado ? 'Pausado<span class="txt-longo"> · automático</span>' : `No ar<span class="txt-longo"> · próximo ${esc(d.proxima)}</span>`;
 
   const h = new Date().getHours();
   $("saudacao").textContent = (h < 12 ? "Bom dia" : h < 18 ? "Boa tarde" : "Boa noite") + ", Manoel";
@@ -935,13 +957,15 @@ function render() {
   $("escolha_canais").innerHTML = d.canais.map(c => `<label class="chip"><input type="checkbox" value="${c.id}" ${(primeira ? c.auto : marcados.has(String(c.id))) ? "checked" : ""}><span class="ck"></span>${esc(c.nome)}${c.nicho ? ` <span style="font-weight:500">· ${esc(c.nicho)}</span>` : ""}</label>`).join("") || vazio("Adicione um canal em Canais.");
   const nichos = [...new Set(d.canais.map(c => (c.nicho || "").trim()).filter(Boolean))];
   $("lista_nichos").innerHTML = nichos.map(n => `<option value="${esc(n)}">`).join("");
-  $("escolha_nichos").innerHTML = nichos.length ? `<span class="dica" style="margin:0 4px 0 0;align-self:center">Marcar nicho:</span>` + nichos.map(n => `<button class="chip" data-nicho="${esc(n)}">${esc(n)}</button>`).join("") : "";
+  $("escolha_nichos").innerHTML = (d.canais.length > 1 ? `<button class="chip" data-nicho="*todos">Todos os canais</button><button class="chip" data-nicho="*nenhum">Nenhum</button>` : "")
+    + (nichos.length ? `<span class="dica" style="margin:0 4px 0 6px;align-self:center">Marcar nicho:</span>` + nichos.map(n => `<button class="chip" data-nicho="${esc(n)}">${esc(n)}</button>`).join("") : "");
 
   $("c_agendados").textContent = d.agendados.length || ""; $("c_fila").textContent = d.fila.length ? `${livros} livros · ${ofertas} ofertas` : "";
   $("lista_agendados").innerHTML = d.agendados.map(p => itemPost(p, acoesPost(p))).join("") || vazio("Nada agendado.");
   $("lista_fila").innerHTML = d.fila.map(p => itemPost(p, acoesPost(p))).join("") || vazio("Fila vazia. Use “Garimpar” em Ajustes.");
   $("lista_historico").innerHTML = d.historico.map(p => itemPost(p)).join("") || vazio("Nada ainda.");
 
+  renderLotes();
   $("c_noar").textContent = d.no_ar.length || ""; $("c_noar_mais").textContent = d.no_ar.length || "";
   $("lista_noar").innerHTML = d.no_ar.map(e => `<div class="item"><div class="capa">${ico("noar")}</div><div class="corpo">
       <div class="tit">${esc(e.titulo || "post #" + e.post_id)}</div>
@@ -964,7 +988,8 @@ function render() {
 }
 $("escolha_nichos").addEventListener("click", e => {
   const b = e.target.closest("[data-nicho]"); if (!b) return;
-  const ids = dados.canais.filter(c => (c.nicho || "").trim() === b.dataset.nicho).map(c => String(c.id));
+  const alvo = b.dataset.nicho;
+  const ids = dados.canais.filter(c => alvo === "*todos" || (alvo !== "*nenhum" && (c.nicho || "").trim() === alvo)).map(c => String(c.id));
   document.querySelectorAll("#escolha_canais input").forEach(i => i.checked = ids.includes(i.value)); previa();
 });
 
@@ -978,7 +1003,7 @@ const TIPOS_IA = { ingles: [["lista", "Lista de frases"], ["aula", "Mini-aula"],
                    renda: [["lista", "Dica em lista"], ["quiz", "Quiz"]] };
 const tipoIA = { ingles: "lista", renda: "lista" };
 function formCanal(c) {
-    const rec = (c.recebe ?? "livro,oferta").split(",");
+    const rec = (c.recebe || "").split(",");
     const a = dados.ajustes || {}, proprios = (c.horarios || "").trim(), gerais = (a.horarios || []).join(" ");
     const selo = !c.auto ? '<span class="badge">automático desligado</span>'
       : a.pausado ? '<span class="badge aviso">automático pausado geral</span>'
@@ -991,9 +1016,10 @@ function formCanal(c) {
       </div>
       <label class="rot">Hashtags próprias</label><input name="tags" value="${esc(c.tags)}" placeholder="#tecnologia #ofertas">
       <div class="fonte" style="margin-top:16px">
-        <div class="secao" style="margin-bottom:8px">Automático deste canal</div>
+        <div class="secao" style="margin-bottom:8px">Livros e ofertas da Amazon neste canal</div>
+        <p class="dica" style="margin-top:0">Só ligue em canal de livros ou de ofertas. Canal de outro tema (inglês, cursos...) deixe desligado.</p>
         <div class="chips">
-          <label class="chip"><input type="checkbox" name="auto" ${c.auto ? "checked" : ""}><span class="ck"></span>Postar sozinho</label>
+          <label class="chip"><input type="checkbox" name="auto" ${c.auto ? "checked" : ""}><span class="ck"></span>Receber da fila sozinho</label>
           <label class="chip"><input type="checkbox" name="livro" ${rec.includes("livro") ? "checked" : ""}><span class="ck"></span>📖 Livros</label>
           <label class="chip"><input type="checkbox" name="oferta" ${rec.includes("oferta") ? "checked" : ""}><span class="ck"></span>🛒 Ofertas</label>
         </div>
@@ -1187,10 +1213,60 @@ async function addCanal() { try { await api("/api/canais", { chat: $("novo_canal
 async function salvarCanal(id) {
   const box = document.querySelector(`[data-canal="${id}"]`), v = (n) => box.querySelector(`[name=${n}]`);
   const recebe = ["livro", "oferta"].filter(t => v(t).checked).join(",");
-  try { await api(`/api/canais/${id}`, { nicho: v("nicho").value.trim(), assinatura: v("assinatura").value, tags: v("tags").value.trim(), auto: v("auto").checked, recebe, horarios: v("horarios").value }); } catch (e) {}
+  if (v("auto").checked && !recebe) { toast("Marque Livros ou Ofertas, ou desligue o “Receber da fila sozinho”."); return; }
+  try { await api(`/api/canais/${id}`, { nicho: v("nicho").value.trim(), assinatura: v("assinatura").value, tags: v("tags").value.trim(), auto: v("auto").checked && !!recebe, recebe, horarios: v("horarios").value }); } catch (e) {}
   document.activeElement && document.activeElement.blur(); carregar();
 }
 async function removerCanal(id) { if (confirm("Tirar este canal do painel? (o canal não é apagado)")) { try { await api(`/api/canais/${id}`, { remover: true }); } catch (e) {} carregar(); } }
+async function pausaTotal(sim) {
+  if (sim && !confirm("Pausar TUDO? Nada entra nos canais, nem os agendados, até você religar.")) return;
+  if (!sim && !confirm("Religar tudo? Os agendados que passaram da hora entram agora, de uma vez.")) return;
+  try { await api("/api/ajustes", { pausa_total: sim }); } catch (e) {} carregar();
+}
+const loteAberto = new Set();
+function renderLotes() {
+  const L = dados.lotes || [];
+  $("c_lotes").textContent = L.length || "";
+  if (document.querySelector("#lista_lotes .lote-ed :focus")) return; // não apaga o que está sendo digitado
+  $("lista_lotes").innerHTML = L.map(l => {
+    const [st, cor] = l.status === "agendado" ? ["vai entrar", "azul"] : ["no ar", "ok"];
+    const fix = l.fixados ? `<span class="badge">📌 fixado em ${l.fixados}</span>` : l.fixar ? '<span class="badge">📌 entra fixado</span>' : "";
+    const ed = loteAberto.has(l.id) ? `<div class="lote-ed" data-lote="${l.id}">
+        <label class="rot" style="margin:0">Texto</label><textarea name="texto">${esc(l.texto)}</textarea>
+        <div class="linha"><input name="botao_texto" placeholder="Texto do botão" value="${esc(l.botao_texto)}"><input name="botao_url" placeholder="https://..." value="${esc(l.botao_url)}"></div>
+        ${l.status === "agendado" ? `<label class="rot" style="margin:0">Entra em</label><input name="quando" type="datetime-local" value="${esc((l.agendado_para || "").replace(" ", "T"))}">` : ""}
+        <label class="rot" style="margin:0">Sai do ar em (em branco = não sai)</label><input name="saida" type="datetime-local" value="${esc((l.saida_em || "").replace(" ", "T"))}">
+        <div class="botoes"><button class="btn pri peq" onclick="salvarLote(${l.id}, this)">Salvar em todos os canais</button><button class="btn peq" onclick="abrirLote(${l.id})">Fechar</button></div></div>` : "";
+    return `<div class="item">${l.foto ? `<img class="capa" src="${esc(l.foto)}" alt="" loading="lazy">` : `<div class="capa">${ico("criar")}</div>`}<div class="corpo">
+      <div class="tit">${esc(l.titulo || "post #" + l.id)}</div>
+      <div class="meta"><span class="badge ${cor}">${st}</span><span class="badge">${l.canais.length} canal(is)</span>${l.agendado_para && l.status === "agendado" ? `<span>entra ${dataBR(l.agendado_para)}</span>` : ""}${l.saida_em ? `<span>sai ${dataBR(l.saida_em)}</span>` : ""}${fix}</div>
+      <div class="meta"><span>${esc(l.canais.slice(0, 6).join(", "))}${l.canais.length > 6 ? ` e mais ${l.canais.length - 6}` : ""}</span></div>
+      ${l.erro ? `<div class="erro">${esc(l.erro)}</div>` : ""}
+      <div class="botoes"><button class="btn peq" onclick="abrirLote(${l.id})">Editar</button>
+        <button class="btn peq" onclick="fixarLote(${l.id}, ${!(l.fixados || (l.status === "agendado" && l.fixar))})">${l.fixados || (l.status === "agendado" && l.fixar) ? "Desafixar" : "📌 Fixar"}</button>
+        ${l.status === "agendado" ? `<button class="btn peq" onclick="agora(${l.id})">${ico("foguete")}Postar agora</button>` : ""}
+        <button class="btn peq perigo" onclick="apagarLote(${l.id}, '${l.status}')">${ico("lixo")}${l.status === "agendado" ? "Cancelar" : "Apagar de todos"}</button></div>
+      ${ed}</div></div>`;
+  }).join("") || vazio("Nenhum post seu no ar ou agendado. Crie um em Criar e marque os canais.");
+}
+function abrirLote(id) { loteAberto.has(id) ? loteAberto.delete(id) : loteAberto.add(id); renderLotes(); }
+async function salvarLote(id, bt) {
+  const box = document.querySelector(`[data-lote="${id}"]`), v = n => box.querySelector(`[name=${n}]`);
+  const corpo = { texto: v("texto").value, botao_texto: v("botao_texto").value, botao_url: v("botao_url").value, saida: v("saida").value };
+  if (v("quando")) corpo.quando = v("quando").value;
+  await ocupado(bt, "Salvando...", async () => { await api(`/api/posts/${id}/editar`, corpo); loteAberto.delete(id); document.activeElement && document.activeElement.blur(); carregar(); });
+}
+async function fixarLote(id, sim) { try { await api(`/api/posts/${id}/fixar`, { fixar: sim }); } catch (e) {} carregar(); }
+async function apagarLote(id, st) {
+  if (!confirm(st === "agendado" ? "Cancelar este post? Ele não vai entrar em nenhum canal." : "Apagar este post de TODOS os canais? Não dá para desfazer.")) return;
+  try { await api(`/api/posts/${id}/apagar`, {}); } catch (e) {} carregar();
+}
+async function apagarTudo() {
+  const n = (dados.no_ar || []).length;
+  if (!confirm(`Apagar TODOS os ${n} posts do robô que estão no ar, em todos os canais? Não dá para desfazer.`)) return;
+  const tambem = (dados.agendados || []).length && confirm(`Cancelar também os ${dados.agendados.length} agendados?`);
+  try { await api("/api/envios/apagar-tudo", { agendados: !!tambem }); } catch (e) {} carregar();
+}
 async function alternar(campo) { try { await api("/api/ajustes", { [campo]: !dados.ajustes[campo] }); } catch (e) {} carregar(); }
 async function salvarAjustes() { try { await api("/api/ajustes", { horarios: $("horarios").value, expira_auto_horas: $("expira_auto").value }); } catch (e) {} carregar(); }
 let garimpoDesde = null, garimpoTimer = null;

@@ -30,24 +30,33 @@ def canais_desta_hora(hora_cheia):
             if any(h[:2] == hh for h in postador.horarios_do_canal(c))]
 
 
-def postar():
+def relogio(so_manuais=True):
+    """Entradas e saídas com hora marcada. Roda a cada 10 minutos (relogio.yml) e também na hora cheia.
+    so_manuais: na rodada de 10 minutos não há navegador, então livros e ofertas ficam para a hora cheia."""
     agora_txt = banco.agora()
-    hoje, hh = agora_txt[:10], agora_txt[11:13]
-    marca = f"{hoje} {hh}:00"
-
-    # agendados que já passaram da hora
-    for p in banco.posts(status=("agendado",)):
-        if p["agendado_para"] and p["agendado_para"] <= agora_txt:
-            postador.publicar(p["id"])
-
-    # posts com validade vencida
+    if not postador.pausa_total():
+        for p in banco.posts(status=("agendado",)):
+            if p["agendado_para"] and p["agendado_para"] <= agora_txt and (p["origem"] == "manual" or not so_manuais):
+                postador.publicar(p["id"], conferir=p["origem"] != "manual")
+    # saída do ar: vale mesmo com tudo pausado
     for e in banco.envios_vencidos():
         try:
             postador.apagar(e["chat"], e["message_id"])
             banco.marcar_envio(e["id"], "apagado")
         except Exception as erro:
             print(f"[apagar] {erro}")
-            banco.marcar_envio(e["id"], "erro_apagar")
+            banco.marcar_envio(e["id"], "apagado" if "not found" in str(erro) else "erro_apagar")
+
+
+def postar():
+    agora_txt = banco.agora()
+    hoje, hh = agora_txt[:10], agora_txt[11:13]
+    marca = f"{hoje} {hh}:00"
+
+    relogio(so_manuais=False)
+    if postador.pausa_total():
+        print("Tudo pausado (pausa geral).")
+        return
 
     # "Run workflow" apertado na mão = postar agora, mesmo pausado ou com a hora já postada
     na_mao = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
@@ -84,4 +93,4 @@ def postar():
 if __name__ == "__main__":
     postador.carregar_env()
     acao = sys.argv[1] if len(sys.argv) > 1 else "postar"
-    {"postar": postar, "garimpar": garimpar}[acao]()
+    {"postar": postar, "garimpar": garimpar, "relogio": relogio}[acao]()
