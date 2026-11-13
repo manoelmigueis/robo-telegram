@@ -944,10 +944,13 @@ function linkMsg(e) { return e.chat.startsWith("@") ? `https://t.me/${e.chat.sli
 function render() {
   const d = dados, a = d.ajustes;
   const livros = d.fila.filter(p => p.origem === "livro").length, ofertas = d.fila.filter(p => p.origem === "oferta").length;
-  $("faixa_pausa").classList.toggle("oculto", !a.pausa_total);
-  $("ch_tudo").setAttribute("aria-checked", !!a.pausa_total);
-  $("status").className = "pilula " + (a.pausado || a.pausa_total ? "pausa" : "ok");
-  $("status_txt").innerHTML = a.pausa_total ? 'Tudo pausado' : a.garimpando ? "Garimpando" : a.pausado ? 'Pausado<span class="txt-longo"> · automático</span>' : `No ar<span class="txt-longo"> · próximo ${esc(d.proxima)}</span>`;
+  // enquanto a nuvem atende o clique, a chave já mostra o que foi pedido
+  const pt = pausaPendente !== null ? pausaPendente : !!a.pausa_total;
+  $("faixa_pausa").classList.toggle("oculto", !pt);
+  $("ch_tudo").setAttribute("aria-checked", pt);
+  $("ch_tudo").style.opacity = pausaPendente !== null ? ".55" : "";
+  $("status").className = "pilula " + (a.pausado || pt ? "pausa" : "ok");
+  $("status_txt").innerHTML = pausaPendente !== null ? (pt ? "Pausando tudo…" : "Religando…") : pt ? 'Tudo pausado' : a.garimpando ? "Garimpando" : a.pausado ? 'Pausado<span class="txt-longo"> · automático</span>' : `No ar<span class="txt-longo"> · próximo ${esc(d.proxima)}</span>`;
 
   const h = new Date().getHours();
   $("saudacao").textContent = (h < 12 ? "Bom dia" : h < 18 ? "Boa tarde" : "Boa noite") + ", Manoel";
@@ -1230,10 +1233,14 @@ async function salvarCanal(id) {
   document.activeElement && document.activeElement.blur(); carregar();
 }
 async function removerCanal(id) { if (confirm("Tirar este canal do painel? (o canal não é apagado)")) { try { await api(`/api/canais/${id}`, { remover: true }); } catch (e) {} carregar(); } }
+var pausaPendente = null;  // true/false enquanto a nuvem ainda está fazendo o pedido
 async function pausaTotal(sim) {
+  if (pausaPendente !== null) { toast("⏳ Ainda estou fazendo o pedido anterior. Leva até 2 minutos."); return; }
   if (sim && !confirm("Pausar TUDO? Nada entra nos canais, nem os agendados, até você religar.")) return;
   if (!sim && !confirm("Religar tudo? Os agendados que passaram da hora entram agora, de uma vez.")) return;
-  try { await api("/api/ajustes", { pausa_total: sim }); } catch (e) {} carregar();
+  pausaPendente = sim; render();
+  try { await api("/api/ajustes", { pausa_total: sim }); } catch (e) {}
+  pausaPendente = null; await carregar();
 }
 const loteAberto = new Set();
 function comparar(agora, antes) {
