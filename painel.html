@@ -208,7 +208,19 @@ button.chip{font-family:var(--font)}
 .tabela{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}.tabela th,.tabela td{text-align:left;padding:4px 6px;border-bottom:1px solid var(--line)}
 .ini-canais{margin-bottom:16px}
 .cx-acoes{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 16px}
-.cx-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:16px}
+.cx-abas{margin-bottom:12px;flex-wrap:nowrap}
+.cx-abas button{flex:1 1 0;min-width:0}
+.cx-abas .n{font-weight:700;margin-left:6px;padding:1px 7px;border-radius:999px;background:var(--glass-3);font-size:12px;color:var(--ink)}
+.cx-abas button[aria-pressed="true"] .n{background:var(--acento-soft);color:var(--acento-ink)}
+.cx-caixa{padding:6px 18px 10px}
+.cx-painel[data-cx="ajustes"]{padding:12px 0 6px}
+.cx-lista{max-height:min(62vh,560px);overflow-y:auto;overscroll-behavior:contain;margin:0 -6px;padding:8px 6px}
+.cx-lista .item:first-child{padding-top:6px}
+.cx-mais{margin:8px 0 4px;text-align:center}
+.ini-lista{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.ini-lista .hub-c{padding:9px 10px;box-shadow:none;gap:10px}
+.ini-lista .hub-av{width:34px;height:34px;font-size:16px;border-radius:11px}
+.ini-lista .hub-tx b{font-size:14.5px}
 .kpi{background:var(--glass);border:1px solid var(--rim);box-shadow:var(--shadow);backdrop-filter:blur(18px);border-radius:var(--r-tile);padding:16px 18px;display:flex;gap:14px;align-items:center}
 .kpi .ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--acento-soft);color:var(--acento-ink);flex:none}
 .kpi .n{font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1.05}
@@ -388,8 +400,19 @@ button.chip{font-family:var(--font)}
   .dock .so-cel{display:flex!important}
   .hub-ferr{gap:10px}
   .hub-ferr .busca,.hub-ferr .seg{flex:1 1 100%}
-  .hub-ferr .seg{flex-wrap:nowrap}
-  .hub-ferr .seg button{padding:8px 6px;font-size:12.5px;flex:1 1 0;min-width:0;white-space:nowrap}
+  .hub-ferr .seg{flex-wrap:wrap;border-radius:20px}
+  .hub-ferr .seg button{padding:8px 6px;font-size:12.5px;flex:1 1 calc(50% - 2px);min-width:0;white-space:nowrap}
+  .cx-acoes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:2px 0 14px}
+  .cx-acoes .btn{justify-content:center;padding:0 8px;font-size:13.5px;min-height:44px}
+  .cx-acoes .btn:first-child:nth-last-child(odd){grid-column:1/-1}
+  .cx-abas{padding:4px}
+  .cx-abas button{padding:9px 2px;font-size:12.5px;flex-direction:column;gap:2px}
+  .cx-abas .n{margin-left:0}
+  .cx-caixa{padding:4px 14px 8px}
+  .cx-lista{max-height:58vh}
+  .hub-grade.ini-lista{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .ini-lista .hub-c>svg.i{display:none}
+  .ini-lista .hub-tx small{font-size:11.5px}
   .hub-grade{grid-template-columns:minmax(0,1fr);gap:8px}
   .hub-c{padding:12px;box-shadow:none}
   .troca{align-items:flex-end;padding:0}
@@ -497,7 +520,7 @@ button.chip{font-family:var(--font)}
         </div>
       </div>
       <div class="card ini-canais"><div class="secao">Seus canais <a class="conta-s" href="#" onclick="ir('canais');return false">ver todos</a></div>
-        <p class="dica" style="margin-top:0">Toque num canal para criar, agendar e ver os posts só dele.</p><div class="hub-grade" id="ini_canais"></div></div>
+        <p class="dica" style="margin-top:0">Toque num canal para criar, agendar e ver os posts só dele.</p><div class="hub-grade ini-lista" id="ini_canais"></div></div>
       <div class="kpis">
         <div class="kpi"><div class="ic"><svg class="i"><use href="#i-fila"/></svg></div><div><div class="n" id="k_fila">0</div><div class="l" id="k_fila_l">na fila</div></div></div>
         <div class="kpi"><div class="ic"><svg class="i"><use href="#i-agenda"/></svg></div><div><div class="n" id="k_agenda">0</div><div class="l">agendados</div></div></div>
@@ -1083,7 +1106,7 @@ function filtrar(lista, q) {
 const GRUPOS = [["conteudo", "Conteúdo com IA"], ["livros", "Livros e ofertas"], ["outros", "Outros canais"]];
 function renderIniCanais() {
   if (!$("ini_canais")) return;
-  $("ini_canais").innerHTML = listaCanais().map(c => `<button class="hub-c" onclick="abrirCanal('${c.chave}')">${avatar(c)}<span class="hub-tx"><b>${esc(c.nome)}</b><small>${esc(c.sub)}</small>${c.status ? `<span class="badge ${c.cor}">${esc(c.status)}</span>` : ""}</span><svg class="i"><use href="#i-seta"/></svg></button>`).join("") || vazio("Adicione um canal em Canais.");
+  $("ini_canais").innerHTML = listaCanais().map(c => `<button class="hub-c" onclick="abrirCanal('${c.chave}')">${avatar(c)}<span class="hub-tx"><b>${esc(c.nome)}</b>${c.status ? `<small>${esc(c.status)}</small>` : ""}</span><svg class="i"><use href="#i-seta"/></svg></button>`).join("") || vazio("Adicione um canal em Canais.");
 }
 function renderHub() {
   renderIniCanais();
@@ -1131,29 +1154,39 @@ function postsDoCanal(c) {
   return { fila: dados.fila.filter(p => doCanal(p, c)), agendados: dados.agendados.filter(p => doCanal(p, c)),
            no_ar: dados.no_ar.filter(e => String(e.canal_id) === String(c.id)) };
 }
+let abaCx = "fila";
 function paginaCanal(b, c) {
   const am = amazon(b), ps = postsDoCanal(b);
   const cl = ((dados.desempenho || {}).por_canal || []).find(x => x.chat === b.chat || x.nome === b.nome);
-  const tile = (n, l) => `<div class="kpi"><div><div class="n">${n}</div><div class="l">${l}</div></div></div>`;
-  const noAr = ps.no_ar.slice(0, 6).map(e => `<div class="item"><div class="capa">${ico(e.origem === "oferta" ? "carrinho" : e.origem === "livro" ? "folha" : "criar")}</div><div class="corpo">
+  const noAr = ps.no_ar.slice(0, 60).map(e => `<div class="item"><div class="capa">${ico(e.origem === "oferta" ? "carrinho" : e.origem === "livro" ? "folha" : "criar")}</div><div class="corpo">
       <div class="tit">${esc(e.titulo || "(sem título)")}</div>
       <div class="meta"><span>${dataBR(e.enviado_em)}</span><span>👆 ${e.cliques || 0}</span><span>❤️ ${e.reacoes || 0}</span></div>
       <div class="botoes"><a class="btn peq" href="${esc(linkMsg(e))}" target="_blank" rel="noopener">Abrir no Telegram</a></div></div></div>`).join("");
+  const mais = (n, lim, aba) => n > lim ? `<p class="dica cx-mais">Mostrando ${lim} de ${n}. <a href="#" onclick="ir('${aba}');return false">Ver todos</a></p>` : "";
+  const abas = [["fila", "Fila", ps.fila.length], ["agendados", "Agendados", ps.agendados.length], ["noar", "No ar", ps.no_ar.length], ["ajustes", "Ajustes", null]];
+  if (!abas.some(a => a[0] === abaCx)) abaCx = "fila";
+  const painel = (k, html) => `<div class="cx-painel" data-cx="${k}" ${abaCx === k ? "" : "hidden"}>${html}</div>`;
   return `<div class="cx-cab"><div class="cx-av" style="background:linear-gradient(140deg,#2f86f6,#1a4fb8);color:#fff">${esc(c.inicial)}</div>
-      <div><h1>${esc(b.nome)}</h1><p>${esc(b.chat)} · ${am ? "livros e ofertas da Amazon" : esc(b.nicho || "posts feitos por você")}</p></div></div>
+      <div><h1>${esc(b.nome)}</h1><p>${esc(b.chat)} · ${am ? "livros e ofertas da Amazon" : esc(b.nicho || "posts feitos por você")} · 👆 ${cl ? cl.cliques : 0} cliques em 7 dias</p></div></div>
     <div class="cx-acoes">
       <button class="btn acento" onclick="criarPara(${b.id}, 'branco')">${ico("criar")}Escrever post</button>
       <button class="btn" onclick="criarPara(${b.id}, 'ia')">${ico("brilho")}Criar com IA</button>
       <button class="btn" onclick="criarPara(${b.id}, 'modelos')">${ico("modelo")}Usar um modelo</button>
       ${am ? `<button class="btn" onclick="criarPara(${b.id}, 'amazon')">${ico("carrinho")}Link da Amazon</button>` : ""}
     </div>
-    <div class="cx-tiles">${tile(ps.fila.length, "na fila")}${tile(ps.agendados.length, "agendados")}${tile(ps.no_ar.length, "no ar agora")}${tile(cl ? cl.cliques : 0, "cliques (7 dias)")}</div>
-    <div class="grade g2">
-      <div class="card"><div class="secao">Agendados</div>${ps.agendados.map(p => itemPost(p, acoesPost(p))).join("") || vazio("Nada agendado. Use “Escrever post” e escolha Agendar.")}</div>
-      <div class="card"><div class="secao">Próximos da fila${ps.fila.length > 5 ? ` <a class="conta-s" href="#" onclick="ir('agenda');return false">ver todos (${ps.fila.length})</a>` : ""}</div>${ps.fila.slice(0, 5).map(p => itemPost(p, acoesPost(p))).join("") || vazio(am ? "Fila vazia." : "Nada na fila. Ao criar, escolha “Próximo horário livre”.")}</div>
-    </div>
-    <div class="card" style="margin-top:16px"><div class="secao">No ar agora${ps.no_ar.length > 6 ? ` <a class="conta-s" href="#" onclick="ir('noar');return false">ver todos (${ps.no_ar.length})</a>` : ""}</div>${noAr || vazio("Nenhum post no ar neste canal.")}</div>
-    <div class="secao" style="margin-top:20px">Ajustes do canal</div>` + formCanal(b);
+    <div class="seg cx-abas" role="tablist" aria-label="Partes do canal">${abas.map(([k, r, n]) => `<button role="tab" data-cx="${k}" aria-pressed="${abaCx === k}" aria-selected="${abaCx === k}" onclick="trocaAbaCx('${k}')">${r}${n === null ? "" : `<span class="n">${n}</span>`}</button>`).join("")}</div>
+    <div class="card cx-caixa">
+      ${painel("fila", `<div class="cx-lista">${ps.fila.slice(0, 50).map(p => itemPost(p, acoesPost(p))).join("") || vazio(am ? "Fila vazia." : "Nada na fila. Ao criar, escolha “Próximo horário livre”.")}</div>${mais(ps.fila.length, 50, "agenda")}`)}
+      ${painel("agendados", `<div class="cx-lista">${ps.agendados.map(p => itemPost(p, acoesPost(p))).join("") || vazio("Nada agendado. Use “Escrever post” e escolha Agendar.")}</div>`)}
+      ${painel("noar", `<div class="cx-lista">${noAr || vazio("Nenhum post no ar neste canal.")}</div>${mais(ps.no_ar.length, 60, "noar")}`)}
+      ${painel("ajustes", formCanal(b))}
+    </div>`;
+}
+function trocaAbaCx(k) {
+  abaCx = k;
+  document.querySelectorAll(".cx-abas button").forEach(bt => { const on = bt.dataset.cx === k; bt.setAttribute("aria-pressed", on); bt.setAttribute("aria-selected", on); });
+  document.querySelectorAll(".cx-painel").forEach(p => p.hidden = p.dataset.cx !== k);
+  const l = document.querySelector(`.cx-painel[data-cx="${k}"] .cx-lista`); if (l) l.scrollTop = 0;
 }
 // abre Criar já com só este canal marcado e o jeito de começar escolhido
 function criarPara(id, fonte) {
