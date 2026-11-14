@@ -16,10 +16,11 @@
     "011-at-the-doctor",
     "015-much-vs-many",
     "018-piece-of-cake",
-    "017-quiz-bored"
+    "017-quiz-bored",
+    "014-thank-you"
   ],
-  "contador": 17,
-  "ultimo": "2026-11-14T01:30:18+00:00",
+  "contador": 18,
+  "ultimo": "2026-11-14T18:46:34+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -38,7 +39,8 @@
     "011-at-the-doctor": "2026-11-13T14:54:52+00:00",
     "015-much-vs-many": "2026-11-13T20:33:08+00:00",
     "018-piece-of-cake": "2026-11-13T21:59:33+00:00",
-    "017-quiz-bored": "2026-11-14T01:30:18+00:00"
+    "017-quiz-bored": "2026-11-14T01:30:18+00:00",
+    "014-thank-you": "2026-11-14T18:46:34+00:00"
   },
   "mensagens": {
     "008-phone-conversation": [
@@ -79,6 +81,9 @@
     ],
     "017-quiz-bored": [
       8391
+    ],
+    "014-thank-you": [
+      8392
     ]
   }
 }
