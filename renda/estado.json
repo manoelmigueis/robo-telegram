@@ -18,7 +18,8 @@
     "027-fotos-produto",
     "028-divulgar",
     "018-aprender-ia",
-    "011-mei"
+    "011-mei",
+    "015-escrita"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -26,8 +27,8 @@
     "ministério da cultura oferece curso de extensão on line e gratuito em cultura di",
     "startup da unicamp oferece 15 cursos online gratuitos com certificado veja as op"
   ],
-  "contador": 19,
-  "ultimo": "2026-11-14T01:03:04+00:00",
+  "contador": 20,
+  "ultimo": "2026-11-14T18:29:47+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -43,7 +44,8 @@
     "027-fotos-produto": "2026-11-13T16:05:32+00:00",
     "028-divulgar": "2026-11-13T16:05:32+00:00",
     "018-aprender-ia": "2026-11-13T16:05:45+00:00",
-    "011-mei": "2026-11-14T01:03:04+00:00"
+    "011-mei": "2026-11-14T01:03:04+00:00",
+    "015-escrita": "2026-11-14T18:29:47+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -78,6 +80,9 @@
     ],
     "011-mei": [
       8781
+    ],
+    "015-escrita": [
+      8782
     ]
   }
 }
