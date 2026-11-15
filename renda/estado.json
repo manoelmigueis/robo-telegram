@@ -23,7 +23,8 @@
     "026-quiz-teste",
     "025-erros",
     "019-ia",
-    "020-curriculo-robo"
+    "020-curriculo-robo",
+    "021-whatsapp"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -33,8 +34,8 @@
     "usp abre inscrições para curso gratuito e 100 online sobre mercado de carbono",
     "3 cursos da usp on line com inscrições abertas nesta sexta feira 13"
   ],
-  "contador": 24,
-  "ultimo": "2026-11-15T19:06:55+00:00",
+  "contador": 25,
+  "ultimo": "2026-11-15T23:31:30+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -55,7 +56,8 @@
     "026-quiz-teste": "2026-11-15T00:28:07+00:00",
     "025-erros": "2026-11-15T00:28:14+00:00",
     "019-ia": "2026-11-15T12:41:40+00:00",
-    "020-curriculo-robo": "2026-11-15T16:41:41+00:00"
+    "020-curriculo-robo": "2026-11-15T16:41:41+00:00",
+    "021-whatsapp": "2026-11-15T23:31:30+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -105,6 +107,9 @@
     ],
     "020-curriculo-robo": [
       8788
+    ],
+    "021-whatsapp": [
+      8793
     ]
   }
 }
