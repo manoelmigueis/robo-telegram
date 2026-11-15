@@ -22,7 +22,8 @@
     "015-escrita",
     "026-quiz-teste",
     "025-erros",
-    "019-ia"
+    "019-ia",
+    "020-curriculo-robo"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -31,8 +32,8 @@
     "startup da unicamp oferece 15 cursos online gratuitos com certificado veja as op",
     "usp abre inscrições para curso gratuito e 100 online sobre mercado de carbono"
   ],
-  "contador": 23,
-  "ultimo": "2026-11-15T12:41:40+00:00",
+  "contador": 24,
+  "ultimo": "2026-11-15T16:41:41+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -52,7 +53,8 @@
     "015-escrita": "2026-11-14T18:29:47+00:00",
     "026-quiz-teste": "2026-11-15T00:28:07+00:00",
     "025-erros": "2026-11-15T00:28:14+00:00",
-    "019-ia": "2026-11-15T12:41:40+00:00"
+    "019-ia": "2026-11-15T12:41:40+00:00",
+    "020-curriculo-robo": "2026-11-15T16:41:41+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -99,6 +101,9 @@
     ],
     "019-ia": [
       8786
+    ],
+    "020-curriculo-robo": [
+      8788
     ]
   }
 }
