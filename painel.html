@@ -261,6 +261,8 @@ button.chip{font-family:var(--font)}
 .tg-txt{padding:9px 12px 4px;white-space:pre-wrap;word-wrap:break-word;font:400 14.5px/1.42 -apple-system,'Segoe UI',Roboto,sans-serif}
 .tg-txt a{color:var(--tg-link);text-decoration:none}
 .tg-hora{text-align:right;font-size:11.5px;color:var(--tg-sub);padding:0 10px 6px}
+.tg-botao.primary{background:#3390ec}.tg-botao.success{background:#31a24c}.tg-botao.danger{background:#e5484d}
+.cores-bt{flex-wrap:wrap;margin-bottom:6px}.cores-bt button{flex:1 1 0;min-width:0;white-space:nowrap}
 .tg-botao{max-width:420px;margin-top:4px;border-radius:10px;padding:9px;text-align:center;font:600 14px -apple-system,'Segoe UI',Roboto,sans-serif;color:#fff;background:rgba(40,60,80,.42);backdrop-filter:blur(6px)}
 
 /* ---------- canais ---------- */
@@ -600,6 +602,8 @@ button.chip{font-family:var(--font)}
               <div><label class="rot" for="botao_texto">Texto do botão (opcional)</label><input id="botao_texto" placeholder="🛒 VER OFERTA"></div>
               <div><label class="rot" for="botao_url">Link do botão</label><input id="botao_url" placeholder="https://..."></div>
             </div>
+            <label class="rot">Cor do botão</label>
+            <div class="seg cores-bt" id="botao_cor" role="radiogroup" aria-label="Cor do botão"></div>
             <p class="dica" id="aviso_tag"></p>
           </div>
 
@@ -832,6 +836,13 @@ function md(t) {
 }
 function visivel(t) { return t.trim().replace(/\[([^\]\n]+)\]\(((?:https?|tg):\/\/[^\s)]+)\)/g, "$1").replace(/\*\*|__|~~/g, "").length; }
 
+const CORES_BT = [["", "Cor do canal"], ["primary", "🔵 Azul"], ["success", "🟢 Verde"], ["danger", "🔴 Vermelho"]];
+let corBt = "";
+function opcoesCor(sel) { return CORES_BT.map(([k, r]) => `<option value="${k}" ${k === (sel || "") ? "selected" : ""}>${r}</option>`).join(""); }
+function renderCorBt() {
+  $("botao_cor").innerHTML = CORES_BT.map(([k, r]) => `<button type="button" role="radio" aria-pressed="${corBt === k}" aria-checked="${corBt === k}" onclick="corBt='${k}';renderCorBt();previa()">${r}</button>`).join("");
+}
+renderCorBt();
 function previa() {
   const txt = $("texto").value;
   $("previa").innerHTML = md(txt) || '<span style="color:var(--tg-sub)">A prévia do post aparece aqui.</span>';
@@ -841,9 +852,10 @@ function previa() {
   const src = fotoLocal || $("foto_url").value.trim();
   $("pv_foto").innerHTML = src ? `<img src="${esc(src)}" alt="Foto do post">` : "";
   const bt = $("botao_texto").value.trim();
-  $("pv_botao").classList.toggle("oculto", !bt); $("pv_botao").textContent = bt;
   const marcado = document.querySelector("#escolha_canais input:checked");
   const canal = marcado && dados ? dados.canais.find(c => String(c.id) === marcado.value) : null;
+  const corPv = corBt || (canal && canal.cor_botao) || "";
+  $("pv_botao").className = "tg-botao" + (bt ? "" : " oculto") + (corPv ? " " + corPv : ""); $("pv_botao").textContent = bt;
   $("pv_nome").textContent = canal ? canal.nome : "Seu canal";
   $("pv_av").textContent = (canal ? canal.nome : "C").trim().charAt(0).toUpperCase();
   $("pv_hora").textContent = new Date().toTimeString().slice(0, 5);
@@ -940,6 +952,7 @@ async function criarPost() {
   if (modo === "agora" && ids.length && !confirm(`Postar agora em ${ids.length} canal(is)?`)) return;
   const f = new FormData();
   ["texto", "foto_url", "botao_texto", "botao_url", "quando"].forEach(id => f.append(id, $(id).value));
+  f.append("botao_cor", corBt);
   if ($("foto").files[0]) f.append("foto", $("foto").files[0]);
   f.append("canais", ids.join(",")); f.append("modo", modo); f.append("expira_horas", $("expira").value);
   f.append("saida", $("saida").value); f.append("fixar", $("fixar").checked ? "1" : "");
@@ -948,7 +961,7 @@ async function criarPost() {
 function limpar(semPerguntar) {
   if (!semPerguntar && $("texto").value.trim() && !confirm("Apagar o que está escrito?")) return;
   ["texto", "foto_url", "botao_texto", "botao_url", "quando", "expira", "saida", "am_link"].forEach(id => $(id).value = "");
-  $("fixar").checked = false;
+  $("fixar").checked = false; corBt = ""; renderCorBt();
   $("foto").value = ""; fotoLocal = ""; previa();
 }
 
@@ -1058,6 +1071,9 @@ function formCanal(c) {
         <div><label class="rot">@ na assinatura</label><input name="assinatura" value="${esc(c.assinatura)}" placeholder="${esc(c.chat.startsWith("@") ? c.chat : "@seucanal")}"></div>
       </div>
       <label class="rot">Hashtags próprias</label><input name="tags" value="${esc(c.tags)}" placeholder="#tecnologia #ofertas">
+      <label class="rot">Cor dos botões neste canal</label>
+      <select name="cor_botao">${CORES_BT.map(([k, r]) => `<option value="${k}" ${k === (c.cor_botao || "") ? "selected" : ""}>${k ? r : "Padrão do Telegram (sem cor)"}</option>`).join("")}</select>
+      <p class="dica" style="margin-top:4px">Vale para os livros, as ofertas e os seus posts com “Cor do canal”.</p>
       <details class="fonte" style="margin-top:16px" ${amazon(c) ? "open" : ""}>
         <summary class="secao" style="margin-bottom:8px;cursor:pointer">Livros e ofertas da Amazon neste canal${amazon(c) ? "" : " (desligado)"}</summary>
         <p class="dica" style="margin-top:0">Só ligue em canal de livros ou de ofertas. Canal de outro tema (inglês, cursos...) deixe desligado.</p>
@@ -1320,7 +1336,7 @@ async function salvarCanal(id) {
   const box = document.querySelector(`[data-canal="${id}"]`), v = (n) => box.querySelector(`[name=${n}]`);
   const recebe = ["livro", "oferta"].filter(t => v(t).checked).join(",");
   if (v("auto").checked && !recebe) { toast("Marque Livros ou Ofertas, ou desligue o “Receber da fila sozinho”."); return; }
-  try { await api(`/api/canais/${id}`, { nicho: v("nicho").value.trim(), assinatura: v("assinatura").value, tags: v("tags").value.trim(), auto: v("auto").checked && !!recebe, recebe, horarios: v("horarios").value }); } catch (e) {}
+  try { await api(`/api/canais/${id}`, { nicho: v("nicho").value.trim(), assinatura: v("assinatura").value, tags: v("tags").value.trim(), cor_botao: v("cor_botao").value, auto: v("auto").checked && !!recebe, recebe, horarios: v("horarios").value }); } catch (e) {}
   document.activeElement && document.activeElement.blur(); carregar();
 }
 async function removerCanal(id) { if (confirm("Tirar este canal do painel? (o canal não é apagado)")) { try { await api(`/api/canais/${id}`, { remover: true }); } catch (e) {} carregar(); } }
@@ -1418,6 +1434,7 @@ function renderLotes() {
     const ed = loteAberto.has(l.id) ? `<div class="lote-ed" data-lote="${l.id}">
         <label class="rot" style="margin:0">Texto</label><textarea name="texto">${esc(l.texto)}</textarea>
         <div class="linha"><input name="botao_texto" placeholder="Texto do botão" value="${esc(l.botao_texto)}"><input name="botao_url" placeholder="https://..." value="${esc(l.botao_url)}"></div>
+        <label class="rot" style="margin:0">Cor do botão</label><select name="botao_cor">${opcoesCor(l.botao_cor)}</select>
         ${l.status === "agendado" ? `<label class="rot" style="margin:0">Entra em</label><input name="quando" type="datetime-local" value="${esc((l.agendado_para || "").replace(" ", "T"))}">` : ""}
         <label class="rot" style="margin:0">Sai do ar em (em branco = não sai)</label><input name="saida" type="datetime-local" value="${esc((l.saida_em || "").replace(" ", "T"))}">
         <div class="botoes"><button class="btn pri peq" onclick="salvarLote(${l.id}, this)">Salvar em todos os canais</button><button class="btn peq" onclick="abrirLote(${l.id})">Fechar</button></div></div>` : "";
@@ -1436,7 +1453,7 @@ function renderLotes() {
 function abrirLote(id) { loteAberto.has(id) ? loteAberto.delete(id) : loteAberto.add(id); renderLotes(); }
 async function salvarLote(id, bt) {
   const box = document.querySelector(`[data-lote="${id}"]`), v = n => box.querySelector(`[name=${n}]`);
-  const corpo = { texto: v("texto").value, botao_texto: v("botao_texto").value, botao_url: v("botao_url").value, saida: v("saida").value };
+  const corpo = { texto: v("texto").value, botao_texto: v("botao_texto").value, botao_url: v("botao_url").value, botao_cor: v("botao_cor").value, saida: v("saida").value };
   if (v("quando")) corpo.quando = v("quando").value;
   await ocupado(bt, "Salvando...", async () => { await api(`/api/posts/${id}/editar`, corpo); loteAberto.delete(id); document.activeElement && document.activeElement.blur(); carregar(); });
 }

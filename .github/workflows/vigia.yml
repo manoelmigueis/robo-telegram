@@ -1,0 +1,34 @@
+name: Vigia (horários na hora certa)
+
+# O GitHub atrasa muito as rodadas marcadas: o relógio de 10 minutos chegou a rodar de 4 em 4 horas.
+# O vigia fica ligado quase 6 horas e aperta "Run workflow" de cada tarefa na hora certa:
+# relógio a cada 10 minutos, postar no minuto 7, inglês no 23, renda no 41 e garimpo às 07h30 de Manaus.
+# No fim ele chama o próximo vigia. O cron abaixo só religa o vigia se ele cair.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17,47 * * * *"
+
+concurrency:
+  group: vigia
+  cancel-in-progress: false
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  vigia:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          sparse-checkout: vigia.py
+          sparse-checkout-cone-mode: false
+      - name: Vigiar os horários
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PYTHONUNBUFFERED: "1"
+        run: python3 vigia.py

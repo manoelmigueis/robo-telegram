@@ -120,7 +120,7 @@ def lotes():
             "agendado_para": p["agendado_para"], "saida_em": (p["dados"] or {}).get("saida_em")
             or (no_ar[0]["expira_em"] if no_ar else None),
             "fixar": bool((p["dados"] or {}).get("fixar")), "fixados": sum(1 for e in no_ar if e.get("fixado")),
-            "texto": para_editor(p["legenda"]), "botao_texto": botao.get("text", ""), "botao_url": botao.get("url", ""),
+            "texto": para_editor(p["legenda"]), "botao_texto": botao.get("text", ""), "botao_url": botao.get("url", ""), "botao_cor": botao.get("style", ""),
             "foto": p["foto"] if str(p["foto"] or "").startswith("http") else "",
             "canais": [e["canal_nome"] or e["chat"] for e in no_ar] if no_ar
             else [nomes.get(c, f"canal {c}") for c in (p["canais"] or [])],
@@ -191,7 +191,7 @@ def para_editor(h):
 @app.post("/api/posts")
 async def criar_post(
     texto: str = Form(""), foto_url: str = Form(""), foto: UploadFile | None = File(None),
-    botao_texto: str = Form(""), botao_url: str = Form(""), canais: str = Form(""),
+    botao_texto: str = Form(""), botao_url: str = Form(""), botao_cor: str = Form(""), canais: str = Form(""),
     modo: str = Form("agora"), quando: str = Form(""), expira_horas: str = Form(""),
     saida: str = Form(""), fixar: str = Form(""),
 ):
@@ -216,6 +216,8 @@ async def criar_post(
         if not botao_url.startswith(("http://", "https://", "tg://")):
             erro("O link do botão precisa começar com https://")
         botoes = [[{"text": botao_texto.strip(), "url": botao_url.strip()}]]
+        if botao_cor in banco.CORES_BOTAO:
+            botoes[0][0]["style"] = botao_cor
     ids = [int(c) for c in canais.split(",") if c.strip()]
     if not ids:
         erro("Escolha pelo menos um canal.")
@@ -326,7 +328,9 @@ def editar_post(pid: int, dados: dict = Body(...)):
         bt, bu = str(dados.get("botao_texto", "")).strip(), str(dados.get("botao_url", "")).strip()
         if bt and bu and not bu.startswith(("http://", "https://", "tg://")):
             erro("O link do botão precisa começar com https://")
-        mudar["botoes"] = p["botoes"] = [[{"text": bt, "url": bu}]] if bt and bu else []
+        bc = str(dados.get("botao_cor", ""))
+        mudar["botoes"] = p["botoes"] = [[{"text": bt, "url": bu, **({"style": bc} if bc in banco.CORES_BOTAO else {})}]] \
+            if bt and bu else []
     if dados.get("quando") and p["status"] == "agendado":
         q = str(dados["quando"]).replace("T", " ")[:16]
         if q <= banco.agora():
@@ -485,6 +489,8 @@ async def mudar_canal(cid: int, request: Request):
         dados["assinatura"] = a if not a or a.startswith("@") else "@" + a
     if "horarios" in dados:  # vazio = segue os horários gerais
         dados["horarios"] = " ".join(sorted(set(re.findall(r"\b\d{2}:\d{2}\b", str(dados["horarios"])))))
+    if "cor_botao" in dados and dados["cor_botao"] not in banco.CORES_BOTAO:
+        dados["cor_botao"] = ""
     if "recebe" in dados:
         dados["recebe"] = ",".join(t for t in ("livro", "oferta") if t in str(dados["recebe"]))
     banco.mudar_canal(cid, **{k: v for k, v in dados.items() if k != "remover"})

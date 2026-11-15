@@ -7,6 +7,11 @@ on:
     # rodada, o post sai na rodada seguinte. Minuto 23 evita o pico da hora cheia.
     - cron: "23 13-23,0-1 * * *"
   workflow_dispatch:
+    inputs:
+      vigia:
+        description: "Deixe em branco para postar agora (o vigia usa 1 = rodada marcada)"
+        required: false
+        default: ""
 
 concurrency:
   group: ingles
@@ -34,7 +39,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           PYTHONUTF8: "1"
         # Na mão (Run workflow) posta na hora; no agendamento, só se um horário venceu.
-        run: python ingles.py ${{ github.event_name == 'schedule' && 'agendado' || 'proximo' }}
+        run: python ingles.py ${{ (github.event_name == 'schedule' || inputs.vigia) && 'agendado' || 'proximo' }}
       - name: Guardar o estado
         run: |
           git config user.name "robo-nuvem"

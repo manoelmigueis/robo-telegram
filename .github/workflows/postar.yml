@@ -5,6 +5,11 @@ on:
     # 08h às 22h no horário de Manaus (UTC-4) = 12h às 02h UTC
     - cron: "7 12-23,0-2 * * *"
   workflow_dispatch:
+    inputs:
+      vigia:
+        description: "Deixe em branco para postar agora (o vigia usa 1 = rodada marcada)"
+        required: false
+        default: ""
 
 concurrency:
   group: robo
@@ -32,6 +37,7 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          VIGIA: ${{ inputs.vigia }}
           PYTHONUTF8: "1"
         run: python nuvem.py postar
       - name: Atender a fila de cliques (bot e painel)

@@ -43,7 +43,16 @@ def links_rastreados(p, canal, legenda, botoes):
     pid, cid = p.get("id"), canal.get("id")
     legenda = re.sub(r'href="([^"]+)"', lambda m: f'href="{rastrear(m.group(1).replace("&amp;", "&"), pid, cid)}"'
                      .replace("&", "&amp;") if site_ok(m.group(1).replace("&amp;", "&")) else m.group(0), legenda or "")
-    novos = [[{**b, "url": rastrear(b["url"], pid, cid)} if b.get("url") else b for b in linha] for linha in (botoes or [])]
+    cor = canal.get("cor_botao") or ""
+
+    def _bt(b):
+        b = {**b, "url": rastrear(b["url"], pid, cid)} if b.get("url") else dict(b)
+        if b.get("style") not in banco.CORES_BOTAO:  # sem cor própria: usa a cor do canal
+            b.pop("style", None)
+            if cor in banco.CORES_BOTAO:
+                b["style"] = cor
+        return b
+    novos = [[_bt(b) for b in linha] for linha in (botoes or [])]
     return legenda, novos
 
 

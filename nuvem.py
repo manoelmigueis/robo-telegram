@@ -64,7 +64,7 @@ def postar():
         return
 
     # "Run workflow" apertado na mão = postar agora, mesmo pausado ou com a hora já postada
-    na_mao = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
+    na_mao = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch" and not os.environ.get("VIGIA")
     st = postador.estado()
     if st.get("pausado") and not na_mao:
         print("Automático pausado.")

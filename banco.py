@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS envios (
 _tem = {l[1] for l in _con.execute("PRAGMA table_info(canais)")}
 for _col, _tipo in (("nicho", "TEXT DEFAULT ''"), ("recebe", "TEXT DEFAULT 'livro,oferta'"),
                     ("assinatura", "TEXT DEFAULT ''"), ("tags", "TEXT DEFAULT ''"),
-                    ("horarios", "TEXT DEFAULT ''")):
+                    ("horarios", "TEXT DEFAULT ''"), ("cor_botao", "TEXT DEFAULT ''")):
     if _col not in _tem:
         _con.execute(f"ALTER TABLE canais ADD COLUMN {_col} {_tipo}")
 _cols_envios = {l[1] for l in _con.execute("PRAGMA table_info(envios)")}
@@ -82,7 +82,8 @@ def novo_canal(chat, nome, auto=True):
     sql("UPDATE canais SET ativo=1 WHERE chat=?", (chat,))  # se tinha sido tirado, volta
 
 
-CAMPOS_CANAL = ("nome", "auto", "nicho", "recebe", "assinatura", "tags", "horarios")
+CAMPOS_CANAL = ("nome", "auto", "nicho", "recebe", "assinatura", "tags", "horarios", "cor_botao")
+CORES_BOTAO = ("primary", "success", "danger")  # azul, verde, vermelho
 
 
 def mudar_canal(cid, **campos):

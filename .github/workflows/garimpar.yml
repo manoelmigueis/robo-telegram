@@ -5,6 +5,11 @@ on:
     # 07h30 no horário de Manaus (UTC-4) = 11h30 UTC
     - cron: "30 11 * * *"
   workflow_dispatch:
+    inputs:
+      vigia:
+        description: "Deixe em branco para postar agora (o vigia usa 1 = rodada marcada)"
+        required: false
+        default: ""
 
 concurrency:
   group: robo

@@ -14,6 +14,7 @@ concurrency:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   relogio:
@@ -35,6 +36,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PYTHONUTF8: "1"
         run: python nuvem.py relogio
+      - name: Atender a fila de cliques (bot e painel)
+        if: always()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PYTHONUTF8: "1"
+        run: |
+          pip install -q fastapi uvicorn python-multipart httpx
+          python bot_nuvem.py fila || true
       - name: Guardar a fila e o estado
         if: always()
         run: |
