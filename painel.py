@@ -603,6 +603,30 @@ def ingles_previa(dados: dict = Body(default={})):
     return {"ok": True, "msg": f"Mandei {len(itens)} prévia(s) no seu privado do Telegram."}
 
 
+# ---------- canal de cursos grátis da Udemy ----------
+@app.get("/api/cursos")
+def cursos_lista():
+    """Busca no site (Couponami) os cursos grátis de hoje e ontem que ainda não saíram no canal."""
+    import cursos
+    achados = cursos.garimpar()
+    e = cursos.estado()
+    return {"canal": cursos.canal(), "cursos": achados[:40], "postados": len(e["postados"]), "ultimo": e.get("ultimo")}
+
+
+@app.post("/api/cursos/postar")
+def cursos_postar(dados: dict = Body(default={})):
+    import cursos
+    c = {k: str(dados.get(k, "")) for k in ("slug", "titulo", "pagina", "idioma")}
+    if not re.fullmatch(r"[\w-]+", c["slug"]) or not c["pagina"].startswith(cursos.SITE):
+        erro("Curso inválido.")
+    if c["slug"] in cursos.estado()["postados"]:
+        return {"ok": True, "msg": "Esse curso já tinha saído no canal."}
+    feito = cursos.postar_escolhido(c)
+    if not feito:
+        erro("O cupom desse curso já acabou ou não foi achado. Escolha outro.")
+    return {"ok": True, "msg": f"Postado no canal: {feito[0]}"}
+
+
 # ---------- central dos canais de conteúdo (inglês e renda extra) ----------
 def _central(funcao, *args):
     import central

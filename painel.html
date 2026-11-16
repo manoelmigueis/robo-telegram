@@ -1290,6 +1290,7 @@ function paginaCanal(b, c) {
       <button class="btn" onclick="criarPara(${b.id}, 'modelos')">${ico("modelo")}Usar um modelo</button>
       ${am ? `<button class="btn" onclick="criarPara(${b.id}, 'amazon')">${ico("carrinho")}Link da Amazon</button>` : ""}
     </div>
+    ${udemy(b) ? cartaoCursos() : ""}
     <div class="seg cx-abas" role="tablist" aria-label="Partes do canal">${abas.map(([k, r, n]) => `<button role="tab" data-cx="${k}" aria-pressed="${abaCx === k}" aria-selected="${abaCx === k}" onclick="trocaAbaCx('${k}')">${r}${n === null ? "" : `<span class="n">${n}</span>`}</button>`).join("")}</div>
     <div class="card cx-caixa">
       ${painel("fila", `<div class="cx-lista">${ps.fila.slice(0, 50).map(p => itemPost(p, acoesPost(p))).join("") || vazio(am ? "Fila vazia." : "Nada na fila. Ao criar, escolha “Próximo horário livre”.")}</div>${mais(ps.fila.length, 50, "agenda")}`)}
@@ -1297,6 +1298,40 @@ function paginaCanal(b, c) {
       ${painel("noar", `<div class="cx-lista">${noAr || vazio("Nenhum post no ar neste canal.")}</div>${mais(ps.no_ar.length, 60, "noar")}`)}
       ${painel("ajustes", formCanal(b))}
     </div>`;
+}
+// canal de cursos grátis da Udemy: busca no site os cursos de hoje e posta o escolhido
+let CURSOS = null, cursosBuscando = false;
+const udemy = b => /cursosgratuitosudemy/i.test((b && b.chat) || "");
+const BANDEIRA = { "Português": "🇧🇷", "Espanhol": "🇪🇸", "Inglês": "🇺🇸" };
+function cartaoCursos() {
+  const lista = !CURSOS ? `<p class="dica">Toque em <b>Buscar cursos no site</b> para ver os cursos da Udemy que estão de graça hoje.</p>`
+    : !CURSOS.cursos.length ? vazio("Nenhum curso grátis novo agora. Tente de novo mais tarde.")
+    : CURSOS.cursos.map(c => `<div class="item"><div class="capa">${BANDEIRA[c.idioma] || "🎓"}</div><div class="corpo">
+        <div class="tit">${esc(c.titulo)}</div><div class="meta"><span>${esc(c.idioma)}</span></div>
+        <div class="botoes"><button class="btn pri peq" onclick="postarCurso('${esc(c.slug)}', this)">Postar agora</button>
+        <a class="btn peq" href="${esc(c.pagina)}" target="_blank" rel="noopener">Ver no site</a></div></div></div>`).join("");
+  const n = CURSOS ? ` <span class="conta-s">${CURSOS.cursos.length} achados</span>` : "";
+  return `<div class="card" id="cursos_card"><div class="secao">Cursos grátis no site${n}</div>
+    <div class="linha-garimpo"><button class="btn pri peq" onclick="buscarCursos()" ${cursosBuscando ? "disabled" : ""}><svg class="i"><use href="#i-picareta"/></svg>${cursosBuscando ? "Buscando…" : "Buscar cursos no site"}</button></div>
+    <div class="cx-lista">${lista}</div></div>`;
+}
+function pintaCursos() { const el = $("cursos_card"); if (el) el.outerHTML = cartaoCursos(); }
+async function buscarCursos() {
+  cursosBuscando = true; pintaCursos();
+  try { CURSOS = await api("/api/cursos"); toast(CURSOS.cursos.length ? `Achei ${CURSOS.cursos.length} curso(s) grátis.` : "Nenhum curso grátis novo agora."); }
+  catch (e) { toast("Não consegui abrir o site de cursos agora. Tente de novo."); }
+  cursosBuscando = false; pintaCursos();
+}
+async function postarCurso(slug, bt) {
+  const c = CURSOS && CURSOS.cursos.find(x => x.slug === slug); if (!c) return;
+  if (!confirm(`Postar agora no canal?
+
+${c.titulo}`)) return;
+  bt.disabled = true; bt.textContent = "Postando…";
+  try {
+    const r = await api("/api/cursos/postar", c);
+    CURSOS.cursos = CURSOS.cursos.filter(x => x.slug !== slug); pintaCursos();
+  } catch (e) { bt.disabled = false; bt.textContent = "Postar agora"; }
 }
 function trocaAbaCx(k) {
   abaCx = k;

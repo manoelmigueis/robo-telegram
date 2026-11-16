@@ -192,6 +192,39 @@ def enviar(chat, c):
                        link_preview_options={"is_disabled": True})["message_id"]
 
 
+def marcar_postado(slug):
+    """Guarda o curso como postado. Pelo painel (na nuvem) grava direto no GitHub, como a central faz."""
+    import central
+    agora = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    if not central.tem_nuvem():
+        e = estado()
+        e["postados"].append(slug)
+        e["ultimo"] = agora
+        salvar_estado(e)
+        return
+    try:
+        central._git("fetch", "-q", "origin", "main")
+        e = json.loads(central._git("show", "FETCH_HEAD:cursos/estado.json"))
+    except Exception:
+        e = estado()
+    e.setdefault("postados", []).append(slug)
+    e["postados"] = e["postados"][-1000:]
+    e["ultimo"] = agora
+    central.gravar("ingles", f"cursos grátis: post pelo painel {agora[:16]}",
+                   arquivos={"cursos/estado.json": json.dumps(e, ensure_ascii=False, indent=2).encode("utf-8")})
+
+
+def postar_escolhido(c):
+    """Posta o curso que o Manoel escolheu no painel. Devolve (título, message_id) ou None sem cupom."""
+    c = detalhes(dict(c))
+    if not c:
+        return None
+    mid = enviar(canal(), c)
+    marcar_postado(c["slug"])
+    print(f"Curso postado pelo painel: {c['titulo']} (mensagem {mid})")
+    return c["titulo"], mid
+
+
 # ---------------- postar ----------------
 def postar_um():
     for c in garimpar()[:8]:

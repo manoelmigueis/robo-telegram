@@ -34,7 +34,7 @@ REPO = os.environ.get("REPO", "manoelmigueis/robo-telegram")
 PASTA = Path("/tmp/robo")
 ARQUIVOS = ["banco.py", "metricas.py", "postador.py", "escritor.py", "ingles.py", "renda.py", "central.py", "painel.py",
             "painel.html", "config.json", "robo.db", "estado.json", "ingles/posts.json", "ingles/estado.json",
-            "renda/posts.json", "renda/estado.json"]
+            "renda/posts.json", "renda/estado.json", "cursos.py", "cursos/estado.json"]
 # chave pública do Telegram para conferir a assinatura do Mini App sem precisar do token do robô
 TELEGRAM_CHAVE = "e7bf03a2fa4602af4580703d88dda5bb59f32ed8b02a56c187fe7d34caed242a"
 
@@ -100,7 +100,7 @@ def painel():
             os.environ.setdefault("PAINEL_SENHA", "nuvem")  # o painel.py não cria .env
             if str(PASTA) not in sys.path:
                 sys.path.insert(0, str(PASTA))
-            for nome in ("painel", "ingles", "postador", "escritor", "banco", "metricas", "central", "renda"):
+            for nome in ("painel", "ingles", "postador", "escritor", "banco", "metricas", "central", "renda", "cursos"):
                 sys.modules.pop(nome, None)
             _cache["painel"] = importlib.import_module("painel")
             _cache["sha"] = sha
@@ -192,6 +192,11 @@ def ingles_img(nome: str):
     if not re.fullmatch(r"[\w.-]+", nome):
         return JSONResponse({"erro": "Imagem não encontrada."}, status_code=404)
     return RedirectResponse(f"https://raw.githubusercontent.com/{REPO}/main/ingles/img/{nome}")
+
+
+@app.get("/api/cursos")
+def cursos_lista():
+    return painel().cursos_lista()
 
 
 @app.get("/api/crescimento")

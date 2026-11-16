@@ -19,6 +19,8 @@
     { "source": "/api/canais/:r*", "destination": "/api/painel" },
     { "source": "/api/ajustes", "destination": "/api/painel" },
     { "source": "/api/crescimento", "destination": "/api/painel" },
+    { "source": "/api/cursos", "destination": "/api/painel" },
+    { "source": "/api/cursos/:r*", "destination": "/api/painel" },
     { "source": "/api/garimpar", "destination": "/api/painel" }
   ]
 }
