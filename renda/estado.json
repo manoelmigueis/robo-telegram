@@ -26,7 +26,8 @@
     "020-curriculo-robo",
     "021-whatsapp",
     "022-onde-curso-gratis",
-    "023-bairro"
+    "023-bairro",
+    "024-portfolio"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -37,8 +38,8 @@
     "3 cursos da usp on line com inscrições abertas nesta sexta feira 13",
     "firjan senai rj abre inscrições para quatro cursos gratuitos com vagas abertas"
   ],
-  "contador": 27,
-  "ultimo": "2026-11-16T19:41:37+00:00",
+  "contador": 28,
+  "ultimo": "2026-11-16T23:00:57+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -62,7 +63,8 @@
     "020-curriculo-robo": "2026-11-15T16:41:41+00:00",
     "021-whatsapp": "2026-11-15T23:31:30+00:00",
     "022-onde-curso-gratis": "2026-11-16T12:41:37+00:00",
-    "023-bairro": "2026-11-16T16:41:55+00:00"
+    "023-bairro": "2026-11-16T16:41:55+00:00",
+    "024-portfolio": "2026-11-16T23:00:57+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -121,6 +123,9 @@
     ],
     "023-bairro": [
       8795
+    ],
+    "024-portfolio": [
+      8801
     ]
   }
 }
