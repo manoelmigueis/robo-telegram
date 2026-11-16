@@ -38,6 +38,11 @@ def relogio(so_manuais=True):
         metricas.coletar()
     except Exception as x:
         print(f"[métricas] {x}")
+    try:  # membros de cada canal, uma vez por hora (gráfico de crescimento do painel)
+        import metricas
+        metricas.medir_membros()
+    except Exception as x:
+        print(f"[membros] {x}")
     agora_txt = banco.agora()
     if not postador.pausa_total():
         for p in banco.posts(status=("agendado",)):

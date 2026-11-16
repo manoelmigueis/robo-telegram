@@ -299,6 +299,23 @@ def registrar_postado(n, item_id, mid):
         return e
 
 
+def reciclar(n, e, dias=3):
+    """Fila vazia e a IA fora do ar: repete o post que saiu há mais tempo (no mínimo `dias` atrás),
+    para o canal não ficar parado. Posts tirados no painel nunca voltam."""
+    limite = datetime.now(timezone.utc) - timedelta(days=dias)
+    velhos = []
+    for i in modulo(n).banco():
+        if i["id"] in e["pulados"] or i["id"] in e["agendados"] or i["id"] not in e["postados"]:
+            continue
+        quando = e["quando"].get(i["id"]) or "2000-01-01T00:00:00+00:00"  # postado antes de guardar a hora
+        if datetime.fromisoformat(quando) <= limite:
+            velhos.append((quando, i))
+    velhos.sort(key=lambda par: par[0])
+    if velhos:
+        print(f"[central] {n}: fila vazia, repetindo {velhos[0][1]['id']} (saiu em {velhos[0][0][:10]}).")
+    return [i for _, i in velhos[:1]]
+
+
 def postar(n, item_id=None):
     """Posta no canal um post da fila (ou o próximo) e marca como postado na nuvem."""
     m = modulo(n)
@@ -308,7 +325,7 @@ def postar(n, item_id=None):
         if item["id"] in e["postados"] and item["id"] not in e["apagados"]:
             return item, None
     else:
-        f = fila(n, e)
+        f = fila(n, e) or reciclar(n, e)
         if not f:
             return None, None
         item = f[0]

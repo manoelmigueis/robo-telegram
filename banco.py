@@ -51,6 +51,9 @@ for _col in ("fixado", "cliques", "reacoes"):
 # cada clique e cada aviso de reação, para os números do painel e para não contar nada duas vezes
 _con.execute("CREATE TABLE IF NOT EXISTS eventos (nome TEXT PRIMARY KEY, tipo TEXT, post_id INTEGER, "
              "canal_id INTEGER, envio_id INTEGER, quando TEXT, valor INTEGER)")
+# quantos membros cada canal tinha em cada hora (o gráfico de crescimento do painel)
+_con.execute("CREATE TABLE IF NOT EXISTS membros (chat TEXT, nome TEXT, hora TEXT, total INTEGER, "
+             "PRIMARY KEY (chat, hora))")
 _con.commit()
 
 
@@ -163,3 +166,12 @@ def envios_vencidos():
 
 def marcar_envio(eid, status):
     sql("UPDATE envios SET status=?, apagado_em=? WHERE id=?", (status, agora(), eid))
+
+
+# ---------- membros (crescimento) ----------
+def anotar_membros(chat, nome, hora, total):
+    sql("INSERT OR REPLACE INTO membros (chat, nome, hora, total) VALUES (?,?,?,?)", (chat, nome, hora, total))
+
+
+def membros_desde(hora):
+    return sql("SELECT chat, nome, hora, total FROM membros WHERE hora >= ? ORDER BY chat, hora", (hora,))

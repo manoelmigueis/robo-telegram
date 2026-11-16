@@ -192,8 +192,7 @@ def postar_proximo():
     import central  # posta e já grava no GitHub (com o número da mensagem, para poder apagar depois)
     item, mid = central.postar("ingles")
     if not item:
-        postador.avisar("🇺🇸 O banco de posts de inglês acabou e a IA não conseguiu escrever agora. Ela tenta de novo na próxima rodada.")
-        print("Banco de inglês vazio.")
+        print("Banco de inglês vazio (e nenhum post antigo para repetir).")
         return False
     print(f"Inglês postado: {item['id']} (mensagem {mid})")
     restam = len(proximos(10**6))

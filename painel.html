@@ -151,6 +151,19 @@ input[type=file]::file-selector-button{border:0;border-radius:999px;background:v
 .linha{display:flex;gap:12px;flex-wrap:wrap}
 .linha>*{flex:1 1 200px}
 .dica{font-size:12.5px;color:var(--muted);margin-top:6px}
+.cresc-topo{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.cresc-topo .seg{flex:0 0 auto}
+.cresc-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:14px}
+.cresc-item{background:var(--glass-2);border:1px solid var(--line);border-radius:var(--r-tile);padding:14px 14px 10px;position:relative;min-width:0}
+.cresc-nome{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cresc-num{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.15;font-variant-numeric:tabular-nums}
+.cresc-var{display:flex;gap:12px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.cresc-var b{color:var(--ink);font-weight:700}
+.cresc-item svg{display:block;width:100%;height:auto;margin-top:8px;overflow:visible}
+.cresc-leg{display:flex;gap:12px;font-size:11.5px;color:var(--muted);margin-top:4px}
+.cresc-leg i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.cresc-tip{position:absolute;pointer-events:none;background:var(--glass-3);border:1px solid var(--line-2);box-shadow:var(--shadow-pop);border-radius:10px;padding:7px 10px;font-size:12px;line-height:1.45;white-space:nowrap;z-index:5;color:var(--ink)}
+.cresc-tip.oculto{display:none}
 .nota{background:var(--soft);border-radius:14px;padding:10px 14px;font-size:13px;color:var(--muted);margin-top:12px}
 
 .seg{display:flex;background:var(--soft);border-radius:999px;padding:5px;gap:2px;flex-wrap:wrap}
@@ -696,6 +709,14 @@ button.chip{font-family:var(--font)}
         <div class="busca"><svg class="i"><use href="#i-busca"/></svg><input id="hub_busca" placeholder="Buscar por nome, @ ou nicho" aria-label="Buscar canal" autocomplete="off"></div>
         <div class="seg" id="hub_filtro" role="group" aria-label="Tipo de canal"></div>
       </div>
+      <div class="card cresc">
+        <div class="cresc-topo">
+          <div class="secao" style="margin:0">Crescimento dos canais</div>
+          <div class="seg" id="cresc_periodo" role="group" aria-label="Período"></div>
+        </div>
+        <p class="dica" id="cresc_dica">Membros de cada canal, medidos de hora em hora. Entradas e saídas são estimadas pela diferença entre uma medida e a seguinte.</p>
+        <div id="cresc_canais" class="cresc-grade"></div>
+      </div>
       <div id="hub_canais"></div>
       <div class="card" style="margin-top:22px">
         <div class="secao">Adicionar canal</div>
@@ -821,7 +842,7 @@ function ir(aba) {
   document.querySelectorAll("[data-pagina]").forEach(s => s.classList.toggle("oculto", s.dataset.pagina !== aba));
   try { localStorage.setItem("aba", aba); } catch (e) {}
   if (aba === "canal") mostrarCanal();
-  if (aba === "canais") { renderHub(); buscarCentrais(); }
+  if (aba === "canais") { renderHub(); buscarCentrais(); crescer(); }
   scrollTo({ top: 0 });
 }
 function abrirMais() { const f = $("folha_mais"), abre = f.classList.contains("oculto"); f.classList.toggle("oculto", !abre); }
@@ -1128,6 +1149,81 @@ function renderIniCanais() {
   if (!$("ini_canais")) return;
   $("ini_canais").innerHTML = listaCanais().map(c => `<button class="hub-c" onclick="abrirCanal('${c.chave}')">${avatar(c)}<span class="hub-tx"><b>${esc(c.nome)}</b>${c.status ? `<small>${esc(c.status)}</small>` : ""}</span><svg class="i"><use href="#i-seta"/></svg></button>`).join("") || vazio("Adicione um canal em Canais.");
 }
+// ---------- crescimento dos canais ----------
+let crescDias = 30; try { crescDias = +localStorage.getItem("crescDias") || 30; } catch (e) {}
+const fmtN = n => Number(n).toLocaleString("pt-BR");
+const sinal = n => (n > 0 ? "+" : n < 0 ? "−" : "") + fmtN(Math.abs(n));
+const diaBR = d => d.slice(8, 10) + "/" + d.slice(5, 7);
+async function crescer(dias) {
+  if (dias) { crescDias = dias; try { localStorage.setItem("crescDias", dias); } catch (e) {} }
+  $("cresc_periodo").innerHTML = [[7, "7 dias"], [30, "30 dias"], [90, "90 dias"]].map(([d, r]) =>
+    `<button aria-pressed="${crescDias === d}" onclick="crescer(${d})">${r}</button>`).join("");
+  let c;
+  try { c = await api("/api/crescimento?dias=" + crescDias); } catch (e) { return; }
+  if (!c.canais.length) {
+    $("cresc_canais").innerHTML = vazio("A primeira medida sai na próxima rodada do robô (de hora em hora). Volte daqui a pouco.");
+    return;
+  }
+  $("cresc_canais").innerHTML = c.canais.map((k, i) => `
+    <div class="cresc-item" data-i="${i}">
+      <div class="cresc-nome" title="${esc(k.chat)}">${esc(k.nome)}</div>
+      <div class="cresc-num">${fmtN(k.atual)} <span style="font-size:13px;font-weight:600;color:var(--muted)">membros</span></div>
+      <div class="cresc-var"><span>24 h: <b>${sinal(k.dia)}</b></span><span>7 dias: <b>${sinal(k.semana)}</b></span>
+        <span>entraram <b>${fmtN(k.entradas)}</b></span><span>saíram <b>${fmtN(k.saidas)}</b></span></div>
+      ${graficoCresc(k)}
+      <div class="cresc-leg"><span><i style="background:var(--acento)"></i>membros</span><span><i style="background:var(--ok)"></i>entradas</span><span><i style="background:var(--perigo)"></i>saídas</span></div>
+      <div class="cresc-tip oculto"></div>
+    </div>`).join("");
+  $("cresc_canais").querySelectorAll(".cresc-item").forEach(el => {
+    const k = c.canais[+el.dataset.i], tip = el.querySelector(".cresc-tip"), svg = el.querySelector("svg");
+    const mostrar = ev => {
+      const r = svg.getBoundingClientRect(), x = ((ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left) / r.width;
+      const j = Math.max(0, Math.min(k.serie.length - 1, Math.round(x * (k.serie.length - 1))));
+      const d = k.serie[j];
+      tip.innerHTML = `<b>${diaBR(d.dia)}</b><br>${fmtN(d.total)} membros<br>entraram ${fmtN(d.entradas)} · saíram ${fmtN(d.saidas)}`;
+      tip.classList.remove("oculto");
+      const px = (k.serie.length > 1 ? j / (k.serie.length - 1) : .5) * r.width + (r.left - el.getBoundingClientRect().left);
+      tip.style.left = Math.max(6, Math.min(el.clientWidth - tip.offsetWidth - 6, px - tip.offsetWidth / 2)) + "px";
+      tip.style.top = (r.top - el.getBoundingClientRect().top + 4) + "px";
+      svg.querySelector(".mira").setAttribute("x1", 8 + (k.serie.length > 1 ? j / (k.serie.length - 1) : .5) * 272);
+      svg.querySelector(".mira").setAttribute("x2", svg.querySelector(".mira").getAttribute("x1"));
+      svg.querySelector(".mira").style.opacity = 1;
+    };
+    const esconder = () => { tip.classList.add("oculto"); svg.querySelector(".mira").style.opacity = 0; };
+    svg.addEventListener("mousemove", mostrar); svg.addEventListener("touchstart", mostrar, { passive: true });
+    svg.addEventListener("mouseleave", esconder);
+  });
+}
+function graficoCresc(k) {
+  // um gráfico por canal (cada um na sua escala): linha = membros; barras = entradas (cima) e saídas (baixo)
+  const W = 320, H = 162, x0 = 8, larg = 272, topoL = 8, altL = 80, meio = 122, altB = 22;
+  const s = k.serie, n = s.length;
+  const tot = s.map(d => d.total), mn = Math.min(...tot), mx = Math.max(...tot);
+  const pad = Math.max(1, Math.round((mx - mn) * .15)), lo = mn - pad, hi = mx + pad;
+  const X = i => x0 + (n > 1 ? i / (n - 1) : .5) * larg, Y = v => topoL + (1 - (v - lo) / (hi - lo)) * altL;
+  const linha = s.map((d, i) => `${i ? "L" : "M"}${X(i).toFixed(1)},${Y(d.total).toFixed(1)}`).join("");
+  const maxB = Math.max(1, ...s.map(d => Math.max(d.entradas, d.saidas)));
+  const bw = Math.max(2, Math.min(10, larg / Math.max(n, 1) - 2));
+  const barras = s.map((d, i) => {
+    const he = d.entradas / maxB * altB, hs = d.saidas / maxB * altB, x = (X(i) - bw / 2).toFixed(1);
+    return (he ? `<rect x="${x}" y="${(meio - he).toFixed(1)}" width="${bw}" height="${he.toFixed(1)}" rx="1.5" fill="var(--ok)"/>` : "")
+         + (hs ? `<rect x="${x}" y="${meio + 1}" width="${bw}" height="${hs.toFixed(1)}" rx="1.5" fill="var(--perigo)"/>` : "");
+  }).join("");
+  const ult = s[n - 1];
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(k.nome)}: de ${fmtN(s[0].total)} para ${fmtN(ult.total)} membros em ${n} dia(s)">
+    <text x="${W}" y="${topoL + 4}" text-anchor="end" font-size="10" fill="var(--faint)">${fmtN(mx)}</text>
+    <text x="${W}" y="${topoL + altL}" text-anchor="end" font-size="10" fill="var(--faint)">${fmtN(mn)}</text>
+    <line x1="${x0}" x2="${x0 + larg}" y1="${meio + .5}" y2="${meio + .5}" stroke="var(--line-2)"/>
+    ${barras}
+    <path d="${linha}" fill="none" stroke="var(--acento)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="${X(n - 1)}" cy="${Y(ult.total)}" r="4" fill="var(--acento)" stroke="var(--glass-3)" stroke-width="2"/>
+    <line class="mira" x1="0" x2="0" y1="${topoL}" y2="${meio + altB}" stroke="var(--line-2)" style="opacity:0"/>
+    <text x="${x0}" y="${H - 2}" font-size="10" fill="var(--faint)">${diaBR(s[0].dia)}</text>
+    <text x="${x0 + larg}" y="${H - 2}" text-anchor="end" font-size="10" fill="var(--faint)">${diaBR(ult.dia)}</text>
+    <rect x="0" y="0" width="${W}" height="${H}" fill="transparent"/>
+  </svg>`;
+}
+
 function renderHub() {
   renderIniCanais();
   if (!$("hub_canais")) return;

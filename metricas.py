@@ -204,3 +204,72 @@ def resumo(dias=30):
     return {"dias": dias, "cliques": esta["cliques"], "reacoes": esta["reacoes"], "semana": esta, "semana_antes": antes,
             "por_dia": por_dia, "por_hora": por_hora, "por_tipo": por_tipo, "por_canal": por_canal,
             "melhores": melhores, "conclusao": _conclusao(por_hora, por_tipo)}
+
+
+# ---------- crescimento dos canais (membros) ----------
+def canais_medidos():
+    """Canais públicos do robô (os da tabela + o de renda extra), sem chats privados."""
+    vistos, lista = set(), []
+    for c in banco.canais():
+        chat = str(c["chat"])
+        if chat.startswith("@") or chat.startswith("-100"):
+            vistos.add(chat.lower())
+            lista.append((chat, c["nome"] or chat))
+    try:
+        import renda
+        if renda.canal().lower() not in vistos:
+            lista.append((renda.canal(), "💰 Renda Extra"))
+    except Exception:
+        pass
+    return lista
+
+
+def medir_membros():
+    """Anota quantos membros cada canal tem agora. Uma medida por hora (as outras rodadas pulam)."""
+    import postador
+    hora = banco.agora()[:13] + ":00"
+    feitas = {r["chat"] for r in banco.sql("SELECT chat FROM membros WHERE hora=?", (hora,))}
+    for chat, nome in canais_medidos():
+        if chat in feitas:
+            continue
+        try:
+            total = postador.tg("getChatMemberCount", chat_id=chat)
+            banco.anotar_membros(chat, nome, hora, int(total))
+        except Exception as x:
+            print(f"[membros] {chat}: {x}")
+
+
+def crescimento(dias=30):
+    """Por canal: membros por dia, entradas e saídas (estimadas pela diferença de hora em hora)."""
+    from datetime import timedelta
+    desde = (datetime.now(banco.FUSO) - timedelta(days=dias)).strftime("%Y-%m-%d 00:00")
+    por_chat = {}
+    for r in banco.membros_desde(desde):
+        por_chat.setdefault(r["chat"], []).append(r)
+    canais = []
+    for chat, pontos in por_chat.items():
+        dia_a_dia = {}
+        anterior = None
+        for p in pontos:
+            d = dia_a_dia.setdefault(p["hora"][:10], {"dia": p["hora"][:10], "total": 0, "entradas": 0, "saidas": 0})
+            d["total"] = p["total"]
+            if anterior is not None:
+                dif = p["total"] - anterior
+                if dif > 0:
+                    d["entradas"] += dif
+                else:
+                    d["saidas"] += -dif
+            anterior = p["total"]
+        serie = list(dia_a_dia.values())
+        atual = pontos[-1]["total"]
+
+        def ha(n):  # total de n dias atrás (o mais perto que tiver)
+            alvo = (datetime.now(banco.FUSO) - timedelta(days=n)).strftime("%Y-%m-%d %H:%M")
+            antes = [p["total"] for p in pontos if p["hora"] <= alvo]
+            return antes[-1] if antes else pontos[0]["total"]
+        canais.append({"chat": chat, "nome": pontos[-1]["nome"] or chat, "atual": atual,
+                       "dia": atual - ha(1), "semana": atual - ha(7), "desde": pontos[0]["hora"],
+                       "entradas": sum(d["entradas"] for d in serie), "saidas": sum(d["saidas"] for d in serie),
+                       "serie": serie})
+    canais.sort(key=lambda c: -c["atual"])
+    return {"dias": dias, "canais": canais, "medido": max((p["hora"] for v in por_chat.values() for p in v), default=None)}

@@ -93,16 +93,26 @@ def _via_gratis(pedido):
     token = os.environ.get("GITHUB_TOKEN")
     if not token:
         return None
-    for modelo in MODELOS_GRATIS:
+    # Endereço novo do GitHub Models e, se ele não responder JSON, o endereço antigo (Azure).
+    tentativas = [("https://models.github.ai/inference/chat/completions", m) for m in MODELOS_GRATIS]
+    tentativas += [("https://models.inference.ai.azure.com/chat/completions", m)
+                   for m in ("gpt-4o-mini", "Meta-Llama-3.1-70B-Instruct")]
+    for url, modelo in tentativas:
         req = urllib.request.Request(
-            "https://models.github.ai/inference/chat/completions", method="POST",
+            url, method="POST",
             data=json.dumps({"model": modelo, "max_tokens": 4000, "temperature": 0.8,
                              "messages": [{"role": "user", "content": pedido}]}).encode(),
             headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json",
-                     "Accept": "application/vnd.github+json"})
+                     "Accept": "application/json", "X-GitHub-Api-Version": "2022-11-28"})
         try:
             with urllib.request.urlopen(req, timeout=120) as r:
-                texto = json.loads(r.read())["choices"][0]["message"]["content"]
+                bruto = r.read()
+                try:
+                    texto = json.loads(bruto)["choices"][0]["message"]["content"]
+                except ValueError:
+                    print(f"[escritor] IA grátis {modelo} devolveu algo que não é JSON "
+                          f"({r.status}, {r.headers.get('Content-Type')}): {bruto[:150]!r}")
+                    continue
             if texto and texto.strip():
                 print(f"[escritor] IA grátis: {modelo}")
                 return texto

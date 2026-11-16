@@ -190,6 +190,11 @@ def para_editor(h):
     return html.unescape(re.sub(r"<[^>]+>", "", t))
 
 
+@app.get("/api/crescimento")
+def crescimento(dias: int = 30):
+    return metricas.crescimento(max(1, min(dias, 365)))
+
+
 @app.post("/api/posts")
 async def criar_post(
     texto: str = Form(""), foto_url: str = Form(""), foto: UploadFile | None = File(None),
