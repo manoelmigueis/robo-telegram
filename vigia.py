@@ -16,12 +16,13 @@ TOKEN = os.environ["GITHUB_TOKEN"]
 DURACAO = int(os.environ.get("VIGIA_SEGUNDOS", 5 * 3600 + 45 * 60))
 ROBO = ("postar.yml", "relogio.yml", "garimpar.yml", "bot.yml")  # quem divide a vez no grupo "robo"
 
-# (arquivo, minuto UTC, horas UTC). Todos no minuto 0: o post sai em menos de 1 minuto depois da hora. Postar: 08h–22h de Manaus; inglês, renda e cursos: como no cron deles.
+# (arquivo, minuto UTC, horas UTC). Todos no minuto 0: o post sai em menos de 1 minuto depois da hora. Postar: 08h–22h de Manaus; inglês, renda, cursos e achadinhos: como no cron deles.
 TAREFAS = [
     ("postar.yml", 0, set(range(12, 24)) | {0, 1, 2}),
     ("ingles.yml", 0, set(range(13, 24)) | {0, 1}),
     ("renda.yml", 0, set(range(12, 24)) | {0, 1}),
     ("cursos.yml", 0, set(range(13, 24)) | {0, 1}),
+    ("achadinhos.yml", 0, set(range(13, 24)) | {0, 1}),
     ("garimpar.yml", 30, {11}),
 ]
 

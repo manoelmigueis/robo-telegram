@@ -219,6 +219,13 @@ def canais_medidos():
         import renda
         if renda.canal().lower() not in vistos:
             lista.append((renda.canal(), "💰 Renda Extra"))
+            vistos.add(renda.canal().lower())
+    except Exception:
+        pass
+    try:
+        import achadinhos
+        if achadinhos.canal().lower() not in vistos:
+            lista.append((achadinhos.canal(), "🏠 Achadinhos Casa e Cozinha"))
     except Exception:
         pass
     return lista
