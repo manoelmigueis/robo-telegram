@@ -26,8 +26,11 @@ ESTADO = PASTA / "estado.json"
 CFG = postador.CONFIG.get("cursos", {})
 FUSO = timezone(timedelta(hours=-4))  # Manaus
 SITE = "https://www.couponami.com"
-# Português primeiro. Se não houver curso novo em português, vale um em inglês (dá para desligar no config).
-LISTAS = CFG.get("listas") or [["Português", "/language/Portuguese"], ["Inglês", "/language/English"]]
+# Português primeiro, depois espanhol e inglês (dá para mudar no config, em "listas").
+LISTAS = CFG.get("listas") or [["Português", "/language/Portuguese"], ["Espanhol", "/language/Spanish"],
+                               ["Inglês", "/language/English"]]
+BANDEIRA = {"Português": "🇧🇷", "Espanhol": "🇪🇸", "Inglês": "🇺🇸"}
+TAGS_FIXAS = ["#cursosgratis", "#cursogratuito", "#udemy", "#cursosonline"]
 NAVEGADOR = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130 Safari/537.36"}
 NOVOS = ("today", "yesterday")  # cupom de curso grátis acaba em poucos dias: só os de hoje e ontem
 
@@ -102,6 +105,8 @@ def detalhes(c):
         c["descricao"] = _limpo(meta("og:description") or meta("description"))
         foto = meta("og:image")
         c["foto"] = re.sub(r"/course/\d+x\d+/", "/course/750x422/", foto) if foto else ""
+        cat = re.search(r'/category/([a-z0-9-]+)"', pagina)
+        c["categoria"] = cat.group(1) if cat else ""
         c["titulo"] = re.sub(r"^\[(PT|EN|ES)\]\s*", "", _limpo(meta("og:title")) or c["titulo"])
         return c
     except Exception as erro:
@@ -110,32 +115,51 @@ def detalhes(c):
 
 
 # ---------------- texto ----------------
-def resumo_ia(c):
-    """2 ou 3 frases em português dizendo o que a pessoa aprende. Sem IA, usa a descrição do curso."""
+def _tags(texto):
+    """Só hashtags limpas: minúsculas, sem acento, sem espaço."""
+    import unicodedata
+    sem = unicodedata.normalize("NFKD", texto or "").encode("ascii", "ignore").decode().lower()
+    return list(dict.fromkeys("#" + t for t in re.findall(r"#([a-z0-9_]{3,30})", sem)))
+
+
+def texto_ia(c):
+    """Resumo (2 ou 3 frases) e hashtags do tema do curso. Sem IA: descrição do curso e a categoria."""
+    resumo, tags = "", []
     try:
         import escritor
-        pedido = f"""Escreva 2 ou 3 frases curtas, em português do Brasil simples, para o post de um canal do Telegram
-que divulga cursos gratuitos. Diga o que a pessoa aprende e para quem o curso serve.
+        pedido = f"""Você escreve posts de um canal do Telegram que divulga cursos gratuitos. Responda em 2 linhas, neste formato:
+RESUMO: 2 ou 3 frases curtas, em português do Brasil simples, dizendo o que a pessoa aprende e para quem o curso serve.
+TAGS: 5 a 7 hashtags em português sobre o TEMA do curso, do jeito que as pessoas procuram no Telegram
+(ex.: um curso de TikTok Shop -> #tiktokshop #vendasonline #ecommerce; de Excel -> #excel #informatica #planilhas).
+Hashtags em minúsculas, sem acento e sem espaço.
 Use só o que está nos dados abaixo. Não invente carga horária, certificado, nota ou número de alunos.
-Sem emoji, sem hashtag, sem travessão longo, sem título. Responda só com as frases.
+No resumo: sem emoji, sem hashtag, sem travessão longo.
 
 Curso: {c['titulo']}
 Idioma das aulas: {c['idioma']}
+Categoria no site: {c.get('categoria', '')}
 Descrição do curso: {c.get('descricao', '')}"""
-        texto = (escritor.responder(pedido) or "").strip().replace("—", ",").replace("–", ",")
-        if texto and len(texto) < 600:
-            return texto
+        resposta = escritor.responder(pedido) or ""
+        r = re.search(r"RESUMO:\s*(.+?)(?:\n\s*TAGS:|$)", resposta, re.S)
+        resumo = (r.group(1) if r else "").strip().replace("—", ",").replace("–", ",")
+        tg = re.search(r"TAGS:\s*(.+)", resposta)
+        tags = _tags(tg.group(1) if tg else "")[:7]
     except Exception as erro:
-        print(f"[cursos] a IA não escreveu o resumo: {erro}")
-    return c.get("descricao", "")[:300]
+        print(f"[cursos] a IA não escreveu o texto: {erro}")
+    if not resumo or len(resumo) > 600:
+        resumo = c.get("descricao", "")[:300]
+    if not tags and c.get("categoria"):
+        tags = ["#" + c["categoria"].replace("-", "")]
+    return resumo, list(dict.fromkeys(tags + TAGS_FIXAS))
 
 
 def legenda(c):
-    linhas = [f"🎓 <b>{html.escape(c['titulo'])}</b>", "", html.escape(resumo_ia(c)), "",
-              f"🌐 Aulas em {c['idioma'].lower()}",
-              "🆓 Curso pago que está de graça hoje, com cupom",
-              "⏳ O cupom acaba rápido e tem vagas limitadas. Garanta o seu agora: depois de entrar, o curso fica seu.",
-              "", "#cursosgratis #udemy #cursosonline"]
+    """Padrão do canal: título, descrição, idioma, gatilho com o link, @ do canal e hashtags do tema."""
+    resumo, tags = texto_ia(c)
+    linhas = [f"🎓 <b>{html.escape(c['titulo'])}</b>", "", html.escape(resumo), "",
+              f"{BANDEIRA.get(c['idioma'], '🌐')} {c['idioma']}", "",
+              f'<a href="{html.escape(c["link"], quote=True)}">🕐 GRÁTIS POR TEMPO LIMITADO 🔥</a>', "",
+              f"📚: {canal()}", "", " ".join(tags)]
     return "\n".join(linhas)[:1024]
 
 
