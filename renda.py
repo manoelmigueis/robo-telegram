@@ -302,14 +302,11 @@ def enviar_noticia(chat, n):
 def postar_dica():
     import central  # posta e já grava no GitHub (com o número da mensagem, para poder apagar depois)
     if not proximas(1):
-        postador.avisar("💵 O banco de dicas de renda extra acabou. Peça ao Claude um lote novo.")
+        postador.avisar("💵 O banco de dicas de renda extra acabou e a IA não conseguiu escrever agora. Ela tenta de novo na próxima rodada.")
         print("Banco de dicas vazio; postando uma notícia no lugar.")
         return postar_noticia(sem_dica=True)
     item, mid = central.postar("renda")
     print(f"Dica postada: {item['id']} (mensagem {mid})")
-    restam = len(proximas(10**6))
-    if restam in (9, 3):
-        postador.avisar(f"💵 Restam {restam} dicas de renda extra no banco. Peça ao Claude um lote novo.")
     return True
 
 
@@ -358,6 +355,10 @@ def postar_se_devido():
     if postador.pausa_total():
         print("Tudo pausado (pausa geral do painel).")
         return False
+    try:  # fila acabando: a IA escreve posts novos antes de faltar
+        central.repor("renda")
+    except Exception as x:
+        print(f"[repor] falhou: {x}")
     if central.postar_agendados("renda"):  # agendados pela central saem primeiro
         return True
     devido = horario_devido()

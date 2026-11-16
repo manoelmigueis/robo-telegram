@@ -717,6 +717,9 @@ button.chip{font-family:var(--font)}
           <div class="opcao"><div class="t"><b>Pausar tudo</b><span>Nada entra nos canais, nem os agendados, até você religar. Ao religar, os agendados que passaram da hora entram de uma vez.</span></div><button class="chave" id="ch_tudo" role="switch" aria-label="Pausar tudo" onclick="pausaTotal(!dados.ajustes.pausa_total)"></button></div>
           <div class="opcao"><div class="t"><b>Automático ligado</b><span>Posta um livro ou oferta da fila em cada horário.</span></div><button class="chave" id="ch_auto" role="switch" aria-label="Automático" onclick="alternar('pausado')"></button></div>
           <div class="opcao"><div class="t"><b>Pedir minha aprovação</b><span>Em cada horário, o robô te manda a prévia no Telegram e espera o “Publicar”.</span></div><button class="chave" id="ch_aprov" role="switch" aria-label="Aprovação" onclick="alternar('aprovacao')"></button></div>
+          <div class="secao" style="margin-top:14px">Inteligência artificial</div>
+          <div class="opcao"><div class="t"><b>A IA repõe os posts sozinha</b><span>Quando a fila do inglês ou da renda extra estiver acabando, a IA escreve posts novos no estilo do canal. Eles entram na fila e você pode revisar antes de sair.</span></div><button class="chave" id="ch_ia_auto" role="switch" aria-label="A IA repõe os posts sozinha" onclick="alternar('ia_auto')"></button></div>
+          <div class="opcao"><div class="t"><b>Usar só a IA grátis</b><span>Desligado: o Claude escreve e, se ele falhar, entra a IA grátis do GitHub. Ligado: só a grátis, sem gastar crédito do Claude.</span></div><button class="chave" id="ch_ia_gratis" role="switch" aria-label="Usar só a IA grátis" onclick="alternar('ia_gratis')"></button></div>
           <div class="opcao"><div class="t"><b>Garimpar agora</b><span>Busca livros grátis e ofertas novas na Amazon (uns 20 minutos).</span></div><button class="btn peq" id="botao_garimpo" onclick="garimpar()"><svg class="i"><use href="#i-picareta"/></svg>Garimpar</button></div>
         </div>
         <div class="card">
@@ -1033,6 +1036,7 @@ function render() {
   if (abaAtual === "canal" && canalAtual.startsWith("b:") && !document.querySelector("#canal_corpo :focus")) mostrarCanal();
 
   $("ch_auto").setAttribute("aria-checked", !a.pausado); $("ch_aprov").setAttribute("aria-checked", a.aprovacao);
+  $("ch_ia_auto").setAttribute("aria-checked", !!a.ia_auto); $("ch_ia_gratis").setAttribute("aria-checked", !!a.ia_gratis);
   $("botao_garimpo").disabled = a.garimpando;
   mostrarGarimpo(a.garimpando);
   if (document.activeElement !== $("horarios")) $("horarios").value = (a.horarios || []).join(" ");

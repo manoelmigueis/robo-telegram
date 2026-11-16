@@ -7,9 +7,10 @@ modelo fixo, para a IA nunca inventar nada. A IA só escreve:
   - as hashtags do tema.
 
 Quem escreve, nesta ordem:
-  1. API do Claude, se houver ANTHROPIC_API_KEY no .env;
-  2. o Claude Code instalado no PC (usa o seu plano, sem chave);
-  3. sem IA: corta o começo da descrição e usa tags fixas.
+  1. API do Claude, se houver ANTHROPIC_API_KEY (e o painel não estiver em "Usar só a IA grátis");
+  2. IA grátis do GitHub (GitHub Models), na nuvem, com a chave que o próprio GitHub dá (sem conta nova);
+  3. o Claude Code instalado no PC (usa o seu plano, sem chave);
+  4. sem IA: corta o começo da descrição e usa tags fixas.
 """
 import html
 import json
@@ -17,6 +18,8 @@ import os
 import re
 import shutil
 import subprocess
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 CONFIG = json.loads((Path(__file__).parent / "config.json").read_text(encoding="utf-8"))
@@ -81,6 +84,65 @@ def _via_api(pedido):
     return "".join(b.text for b in resposta.content if b.type == "text")
 
 
+# IA grátis do GitHub. Limite grátis: uns 50 pedidos por dia no melhor modelo e 150 no menor;
+# se um estourar, passa para o próximo.
+MODELOS_GRATIS = ("openai/gpt-4.1", "openai/gpt-4.1-mini", "meta/Llama-3.3-70B-Instruct")
+
+
+def _via_gratis(pedido):
+    token = os.environ.get("GITHUB_TOKEN")
+    if not token:
+        return None
+    for modelo in MODELOS_GRATIS:
+        req = urllib.request.Request(
+            "https://models.github.ai/inference/chat/completions", method="POST",
+            data=json.dumps({"model": modelo, "max_tokens": 4000, "temperature": 0.8,
+                             "messages": [{"role": "user", "content": pedido}]}).encode(),
+            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json",
+                     "Accept": "application/vnd.github+json"})
+        try:
+            with urllib.request.urlopen(req, timeout=120) as r:
+                texto = json.loads(r.read())["choices"][0]["message"]["content"]
+            if texto and texto.strip():
+                print(f"[escritor] IA grátis: {modelo}")
+                return texto
+        except urllib.error.HTTPError as e:
+            print(f"[escritor] IA grátis {modelo} recusou ({e.code}): {e.read()[:200]!r}")
+        except Exception as e:
+            print(f"[escritor] IA grátis {modelo} falhou ({type(e).__name__}: {e})")
+    return None
+
+
+def so_gratis():
+    """Ajuste do painel: "Usar só a IA grátis" (não gasta crédito do Claude)."""
+    try:
+        import postador
+        return bool(postador.estado().get("ia_gratis"))
+    except Exception:
+        return False
+
+
+def _ordem():
+    """Quem tenta escrever, em ordem. O primeiro que responder fica."""
+    ordem = []
+    if os.environ.get("ANTHROPIC_API_KEY") and not so_gratis():
+        ordem.append(("Claude", _via_api))
+    return ordem + [("IA grátis", _via_gratis), ("Claude Code", _via_claude_code)]
+
+
+def responder(pedido):
+    """Texto da primeira IA que responder (ou None)."""
+    for nome, funcao in _ordem():
+        try:
+            texto = funcao(pedido)
+            if texto and texto.strip():
+                print(f"[escritor] escrito por: {nome}")
+                return texto
+        except Exception as e:
+            print(f"[escritor] {nome} falhou ({type(e).__name__}: {e})")
+    return None
+
+
 def _via_claude_code(pedido):
     exe = shutil.which("claude")
     if not exe:
@@ -98,10 +160,7 @@ def escrever(itens):
         return
     pedido = _montar_pedido(itens)
     resposta = None
-    for nome, funcao in (("API", _via_api if os.environ.get("ANTHROPIC_API_KEY") else None),
-                         ("Claude Code", _via_claude_code)):
-        if not funcao:
-            continue
+    for nome, funcao in _ordem():
         try:
             bruto = funcao(pedido)
             if bruto:
@@ -292,16 +351,8 @@ def post_livre(tema, formato="dica", nicho=""):
     """Escreve um post de qualquer nicho. Devolve o texto (com **negrito**) ou None."""
     pedido = PEDIDO_LIVRE.format(nicho=nicho or "geral", formato=FORMATOS.get(formato, FORMATOS["dica"]),
                                  tema=tema.strip())
-    for funcao in (_via_api if os.environ.get("ANTHROPIC_API_KEY") else None, _via_claude_code):
-        if not funcao:
-            continue
-        try:
-            texto = (funcao(pedido) or "").strip()
-            if texto:
-                return texto.replace("—", ",").replace("–", ",")
-        except Exception as e:
-            print(f"[escritor] post livre falhou ({type(e).__name__}: {e})")
-    return None
+    texto = (responder(pedido) or "").strip()
+    return texto.replace("—", ",").replace("–", ",") if texto else None
 
 
 def _cortar(texto, item, refazer):

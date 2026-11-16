@@ -494,6 +494,32 @@ def _slug(t):
     return "-".join(palavras) or "post"
 
 
+def repor(n, minimo=6, lote=2):
+    """Quando a fila do canal está acabando, a IA escreve posts novos sozinha (alterna os tipos).
+    Desliga no painel: Ajustes > "A IA repõe os posts sozinha"."""
+    import postador
+    if not postador.estado().get("ia_auto", True):
+        return 0
+    restam = len(fila(n, banco=banco_nuvem(n)))
+    if restam >= minimo:
+        return 0
+    tipos = NICHOS[n]["tipos"]
+    base = len(banco_nuvem(n))
+    feitos = tentativas = 0
+    while restam + feitos < minimo and feitos < lote and tentativas < lote * 2:
+        tipo = tipos[(base + tentativas) % len(tipos)]
+        tentativas += 1
+        try:
+            item = criar(n, "", tipo)
+            feitos += 1
+            print(f"[repor] {n}: a IA escreveu {item['id']} ({tipo}).")
+        except Exception as x:
+            print(f"[repor] {n}: não deu para escrever agora ({type(x).__name__}: {x}).")
+            if "não respondeu" in str(x):
+                break  # nenhuma IA no ar: tenta na próxima rodada
+    return feitos
+
+
 def desenhar_renda(arte, quiz):
     """Arte 4:5 do canal de renda extra (o desenho com o ícone grande). Devolve os bytes do PNG."""
     import sys
@@ -541,8 +567,7 @@ Regras do formato:
 - No quiz, "quiz" tem "pergunta", "opcoes" (lista), "correta" (número da opção certa, começando em 0), "explicacao" (até 190 letras) e "descricao".
 - Português do Brasil simples, frases curtas. Nada de travessão longo.
 - Nunca escreva "imagens ilustrativas"."""
-    texto = escritor._via_api(pedido) if os.environ.get("ANTHROPIC_API_KEY") else None
-    texto = texto or escritor._via_claude_code(pedido)
+    texto = escritor.responder(pedido)
     if not texto:
         raise Erro("A IA não respondeu agora. Tente de novo em 1 minuto.")
     item = _extrair_json(texto)

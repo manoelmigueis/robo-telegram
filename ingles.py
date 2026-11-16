@@ -174,6 +174,10 @@ def postar_se_devido():
     if postador.pausa_total():
         print("Tudo pausado (pausa geral do painel).")
         return False
+    try:  # fila acabando: a IA escreve posts novos antes de faltar
+        central.repor("ingles")
+    except Exception as x:
+        print(f"[repor] falhou: {x}")
     if central.postar_agendados("ingles"):  # agendados pela central saem primeiro
         return True
     alvo = horario_devido()
@@ -188,13 +192,11 @@ def postar_proximo():
     import central  # posta e já grava no GitHub (com o número da mensagem, para poder apagar depois)
     item, mid = central.postar("ingles")
     if not item:
-        postador.avisar("🇺🇸 O banco de posts de inglês acabou. Peça ao Claude um lote novo.")
+        postador.avisar("🇺🇸 O banco de posts de inglês acabou e a IA não conseguiu escrever agora. Ela tenta de novo na próxima rodada.")
         print("Banco de inglês vazio.")
         return False
     print(f"Inglês postado: {item['id']} (mensagem {mid})")
     restam = len(proximos(10**6))
-    if restam in (9, 3):  # avisa antes de acabar (3 posts por dia)
-        postador.avisar(f"🇺🇸 Restam {restam} posts de inglês no banco. Peça ao Claude um lote novo.")
     return True
 
 
@@ -211,4 +213,9 @@ if __name__ == "__main__":
     elif acao == "agendado":
         postar_se_devido()
     else:
+        try:
+            import central
+            central.repor("ingles")
+        except Exception as x:
+            print(f"[repor] falhou: {x}")
         postar_proximo()

@@ -18,6 +18,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
+  models: read
   contents: write
 
 jobs:
@@ -39,6 +40,8 @@ jobs:
       - name: Postar dica ou notícia de renda extra
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PYTHONUTF8: "1"
         # Na mão (Run workflow) posta na hora; no agendamento, só se um horário venceu.
         run: python renda.py ${{ (github.event_name == 'schedule' || inputs.vigia) && 'agendado' || 'dica' }}

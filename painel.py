@@ -148,6 +148,8 @@ def resumo():
         "ajustes": {
             "pausado": bool(e.get("pausado")),
             "pausa_total": bool(e.get("pausa_total")),
+            "ia_gratis": bool(e.get("ia_gratis")),
+            "ia_auto": bool(e.get("ia_auto", True)),
             "aprovacao": bool(postador.opcao("aprovacao")),
             "horarios": postador.opcao("horarios"),
             "expira_auto_horas": postador.opcao("expira_auto_horas"),
@@ -508,6 +510,9 @@ async def ajustes(request: Request):
         campos["pausado"] = bool(d["pausado"])
     if "aprovacao" in d:
         campos["aprovacao"] = bool(d["aprovacao"])
+    for k in ("ia_gratis", "ia_auto"):
+        if k in d:
+            campos[k] = bool(d[k])
     if "horarios" in d:
         hs = sorted(set(h for h in re.findall(r"\b\d{2}:\d{2}\b", d["horarios"])))
         campos["horarios"] = hs
