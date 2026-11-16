@@ -2,7 +2,7 @@ name: Vigia (horários na hora certa)
 
 # O GitHub atrasa muito as rodadas marcadas: o relógio de 10 minutos chegou a rodar de 4 em 4 horas.
 # O vigia fica ligado quase 6 horas e aperta "Run workflow" de cada tarefa na hora certa:
-# relógio a cada 10 minutos, postar no minuto 7, inglês no 23, renda no 41, cursos no 53 e garimpo às 07h30 de Manaus.
+# relógio a cada 10 minutos, todos os canais no minuto 0 (hora cheia) e garimpo às 07h30 de Manaus.
 # No fim ele chama o próximo vigia. O cron abaixo só religa o vigia se ele cair.
 on:
   workflow_dispatch:
