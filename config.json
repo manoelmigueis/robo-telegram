@@ -112,5 +112,15 @@
       "15:00": "noticia",
       "19:00": "dica"
     }
+  },
+  "cursos": {
+    "canal": "@cursosgratuitosudemy",
+    "horarios": [
+      "09:00",
+      "12:00",
+      "15:00",
+      "18:00",
+      "21:00"
+    ]
   }
 }
