@@ -29,8 +29,23 @@ SITE = "https://www.couponami.com"
 # Português primeiro, depois espanhol e inglês (dá para mudar no config, em "listas").
 LISTAS = CFG.get("listas") or [["Português", "/language/Portuguese"], ["Espanhol", "/language/Spanish"],
                                ["Inglês", "/language/English"]]
-BANDEIRA = {"Português": "🇧🇷", "Espanhol": "🇪🇸", "Inglês": "🇺🇸"}
-TAGS_FIXAS = ["#cursosgratis", "#cursogratuito", "#udemy", "#cursosonline"]
+# Igual ao canal de livros: curso de fora sai 100% no idioma dele (descrição, idioma, gatilho, botão e hashtags).
+LINGUAS = {
+    "Português": {"selo": "🇧🇷 Português", "gratis": "GRÁTIS POR TEMPO LIMITADO", "botao": "🎓 Pegar o curso grátis",
+                  "escrever": "português do Brasil", "fixas": ["#cursosgratis", "#cursogratuito", "#udemy", "#cursosonline"],
+                  "exemplo": "um curso de TikTok Shop -> #tiktokshop #vendasonline #ecommerce; de Excel -> #excel #informatica #planilhas"},
+    "Espanhol": {"selo": "🇪🇸 Español", "gratis": "GRATIS POR TIEMPO LIMITADO", "botao": "🎓 Obtener el curso gratis",
+                 "escrever": "espanhol (español neutro, de América Latina)",
+                 "fixas": ["#cursosgratis", "#cursogratuito", "#udemy", "#cursosenlinea"],
+                 "exemplo": "um curso de TikTok Shop -> #tiktokshop #ventasonline #ecommerce; de Excel -> #excel #informatica #hojasdecalculo"},
+    "Inglês": {"selo": "🇺🇸 English", "gratis": "FREE FOR A LIMITED TIME", "botao": "🎓 Get the course for free",
+               "escrever": "inglês (English)", "fixas": ["#freecourses", "#freecourse", "#udemy", "#onlinecourses"],
+               "exemplo": "um curso de TikTok Shop -> #tiktokshop #onlineselling #ecommerce; de Excel -> #excel #computerskills #spreadsheets"},
+}
+
+
+def lingua(c):
+    return LINGUAS.get(c.get("idioma"), LINGUAS["Português"])
 NAVEGADOR = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130 Safari/537.36"}
 NOVOS = ("today", "yesterday")  # cupom de curso grátis acaba em poucos dias: só os de hoje e ontem
 
@@ -124,14 +139,14 @@ def _tags(texto):
 
 def texto_ia(c):
     """Resumo (2 ou 3 frases) e hashtags do tema do curso. Sem IA: descrição do curso e a categoria."""
-    resumo, tags = "", []
+    resumo, tags, ln = "", [], lingua(c)
     try:
         import escritor
         pedido = f"""Você escreve posts de um canal do Telegram que divulga cursos gratuitos. Responda em 2 linhas, neste formato:
-RESUMO: 2 ou 3 frases curtas, em português do Brasil simples, dizendo o que a pessoa aprende e para quem o curso serve.
-TAGS: 5 a 7 hashtags em português sobre o TEMA do curso, do jeito que as pessoas procuram no Telegram
-(ex.: um curso de TikTok Shop -> #tiktokshop #vendasonline #ecommerce; de Excel -> #excel #informatica #planilhas).
-Hashtags em minúsculas, sem acento e sem espaço.
+RESUMO: 2 ou 3 frases curtas e simples, escritas em {ln['escrever']}, dizendo o que a pessoa aprende e para quem o curso serve.
+TAGS: 5 a 7 hashtags em {ln['escrever']} sobre o TEMA do curso, do jeito que as pessoas procuram no Telegram
+(ex.: {ln['exemplo']}).
+Hashtags em minúsculas, sem acento e sem espaço. As palavras "RESUMO" e "TAGS" ficam assim, mas o conteúdo vai todo em {ln['escrever']}.
 Use só o que está nos dados abaixo. Não invente carga horária, certificado, nota ou número de alunos.
 No resumo: sem emoji, sem hashtag, sem travessão longo.
 
@@ -150,21 +165,22 @@ Descrição do curso: {c.get('descricao', '')}"""
         resumo = c.get("descricao", "")[:300]
     if not tags and c.get("categoria"):
         tags = ["#" + c["categoria"].replace("-", "")]
-    return resumo, list(dict.fromkeys(tags + TAGS_FIXAS))
+    return resumo, list(dict.fromkeys(tags + ln["fixas"]))
 
 
 def legenda(c):
-    """Padrão do canal: título, descrição, idioma, gatilho com o link, @ do canal e hashtags do tema."""
+    """Padrão do canal de livros: título, descrição, idioma, gatilho com o link, @ do canal e hashtags do tema,
+    tudo no idioma do curso."""
     resumo, tags = texto_ia(c)
-    linhas = [f"🎓 <b>{html.escape(c['titulo'])}</b>", "", html.escape(resumo), "",
-              f"{BANDEIRA.get(c['idioma'], '🌐')} {c['idioma']}", "",
-              f'<a href="{html.escape(c["link"], quote=True)}">🕐 GRÁTIS POR TEMPO LIMITADO 🔥</a>', "",
+    ln = lingua(c)
+    linhas = [f"🎓 <b>{html.escape(c['titulo'])}</b>", "", html.escape(resumo), "", ln["selo"], "",
+              f'<a href="{html.escape(c["link"], quote=True)}">🕐 {ln["gratis"]} 🔥</a>', "",
               f"📚: {canal()}", "", " ".join(tags)]
     return "\n".join(linhas)[:1024]
 
 
 def enviar(chat, c):
-    teclado = {"inline_keyboard": [[{"text": "🎓 Pegar o curso grátis", "url": c["link"]}]]}
+    teclado = {"inline_keyboard": [[{"text": lingua(c)["botao"], "url": c["link"]}]]}
     texto = legenda(c)
     if c.get("foto"):
         try:
