@@ -44,9 +44,11 @@ jobs:
         # Na mão (Run workflow) posta na hora; no agendamento, só se um horário venceu.
         # As linhas também viram avisos (annotations) do job, que dá para ler pela API pública.
         run: |
-          set -o pipefail
-          python achadinhos.py ${{ (github.event_name == 'schedule' || inputs.vigia) && 'agendado' || 'agora' }} 2>&1 | tee saida.txt
+          status=0
+          python achadinhos.py ${{ (github.event_name == 'schedule' || inputs.vigia) && 'agendado' || 'agora' }} > saida.txt 2>&1 || status=$?
+          cat saida.txt
           tail -n 8 saida.txt | while IFS= read -r l; do echo "::notice title=achadinhos::$l"; done
+          exit $status
       - name: Guardar o estado
         run: |
           git config user.name "robo-nuvem"
