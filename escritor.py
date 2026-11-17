@@ -92,7 +92,7 @@ URL_GEMINI = "https://generativelanguage.googleapis.com/v1beta/models/{modelo}:g
 
 
 def _via_gratis(pedido):
-    chave = os.environ.get("GEMINI_API_KEY")
+    chave = os.environ.get("GEMINI_API_KEY") or os.environ.get("GEMINI_KEY")
     if not chave:
         print("[escritor] IA grátis: falta o segredo GEMINI_API_KEY no GitHub.")
         return None
