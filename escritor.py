@@ -8,7 +8,7 @@ modelo fixo, para a IA nunca inventar nada. A IA só escreve:
 
 Quem escreve, nesta ordem:
   1. API do Claude, se houver ANTHROPIC_API_KEY (e o painel não estiver em "Usar só a IA grátis");
-  2. IA grátis do GitHub (GitHub Models), na nuvem, com a chave que o próprio GitHub dá (sem conta nova);
+  2. IA grátis do Google (Gemini), na nuvem, com a chave grátis do AI Studio (segredo GEMINI_API_KEY);
   3. o Claude Code instalado no PC (usa o seu plano, sem chave);
   4. sem IA: corta o começo da descrição e usa tags fixas.
 """
@@ -84,38 +84,35 @@ def _via_api(pedido):
     return "".join(b.text for b in resposta.content if b.type == "text")
 
 
-# IA grátis do GitHub. Limite grátis: uns 50 pedidos por dia no melhor modelo e 150 no menor;
-# se um estourar, passa para o próximo.
-MODELOS_GRATIS = ("openai/gpt-4.1", "openai/gpt-4.1-mini", "meta/Llama-3.3-70B-Instruct")
+# IA grátis do Google (Gemini), com a chave grátis do Google AI Studio (sem cartão),
+# guardada no segredo GEMINI_API_KEY do GitHub. O GitHub Models (a grátis antiga) foi
+# desligado pelo GitHub em 30/07/2026. Se um modelo estourar o limite do dia, passa para o próximo.
+MODELOS_GRATIS = ("gemini-flash-latest", "gemini-3.8-flash", "gemini-flash-lite-latest")
+URL_GEMINI = "https://generativelanguage.googleapis.com/v1beta/models/{modelo}:generateContent"
 
 
 def _via_gratis(pedido):
-    token = os.environ.get("GITHUB_TOKEN")
-    if not token:
+    chave = os.environ.get("GEMINI_API_KEY")
+    if not chave:
+        print("[escritor] IA grátis: falta o segredo GEMINI_API_KEY no GitHub.")
         return None
-    # Endereço novo do GitHub Models e, se ele não responder JSON, o endereço antigo (Azure).
-    tentativas = [("https://models.github.ai/inference/chat/completions", m) for m in MODELOS_GRATIS]
-    tentativas += [("https://models.inference.ai.azure.com/chat/completions", m)
-                   for m in ("gpt-4o-mini", "Meta-Llama-3.1-70B-Instruct")]
-    for url, modelo in tentativas:
+    corpo = json.dumps({
+        "contents": [{"role": "user", "parts": [{"text": pedido}]}],
+        "generationConfig": {"temperature": 0.8, "maxOutputTokens": 4000},
+    }).encode()
+    for modelo in MODELOS_GRATIS:
         req = urllib.request.Request(
-            url, method="POST",
-            data=json.dumps({"model": modelo, "max_tokens": 4000, "temperature": 0.8,
-                             "messages": [{"role": "user", "content": pedido}]}).encode(),
-            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json",
-                     "Accept": "application/json", "X-GitHub-Api-Version": "2022-11-28"})
+            URL_GEMINI.format(modelo=modelo), method="POST", data=corpo,
+            headers={"x-goog-api-key": chave, "Content-Type": "application/json"})
         try:
             with urllib.request.urlopen(req, timeout=120) as r:
-                bruto = r.read()
-                try:
-                    texto = json.loads(bruto)["choices"][0]["message"]["content"]
-                except ValueError:
-                    print(f"[escritor] IA grátis {modelo} devolveu algo que não é JSON "
-                          f"({r.status}, {r.headers.get('Content-Type')}): {bruto[:150]!r}")
-                    continue
-            if texto and texto.strip():
+                dados = json.loads(r.read())
+            partes = (dados.get("candidates") or [{}])[0].get("content", {}).get("parts", [])
+            texto = "".join(p.get("text", "") for p in partes if not p.get("thought"))
+            if texto.strip():
                 print(f"[escritor] IA grátis: {modelo}")
                 return texto
+            print(f"[escritor] IA grátis {modelo} não devolveu texto: {str(dados)[:200]}")
         except urllib.error.HTTPError as e:
             print(f"[escritor] IA grátis {modelo} recusou ({e.code}): {e.read()[:200]!r}")
         except Exception as e:
