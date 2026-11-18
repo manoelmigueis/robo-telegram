@@ -1043,5 +1043,39 @@
   "imagens": [
    "img/030.png"
   ]
+ },
+ {
+  "id": "031-livros-gratis-para",
+  "tipo": "lista",
+  "titulo": "📚 5 livros grátis para aprender a negociar",
+  "arte": {
+   "titulo": "5 livros grátis para aprender a negociar",
+   "sub": "",
+   "itens": [
+    "Domínio da persuasão",
+    "Técnicas de vendas",
+    "Falar com clareza",
+    "Gestão do tempo",
+    "Educação financeira"
+   ],
+   "icone": "📚",
+   "icones": [
+    "📖",
+    "💼",
+    "🗣️",
+    "⏱️",
+    "🪙"
+   ]
+  },
+  "corpo": "<p>Saber negociar é o que separa quem ganha pouco de quem cobra o valor justo pelo próprio trabalho:</p><p><b>1.</b> <b>Domínio da persuasão</b>: aprenda a mostrar o real valor do seu produto ou serviço sem parecer chato.<br/><b>2.</b> <b>Técnicas de vendas</b>: descubra como contornar objeções comuns de clientes indecisos.<br/><b>3.</b> <b>Falar com clareza</b>: comunique suas ideias de forma direta e ganhe a confiança de quem te contrata.<br/><b>4.</b> <b>Gestão do tempo</b>: organize sua rotina para dar conta de mais tarefas sem perder a qualidade.<br/><b>5.</b> <b>Educação financeira</b>: entenda como separar o dinheiro pessoal do dinheiro do seu negócio.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Muitas bibliotecas municipais e acervos digitais públicos oferecem esses livros em versão digital grátis ou por empréstimo.</p></details><p>📌 Salve e compartilhe com quem quer aprender a negociar melhor.</p>",
+  "tags": [
+   "rendaextra",
+   "negociacao",
+   "livros",
+   "aprendizado"
+  ],
+  "imagens": [
+   "img/031.png"
+  ]
  }
 ]
