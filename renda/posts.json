@@ -1004,5 +1004,44 @@
   "imagens": [
    "img/029.png"
   ]
+ },
+ {
+  "id": "030-voce-terminou-projeto",
+  "tipo": "quiz",
+  "titulo": "Você terminou um projeto freelancer mas o cliente sumiu e não responde. O que fazer?",
+  "arte": {
+   "titulo": "Cliente sumiu",
+   "sub": "Você terminou um projeto freelancer mas o cliente sumiu e não responde. O que fazer?",
+   "itens": [
+    "Esquecer e perder o valor",
+    "Enviar nova cobrança e pausar arquivos",
+    "Ameaçar nas redes sociais",
+    "Refazer o trabalho inteiro"
+   ],
+   "icone": "⏳",
+   "icones": []
+  },
+  "quiz": {
+   "pergunta": "Você terminou um projeto freelancer mas o cliente sumiu e não responde. O que fazer?",
+   "opcoes": [
+    "Esquecer e perder o valor",
+    "Enviar nova cobrança e pausar arquivos",
+    "Ameaçar nas redes sociais",
+    "Refazer o trabalho inteiro"
+   ],
+   "correta": 1,
+   "explicacao": "Mande mensagem cobrando de forma firme e só entregue os arquivos finais ou o acesso total após a confirmação do pagamento.",
+   "descricao": "⏳ Sempre exija um sinal antes de começar e guarde os arquivos finais até a quitação."
+  },
+  "corpo": "<b>Você terminou um projeto freelancer, mandou a mensagem com a entrega e... silêncio.</b> O cliente sumiu e não responde. O que você faz nessa hora?<br><br>Essa é uma situação chata, mas que acontece bastante com quem trabalha de forma autônoma. Saber como agir evita prejuízos e garante mais segurança nos próximos trabalhos.<br><br>🧠 Pense bem antes de responder ao quiz acima e descubra a melhor estratégia para resolver isso.<br><br><b>👀 Toque para ver a dica de ouro</b><br>details summary Para evitar esse tipo de dor de cabeça, trabalhe sempre com contrato simples por escrito e cobre pelo menos 50% do valor combinado antes de colocar a mão na massa. O restante só entra na conta na entrega final./summary<br><br>Salve e compartilhe com quem faz freela! 🤝<br><br>#rendaextra #freelancer #autonomo #trabalhoonline",
+  "tags": [
+   "rendaextra",
+   "freelancer",
+   "autonomo",
+   "trabalhoonline"
+  ],
+  "imagens": [
+   "img/030.png"
+  ]
  }
 ]
