@@ -327,5 +327,18 @@
       "restaurante"
     ],
     "imagens": []
+  },
+  {
+    "id": "020-the-supermarket-frases",
+    "tipo": "lista",
+    "titulo": "🛒 At the supermarket: frases e itens essenciais",
+    "corpo": "<p>Vai fazer compras em um país de língua inglesa? Salve este post 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Where is the shopping cart?</td><td>Onde fica o carrinho de compras?</td></tr><tr><td>Do you have plastic bags?</td><td>Vocês têm sacolas plásticas?</td></tr><tr><td>Where can I find milk?</td><td>Onde posso encontrar leite?</td></tr><tr><td>Is this on sale?</td><td>Isto está na promoção?</td></tr><tr><td>Can I pay by card?</td><td>Posso pagar com cartão?</td></tr><tr><td>Paper or plastic?</td><td>Papel ou plástico? (pergunta comum no caixa)</td></tr></table><details><summary>👀 Qual a diferença entre carrinho e cesta?</summary><p><b>Shopping cart</b> é o carrinho de rodinhas e <b>shopping basket</b> é a cestinha de mão.</p></details><p>🔁 Mande para aquele amigo que adora fazer compras em viagens.</p>",
+    "tags": [
+      "ingles",
+      "aprenderingles",
+      "vocabulario",
+      "inglesparaviagem"
+    ],
+    "imagens": []
   }
 ]
