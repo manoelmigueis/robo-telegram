@@ -1150,5 +1150,44 @@
   "imagens": [
    "img/033.png"
   ]
+ },
+ {
+  "id": "034-voce-recebeu-uma",
+  "tipo": "quiz",
+  "titulo": "Você recebeu uma proposta de parceria para vender produtos de terceiros com comissão alta. O que analisar antes?",
+  "arte": {
+   "titulo": "Avaliar Parceria",
+   "sub": "Você recebeu uma proposta de parceria para vender. O que analisar?",
+   "itens": [
+    "Aceitar na hora pelo lucro",
+    "Ver reputação e contrato",
+    "Comprar o estoque mínimo",
+    "Negar tudo sem olhar"
+   ],
+   "icone": "🤝",
+   "icones": []
+  },
+  "quiz": {
+   "pergunta": "Você recebeu uma proposta de parceria para vender produtos de terceiros com comissão alta. O que analisar antes?",
+   "opcoes": [
+    "Aceitar na hora pelo lucro",
+    "Ver reputação e contrato",
+    "Comprar o estoque mínimo",
+    "Negar tudo sem olhar"
+   ],
+   "correta": 1,
+   "explicacao": "Sempre verifique a qualidade do produto, a reputação da marca e se há um contrato claro sobre o pagamento das comissões.",
+   "descricao": "🤝 Parcerias sérias exigem alinhamento claro para evitar dor de cabeça com clientes insatisfeitos."
+  },
+  "corpo": "<b>Receber um convite para revender produtos ou fazer parcerias comerciais parece ótimo, mas exige cuidado.</b> Antes de sair divulgando, o que você deve fazer?<br><br>Promessas de comissões muito altas podem esconder produtos ruins ou empresas sem suporte. Saber filtrar o que vale a pena protege sua imagem e seu tempo.<br><br>🧠 Pense bem antes de responder ao quiz acima e descubra a atitude mais segura para o seu negócio.<br><br><b>👀 Toque para ver a dica de ouro</b><br><details><summary>Teste você mesmo o produto ou serviço antes de indicar para outras pessoas. Sua credibilidade é seu maior ativo na hora de conseguir vendas.</summary></details><br>Salve e compartilhe com quem quer fazer parcerias! 🤝<br><br>#rendaextra #parceria #vendas #negocios",
+  "tags": [
+   "rendaextra",
+   "parceria",
+   "vendas",
+   "negocios"
+  ],
+  "imagens": [
+   "img/034.png"
+  ]
  }
 ]
