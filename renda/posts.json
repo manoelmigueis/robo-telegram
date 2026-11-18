@@ -1116,5 +1116,39 @@
   "imagens": [
    "img/032.png"
   ]
+ },
+ {
+  "id": "033-passos-para-precificar",
+  "tipo": "lista",
+  "titulo": "🧮 5 passos para precificar seu trabalho",
+  "arte": {
+   "titulo": "5 passos para precificar seu trabalho",
+   "sub": "",
+   "itens": [
+    "Some seus gastos",
+    "Defina sua hora",
+    "Estude a praça",
+    "Valorize o prazo",
+    "Revise os custos"
+   ],
+   "icone": "🧮",
+   "icones": [
+    "🧾",
+    "⏰",
+    "🏙️",
+    "📅",
+    "📊"
+   ]
+  },
+  "corpo": "<p>Cobrar barato demais faz você trabalhar muito e sobrar pouco. Cobrar caro sem embasamento afasta os clientes:</p><p><b>1.</b> <b>Some seus gastos</b>: coloque na ponta do lápis luz, internet e material usado no serviço.<br/><b>2.</b> <b>Defina sua hora</b>: calcule quanto você quer ganhar por mês e divida pelas horas trabalhadas.<br/><b>3.</b> <b>Estude a praça</b>: veja quanto outros profissionais da sua região cobram pelo mesmo serviço.<br/><b>4.</b> <b>Valorize o prazo</b>: se o cliente pedir urgência, adicione uma taxa extra pelo trabalho rápido.<br/><b>5.</b> <b>Revise os custos</b>: atualize seus preços a cada seis meses conforme a inflação e sua experiência.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Nunca cobre menos do que o necessário para cobrir seus custos básicos. O seu lucro vem depois que todas as despesas já estão pagas.</p></details><p>📌 Salve e compartilhe com quem tem dúvidas na hora de cobrar.</p>",
+  "tags": [
+   "rendaextra",
+   "precificacao",
+   "trabalho",
+   "financas"
+  ],
+  "imagens": [
+   "img/033.png"
+  ]
  }
 ]
