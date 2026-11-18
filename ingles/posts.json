@@ -364,5 +364,18 @@
       "aprenderingles"
     ],
     "imagens": []
+  },
+  {
+    "id": "023-falso-amigo-pretend",
+    "tipo": "palavra",
+    "titulo": "⚠️ Falso amigo: Pretend",
+    "corpo": "<p>Parece \"pretender\" (ter a intenção), mas <b>não é</b>!</p><table><tr><th>Inglês</th><th>Significa</th></tr><tr><td>✅ pretend</td><td>fingir</td></tr><tr><td>✅ intend / plan</td><td>pretender</td></tr></table><blockquote><i>He didn't want to work, so he pretended to be sick.</i><br/>Ele não queria trabalhar, então fingiu estar doente.</blockquote><p>🔁 Mande para alguém que ainda confunde essa palavra!</p>",
+    "tags": [
+      "ingles",
+      "falsoscognatos",
+      "falsoamigo",
+      "aprenderingles"
+    ],
+    "imagens": []
   }
 ]
