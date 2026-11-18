@@ -402,5 +402,17 @@
       "aprenderingles"
     ],
     "imagens": []
+  },
+  {
+    "id": "026-mini-aula-for",
+    "tipo": "aula",
+    "titulo": "📘 Mini-aula: TO ou FOR?",
+    "corpo": "<p>Essas duas pequenas palavras confundem muita gente, mas têm regras bem claras.</p><table><tr><th>🎯 TO: movimento, destino ou entrega</th><th>🎁 FOR: benefício, favor ou duração</th></tr><tr><td>go to work</td><td>buy a gift for you</td></tr><tr><td>talk to me</td><td>cook dinner for us</td></tr><tr><td>send an email to her</td><td>wait for a friend</td></tr></table><p>💡 <b>Regra prática:</b> use <b>to</b> quando há direção ou conexão com alguém. Use <b>for</b> quando você faz algo em favor de alguém ou por causa de algo.</p><details><summary>🧠 Desafio: \"I bought this book ___ you.\" É to ou for?</summary><p><b>For</b>. Você comprou o livro em benefício de outra pessoa.</p></details>",
+    "tags": [
+      "ingles",
+      "gramaticainglesa",
+      "aprenderingles"
+    ],
+    "imagens": []
   }
 ]
