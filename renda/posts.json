@@ -1189,5 +1189,37 @@
   "imagens": [
    "img/034.png"
   ]
+ },
+ {
+  "id": "035-passos-para-fazer",
+  "tipo": "lista",
+  "titulo": "📝 4 passos para fazer um orçamento que converte",
+  "arte": {
+   "titulo": "4 passos para fazer um orçamento que converte",
+   "sub": "",
+   "itens": [
+    "Entenda a demanda",
+    "Separe os custos",
+    "Defina o prazo",
+    "Feche com clareza"
+   ],
+   "icone": "📝",
+   "icones": [
+    "🎯",
+    "🧾",
+    "⏱️",
+    "🤝"
+   ]
+  },
+  "corpo": "<p>Enviar um preço solto no chat faz você perder clientes. Um bom orçamento mostra profissionalismo e aumenta suas chances de fechar o serviço:</p><p><b>1.</b> <b>Entenda a demanda</b>: faça perguntas antes de passar o valor para saber exatamente o que o cliente precisa.<br/><b>2.</b> <b>Separe os custos</b>: mostre o que está incluso no preço, como materiais, taxas e as horas trabalhadas.<br/><b>3.</b> <b>Defina o prazo</b>: coloque uma data clara de entrega e o período de validade daquela proposta.<br/><b>4.</b> <b>Feche com clareza</b>: explique qual é a forma de pagamento e qual é a porcentagem exigida de sinal para iniciar.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Envie o orçamento em formato PDF ou em um documento limpo. Evite mandar apenas um bloco de texto bagunçado no WhatsApp.</p></details><p>📌 Salve e compartilhe com quem quer fechar mais contratos.</p>",
+  "tags": [
+   "rendaextra",
+   "orcamento",
+   "vendas",
+   "freelancer"
+  ],
+  "imagens": [
+   "img/035.png"
+  ]
  }
 ]
