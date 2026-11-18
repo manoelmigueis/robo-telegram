@@ -970,5 +970,39 @@
    "marketing",
    "empreender"
   ]
+ },
+ {
+  "id": "029-habilidades-simples-que",
+  "tipo": "lista",
+  "titulo": "🎨 5 habilidades simples que dão lucro",
+  "arte": {
+   "titulo": "5 habilidades simples que dão lucro",
+   "sub": "",
+   "itens": [
+    "Organizar planilhas",
+    "Escrever textos",
+    "Editar vídeos",
+    "Traduzir áudios",
+    "Criar artes"
+   ],
+   "icone": "🎨",
+   "icones": [
+    "📊",
+    "✍️",
+    "🎬",
+    "🎧",
+    "🖼️"
+   ]
+  },
+  "corpo": "<p>Muitas pessoas ganham dinheiro extra fazendo tarefas que parecem básicas para você, mas que outros não têm tempo ou paciência para fazer:</p><p><b>1.</b> <b>Organizar planilhas</b>: coloque dados em ordem no Excel ou Google Planilhas para comércios locais.<br/><b>2.</b> <b>Escrever textos</b>: crie legendas simples para lojas postarem no Instagram.<br/><b>3.</b> <b>Editar vídeos</b>: corte partes chatas de vídeos longos para virarem Reels ou TikTok.<br/><b>4.</b> <b>Traduzir áudios</b>: passe gravações de reuniões ou aulas para o formato de texto.<br/><b>5.</b> <b>Criar artes</b>: monte posts bonitos e rápidos usando modelos prontos do Canva.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Escolha apenas uma habilidade que você já faz bem hoje. Crie um exemplo prático e mostre para três conhecidos que têm negócio próprio.</p></details><p>📌 Salve e comece a treinar a sua habilidade escolhida hoje mesmo.</p>",
+  "tags": [
+   "rendaextra",
+   "habilidades",
+   "trabalho",
+   "freelancer"
+  ],
+  "imagens": [
+   "img/029.png"
+  ]
  }
 ]
