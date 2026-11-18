@@ -18,10 +18,11 @@
     "018-piece-of-cake",
     "017-quiz-bored",
     "014-thank-you",
-    "019-the-restaurant-frases"
+    "019-the-restaurant-frases",
+    "020-the-supermarket-frases"
   ],
-  "contador": 19,
-  "ultimo": "2026-11-17T13:00:30+00:00",
+  "contador": 20,
+  "ultimo": "2026-11-18T15:01:05+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -44,7 +45,8 @@
     "014-thank-you": "2026-11-14T18:46:34+00:00",
     "019-the-restaurant-frases": "2026-11-16T18:23:26+00:00",
     "001-break-the-ice": "2026-11-16T23:00:40+00:00",
-    "007-common-mistakes": "2026-11-17T13:00:30+00:00"
+    "007-common-mistakes": "2026-11-17T13:00:30+00:00",
+    "020-the-supermarket-frases": "2026-11-18T15:01:05+00:00"
   },
   "mensagens": {
     "008-phone-conversation": [
@@ -97,6 +99,9 @@
     ],
     "007-common-mistakes": [
       8403
+    ],
+    "020-the-supermarket-frases": [
+      8407
     ]
   }
 }
