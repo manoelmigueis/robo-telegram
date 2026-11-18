@@ -352,5 +352,17 @@
       "aprenderingles"
     ],
     "imagens": []
+  },
+  {
+    "id": "022-mini-aula-borrow",
+    "tipo": "aula",
+    "titulo": "📘 Mini-aula: BORROW ou LEND?",
+    "corpo": "<p>Os dois têm a ver com emprestar coisas, mas dependem de quem está com o objeto.</p><table><tr><th>📥 BORROW: você pega emprestado</th><th>📤 LEND: você empresta aos outros</th></tr><tr><td>borrow a pen</td><td>lend a pen</td></tr><tr><td>borrow money</td><td>lend money</td></tr><tr><td>borrow my car</td><td>lend my car</td></tr></table><p>💡 <b>Regra prática:</b> se o objeto vem para as suas mãos, é <b>borrow</b>. Se sai das suas mãos para o outro, é <b>lend</b>.</p><details><summary>🧠 Desafio: \"Can you ___ me R$ 50?\"</summary><p><b>Lend</b>. Você está pedindo para a pessoa dar o dinheiro para você.</p></details>",
+    "tags": [
+      "ingles",
+      "gramaticainglesa",
+      "aprenderingles"
+    ],
+    "imagens": []
   }
 ]
