@@ -27,7 +27,8 @@
     "021-whatsapp",
     "022-onde-curso-gratis",
     "023-bairro",
-    "024-portfolio"
+    "024-portfolio",
+    "029-habilidades-simples-que"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -40,8 +41,8 @@
     "if goiano abre vagas em dois cursos de especialização totalmente gratuitos 100 o",
     "começam hoje as inscrições para os cursos de especialização gratuitos 100 online"
   ],
-  "contador": 28,
-  "ultimo": "2026-11-18T15:01:34+00:00",
+  "contador": 29,
+  "ultimo": "2026-11-18T16:08:39+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -66,7 +67,8 @@
     "021-whatsapp": "2026-11-15T23:31:30+00:00",
     "022-onde-curso-gratis": "2026-11-16T12:41:37+00:00",
     "023-bairro": "2026-11-16T16:41:55+00:00",
-    "024-portfolio": "2026-11-16T23:00:57+00:00"
+    "024-portfolio": "2026-11-16T23:00:57+00:00",
+    "029-habilidades-simples-que": "2026-11-18T16:08:39+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -128,6 +130,9 @@
     ],
     "024-portfolio": [
       8801
+    ],
+    "029-habilidades-simples-que": [
+      8807
     ]
   }
 }
