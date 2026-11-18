@@ -340,5 +340,17 @@
       "inglesparaviagem"
     ],
     "imagens": []
+  },
+  {
+    "id": "021-mini-aula-say",
+    "tipo": "aula",
+    "titulo": "📘 Mini-aula: SAY ou TELL?",
+    "corpo": "<p>Os dois significam \"dizer\" ou \"falar\", mas a regra de uso é diferente.</p><table><tr><th>💬 SAY: o foco é na fala</th><th>🗣️ TELL: quem ouve importa</th></tr><tr><td>say hello</td><td>tell me</td></tr><tr><td>say sorry</td><td>tell a story</td></tr><tr><td>say goodbye</td><td>tell the truth</td></tr></table><p>💡 <b>Regra prática:</b> se você diz algo <i>para alguém</i>, use <b>tell</b> (tell him, tell us).</p><details><summary>🧠 Desafio: \"She ___ me a secret.\" É say ou tell?</summary><p><b>Tell</b> (no passado: <i>told</i>). Tem alguém ouvindo a fofoca!</p></details>",
+    "tags": [
+      "ingles",
+      "gramaticainglesa",
+      "aprenderingles"
+    ],
+    "imagens": []
   }
 ]
