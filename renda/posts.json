@@ -1077,5 +1077,44 @@
   "imagens": [
    "img/031.png"
   ]
+ },
+ {
+  "id": "032-cliente-aprovou-projeto",
+  "tipo": "quiz",
+  "titulo": "O cliente aprovou o projeto, mas agora quer mudar metade do que foi combinado sem pagar a mais. O que fazer?",
+  "arte": {
+   "titulo": "Mudanças no projeto",
+   "sub": "O cliente quer mudar tudo depois de pronto. O que fazer?",
+   "itens": [
+    "Fazer tudo de graça",
+    "Cobrar taxa extra por alteração",
+    "Recusar e cancelar o contrato",
+    "Fazer brigas nas redes sociais"
+   ],
+   "icone": "🔄",
+   "icones": []
+  },
+  "quiz": {
+   "pergunta": "O cliente aprovou o projeto, mas agora quer mudar metade do que foi combinado sem pagar a mais. O que fazer?",
+   "opcoes": [
+    "Fazer tudo de graça",
+    "Cobrar taxa extra por alteração",
+    "Recusar e cancelar o contrato",
+    "Fazer brigas nas redes sociais"
+   ],
+   "correta": 1,
+   "explicacao": "Explique com calma que o escopo mudou e apresente um orçamento extra para os novos pedidos, conforme combinado no início.",
+   "descricao": "🔄 O excesso de mudanças sem cobrança extra é o principal motivo de prejuízo para quem trabalha por conta própria."
+  },
+  "corpo": "<b>Você entregou o projeto no prazo e o cliente aprovou. Mas, de última hora, ele pede para mudar metade das coisas.</b> O que você faz nessa hora?<br><br>Esse é um clássico desafio de quem trabalha de forma autônoma. O limite entre ser prestativo e trabalhar de graça é tênue, e definir regras claras evita desgaste e prejuízo.<br><br>🧠 Pense bem antes de responder ao quiz acima e descubra a melhor atitude profissional para essa situação.<br><br><b>👀 Toque para ver a dica de ouro</b><br><details><summary>Deixe claro no seu orçamento ou contrato quantos ajustes estão inclusos no valor. Mudanças fora desse limite devem ser cobradas à parte, sempre com aprovação prévia do cliente.</summary></details><br>Salve e compartilhe com quem faz freela! 🤝<br><br>#rendaextra #freelancer #autonomo #trabalhoonline",
+  "tags": [
+   "rendaextra",
+   "freelancer",
+   "autonomo",
+   "trabalhoonline"
+  ],
+  "imagens": [
+   "img/032.png"
+  ]
  }
 ]
