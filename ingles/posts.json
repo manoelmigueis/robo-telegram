@@ -414,5 +414,18 @@
       "aprenderingles"
     ],
     "imagens": []
+  },
+  {
+    "id": "027-the-hotel-frases",
+    "tipo": "palavra",
+    "titulo": "🏨 At the hotel: frases para o check-in",
+    "corpo": "<p>Vai viajar e precisa fazer o check-in no hotel? Veja frases simples para falar inglês sem medo:</p><table><tr><th>Inglês</th><th>Português</th></tr><tr><td>✅ I have a reservation.</td><td>Eu tenho uma reserva.</td></tr><tr><td>✅ Here is my passport.</td><td>Aqui está o meu passaporte.</td></tr><tr><td>✅ What time is breakfast?</td><td>A que horas é o café da manhã?</td></tr><tr><td>✅ Where is the elevator?</td><td>Onde fica o elevador?</td></tr><tr><td>✅ What is the Wi-Fi password?</td><td>Qual é a senha do Wi-Fi?</td></tr><tr><td>✅ Can I have the bill, please?</td><td>Pode me dar a conta, por favor?</td></tr></table><p>🔁 Mande para aquele amigo que ama viajar!</p>",
+    "tags": [
+      "ingles",
+      "viagem",
+      "aprenderingles",
+      "travel"
+    ],
+    "imagens": []
   }
 ]
