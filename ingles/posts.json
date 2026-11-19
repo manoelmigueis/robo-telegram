@@ -453,5 +453,17 @@
       "academia"
     ],
     "imagens": []
+  },
+  {
+    "id": "030-mini-aula-such",
+    "tipo": "aula",
+    "titulo": "📘 Mini-aula: SO ou SUCH?",
+    "corpo": "<p>Essas duas palavras aumentam a intensidade de algo, mas vão acompanhadas de classes de palavras diferentes.</p><table><tr><th>⭐ SO: antes de adjetivos ou advérbios</th><th>🌟 SUCH: antes de substantivos (com ou sem adjetivo)</th></tr><tr><td>so good (tão bom)</td><td>such a good movie (um filme tão bom)</td></tr><tr><td>so fast (tão rápido)</td><td>such nice people (pessoas tão legais)</td></tr><tr><td>so much money (tanto dinheiro)</td><td>such a surprise (uma surpresa e tanto)</td></tr></table><p>💡 <b>Regra prática:</b> se a frase tem um substantivo (pessoa, lugar, coisa), use <b>such</b>. Se for apenas uma qualidade (adjetivo), use <b>so</b>.</p><details><summary>🧠 Desafio: \"She is ___ a smart student.\" É so ou such?</summary><p><b>Such</b>. Logo depois vem o substantivo \"student\", então usamos such.</p></details>",
+    "tags": [
+      "ingles",
+      "gramaticainglesa",
+      "aprenderingles"
+    ],
+    "imagens": []
   }
 ]
