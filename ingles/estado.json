@@ -23,10 +23,11 @@
     "021-mini-aula-say",
     "022-mini-aula-borrow",
     "023-falso-amigo-pretend",
-    "024-the-coffee-shop"
+    "024-the-coffee-shop",
+    "025-mini-aula-look"
   ],
-  "contador": 24,
-  "ultimo": "2026-11-19T17:00:31+00:00",
+  "contador": 25,
+  "ultimo": "2026-11-19T23:00:31+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -54,7 +55,8 @@
     "021-mini-aula-say": "2026-11-18T17:00:49+00:00",
     "022-mini-aula-borrow": "2026-11-18T23:00:23+00:00",
     "023-falso-amigo-pretend": "2026-11-19T13:00:33+00:00",
-    "024-the-coffee-shop": "2026-11-19T17:00:31+00:00"
+    "024-the-coffee-shop": "2026-11-19T17:00:31+00:00",
+    "025-mini-aula-look": "2026-11-19T23:00:31+00:00"
   },
   "mensagens": {
     "008-phone-conversation": [
@@ -122,6 +124,9 @@
     ],
     "024-the-coffee-shop": [
       8413
+    ],
+    "025-mini-aula-look": [
+      8417
     ]
   }
 }
