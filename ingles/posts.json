@@ -427,5 +427,18 @@
       "travel"
     ],
     "imagens": []
+  },
+  {
+    "id": "028-kitchen-utensils-utensilios",
+    "tipo": "lista",
+    "titulo": "🍳 Kitchen utensils: utensílios de cozinha em inglês",
+    "corpo": "<p>Sabe o nome dos utensílios de cozinha em inglês? Salve este post 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Frying pan</td><td>Frigideira</td></tr><tr><td>Cutting board</td><td>Tábua de corte</td></tr><tr><td>Peel</td><td>Descascador de legumes</td></tr><tr><td>Whisk</td><td>Fouet / Batedor de ovos</td></tr><tr><td>Spátula</td><td>Espátula</td></tr><tr><td>Colander</td><td>Escorredor de macarrão</td></tr><tr><td>Measuring cup</td><td>Copo medidor</td></tr><tr><td>Can opener</td><td>Abridor de latas</td></tr></table><details><summary>👀 Qual a diferença entre pan e pot?</summary><p><b>Pan</b> é frigideira ou panela rasa com cabo. <b>Pot</b> é panela funda, usada para sopas e feijão.</p></details><p>🔁 Mande para aquele amigo que ama cozinhar.</p>",
+    "tags": [
+      "ingles",
+      "aprenderingles",
+      "vocabulario",
+      "cozinha"
+    ],
+    "imagens": []
   }
 ]
