@@ -1221,5 +1221,44 @@
   "imagens": [
    "img/035.png"
   ]
+ },
+ {
+  "id": "036-voce-recebeu-uma",
+  "tipo": "quiz",
+  "titulo": "Você recebeu uma proposta para adiantar um serviço no fim de semana, mas o valor oferecido é o mesmo. O que fazer?",
+  "arte": {
+   "titulo": "Hora Extra no Prazo",
+   "sub": "Pediram trabalho no fim de semana sem pagar a mais. O que fazer?",
+   "itens": [
+    "Aceitar para agradar",
+    "Negociar adicional de urgência",
+    "Recusar e bloquear o cliente",
+    "Fazer mal feito de propósito"
+   ],
+   "icone": "⏰",
+   "icones": []
+  },
+  "quiz": {
+   "pergunta": "Você recebeu uma proposta para adiantar um serviço no fim de semana, mas o valor oferecido é o mesmo. O que fazer?",
+   "opcoes": [
+    "Aceitar para agradar",
+    "Negociar adicional de urgência",
+    "Recusar e bloquear o cliente",
+    "Fazer mal feito de propósito"
+   ],
+   "correta": 1,
+   "explicacao": "Trabalhar fora do horário ou no fim de semana exige taxa de urgência. Explique com educação que o prazo curto altera sua rotina.",
+   "descricao": "⏰ Valorizar o seu tempo livre é essencial para não se esgotar com trabalhos extras."
+  },
+  "corpo": "<b>O cliente pede para você virar a noite ou trabalhar no fim de semana para entregar algo antes, mas sem mudar o pagamento.</b> Como lidar com isso?<br><br>Quem faz renda extra precisa equilibrar o tempo livre com os ganhos. Aceitar qualquer demanda urgente pelo mesmo preço gera desgaste e tira o foco de outros projetos.<br><br>🧠 Pense bem antes de responder ao quiz acima e descubra a melhor postura profissional para essa situação.<br><br><b>👀 Toque para ver a dica de ouro</b><br><details><summary>Crie uma regra de taxa de urgência para prazos menores que o combinado. Quem realmente precisa da entrega rápida vai entender e pagar pelo seu esforço extra.</summary></details><br>Salve e compartilhe com quem trabalha por conta própria! 🤝<br><br>#rendaextra #freelancer #autonomo #produtividade",
+  "tags": [
+   "rendaextra",
+   "freelancer",
+   "autonomo",
+   "produtividade"
+  ],
+  "imagens": [
+   "img/036.png"
+  ]
  }
 ]
