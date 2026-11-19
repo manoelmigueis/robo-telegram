@@ -31,7 +31,8 @@
     "029-habilidades-simples-que",
     "030-voce-terminou-projeto",
     "031-livros-gratis-para",
-    "032-cliente-aprovou-projeto"
+    "032-cliente-aprovou-projeto",
+    "033-passos-para-precificar"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -46,8 +47,8 @@
     "ministério da saúde abre 50 mil vagas em curso gratuito online de 180 horas com ",
     "cursos gratuitos on line 10 opções do senai play para quem quer se destacar no m"
   ],
-  "contador": 32,
-  "ultimo": "2026-11-19T19:00:52+00:00",
+  "contador": 33,
+  "ultimo": "2026-11-19T23:00:51+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -76,7 +77,8 @@
     "029-habilidades-simples-que": "2026-11-18T16:08:39+00:00",
     "030-voce-terminou-projeto": "2026-11-18T23:00:55+00:00",
     "031-livros-gratis-para": "2026-11-19T12:00:45+00:00",
-    "032-cliente-aprovou-projeto": "2026-11-19T16:00:49+00:00"
+    "032-cliente-aprovou-projeto": "2026-11-19T16:00:49+00:00",
+    "033-passos-para-precificar": "2026-11-19T23:00:51+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -150,6 +152,9 @@
     ],
     "032-cliente-aprovou-projeto": [
       8815
+    ],
+    "033-passos-para-precificar": [
+      8820
     ]
   }
 }
