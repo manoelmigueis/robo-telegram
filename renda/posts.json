@@ -1294,5 +1294,44 @@
   "imagens": [
    "img/037.png"
   ]
+ },
+ {
+  "id": "038-voce-enviou-orcamento",
+  "tipo": "quiz",
+  "titulo": "Você enviou um orçamento para um cliente e ele sumiu sem responder. O que fazer?",
+  "arte": {
+   "titulo": "Cliente Sumiu",
+   "sub": "Você enviou o orçamento e não teve resposta. O que fazer?",
+   "itens": [
+    "Esquecer e desistir",
+    "Cobrar todo dia no chat",
+    "Fazer um contato educado",
+    "Oferecer desconto alto"
+   ],
+   "icone": "⏳",
+   "icones": []
+  },
+  "quiz": {
+   "pergunta": "Você enviou um orçamento para um cliente e ele sumiu sem responder. O que fazer?",
+   "opcoes": [
+    "Esquecer e desistir",
+    "Cobrar todo dia no chat",
+    "Fazer um contato educado",
+    "Oferecer desconto alto"
+   ],
+   "correta": 2,
+   "explicacao": "Espere alguns dias e mande uma mensagem curta perguntando se ficou alguma dúvida sobre a proposta enviada.",
+   "descricao": "⏳ Um follow-up educado mostra profissionalismo e recupera muitos negócios que pareciam perdidos."
+  },
+  "corpo": "<b>Você calculou os custos, preparou um orçamento caprichado e enviou para o cliente. Mas os dias passam e ninguém responde. O que fazer?</b><br><br>Quem trabalha de forma autônoma passa por isso sempre. O cliente pode ter apenas esquecido na correria do dia a dia. Saber a hora certa e o jeito certo de retomar o contato faz toda a diferença.<br><br>🧠 Pense bem antes de responder ao quiz acima e descubra a melhor atitude para reverter essa situação.<br><br><b>👀 Toque para ver a dica de ouro</b><br><details><summary>Espere uns três dias úteis e mande uma mensagem leve. Pergunte se ele teve tempo de ver a proposta ou se ficou com alguma dúvida sobre os prazos e valores.</summary></details><br>Salve e compartilhe com quem faz orçamento e freelas! 🤝<br><br>#rendaextra #freelancer #vendas #autonomo",
+  "tags": [
+   "rendaextra",
+   "freelancer",
+   "vendas",
+   "autonomo"
+  ],
+  "imagens": [
+   "img/038.png"
+  ]
  }
 ]
