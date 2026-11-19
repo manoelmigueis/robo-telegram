@@ -21,10 +21,11 @@
     "019-the-restaurant-frases",
     "020-the-supermarket-frases",
     "021-mini-aula-say",
-    "022-mini-aula-borrow"
+    "022-mini-aula-borrow",
+    "023-falso-amigo-pretend"
   ],
-  "contador": 22,
-  "ultimo": "2026-11-18T23:00:23+00:00",
+  "contador": 23,
+  "ultimo": "2026-11-19T13:00:33+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -50,7 +51,8 @@
     "007-common-mistakes": "2026-11-17T13:00:30+00:00",
     "020-the-supermarket-frases": "2026-11-18T15:01:05+00:00",
     "021-mini-aula-say": "2026-11-18T17:00:49+00:00",
-    "022-mini-aula-borrow": "2026-11-18T23:00:23+00:00"
+    "022-mini-aula-borrow": "2026-11-18T23:00:23+00:00",
+    "023-falso-amigo-pretend": "2026-11-19T13:00:33+00:00"
   },
   "mensagens": {
     "008-phone-conversation": [
@@ -112,6 +114,9 @@
     ],
     "022-mini-aula-borrow": [
       8411
+    ],
+    "023-falso-amigo-pretend": [
+      8412
     ]
   }
 }
