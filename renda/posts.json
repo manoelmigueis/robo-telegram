@@ -1260,5 +1260,39 @@
   "imagens": [
    "img/036.png"
   ]
+ },
+ {
+  "id": "037-passos-para-organizar",
+  "tipo": "lista",
+  "titulo": "💼 5 passos para organizar sua rotina de freela",
+  "arte": {
+   "titulo": "5 passos para organizar sua rotina de freela",
+   "sub": "",
+   "itens": [
+    "Separe seu horário",
+    "Crie um espaço fixo",
+    "Defina metas diárias",
+    "Use uma lista visual",
+    "Respeite seu descanso"
+   ],
+   "icone": "💼",
+   "icones": [
+    "⏰",
+    "🪑",
+    "🎯",
+    "📋",
+    "☕"
+   ]
+  },
+  "corpo": "<p>Trabalhar por conta própria exige disciplina. Sem um horário definido, você acaba misturando as tarefas de casa e o trabalho não rende:</p><p><b>1.</b> <b>Separe seu horário</b>: determine horas fixas do dia só para atender clientes e produzir seus serviços.<br/><b>2.</b> <b>Crie um espaço fixo</b>: monte um canto limpo e silencioso, mesmo que seja na mesa da cozinha, longe da TV.<br/><b>3.</b> <b>Defina metas diárias</b>: anote três tarefas principais que precisam ser entregues antes do dia terminar.<br/><b>4.</b> <b>Use uma lista visual</b>: utilize aplicativos simples ou um caderno para riscar o que já foi feito.<br/><b>5.</b> <b>Respeite seu descanso</b>: desligue no horário certo para evitar o cansaço mental e render mais no dia seguinte.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Avise sua família ou quem mora com você quais são os seus horários de trabalho. Isso evita interrupções e ajuda a manter o foco.</p></details><p>📌 Salve e compartilhe com quem quer organizar melhor o tempo.</p>",
+  "tags": [
+   "rendaextra",
+   "freelancer",
+   "organizacao",
+   "produtividade"
+  ],
+  "imagens": [
+   "img/037.png"
+  ]
  }
 ]
