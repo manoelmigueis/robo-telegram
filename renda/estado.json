@@ -29,7 +29,8 @@
     "023-bairro",
     "024-portfolio",
     "029-habilidades-simples-que",
-    "030-voce-terminou-projeto"
+    "030-voce-terminou-projeto",
+    "031-livros-gratis-para"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -43,8 +44,8 @@
     "começam hoje as inscrições para os cursos de especialização gratuitos 100 online",
     "ministério da saúde abre 50 mil vagas em curso gratuito online de 180 horas com "
   ],
-  "contador": 30,
-  "ultimo": "2026-11-18T23:00:55+00:00",
+  "contador": 31,
+  "ultimo": "2026-11-19T12:00:45+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -71,7 +72,8 @@
     "023-bairro": "2026-11-16T16:41:55+00:00",
     "024-portfolio": "2026-11-16T23:00:57+00:00",
     "029-habilidades-simples-que": "2026-11-18T16:08:39+00:00",
-    "030-voce-terminou-projeto": "2026-11-18T23:00:55+00:00"
+    "030-voce-terminou-projeto": "2026-11-18T23:00:55+00:00",
+    "031-livros-gratis-para": "2026-11-19T12:00:45+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -139,6 +141,9 @@
     ],
     "030-voce-terminou-projeto": [
       8813
+    ],
+    "031-livros-gratis-para": [
+      8814
     ]
   }
 }
