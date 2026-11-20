@@ -504,5 +504,20 @@
     "imagens": [
       "img/031.png"
     ]
+  },
+  {
+    "id": "032-car-parts-partes",
+    "tipo": "lista",
+    "titulo": "🚗 Car parts: partes do carro em inglês",
+    "corpo": "<p>Vai dirigir fora do país ou quer aprender sobre carros? Salve este post 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Steering wheel</td><td>Volante</td></tr><tr><td>Windshield</td><td>Para-brisa</td></tr><tr><td>Gas pedal</td><td>Acelerador</td></tr><tr><td>Brake pedal</td><td>Freio</td></tr><tr><td>Gear shift</td><td>Câmbio / Alavanca de marcha</td></tr><tr><td>Rearview mirror</td><td>Retrovisor interno</td></tr><tr><td>Turn signal</td><td>Seta / Pisca-alerta</td></tr><tr><td>Tire</td><td>Pneu</td></tr></table><details><summary>👀 Como se diz \"gasolina\" nos EUA?</summary><p>Nos Estados Unidos, o mais comum é usar <b>gas</b>, e não gasoline. No Reino Unido, eles chamam de <b>petrol</b>.</p></details><p>🔁 Mande para aquele amigo que ama carros.</p>",
+    "tags": [
+      "ingles",
+      "aprenderingles",
+      "vocabulario",
+      "carros"
+    ],
+    "imagens": [
+      "img/032.png"
+    ]
   }
 ]
