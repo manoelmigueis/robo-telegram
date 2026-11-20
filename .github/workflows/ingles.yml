@@ -35,6 +35,8 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-nuvem.txt
       - run: pip install -r requirements-nuvem.txt
+      # Navegador que desenha a arte dos posts novos (ingles/arte.py, chamado pelo central.repor).
+      - run: python -m playwright install --with-deps chromium
       - name: Postar o próximo post de inglês
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}

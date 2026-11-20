@@ -326,7 +326,9 @@
       "inglesparaviagem",
       "restaurante"
     ],
-    "imagens": []
+    "imagens": [
+      "img/019.png"
+    ]
   },
   {
     "id": "020-the-supermarket-frases",
@@ -339,7 +341,9 @@
       "vocabulario",
       "inglesparaviagem"
     ],
-    "imagens": []
+    "imagens": [
+      "img/020.png"
+    ]
   },
   {
     "id": "021-mini-aula-say",
@@ -351,7 +355,9 @@
       "gramaticainglesa",
       "aprenderingles"
     ],
-    "imagens": []
+    "imagens": [
+      "img/021.png"
+    ]
   },
   {
     "id": "022-mini-aula-borrow",
@@ -363,7 +369,9 @@
       "gramaticainglesa",
       "aprenderingles"
     ],
-    "imagens": []
+    "imagens": [
+      "img/022.png"
+    ]
   },
   {
     "id": "023-falso-amigo-pretend",
@@ -376,7 +384,9 @@
       "falsoamigo",
       "aprenderingles"
     ],
-    "imagens": []
+    "imagens": [
+      "img/023.png"
+    ]
   },
   {
     "id": "024-the-coffee-shop",
@@ -389,7 +399,9 @@
       "vocabulario",
       "inglesparaviagem"
     ],
-    "imagens": []
+    "imagens": [
+      "img/024.png"
+    ]
   },
   {
     "id": "025-mini-aula-look",
@@ -401,7 +413,9 @@
       "gramaticainglesa",
       "aprenderingles"
     ],
-    "imagens": []
+    "imagens": [
+      "img/025.png"
+    ]
   },
   {
     "id": "026-mini-aula-for",
@@ -413,7 +427,9 @@
       "gramaticainglesa",
       "aprenderingles"
     ],
-    "imagens": []
+    "imagens": [
+      "img/026.png"
+    ]
   },
   {
     "id": "027-the-hotel-frases",
@@ -426,20 +442,24 @@
       "aprenderingles",
       "travel"
     ],
-    "imagens": []
+    "imagens": [
+      "img/027.png"
+    ]
   },
   {
     "id": "028-kitchen-utensils-utensilios",
     "tipo": "lista",
     "titulo": "🍳 Kitchen utensils: utensílios de cozinha em inglês",
-    "corpo": "<p>Sabe o nome dos utensílios de cozinha em inglês? Salve este post 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Frying pan</td><td>Frigideira</td></tr><tr><td>Cutting board</td><td>Tábua de corte</td></tr><tr><td>Peel</td><td>Descascador de legumes</td></tr><tr><td>Whisk</td><td>Fouet / Batedor de ovos</td></tr><tr><td>Spátula</td><td>Espátula</td></tr><tr><td>Colander</td><td>Escorredor de macarrão</td></tr><tr><td>Measuring cup</td><td>Copo medidor</td></tr><tr><td>Can opener</td><td>Abridor de latas</td></tr></table><details><summary>👀 Qual a diferença entre pan e pot?</summary><p><b>Pan</b> é frigideira ou panela rasa com cabo. <b>Pot</b> é panela funda, usada para sopas e feijão.</p></details><p>🔁 Mande para aquele amigo que ama cozinhar.</p>",
+    "corpo": "<p>Sabe o nome dos utensílios de cozinha em inglês? Salve este post 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Frying pan</td><td>Frigideira</td></tr><tr><td>Cutting board</td><td>Tábua de corte</td></tr><tr><td>Peeler</td><td>Descascador de legumes</td></tr><tr><td>Whisk</td><td>Fouet / Batedor de ovos</td></tr><tr><td>Spatula</td><td>Espátula</td></tr><tr><td>Colander</td><td>Escorredor de macarrão</td></tr><tr><td>Measuring cup</td><td>Copo medidor</td></tr><tr><td>Can opener</td><td>Abridor de latas</td></tr></table><details><summary>👀 Qual a diferença entre pan e pot?</summary><p><b>Pan</b> é frigideira ou panela rasa com cabo. <b>Pot</b> é panela funda, usada para sopas e feijão.</p></details><p>🔁 Mande para aquele amigo que ama cozinhar.</p>",
     "tags": [
       "ingles",
       "aprenderingles",
       "vocabulario",
       "cozinha"
     ],
-    "imagens": []
+    "imagens": [
+      "img/028.png"
+    ]
   },
   {
     "id": "029-the-gym-vocabulario",
@@ -452,7 +472,9 @@
       "vocabulario",
       "academia"
     ],
-    "imagens": []
+    "imagens": [
+      "img/029.png"
+    ]
   },
   {
     "id": "030-mini-aula-such",
@@ -464,7 +486,9 @@
       "gramaticainglesa",
       "aprenderingles"
     ],
-    "imagens": []
+    "imagens": [
+      "img/030.png"
+    ]
   },
   {
     "id": "031-the-pharmacy-frases",
@@ -477,6 +501,8 @@
       "vocabulario",
       "aprenderingles"
     ],
-    "imagens": []
+    "imagens": [
+      "img/031.png"
+    ]
   }
 ]

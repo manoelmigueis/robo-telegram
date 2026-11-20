@@ -604,5 +604,17 @@ Regras do formato:
         nome = f"img/{num:03d}.png"
         arquivos[f"renda/{nome}"] = desenhar_renda(item["arte"], tipo == "quiz")
         item["imagens"] = [nome]
+    if n == "ingles":
+        # Arte 4:5 desenhada do próprio texto do post (ingles/arte.py). Sem ela o post sai só em texto.
+        try:
+            import importlib.util  # a pasta ingles/ tem o mesmo nome do ingles.py da raiz
+            spec = importlib.util.spec_from_file_location("ingles_arte", Path(__file__).parent / "ingles" / "arte.py")
+            arte_ingles = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(arte_ingles)
+            nome = f"img/{num:03d}.png"
+            arquivos[f"ingles/{nome}"] = arte_ingles.png(item)
+            item["imagens"] = [nome]
+        except Exception as e:
+            print(f"inglês: não deu para desenhar a arte de {item['id']}: {e}")
     gravar(n, f"central: post novo {item['id']}", mudar_banco=lambda lista: lista.append(item), arquivos=arquivos)
     return item
