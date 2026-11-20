@@ -25,10 +25,11 @@
     "023-falso-amigo-pretend",
     "024-the-coffee-shop",
     "025-mini-aula-look",
-    "026-mini-aula-for"
+    "026-mini-aula-for",
+    "027-the-hotel-frases"
   ],
-  "contador": 26,
-  "ultimo": "2026-11-20T13:00:49+00:00",
+  "contador": 27,
+  "ultimo": "2026-11-20T17:00:59+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -58,7 +59,8 @@
     "023-falso-amigo-pretend": "2026-11-19T13:00:33+00:00",
     "024-the-coffee-shop": "2026-11-19T17:00:31+00:00",
     "025-mini-aula-look": "2026-11-19T23:00:31+00:00",
-    "026-mini-aula-for": "2026-11-20T13:00:49+00:00"
+    "026-mini-aula-for": "2026-11-20T13:00:49+00:00",
+    "027-the-hotel-frases": "2026-11-20T17:00:59+00:00"
   },
   "mensagens": {
     "008-phone-conversation": [
@@ -132,6 +134,9 @@
     ],
     "026-mini-aula-for": [
       8424
+    ],
+    "027-the-hotel-frases": [
+      8428
     ]
   }
 }
