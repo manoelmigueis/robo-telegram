@@ -1440,5 +1440,44 @@
   "imagens": [
    "img/041.png"
   ]
+ },
+ {
+  "id": "042-cliente-quer-alterar",
+  "tipo": "quiz",
+  "titulo": "Um cliente quer alterar o escopo de um projeto já fechado e diz que é apenas um detalhe rápido. O que fazer?",
+  "arte": {
+   "titulo": "Mudança de Escopo",
+   "sub": "O cliente pediu um ajuste rápido fora do combinado. O que fazer?",
+   "itens": [
+    "Fazer tudo de graça",
+    "Recusar o pedido bravo",
+    "Cobrar a hora extra",
+    "Parar de responder"
+   ],
+   "icone": "⚠️",
+   "icones": []
+  },
+  "quiz": {
+   "pergunta": "Um cliente quer alterar o escopo de um projeto já fechado e diz que é apenas um detalhe rápido. O que fazer?",
+   "opcoes": [
+    "Fazer tudo de graça",
+    "Recusar o pedido bravo",
+    "Cobrar a hora extra",
+    "Parar de responder"
+   ],
+   "correta": 2,
+   "explicacao": "Todo ajuste fora do combinado consome tempo. Explique de forma educada que o novo pedido entra como serviço extra e passe o valor.",
+   "descricao": "⚠️ Alinhar expectativas protege o seu tempo e garante que você receba pelo esforço real."
+  },
+  "corpo": "<b>Você fechou um serviço, combinou as entregas certas e começou a produzir. De repente, o cliente pede para mudar parte do projeto, alegando que é um ajuste simples. Como agir?</b><br><br>Quem trabalha de forma autônoma sofre muito com o chamado escopo infinito. Pequenas mudanças somadas viram outro projeto inteiro. Aceitar tudo sem cobrar nada gera prejuízo e desgaste.<br><br>🧠 Pense bem antes de responder ao quiz acima e descubra a postura profissional para lidar com novos pedidos sem perder o cliente.<br><br><b>👀 Toque para ver a dica de ouro</b><br><details><summary>Responda que faz o ajuste com prazer, mas envie um orçamento rápido com o valor da hora extra para aprovação antes de começar a mexer em tudo.</summary></details><br>Salve e compartilhe com quem faz freela e projetos! 🤝<br><br>#rendaextra #freelancer #negociacao #autonomo",
+  "tags": [
+   "rendaextra",
+   "freelancer",
+   "negociacao",
+   "autonomo"
+  ],
+  "imagens": [
+   "img/042.png"
+  ]
  }
 ]
