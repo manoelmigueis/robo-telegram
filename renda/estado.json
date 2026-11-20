@@ -34,7 +34,8 @@
     "032-cliente-aprovou-projeto",
     "033-passos-para-precificar",
     "034-voce-recebeu-uma",
-    "035-passos-para-fazer"
+    "035-passos-para-fazer",
+    "036-voce-recebeu-uma"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -50,8 +51,8 @@
     "cursos gratuitos on line 10 opções do senai play para quem quer se destacar no m",
     "senac rj oferece cursos gratuitos de vendas e marketing digital com inteligência"
   ],
-  "contador": 35,
-  "ultimo": "2026-11-20T19:01:01+00:00",
+  "contador": 36,
+  "ultimo": "2026-11-20T23:00:42+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -83,7 +84,8 @@
     "032-cliente-aprovou-projeto": "2026-11-19T16:00:49+00:00",
     "033-passos-para-precificar": "2026-11-19T23:00:51+00:00",
     "034-voce-recebeu-uma": "2026-11-20T12:16:41+00:00",
-    "035-passos-para-fazer": "2026-11-20T16:01:46+00:00"
+    "035-passos-para-fazer": "2026-11-20T16:01:46+00:00",
+    "036-voce-recebeu-uma": "2026-11-20T23:00:42+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -166,6 +168,9 @@
     ],
     "035-passos-para-fazer": [
       8830
+    ],
+    "036-voce-recebeu-uma": [
+      8837
     ]
   }
 }
