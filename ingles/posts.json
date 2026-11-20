@@ -519,5 +519,20 @@
     "imagens": [
       "img/032.png"
     ]
+  },
+  {
+    "id": "033-pet-shop-vocabulario",
+    "tipo": "lista",
+    "titulo": "🐾 Pet shop: vocabulário de animais de estimação em inglês",
+    "corpo": "<p>Vai cuidar de um pet na gringa ou quer falar sobre bichinhos? Salve este post 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Leash</td><td>Coleira de guia</td></tr><tr><td>Collar</td><td>Coleira de pescoço</td></tr><tr><td>Pet food</td><td>Ração</td></tr><tr><td>Water bowl</td><td>Comedouro / Pote de água</td></tr><tr><td>Litter box</td><td>Caixa de areia (gato)</td></tr><tr><td>Flea</td><td>Pulga</td></tr><tr><td>Tick</td><td>Carrapato</td></tr><tr><td>Grooming</td><td>Banho e tosa</td></tr></table><details><summary>👀 Como se diz \"ração de cachorro\"?</summary><p>Você pode usar <b>dog food</b> de forma geral, ou <b>dry food</b> para ração seca e <b>wet food</b> para ração úmida.</p></details><p>🔁 Mande para aquele amigo que ama animais.</p>",
+    "tags": [
+      "ingles",
+      "aprenderingles",
+      "vocabulario",
+      "pets"
+    ],
+    "imagens": [
+      "img/033.png"
+    ]
   }
 ]
