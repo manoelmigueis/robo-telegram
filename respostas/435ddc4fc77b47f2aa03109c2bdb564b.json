@@ -1,0 +1,1 @@
+{"pronto": true, "status": 400, "json": {"erro": "Não foi: @livrosepubpdfx: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)"}}
