@@ -33,7 +33,8 @@
     "031-livros-gratis-para",
     "032-cliente-aprovou-projeto",
     "033-passos-para-precificar",
-    "034-voce-recebeu-uma"
+    "034-voce-recebeu-uma",
+    "035-passos-para-fazer"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -48,8 +49,8 @@
     "ministério da saúde abre 50 mil vagas em curso gratuito online de 180 horas com ",
     "cursos gratuitos on line 10 opções do senai play para quem quer se destacar no m"
   ],
-  "contador": 34,
-  "ultimo": "2026-11-20T12:16:41+00:00",
+  "contador": 35,
+  "ultimo": "2026-11-20T16:01:46+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -80,7 +81,8 @@
     "031-livros-gratis-para": "2026-11-19T12:00:45+00:00",
     "032-cliente-aprovou-projeto": "2026-11-19T16:00:49+00:00",
     "033-passos-para-precificar": "2026-11-19T23:00:51+00:00",
-    "034-voce-recebeu-uma": "2026-11-20T12:16:41+00:00"
+    "034-voce-recebeu-uma": "2026-11-20T12:16:41+00:00",
+    "035-passos-para-fazer": "2026-11-20T16:01:46+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -160,6 +162,9 @@
     ],
     "034-voce-recebeu-uma": [
       8829
+    ],
+    "035-passos-para-fazer": [
+      8830
     ]
   }
 }
