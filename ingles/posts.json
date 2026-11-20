@@ -534,5 +534,19 @@
     "imagens": [
       "img/033.png"
     ]
+  },
+  {
+    "id": "034-mini-aula-hear",
+    "tipo": "aula",
+    "titulo": "📘 Mini-aula: HEAR ou LISTEN?",
+    "corpo": "<p>Essas duas palavras estão ligadas ao som, mas têm usos bem diferentes no dia a dia.</p><table><tr><th>👂 HEAR: ouvir (algo que chega aos seus ouvidos sem esforço)</th><th>🎧 LISTEN: escutar (prestar atenção em um som de propósito)</th></tr><tr><td>I can hear a noise. (Consigo ouvir um barulho)</td><td>I like to listen to music. (Gosto de escutar música)</td></tr><tr><td>Did you hear that? (Você ouviu isso?)</td><td>Listen to me! (Me escute! / Preste atenção!)</td></tr></table><p>💡 <b>Regra prática:</b> use <b>hear</b> quando o som apenas acontece e você capta. Use <b>listen</b> quando você decide prestar atenção em algo.</p><details><summary>🧠 Desafio: \"She is ___ to the radio.\" É hear ou listen?</summary><p><b>Listening</b>. Ela está prestando atenção no som da rádio. Lembre-se que listen costuma vir acompanhado da preposição to.</p></details>",
+    "tags": [
+      "ingles",
+      "gramaticainglesa",
+      "aprenderingles"
+    ],
+    "imagens": [
+      "img/034.png"
+    ]
   }
 ]
