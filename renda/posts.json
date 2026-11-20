@@ -1367,5 +1367,44 @@
   "imagens": [
    "img/039.png"
   ]
+ },
+ {
+  "id": "040-cliente-quer-fechar",
+  "tipo": "quiz",
+  "titulo": "Um cliente quer fechar um freela mais barato se você prometer indicar mais amigos para ele. O que fazer?",
+  "arte": {
+   "titulo": "Indicação em Troca de Desconto",
+   "sub": "Pediram desconto prometendo indicações. O que fazer?",
+   "itens": [
+    "Dar o desconto pedido",
+    "Recusar o serviço",
+    "Oferecer desconto por indicação real",
+    "Trabalhar de graça"
+   ],
+   "icone": "🤝",
+   "icones": []
+  },
+  "quiz": {
+   "pergunta": "Um cliente quer fechar um freela mais barato se você prometer indicar mais amigos para ele. O que fazer?",
+   "opcoes": [
+    "Dar o desconto pedido",
+    "Recusar o serviço",
+    "Oferecer desconto por indicação real",
+    "Trabalhar de graça"
+   ],
+   "correta": 2,
+   "explicacao": "Promessa futura não paga conta. Se quiser dar desconto, atreva o benefício a uma indicação que realmente fechar negócio.",
+   "descricao": "🤝 Proteja o valor do seu trabalho e premie resultados reais, e não apenas promessas."
+  },
+  "corpo": "<b>O cliente elogia seu trabalho, mas pede um desconto forte porque promete te trazer vários outros clientes no futuro. Como lidar com essa proposta?</b><br><br>Quem faz renda extra ou freela ouve muito essa história. Promessas de indicação futura são comuns, mas o seu custo de tempo e dedicação no projeto atual é imediato e real.<br><br>🧠 Pense bem antes de responder ao quiz acima e descubra a melhor postura profissional para essa negociação.<br><br><b>👀 Toque para ver a dica de ouro</b><br><details><summary>Crie um programa de indicação real. Diga que o desconto vale na próxima contratação, mas apenas quando o amigo indicado fechar e pagar o primeiro serviço.</summary></details><br>Salve e compartilhe com quem trabalha por conta própria! 🤝<br><br>#rendaextra #freelancer #negociacao #autonomo",
+  "tags": [
+   "rendaextra",
+   "freelancer",
+   "negociacao",
+   "autonomo"
+  ],
+  "imagens": [
+   "img/040.png"
+  ]
  }
 ]
