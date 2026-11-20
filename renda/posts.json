@@ -1406,5 +1406,39 @@
   "imagens": [
    "img/040.png"
   ]
+ },
+ {
+  "id": "041-passos-para-criar",
+  "tipo": "lista",
+  "titulo": "📊 5 passos para criar planilhas que vendem",
+  "arte": {
+   "titulo": "5 passos para criar planilhas",
+   "sub": "",
+   "itens": [
+    "Resolva um problema real",
+    "Deixe o visual bem limpo",
+    "Adicione manuais em texto",
+    "Teste com amigos primeiro",
+    "Venda em plataformas livres"
+   ],
+   "icone": "📊",
+   "icones": [
+    "🎯",
+    "🧹",
+    "📖",
+    "👥",
+    "🛒"
+   ]
+  },
+  "corpo": "<p>Muitos pequenos negócios, motoristas de aplicativo e autônomos precisam controlar finanças e estoques, mas não sabem usar sistemas complexos. Você pode criar e vender planilhas simples:</p><p><b>1.</b> <b>Resolva um problema real</b>: pesquise o que profissionais do seu convívio sofrem para anotar, como caixa diário ou controle de entregas.<br/><b>2.</b> <b>Deixe o visual bem limpo</b>: use cores neutras, fontes fáceis de ler e destaque apenas onde a pessoa deve preencher os dados.<br/><b>3.</b> <b>Adicione manuais em texto</b>: coloque uma aba inicial explicando o passo a passo de como usar o arquivo sem errar.<br/><b>4.</b> <b>Teste com amigos primeiro</b>: peça para alguém que não entende de Excel abrir a planilha e ver se acha tudo intuitivo.<br/><b>5.</b> <b>Venda em plataformas livres</b>: coloque seu arquivo digital em sites especializados que cuidam do pagamento e entrega automática.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Grave um vídeo curto de um minuto mostrando a planilha funcionando e publique nas redes sociais. Ver o produto pronto gera muito mais desejo de compra.</p></details><p>📌 Salve e compartilhe com quem gosta de organizar dados e quer criar um produto digital.</p>",
+  "tags": [
+   "rendaextra",
+   "planilhas",
+   "produtividade",
+   "negocios"
+  ],
+  "imagens": [
+   "img/041.png"
+  ]
  }
 ]
