@@ -1333,5 +1333,39 @@
   "imagens": [
    "img/038.png"
   ]
+ },
+ {
+  "id": "039-servicos-assistente-virtual",
+  "tipo": "lista",
+  "titulo": "💻 5 serviços de assistente virtual para começar",
+  "arte": {
+   "titulo": "5 serviços de assistente virtual",
+   "sub": "",
+   "itens": [
+    "Responder e-mails e chat",
+    "Organizar planilhas e dados",
+    "Agendar postagens em redes",
+    "Emitir notas e cobranças",
+    "Cuidar da agenda e reuniões"
+   ],
+   "icone": "💻",
+   "icones": [
+    "📩",
+    "📊",
+    "📱",
+    "🧾",
+    "📅"
+   ]
+  },
+  "corpo": "<p>Muitos pequenos negócios e autônomos não têm tempo para cuidar das tarefas de rotina. Você pode prestar suporte administrativo direto de casa, usando o computador ou até o celular:</p><p><b>1.</b> <b>Responder e-mails e chat</b>: organizar a caixa de entrada da empresa e responder dúvidas básicas de clientes.<br/><b>2.</b> <b>Organizar planilhas e dados</b>: atualizar cadastros de clientes, listas de fornecedores e controle de estoques simples.<br/><b>3.</b> <b>Agendar postagens em redes</b>: programar as imagens e textos que a empresa já preparou nas redes sociais.<br/><b>4.</b> <b>Emitir notas e cobranças</b>: gerar notas fiscais pelo sistema do cliente e enviar avisos amigáveis de vencimento.<br/><b>5.</b> <b>Cuidar da agenda e reuniões</b>: marcar compromissos, confirmar horários e organizar os links das chamadas de vídeo.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Comece oferecendo um único serviço específico para um comércio ou profissional do seu bairro antes de tentar abraçar todas as tarefas de uma vez.</p></details><p>📌 Salve e compartilhe com quem quer trabalhar no modelo home office.</p>",
+  "tags": [
+   "rendaextra",
+   "assistentevirtual",
+   "homeoffice",
+   "trabalhoremoto"
+  ],
+  "imagens": [
+   "img/039.png"
+  ]
  }
 ]
