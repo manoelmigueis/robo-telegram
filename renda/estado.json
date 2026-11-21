@@ -36,7 +36,8 @@
     "034-voce-recebeu-uma",
     "035-passos-para-fazer",
     "036-voce-recebeu-uma",
-    "037-passos-para-organizar"
+    "037-passos-para-organizar",
+    "038-voce-enviou-orcamento"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -52,8 +53,8 @@
     "cursos gratuitos on line 10 opções do senai play para quem quer se destacar no m",
     "senac rj oferece cursos gratuitos de vendas e marketing digital com inteligência"
   ],
-  "contador": 37,
-  "ultimo": "2026-11-21T12:00:44+00:00",
+  "contador": 38,
+  "ultimo": "2026-11-21T16:00:54+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -87,7 +88,8 @@
     "034-voce-recebeu-uma": "2026-11-20T12:16:41+00:00",
     "035-passos-para-fazer": "2026-11-20T16:01:46+00:00",
     "036-voce-recebeu-uma": "2026-11-20T23:00:42+00:00",
-    "037-passos-para-organizar": "2026-11-21T12:00:44+00:00"
+    "037-passos-para-organizar": "2026-11-21T12:00:44+00:00",
+    "038-voce-enviou-orcamento": "2026-11-21T16:00:54+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -176,6 +178,9 @@
     ],
     "037-passos-para-organizar": [
       8842
+    ],
+    "038-voce-enviou-orcamento": [
+      8845
     ]
   }
 }
