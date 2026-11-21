@@ -1479,5 +1479,39 @@
   "imagens": [
    "img/042.png"
   ]
+ },
+ {
+  "id": "043-passos-para-comecar",
+  "tipo": "lista",
+  "titulo": "📞 5 passos para começar no atendimento de chat",
+  "arte": {
+   "titulo": "5 passos para atendimento de chat",
+   "sub": "",
+   "itens": [
+    "Pratique digitação rápida",
+    "Use respostas prontas",
+    "Mantenha tom cordial",
+    "Foque em resolver o caso",
+    "Cadastre-se em plataformas"
+   ],
+   "icone": "📞",
+   "icones": [
+    "⌨️",
+    "📋",
+    "😊",
+    "🎯",
+    "🌐"
+   ]
+  },
+  "corpo": "<p>Muitas empresas terceirizam o suporte via chat e WhatsApp para profissionais que trabalham direto de casa. É uma ótima opção para quem tem boa comunicação escrita e quer começar na internet:</p><p><b>1.</b> <b>Pratique digitação rápida</b>: faça testes gratuitos na web para aumentar sua velocidade e reduzir erros de português no teclado.<br/><b>2.</b> <b>Use respostas prontas</b>: salve modelos educados para saudações e dúvidas frequentes, ganhando agilidade no atendimento.<br/><b>3.</b> <b>Mantenha tom cordial</b>: mesmo com clientes irritados, responda com calma, paciência e foco em ajudar a solucionar o problema.<br/><b>4.</b> <b>Foque em resolver o caso</b>: preste atenção na dúvida principal antes de responder, evitando idas e vindas desnecessárias no chat.<br/><b>5.</b> <b>Cadastre-se em plataformas</b>: busque vagas de suporte remoto em sites oficiais de emprego e empresas de atendimento ao cliente.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Crie um espaço silencioso em casa e garanta uma boa conexão de internet. Empresas que contratam suporte remoto avaliam muito a estabilidade do seu sinal.</p></details><p>📌 Salve e compartilhe com quem quer trabalhar em casa atendendo clientes.</p>",
+  "tags": [
+   "rendaextra",
+   "suporteremoto",
+   "homeoffice",
+   "trabalhoremoto"
+  ],
+  "imagens": [
+   "img/043.png"
+  ]
  }
 ]
