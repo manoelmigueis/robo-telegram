@@ -563,5 +563,20 @@
     "imagens": [
       "img/035.png"
     ]
+  },
+  {
+    "id": "036-weather-clima-tempo",
+    "tipo": "lista",
+    "titulo": "🌧️ Weather: o clima e o tempo em inglês",
+    "corpo": "<p>Vai viajar e precisa saber como falar do tempo? Salve este post 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Sunny</td><td>Ensolarado</td></tr><tr><td>Cloudy</td><td>Nublado</td></tr><tr><td>Rainy</td><td>Chuvoso</td></tr><tr><td>Windy</td><td>Ventoso / Com vento</td></tr><tr><td>Stormy</td><td>Com tempestade</td></tr><tr><td>Snowy</td><td>Com neve</td></tr><tr><td>Foggy</td><td>Com neblina</td></tr><tr><td>Humid</td><td>Úmido</td></tr></table><details><summary>👀 Como perguntar \"como está o tempo\"?</summary><p>A forma mais natural e comum usada pelos americanos é <b>How is the weather?</b> ou <b>What is the weather like?</b>.</p></details><p>🔁 Mande para aquele amigo que adora falar sobre o clima.</p>",
+    "tags": [
+      "ingles",
+      "aprenderingles",
+      "vocabulario",
+      "clima"
+    ],
+    "imagens": [
+      "img/036.png"
+    ]
   }
 ]
