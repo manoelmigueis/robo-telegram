@@ -1513,5 +1513,44 @@
   "imagens": [
    "img/043.png"
   ]
+ },
+ {
+  "id": "044-cliente-pediu-para",
+  "tipo": "quiz",
+  "titulo": "O cliente pediu para você emitir nota fiscal no seu nome para o serviço prestado por outra pessoa. O que fazer?",
+  "arte": {
+   "titulo": "Nota Fiscal para Terceiros",
+   "sub": "Pediram para emitir nota no seu CPF ou CNPJ. O que fazer?",
+   "itens": [
+    "Aceitar sem problemas",
+    "Cobrar taxa e emitir",
+    "Recusar o pedido",
+    "Fazer de graça"
+   ],
+   "icone": "🧾",
+   "icones": []
+  },
+  "quiz": {
+   "pergunta": "O cliente pediu para você emitir nota fiscal no seu nome para o serviço prestado por outra pessoa. O que fazer?",
+   "opcoes": [
+    "Aceitar sem problemas",
+    "Cobrar taxa e emitir",
+    "Recusar o pedido",
+    "Fazer de graça"
+   ],
+   "correta": 2,
+   "explicacao": "Emitir nota para terceiros gera riscos fiscais e tributários graves para você. A nota deve corresponder sempre a quem executou o trabalho.",
+   "descricao": "🧾 Proteja o seu CNPJ ou CPF de problemas com impostos e responsabilidades legais de terceiros."
+  },
+  "corpo": "<b>Você presta serviços por conta própria e um cliente conhecido pede um favor: emitir a nota fiscal do seu negócio para um trabalho que foi feito por outra pessoa. Como agir?</b><br><br>Essa situação parece inofensiva para ajudar um colega, mas envolve riscos sérios. A nota fiscal declara ao governo que foi você quem recebeu o dinheiro e prestou o serviço, o que gera cobrança de impostos e responsabilidade jurídica sobre algo que você nem fez.<br><br>🧠 Pense bem antes de responder ao quiz acima e descubra a postura correta para evitar dor de cabeça com o fisco.<br><br><b>👀 Toque para ver a dica de ouro</b><br><details><summary>Explique com firmeza que a nota fiscal precisa ser emitida por quem executou o serviço e recebeu o pagamento, mantendo a sua contabilidade limpa e segura.</summary></details><br>Salve e compartilhe com quem trabalha de forma autônoma! 🧾<br><br>#rendaextra #freelancer #mei #autonomo",
+  "tags": [
+   "rendaextra",
+   "freelancer",
+   "mei",
+   "autonomo"
+  ],
+  "imagens": [
+   "img/044.png"
+  ]
  }
 ]
