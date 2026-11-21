@@ -548,5 +548,20 @@
     "imagens": [
       "img/034.png"
     ]
+  },
+  {
+    "id": "035-shopping-frases-para",
+    "tipo": "palavra",
+    "titulo": "🛍️ Shopping: frases para comprar roupas",
+    "corpo": "<p>Vai fazer compras em uma viagem e precisa falar com o vendedor? Veja frases simples para usar na loja:</p><table><tr><th>Inglês</th><th>Português</th></tr><tr><td>✅ Can I try this on?</td><td>Eu posso provar isto?</td></tr><tr><td>✅ Where is the fitting room?</td><td>Onde fica o provador?</td></tr><tr><td>✅ Do you have this in a larger size?</td><td>Você tem isto em um tamanho maior?</td></tr><tr><td>✅ Do you have this in blue?</td><td>Você tem isto em azul?</td></tr><tr><td>✅ How much is this?</td><td>Quanto custa isto?</td></tr><tr><td>✅ I am just looking, thanks.</td><td>Estou apenas olhando, obrigado.</td></tr></table><p>🔁 Mande para aquele amigo que adora fazer compras!</p>",
+    "tags": [
+      "ingles",
+      "viagem",
+      "vocabulario",
+      "aprenderingles"
+    ],
+    "imagens": [
+      "img/035.png"
+    ]
   }
 ]
