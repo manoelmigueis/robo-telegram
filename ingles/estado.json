@@ -28,10 +28,11 @@
     "026-mini-aula-for",
     "027-the-hotel-frases",
     "028-kitchen-utensils-utensilios",
-    "029-the-gym-vocabulario"
+    "029-the-gym-vocabulario",
+    "030-mini-aula-such"
   ],
-  "contador": 29,
-  "ultimo": "2026-11-21T13:00:49+00:00",
+  "contador": 30,
+  "ultimo": "2026-11-21T17:00:41+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -64,7 +65,8 @@
     "026-mini-aula-for": "2026-11-20T13:00:49+00:00",
     "027-the-hotel-frases": "2026-11-20T17:00:59+00:00",
     "028-kitchen-utensils-utensilios": "2026-11-20T23:00:53+00:00",
-    "029-the-gym-vocabulario": "2026-11-21T13:00:49+00:00"
+    "029-the-gym-vocabulario": "2026-11-21T13:00:49+00:00",
+    "030-mini-aula-such": "2026-11-21T17:00:41+00:00"
   },
   "mensagens": {
     "008-phone-conversation": [
@@ -147,6 +149,9 @@
     ],
     "029-the-gym-vocabulario": [
       8437
+    ],
+    "030-mini-aula-such": [
+      8440
     ]
   }
 }
