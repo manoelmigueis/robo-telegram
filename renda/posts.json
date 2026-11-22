@@ -1552,5 +1552,39 @@
   "imagens": [
    "img/044.png"
   ]
+ },
+ {
+  "id": "045-passos-para-criar",
+  "tipo": "lista",
+  "titulo": "🌐 5 passos para criar um site simples",
+  "arte": {
+   "titulo": "5 passos para criar um site",
+   "sub": "",
+   "itens": [
+    "Escolha uma boa plataforma",
+    "Defina uma página principal",
+    "Escreva o que você oferece",
+    "Insira botões de contato",
+    "Publique e teste no celular"
+   ],
+   "icone": "🌐",
+   "icones": [
+    "🧩",
+    "📄",
+    "✍️",
+    "💬",
+    "📱"
+   ]
+  },
+  "corpo": "<p>Pequenos comércios, profissionais liberais e prestadores de serviço precisam de uma página na internet para passar confiança, mas muitos não sabem programar. Você pode criar sites simples usando plataformas gratuitas de arrastar e soltar:</p><p><b>1.</b> <b>Escolha uma boa plataforma</b>: use construtores fáceis que oferecem modelos prontos e não exigem conhecimento em códigos.<br/><b>2.</b> <b>Defina uma página principal</b>: coloque logo no topo o que você faz, para quem e como a pessoa pode te contratar.<br/><b>3.</b> <b>Escreva o que você oferece</b>: liste seus principais serviços ou produtos de forma bem direta e sem enrolação.<br/><b>4.</b> <b>Insira botões de contato</b>: adicione links fáceis para o seu WhatsApp e redes sociais para gerar conversas rápidas.<br/><b>5.</b> <b>Publique e teste no celular</b>: abra o seu site recém-criado no telefone para ver se os botões e os textos estão fáceis de ler.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Adicione depoimentos de clientes antigos na página principal. Ler a opinião positiva de quem já comprou ajuda muito a fechar novos negócios.</p></details><p>📌 Salve e compartilhe com quem quer criar uma página na internet.</p>",
+  "tags": [
+   "rendaextra",
+   "criacaodesites",
+   "trabalhodigital",
+   "negocios"
+  ],
+  "imagens": [
+   "img/045.png"
+  ]
  }
 ]
