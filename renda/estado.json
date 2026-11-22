@@ -39,7 +39,8 @@
     "037-passos-para-organizar",
     "038-voce-enviou-orcamento",
     "039-servicos-assistente-virtual",
-    "040-cliente-quer-fechar"
+    "040-cliente-quer-fechar",
+    "041-passos-para-criar"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -56,8 +57,8 @@
     "senac rj oferece cursos gratuitos de vendas e marketing digital com inteligência",
     "senac rj abre mais de 2 mil vagas para cursos gratuitos de tiktok shop e marketi"
   ],
-  "contador": 40,
-  "ultimo": "2026-11-22T12:00:46+00:00",
+  "contador": 41,
+  "ultimo": "2026-11-22T16:00:51+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -94,7 +95,8 @@
     "037-passos-para-organizar": "2026-11-21T12:00:44+00:00",
     "038-voce-enviou-orcamento": "2026-11-21T16:00:54+00:00",
     "039-servicos-assistente-virtual": "2026-11-21T23:00:43+00:00",
-    "040-cliente-quer-fechar": "2026-11-22T12:00:46+00:00"
+    "040-cliente-quer-fechar": "2026-11-22T12:00:46+00:00",
+    "041-passos-para-criar": "2026-11-22T16:00:51+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -192,6 +194,9 @@
     ],
     "040-cliente-quer-fechar": [
       8853
+    ],
+    "041-passos-para-criar": [
+      8856
     ]
   }
 }
