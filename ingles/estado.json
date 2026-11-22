@@ -30,10 +30,11 @@
     "028-kitchen-utensils-utensilios",
     "029-the-gym-vocabulario",
     "030-mini-aula-such",
-    "031-the-pharmacy-frases"
+    "031-the-pharmacy-frases",
+    "032-car-parts-partes"
   ],
-  "contador": 31,
-  "ultimo": "2026-11-21T23:00:41+00:00",
+  "contador": 32,
+  "ultimo": "2026-11-22T13:00:40+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -68,7 +69,8 @@
     "028-kitchen-utensils-utensilios": "2026-11-20T23:00:53+00:00",
     "029-the-gym-vocabulario": "2026-11-21T13:00:49+00:00",
     "030-mini-aula-such": "2026-11-21T17:00:41+00:00",
-    "031-the-pharmacy-frases": "2026-11-21T23:00:41+00:00"
+    "031-the-pharmacy-frases": "2026-11-21T23:00:41+00:00",
+    "032-car-parts-partes": "2026-11-22T13:00:40+00:00"
   },
   "mensagens": {
     "008-phone-conversation": [
@@ -157,6 +159,9 @@
     ],
     "031-the-pharmacy-frases": [
       8444
+    ],
+    "032-car-parts-partes": [
+      8447
     ]
   }
 }
