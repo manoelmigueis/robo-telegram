@@ -608,5 +608,20 @@
     "imagens": [
       "img/038.png"
     ]
+  },
+  {
+    "id": "039-the-bank-frases",
+    "tipo": "palavra",
+    "titulo": "🏦 At the bank: frases para usar no banco",
+    "corpo": "<p>Precisou resolver coisas em um banco na gringa e ficou perdido? Veja frases simples para falar com o atendente:</p><table><tr><th>Inglês</th><th>Português</th></tr><tr><td>✅ I would like to open a checking account.</td><td>Eu gostaria de abrir uma conta corrente.</td></tr><tr><td>✅ Where is the nearest ATM?</td><td>Onde fica o caixa eletrônico mais próximo?</td></tr><tr><td>✅ Can I exchange Brazilian Real for US Dollars?</td><td>Eu posso trocar Real brasileiro por Dólar americano?</td></tr><tr><td>✅ I need to deposit some cash.</td><td>Eu preciso depositar um pouco de dinheiro.</td></tr><tr><td>✅ What is my current balance?</td><td>Qual é o meu saldo atual?</td></tr><tr><td>✅ I lost my debit card.</td><td>Eu perdi meu cartão de débito.</td></tr></table><p>🔁 Salve este post e mande para um amigo que vai viajar!</p>",
+    "tags": [
+      "ingles",
+      "viagem",
+      "vocabulario",
+      "aprenderingles"
+    ],
+    "imagens": [
+      "img/039.png"
+    ]
   }
 ]
