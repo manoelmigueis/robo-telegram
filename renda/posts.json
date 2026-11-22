@@ -1625,5 +1625,39 @@
   "imagens": [
    "img/046.png"
   ]
+ },
+ {
+  "id": "047-passos-para-editar",
+  "tipo": "lista",
+  "titulo": "🎬 5 passos para editar vídeos curtos",
+  "arte": {
+   "titulo": "5 passos para editar vídeos curtos",
+   "sub": "",
+   "itens": [
+    "Corte pausas e silêncios",
+    "Adicione legendas dinâmicas",
+    "Use trilhas sem direitos",
+    "Mantenha o ritmo acelerado",
+    "Exporte na resolução certa"
+   ],
+   "icone": "🎬",
+   "icones": [
+    "✂️",
+    "💬",
+    "🎵",
+    "⚡",
+    "📱"
+   ]
+  },
+  "corpo": "<p>Lojas e profissionais locais gravam vídeos para as redes sociais, mas não têm tempo ou paciência para editar. Você pode oferecer edição básica de Reels e Shorts usando apenas aplicativos gratuitos no celular:</p><p><b>1.</b> <b>Corte pausas e silêncios</b>: remova trechos com erros, respirações longas e momentos sem fala para deixar o vídeo direto ao ponto.<br/><b>2.</b> <b>Adicione legendas dinâmicas</b>: a maioria das pessoas assiste sem som, então use aplicativos gratuitos que geram e sincronizam legendas automáticas.<br/><b>3.</b> <b>Use trilhas sem direitos</b>: coloque músicas de fundo em volume baixo, preferindo faixas das bibliotecas abertas das próprias plataformas.<br/><b>4.</b> <b>Mantenha o ritmo acelerado</b>: prenda a atenção nos primeiros três segundos com um texto ou imagem marcante para evitar que passem o conteúdo.<br/><b>5.</b> <b>Exporte na resolução certa</b>: salve os arquivos no formato vertical (9:16) em resolução alta para garantir nitidez na publicação.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Pegue um vídeo público de um comércio do seu bairro, edite com cortes e legenda e mande como demonstração gratuita. Mostrar o resultado pronto é a forma mais rápida de fechar pacotes mensais.</p></details><p>📌 Salve e compartilhe com quem quer ganhar dinheiro editando vídeos.</p>",
+  "tags": [
+   "rendaextra",
+   "edicaodevideo",
+   "trabalhoremoto",
+   "redessociais"
+  ],
+  "imagens": [
+   "img/047.png"
+  ]
  }
 ]
