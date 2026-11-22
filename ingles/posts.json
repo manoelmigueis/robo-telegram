@@ -594,5 +594,19 @@
     "imagens": [
       "img/037.png"
     ]
+  },
+  {
+    "id": "038-mini-aula-for",
+    "tipo": "aula",
+    "titulo": "📘 Mini-aula: FOR ou DURING?",
+    "corpo": "<p>Essas duas palavras indicam tempo, mas usamos cada uma em situações diferentes.</p><table><tr><th>⏳ FOR: quanto tempo algo dura (duração)</th><th>📅 DURING: quando algo acontece (durante um evento)</th></tr><tr><td>for two hours (por duas horas)</td><td>during the movie (durante o filme)</td></tr><tr><td>for three days (por três dias)</td><td>during the class (durante a aula)</td></tr><tr><td>for a long time (por muito tempo)</td><td>during the summer (durante o verão)</td></tr></table><p>💡 <b>Regra prática:</b> use <b>for</b> seguido de um número ou quantidade de tempo (anos, horas, dias). Use <b>during</b> antes de um evento, festa ou período específico.</p><details><summary>🧠 Desafio: \"I stayed in London ___ five days.\" É for ou during?</summary><p><b>For</b>. Como temos uma quantidade exata de tempo (cinco dias), usamos for.</p></details>",
+    "tags": [
+      "ingles",
+      "gramaticainglesa",
+      "aprenderingles"
+    ],
+    "imagens": [
+      "img/038.png"
+    ]
   }
 ]
