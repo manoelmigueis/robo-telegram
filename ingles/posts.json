@@ -578,5 +578,21 @@
     "imagens": [
       "img/036.png"
     ]
+  },
+  {
+    "id": "037-working-from-home",
+    "tipo": "lista",
+    "titulo": "💻 Working from home: vocabulário de home office em inglês",
+    "corpo": "<p>Trabalha remoto ou quer falar sobre home office com gringos? Salve este post 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Remote work</td><td>Trabalho remoto</td></tr><tr><td>Desk</td><td>Escrivaninha / Mesa</td></tr><tr><td>Headset</td><td>Fone com microfone</td></tr><tr><td>Mute</td><td>Mutado / Silenciado</td></tr><tr><td>Unmute</td><td>Desmutar / Tirar o mudo</td></tr><tr><td>Deadline</td><td>Prazo de entrega</td></tr><tr><td>Wi-Fi signal</td><td>Sinal de internet</td></tr><tr><td>Meeting</td><td>Reunião</td></tr></table><details><summary>👀 Como dizer \"você está no mudo\"?</summary><p>Em uma chamada de vídeo, os americanos dizem <b>You are on mute</b> de forma bem direta e natural.</p></details><p>🔁 Mande para aquele amigo que trabalha em home office.</p>",
+    "tags": [
+      "ingles",
+      "aprenderingles",
+      "vocabulario",
+      "businessenglish",
+      "trabalho"
+    ],
+    "imagens": [
+      "img/037.png"
+    ]
   }
 ]
