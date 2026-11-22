@@ -1586,5 +1586,44 @@
   "imagens": [
    "img/045.png"
   ]
+ },
+ {
+  "id": "046-voce-entregou-servico",
+  "tipo": "quiz",
+  "titulo": "Você entregou um serviço e o cliente disse que só vai pagar quando receber do cliente final dele. O que fazer?",
+  "arte": {
+   "titulo": "Pagamento Condicionado",
+   "sub": "O cliente quer pagar só após receber de terceiros. O que fazer?",
+   "itens": [
+    "Aceitar a condição",
+    "Cobrar antes do prazo",
+    "Definir data fixa",
+    "Cancelar o projeto"
+   ],
+   "icone": "💼",
+   "icones": []
+  },
+  "quiz": {
+   "pergunta": "Você entregou um serviço e o cliente disse que só vai pagar quando receber do cliente final dele. O que fazer?",
+   "opcoes": [
+    "Aceitar a condição",
+    "Cobrar antes do prazo",
+    "Definir data fixa",
+    "Cancelar o projeto"
+   ],
+   "correta": 2,
+   "explicacao": "O risco do negócio é do seu cliente, não seu. O seu trabalho deve ter prazo de pagamento garantido e independente de terceiros.",
+   "descricao": "💼 Proteja o seu fluxo de caixa e estabeleça prazos claros antes de iniciar qualquer serviço."
+  },
+  "corpo": "<b>Você concluiu um freela com dedicação, enviou o resultado final e esperava receber o combinado. Mas o cliente avisa que o pagamento só vai sair quando o cliente dele pagar o projeto inteiro. Como agir?</b><br><br>Essa prática transfere o risco financeiro de outra empresa para o seu bolso. Se o cliente final atrasar ou der calote, quem fica no prejuízo é você, que trabalhou e entregou o serviço no prazo.<br><br>🧠 Pense bem antes de responder ao quiz acima e descubra a postura profissional para blindar o seu dinheiro.<br><br><b>👀 Toque para ver a dica de ouro</b><br><details><summary>Deixe claro no contrato que o seu pagamento é vinculado à sua entrega, com data fixa de vencimento, independentemente de aprovações ou repasses de terceiros.</summary></details><br>Salve e compartilhe com quem trabalha por conta própria! 🤝<br><br>#rendaextra #freelancer #contrato #autonomo",
+  "tags": [
+   "rendaextra",
+   "freelancer",
+   "contrato",
+   "autonomo"
+  ],
+  "imagens": [
+   "img/046.png"
+  ]
  }
 ]
