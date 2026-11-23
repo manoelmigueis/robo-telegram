@@ -638,5 +638,21 @@
     "imagens": [
       "img/040.png"
     ]
+  },
+  {
+    "id": "041-movies-and-series",
+    "tipo": "lista",
+    "titulo": "🎬 Movies and series: vocabulário de cinema e streaming",
+    "corpo": "<p>Vai maratonar uma série ou ver um filme em inglês? Salve este post 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Movie</td><td>Filme</td></tr><tr><td>Series</td><td>Série</td></tr><tr><td>Season</td><td>Temporada</td></tr><tr><td>Episode</td><td>Episódio</td></tr><tr><td>Subtitle</td><td>Legenda</td></tr><tr><td>Spoiler</td><td>Spoiler / Revelação</td></tr><tr><td>Cast</td><td>Elenco</td></tr><tr><td>Trailer</td><td>Trailer / Prévia</td></tr></table><details><summary>👀 Como dizer \"qual é o seu filme favorito\"?</summary><p>Para perguntar sobre filmes, os americanos dizem <b>What is your favorite movie?</b> de forma bem natural.</p></details><p>🔁 Mande para aquele amigo que ama maratonar séries.</p>",
+    "tags": [
+      "ingles",
+      "aprenderingles",
+      "vocabulario",
+      "filmes",
+      "series"
+    ],
+    "imagens": [
+      "img/041.png"
+    ]
   }
 ]
