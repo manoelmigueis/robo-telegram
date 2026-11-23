@@ -43,7 +43,8 @@
     "041-passos-para-criar",
     "042-cliente-quer-alterar",
     "043-passos-para-comecar",
-    "044-cliente-pediu-para"
+    "044-cliente-pediu-para",
+    "045-passos-para-criar"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -62,8 +63,8 @@
     "curso gratuito online veja opções do mec da usp e de institutos federais com cer",
     "senai cimatec abre vagas para curso gratuito de qualificação em design gráfico d"
   ],
-  "contador": 44,
-  "ultimo": "2026-11-23T19:00:58+00:00",
+  "contador": 45,
+  "ultimo": "2026-11-23T23:01:22+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -104,7 +105,8 @@
     "041-passos-para-criar": "2026-11-22T16:00:51+00:00",
     "042-cliente-quer-alterar": "2026-11-22T23:00:56+00:00",
     "043-passos-para-comecar": "2026-11-23T12:00:52+00:00",
-    "044-cliente-pediu-para": "2026-11-23T16:01:26+00:00"
+    "044-cliente-pediu-para": "2026-11-23T16:01:26+00:00",
+    "045-passos-para-criar": "2026-11-23T23:01:22+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -214,6 +216,9 @@
     ],
     "044-cliente-pediu-para": [
       8865
+    ],
+    "045-passos-para-criar": [
+      8872
     ]
   }
 }
