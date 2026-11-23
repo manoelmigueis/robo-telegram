@@ -1698,5 +1698,39 @@
   "imagens": [
    "img/048.png"
   ]
+ },
+ {
+  "id": "049-passos-para-organizar",
+  "tipo": "lista",
+  "titulo": "📦 5 passos para organizar entregas locais",
+  "arte": {
+   "titulo": "5 passos para entregas locais",
+   "sub": "",
+   "itens": [
+    "Separe pedidos por região",
+    "Confirme o endereço antes",
+    "Proteja bem os produtos",
+    "Avise o cliente o horário",
+    "Anote todos os gastos"
+   ],
+   "icone": "📦",
+   "icones": [
+    "🗺️",
+    "📍",
+    "🛡️",
+    "⏰",
+    "📊"
+   ]
+  },
+  "corpo": "<p>Lojas de bairro e pequenos comércios precisam enviar produtos rápido para os clientes, mas muitos não têm entregadores fixos. Você pode prestar esse serviço usando sua moto, bicicleta ou até transporte público:</p><p><b>1.</b> <b>Separe pedidos por região</b>: agrupe as entregas por bairros próximos para economizar tempo e combustível no trajeto.<br/><b>2.</b> <b>Confirme o endereço antes</b>: mande uma mensagem rápida para o cliente verificar se há alguém no local para receber o pacote.<br/><b>3.</b> <b>Proteja bem os produtos</b>: use plástico-bolha ou caixas firmes para evitar danos em itens frágeis durante o transporte.<br/><b>4.</b> <b>Avise o cliente o horário</b>: envie uma estimativa realista de chegada para evitar que a pessoa fique esperando na porta.<br/><b>5.</b> <b>Anote todos os gastos</b>: controle o dinheiro de cada corrida e os custos com combustível ou passagem para não ter prejuízo.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Feche parcerias fixas com duas ou três lojinhas da sua rua para fazer as entregas diárias delas. Ter horários certos garante uma renda previsível toda semana.</p></details><p>📌 Salve e compartilhe com quem quer fazer entregas na região.</p>",
+  "tags": [
+   "rendaextra",
+   "entregas",
+   "trabalhocomocal",
+   "logistica"
+  ],
+  "imagens": [
+   "img/049.png"
+  ]
  }
 ]
