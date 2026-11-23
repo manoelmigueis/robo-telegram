@@ -1659,5 +1659,44 @@
   "imagens": [
    "img/047.png"
   ]
+ },
+ {
+  "id": "048-cliente-pediu-arquivo",
+  "tipo": "quiz",
+  "titulo": "O cliente pediu o arquivo editável do projeto de graça para outro profissional mexer depois. O que fazer?",
+  "arte": {
+   "titulo": "Arquivos Editáveis",
+   "sub": "Pediram o arquivo original sem custo extra. O que fazer?",
+   "itens": [
+    "Entregar tudo grátis",
+    "Cobrar taxa extra",
+    "Negar o arquivo",
+    "Apagar o projeto"
+   ],
+   "icone": "📁",
+   "icones": []
+  },
+  "quiz": {
+   "pergunta": "O cliente pediu o arquivo editável do projeto de graça para outro profissional mexer depois. O que fazer?",
+   "opcoes": [
+    "Entregar tudo grátis",
+    "Cobrar taxa extra",
+    "Negar o arquivo",
+    "Apagar o projeto"
+   ],
+   "correta": 1,
+   "explicacao": "O arquivo editável (como Photoshop ou Canva) vale mais que o PDF final porque permite alterações futuras. Cobra-se um valor à parte por ele.",
+   "descricao": "📁 Proteja o seu trabalho e cobre pelo valor real do material editável."
+  },
+  "corpo": "<b>Você finalizou um design ou texto para um cliente, entregou o arquivo pronto em PDF ou imagem, e ele agora exige que você envie o arquivo editável original. Ele diz que precisa apenas fazer um ajuste pequeno com outra pessoa. Como agir?</b><br><br>O arquivo editável é o código-fonte do seu trabalho. Entregar ele de graça significa que o cliente não precisará mais de você para fazer atualizações, o que tira futuras oportunidades de renda para o seu negócio.<br><br>🧠 Pense bem antes de responder ao quiz acima e descubra como cobrar pelo seu material de valor.<br><br><b>👀 Toque para ver a dica de ouro</b><br><details><summary>Deixe claro desde o orçamento inicial que o arquivo fechado é para uso final, e que o arquivo editável possui uma taxa específica para transferência de direitos de edição.</summary></details><br>Salve e compartilhe com quem trabalha com prestação de serviços! 📁<br><br>#rendaextra #freelancer #design #autonomo",
+  "tags": [
+   "rendaextra",
+   "freelancer",
+   "design",
+   "autonomo"
+  ],
+  "imagens": [
+   "img/048.png"
+  ]
  }
 ]
