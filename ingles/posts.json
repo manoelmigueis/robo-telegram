@@ -623,5 +623,20 @@
     "imagens": [
       "img/039.png"
     ]
+  },
+  {
+    "id": "040-colors-and-shapes",
+    "tipo": "lista",
+    "titulo": "🎨 Colors and shapes: cores e formas em inglês",
+    "corpo": "<p>Quer descrever objetos e coisas ao seu redor? Salve este post 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Red</td><td>Vermelho</td></tr><tr><td>Blue</td><td>Azul</td></tr><tr><td>Yellow</td><td>Amarelo</td></tr><tr><td>Green</td><td>Verde</td></tr><tr><td>Orange</td><td>Laranja</td></tr><tr><td>Purple</td><td>Roxo</td></tr><tr><td>Circle</td><td>Círculo</td></tr><tr><td>Square</td><td>Quadrado</td></tr><tr><td>Triangle</td><td>Triângulo</td></tr></table><details><summary>👀 Como perguntar \"qual é a sua cor favorita\"?</summary><p>A forma mais comum usada pelos americanos é <b>What is your favorite color?</b> de maneira bem simples.</p></details><p>🔁 Mande para aquele amigo que está começando a aprender inglês.</p>",
+    "tags": [
+      "ingles",
+      "aprenderingles",
+      "vocabulario",
+      "cores"
+    ],
+    "imagens": [
+      "img/040.png"
+    ]
   }
 ]
