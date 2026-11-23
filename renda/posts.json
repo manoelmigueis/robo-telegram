@@ -1732,5 +1732,44 @@
   "imagens": [
    "img/049.png"
   ]
+ },
+ {
+  "id": "050-cliente-exige-que",
+  "tipo": "quiz",
+  "titulo": "O cliente exige que você assine um contrato transferindo a propriedade de todo o seu conhecimento futuro. O que fazer?",
+  "arte": {
+   "titulo": "Contrato abusivo",
+   "sub": "Exigem exclusividade sobre suas ideias futuras. O que fazer?",
+   "itens": [
+    "Assinar sem ler",
+    "Recusar a cláusula",
+    "Reduzir o preço",
+    "Aceitar por um mês"
+   ],
+   "icone": "⚖️",
+   "icones": []
+  },
+  "quiz": {
+   "pergunta": "O cliente exige que você assine um contrato transferindo a propriedade de todo o seu conhecimento futuro. O que fazer?",
+   "opcoes": [
+    "Assinar sem ler",
+    "Recusar a cláusula",
+    "Reduzir o preço",
+    "Aceitar por um mês"
+   ],
+   "correta": 1,
+   "explicacao": "Você deve vender apenas o serviço entregue, nunca a sua capacidade de criar ou o seu conhecimento geral acumulado.",
+   "descricao": "⚖️ Proteja a sua propriedade intelectual e leia cada cláusula com atenção."
+  },
+  "corpo": "<b>Você recebeu uma proposta excelente para um projeto freelancer, mas ao ler o contrato percebeu uma cláusula perigosa. O documento exige que você ceda os direitos de qualquer método ou ideia futura que criar na mesma área. Como agir?</b><br><br>Alguns contratos tentam capturar muito mais do que o combinado no escopo do serviço. Assinar algo assim pode impedir você de atender outros clientes ou usar a sua própria experiência profissional no futuro.<br><br>🧠 Pense bem antes de responder ao quiz acima e descubra como proteger os seus direitos profissionais.<br><br><b>👀 Toque para ver a dica de ouro</b><br><details><summary>Negocie para que o contrato restrinja a exclusividade apenas ao material específico entregue naquele projeto, mantendo a liberdade para o seu trabalho futuro.</summary></details><br>Salve e compartilhe com quem trabalha de forma autônoma! 🤝<br><br>#rendaextra #freelancer #contrato #autonomo",
+  "tags": [
+   "rendaextra",
+   "freelancer",
+   "contrato",
+   "autonomo"
+  ],
+  "imagens": [
+   "img/050.png"
+  ]
  }
 ]
