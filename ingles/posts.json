@@ -654,5 +654,19 @@
     "imagens": [
       "img/041.png"
     ]
+  },
+  {
+    "id": "042-mini-aula-come",
+    "tipo": "aula",
+    "titulo": "📘 Mini-aula: COME ou GO?",
+    "corpo": "<p>Essas duas palavras indicam movimento, mas mudam dependendo de onde você está.</p><table><tr><th>➡️ COME: vir (aproximar-se de onde você está)</th><th>⬅️ GO: ir (afastar-se de onde você está)</th></tr><tr><td>Come here, please. (Venha aqui, por favor)</td><td>I need to go home. (Preciso ir para casa)</td></tr><tr><td>Are you coming to the party? (Você vai vir para a festa?)</td><td>Let's go to the beach. (Vamos para a praia)</td></tr></table><p>💡 <b>Regra prática:</b> use <b>come</b> quando o movimento é em direção à pessoa que fala. Use <b>go</b> para ir a qualquer outro lugar.</p><details><summary>🧠 Desafio: \"Can you ___ to my house tonight?\" É come ou go?</summary><p><b>Come</b>. A pessoa está te convidando para ir na direção da casa dela. Salve este post e mande para um amigo!</p></details>",
+    "tags": [
+      "ingles",
+      "gramaticainglesa",
+      "aprenderingles"
+    ],
+    "imagens": [
+      "img/042.png"
+    ]
   }
 ]
