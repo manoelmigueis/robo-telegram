@@ -34,10 +34,11 @@
     "032-car-parts-partes",
     "033-pet-shop-vocabulario",
     "034-mini-aula-hear",
-    "035-shopping-frases-para"
+    "035-shopping-frases-para",
+    "036-weather-clima-tempo"
   ],
-  "contador": 35,
-  "ultimo": "2026-11-23T13:00:42+00:00",
+  "contador": 36,
+  "ultimo": "2026-11-23T17:01:06+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -76,7 +77,8 @@
     "032-car-parts-partes": "2026-11-22T13:00:40+00:00",
     "033-pet-shop-vocabulario": "2026-11-22T17:00:36+00:00",
     "034-mini-aula-hear": "2026-11-22T23:00:41+00:00",
-    "035-shopping-frases-para": "2026-11-23T13:00:42+00:00"
+    "035-shopping-frases-para": "2026-11-23T13:00:42+00:00",
+    "036-weather-clima-tempo": "2026-11-23T17:01:06+00:00"
   },
   "mensagens": {
     "008-phone-conversation": [
@@ -177,6 +179,9 @@
     ],
     "035-shopping-frases-para": [
       8457
+    ],
+    "036-weather-clima-tempo": [
+      8458
     ]
   }
 }
