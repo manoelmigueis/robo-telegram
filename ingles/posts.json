@@ -668,5 +668,20 @@
     "imagens": [
       "img/042.png"
     ]
+  },
+  {
+    "id": "043-asking-for-directions",
+    "tipo": "palavra",
+    "titulo": "📍 Asking for directions: como pedir direções em inglês",
+    "corpo": "<p>Precisa se localizar na viagem e não sabe como pedir ajuda na rua? Veja frases práticas para não se perder:</p><table><tr><th>Inglês</th><th>Português</th></tr><tr><td>✅ Excuse me, how do I get to...?</td><td>Com licença, como eu chego a...?</td></tr><tr><td>✅ Where is the nearest subway station?</td><td>Onde fica a estação de metrô mais próxima?</td></tr><tr><td>✅ Is it within walking distance?</td><td>Dá para ir a pé?</td></tr><tr><td>✅ Go straight ahead and turn right.</td><td>Siga em frente e vire à direita.</td></tr><tr><td>✅ It is on the next corner.</td><td>Fica na próxima esquina.</td></tr><tr><td>✅ How far is it from here?</td><td>Fica longe daqui?</td></tr></table><p>🔁 Salve este post e mande para quem vai viajar!</p>",
+    "tags": [
+      "ingles",
+      "viagem",
+      "vocabulario",
+      "aprenderingles"
+    ],
+    "imagens": [
+      "img/043.png"
+    ]
   }
 ]
