@@ -698,5 +698,19 @@
     "imagens": [
       "img/044.png"
     ]
+  },
+  {
+    "id": "045-mini-aula-make",
+    "tipo": "aula",
+    "titulo": "📘 Mini-aula: MAKE ou DO?",
+    "corpo": "<p>Essas duas palavras significam fazer em português, mas os americanos usam cada uma em situações diferentes.</p><table><tr><th>🛠️ MAKE: criar, construir ou produzir algo novo</th><th>📋 DO: realizar uma tarefa, ação ou trabalho</th></tr><tr><td>make a cake (fazer um bolo)</td><td>do your homework (fazer a lição de casa)</td></tr><tr><td>make a mistake (cometer um erro)</td><td>do the laundry (lavar a roupa)</td></tr><tr><td>make a decision (tomar uma decisão)</td><td>do a good job (fazer um bom trabalho)</td></tr></table><p>💡 <b>Regra prática:</b> use <b>make</b> quando algo físico ou novo é criado. Use <b>do</b> para obrigações, tarefas e trabalhos do dia a dia.</p><details><summary>🧠 Desafio: \"I need to ___ the dishes.\" É make ou do?</summary><p><b>Do</b>. Lavar a louça é uma tarefa da casa. Salve este post e mande para aquele amigo que confunde essas duas palavras!</p></details>",
+    "tags": [
+      "ingles",
+      "gramaticainglesa",
+      "aprenderingles"
+    ],
+    "imagens": [
+      "img/045.png"
+    ]
   }
 ]
