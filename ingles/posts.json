@@ -683,5 +683,20 @@
     "imagens": [
       "img/043.png"
     ]
+  },
+  {
+    "id": "044-animals-animais-ingles",
+    "tipo": "lista",
+    "titulo": "🐾 Animals: animais em inglês",
+    "corpo": "<p>Quer aprender o nome dos animais mais comuns em inglês? Salve este post 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Dog</td><td>Cachorro</td></tr><tr><td>Cat</td><td>Gato</td></tr><tr><td>Bird</td><td>Pássaro</td></tr><tr><td>Fish</td><td>Peixe</td></tr><tr><td>Horse</td><td>Cavalo</td></tr><tr><td>Cow</td><td>Vaca</td></tr><tr><td>Pig</td><td>Porco</td></tr><tr><td>Sheep</td><td>Ovelha</td></tr></table><details><summary>👀 Como dizer \"eu amo animais\"?</summary><p>Para expressar seu amor pelos bichinhos, os americanos dizem <b>I love animals</b> de forma bem simples e natural.</p></details><p>🔁 Mande para aquele amigo que ama animais.</p>",
+    "tags": [
+      "ingles",
+      "aprenderingles",
+      "vocabulario",
+      "animais"
+    ],
+    "imagens": [
+      "img/044.png"
+    ]
   }
 ]
