@@ -1844,5 +1844,39 @@
   "imagens": [
    "img/052.png"
   ]
+ },
+ {
+  "id": "053-passos-para-marmitas",
+  "tipo": "lista",
+  "titulo": "🍳 5 passos para marmitas congeladas",
+  "arte": {
+   "titulo": "5 passos para marmitas congeladas",
+   "sub": "",
+   "itens": [
+    "Monte um cardápio variado",
+    "Compre em atacados locais",
+    "Use embalagens que vão ao forno",
+    "Cole etiquetas com a validade",
+    "Higienize bem a sua cozinha"
+   ],
+   "icone": "🍳",
+   "icones": [
+    "📋",
+    "🛒",
+    "📦",
+    "🏷️",
+    "🧼"
+   ]
+  },
+  "corpo": "<p>Profissionais e estudantes sem tempo costumam procurar comida caseira e saudável para a semana toda. Você pode preparar marmitas congeladas na sua própria cozinha e vender para vizinhos e colegas:</p><p><b>1.</b> <b>Monte um cardápio variado</b>: ofereça opções com frango, carne, massas e alternativas vegetarianas para agradar a diferentes paladares.<br/><b>2.</b> <b>Compre em atacados locais</b>: adquira carnes, legumes e grãos em grande quantidade para reduzir o custo de produção de cada prato.<br/><b>3.</b> <b>Use embalagens que vão ao forno</b>: escolha potes próprios para congelamento que possam ir direto ao micro-ondas ou forno sem deformar.<br/><b>4.</b> <b>Cole etiquetas com a validade</b>: informe claramente a data de fabricação e o prazo limite de consumo para garantir a segurança alimentar.<br/><b>5.</b> <b>Higienize bem a sua cozinha</b>: mantenha um padrão rigoroso de limpeza e use touca e luvas para transmitir total confiança aos compradores.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Venda combos semanais com cinco marmitas variadas. Isso facilita o seu planejamento de compras e garante um valor de venda maior logo no início da semana.</p></details><p>📌 Salve e compartilhe com quem quer vender comida caseira.</p>",
+  "tags": [
+   "rendaextra",
+   "culinaria",
+   "trabalhocomocal",
+   "comida"
+  ],
+  "imagens": [
+   "img/053.png"
+  ]
  }
 ]
