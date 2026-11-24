@@ -712,5 +712,19 @@
     "imagens": [
       "img/045.png"
     ]
+  },
+  {
+    "id": "046-mini-aula-few",
+    "tipo": "aula",
+    "titulo": "📘 Mini-aula: FEW ou LITTLE?",
+    "corpo": "<p>Essas duas palavras significam pouco em português, mas usamos cada uma com um tipo diferente de substantivo.</p><table><tr><th>📦 FEW: para coisas que podemos contar</th><th>💧 LITTLE: para coisas que não podemos contar</th></tr><tr><td>few friends (poucos amigos)</td><td>little time (pouco tempo)</td></tr><tr><td>few books (poucos livros)</td><td>little water (pouca água)</td></tr><tr><td>few problems (poucos problemas)</td><td>little money (pouco dinheiro)</td></tr></table><p>💡 <b>Regra prática:</b> use <b>few</b> no plural para coisas contáveis. Use <b>little</b> no singular para líquidos, massas e ideias abstratas.</p><details><summary>🧠 Desafio: \"I have ___ water left.\" É few ou little?</summary><p><b>Little</b>. Água é um líquido que não podemos contar por unidades. Salve este post e mande para um amigo!</p></details>",
+    "tags": [
+      "ingles",
+      "gramaticainglesa",
+      "aprenderingles"
+    ],
+    "imagens": [
+      "img/046.png"
+    ]
   }
 ]
