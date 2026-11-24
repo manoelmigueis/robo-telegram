@@ -46,7 +46,8 @@
     "044-cliente-pediu-para",
     "045-passos-para-criar",
     "046-voce-entregou-servico",
-    "047-passos-para-editar"
+    "047-passos-para-editar",
+    "048-cliente-pediu-arquivo"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -66,8 +67,8 @@
     "senai cimatec abre vagas para curso gratuito de qualificação em design gráfico d",
     "instituto energisa e ibm oferecem cursos gratuitos de capacitação digital até 31"
   ],
-  "contador": 47,
-  "ultimo": "2026-11-24T19:01:26+00:00",
+  "contador": 48,
+  "ultimo": "2026-11-24T23:00:41+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -111,7 +112,8 @@
     "044-cliente-pediu-para": "2026-11-23T16:01:26+00:00",
     "045-passos-para-criar": "2026-11-23T23:01:22+00:00",
     "046-voce-entregou-servico": "2026-11-24T12:00:46+00:00",
-    "047-passos-para-editar": "2026-11-24T16:01:59+00:00"
+    "047-passos-para-editar": "2026-11-24T16:01:59+00:00",
+    "048-cliente-pediu-arquivo": "2026-11-24T23:00:41+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -230,6 +232,9 @@
     ],
     "047-passos-para-editar": [
       8874
+    ],
+    "048-cliente-pediu-arquivo": [
+      8883
     ]
   }
 }
