@@ -37,10 +37,11 @@
     "035-shopping-frases-para",
     "036-weather-clima-tempo",
     "037-working-from-home",
-    "038-mini-aula-for"
+    "038-mini-aula-for",
+    "039-the-bank-frases"
   ],
-  "contador": 38,
-  "ultimo": "2026-11-24T13:00:48+00:00",
+  "contador": 39,
+  "ultimo": "2026-11-24T17:01:58+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -82,7 +83,8 @@
     "035-shopping-frases-para": "2026-11-23T13:00:42+00:00",
     "036-weather-clima-tempo": "2026-11-23T17:01:06+00:00",
     "037-working-from-home": "2026-11-23T23:00:40+00:00",
-    "038-mini-aula-for": "2026-11-24T13:00:48+00:00"
+    "038-mini-aula-for": "2026-11-24T13:00:48+00:00",
+    "039-the-bank-frases": "2026-11-24T17:01:58+00:00"
   },
   "mensagens": {
     "008-phone-conversation": [
@@ -192,6 +194,9 @@
     ],
     "038-mini-aula-for": [
       8465
+    ],
+    "039-the-bank-frases": [
+      8470
     ]
   }
 }
