@@ -1771,5 +1771,39 @@
   "imagens": [
    "img/050.png"
   ]
+ },
+ {
+  "id": "051-passos-para-organizar",
+  "tipo": "lista",
+  "titulo": "🧹 5 passos para organizar faxinas residenciais",
+  "arte": {
+   "titulo": "5 passos para faxinas residenciais",
+   "sub": "",
+   "itens": [
+    "Defina pacotes por cômodo",
+    "Leve seus próprios produtos",
+    "Faça um checklist na chegada",
+    "Proteja pisos e móveis finos",
+    "Combine o valor por hora"
+   ],
+   "icone": "🧹",
+   "icones": [
+    "📋",
+    "🧼",
+    "✅",
+    "🛡️",
+    "⏱️"
+   ]
+  },
+  "corpo": "<p>Muitas famílias e profissionais sem tempo buscam pessoas de confiança para cuidar da limpeza e organização da casa. Você pode iniciar esse serviço autônomo na sua região seguindo uma rotina profissional:</p><p><b>1.</b> <b>Defina pacotes por cômodo</b>: organize opções de limpeza leve, pesada ou pós-obra para o cliente escolher o que cabe no bolso dele.<br/><b>2.</b> <b>Leve seus próprios produtos</b>: tenha panos limpos, esponjas novas e itens básicos de limpeza para demonstrar capricho e preparo.<br/><b>3.</b> <b>Faça um checklist na chegada</b>: olhe os cômodos junto com o morador para alinhar prioridades e evitar mal-entendidos no fim do dia.<br/><b>4.</b> <b>Proteja pisos e móveis finos</b>: use os produtos corretos em cada superfície para não manchar madeira, mármore ou eletrodomésticos.<br/><b>5.</b> <b>Combine o valor por hora</b>: estabeleça um preço justo pelo seu tempo de trabalho e avise caso precise de horas extras.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Deixe um pequeno bilhete de agradecimento e a casa impecável antes de ir embora. Esse cuidado simples gera indicações espontâneas para os vizinhos.</p></details><p>📌 Salve e compartilhe com quem quer trabalhar com limpeza residencial.</p>",
+  "tags": [
+   "rendaextra",
+   "limpeza",
+   "trabalhocomocal",
+   "servicos"
+  ],
+  "imagens": [
+   "img/051.png"
+  ]
  }
 ]
