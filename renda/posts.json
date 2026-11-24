@@ -1805,5 +1805,44 @@
   "imagens": [
    "img/051.png"
   ]
+ },
+ {
+  "id": "052-cliente-liga-cobrando",
+  "tipo": "quiz",
+  "titulo": "O cliente liga cobrando correções urgentes num domingo à noite, fora do horário combinado. O que fazer?",
+  "arte": {
+   "titulo": "Plantão no Domingo",
+   "sub": "Exigem atendimento fora do horário comercial. O que fazer?",
+   "itens": [
+    "Atender na hora",
+    "Cobrar adicional",
+    "Ignorar a ligação",
+    "Recusar o cliente"
+   ],
+   "icone": "⏰",
+   "icones": []
+  },
+  "quiz": {
+   "pergunta": "O cliente liga cobrando correções urgentes num domingo à noite, fora do horário combinado. O que fazer?",
+   "opcoes": [
+    "Atender na hora",
+    "Cobrar adicional",
+    "Ignorar a ligação",
+    "Recusar o cliente"
+   ],
+   "correta": 1,
+   "explicacao": "Trabalhar em finais de semana e feriados exige uma taxa de urgência. Estabelecer limites protege o seu tempo e valoriza o seu serviço.",
+   "descricao": "⏰ Respeite seus horários e defina regras claras de disponibilidade com os clientes."
+  },
+  "corpo": "<b>Você já fechou o expediente da semana, descansou no fim de semana e, de repente, o seu celular toca no domingo à noite. É um cliente importante exigindo uma mudança urgente para a reunião de segunda-feira cedo. Como agir?</b><br><br>Aceitar demandas fora do horário comercial sem combinar antes cria um hábito ruim. O cliente passa a achar que você está sempre disponível 24 horas por dia, o que acaba esgotando a sua energia e atrapalhando o seu descanso.<br><br>🧠 Pense bem antes de responder ao quiz acima e descubra como lidar com urgências sem perder o respeito do cliente.<br><br><b>👀 Toque para ver a dica de ouro</b><br><details><summary>Defina seus dias e horários de atendimento no orçamento e explique que solicitações feitas fora desse período têm uma taxa extra de urgência.</summary></details><br>Salve e compartilhe com quem trabalha de forma autônoma! ⏰<br><br>#rendaextra #freelancer #organizacao #autonomo",
+  "tags": [
+   "rendaextra",
+   "freelancer",
+   "organizacao",
+   "autonomo"
+  ],
+  "imagens": [
+   "img/052.png"
+  ]
  }
 ]
