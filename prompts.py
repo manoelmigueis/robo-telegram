@@ -282,7 +282,8 @@ def serve(x):
 
 # ---------------- reescrever e desenhar ----------------
 def reescrever(x, titulos=()):
-    """A IA reescreve o prompt em português no modelo do canal. Devolve dict ou None (recusado)."""
+    """A IA decide se o prompt serve e escreve título, dica e tags. O prompt em si vai como veio da galeria
+    (só sem a assinatura do site). Devolve dict ou None (recusado)."""
     import central
     import escritor
     estilo = (PASTA / "ESTILO.md").read_text(encoding="utf-8") if (PASTA / "ESTILO.md").exists() else ""
@@ -299,23 +300,22 @@ Prompt original garimpado (em inglês ou outra língua), de {x['fonte']}:
 {x['texto'][:2500]}
 </prompt>
 
-{"A galeria tem uma imagem de exemplo pronta, que vai junto no post." if x.get("imagem_url") else "Não tem imagem de exemplo: o robô vai gerar uma a partir do prompt_en."}
+O prompt vai no post do jeito que está, na língua original. Você NÃO traduz nem reescreve o prompt: só escreve
+o título, a dica e as tags em português.
+{"A galeria tem uma imagem de exemplo pronta, que vai junto no post." if x.get("imagem_url") else "Não tem imagem de exemplo: o robô vai gerar uma a partir do prompt."}
 
 Primeiro decida se ele serve. NÃO serve se: é de vídeo, é sobre pessoa famosa ou marca real, tem nudez, violência
 ou algo sensível, ou é fraco/genérico demais.{"" if x.get("imagem_url") else " Também NÃO serve se precisa de uma foto da pessoa (selfie, foto de referência, editar imagem)."}
-Se o prompt usa uma foto de quem lê (selfie, "foto enviada"), ele serve: escreva o prompt pedindo "a foto que eu
-enviei" e a dica começa com "Mande sua foto junto com o prompt".
-Tire do prompt qualquer assinatura, marca d'água ou nome de site (ex.: "Brand Signature: PromptPlum.com").
+Se o prompt usa uma foto de quem lê (selfie, "foto enviada", reference image), ele serve e a dica começa com
+"Mande sua foto junto com o prompt".
 Títulos que já saíram (não repita o assunto): {"; ".join(list(titulos)[-40:])}
 
 Responda só com um JSON, sem nada antes ou depois:
 {{"serve": true ou false,
  "motivo": "se não serve, por quê (curto)",
  "titulo": "título curto com gancho, começando com 1 emoji, até 60 letras",
- "prompt": "o prompt inteiro reescrito em português do Brasil, pronto para colar. Mantenha todos os detalhes visuais que fazem o resultado ficar bom (luz, lente, estilo, cores, composição). Partes que a pessoa pode trocar ficam entre [colchetes], ex.: [sua cidade]. Sem aspas em volta. Não ponha "Funciona no" nem título aqui, só o prompt.",
- "prompt_en": "o mesmo prompt em inglês, para o robô gerar a imagem de prova. Troque os [colchetes] por um exemplo concreto.",
- "dica": "uma linha só dizendo o que trocar para personalizar",
- "tags": ["2 a 4 hashtags sem #, minúsculas, sem acento: a da IA (nanobanana) e 1 a 2 do tema"]}}
+ "dica": "uma linha em português dizendo o que trocar no prompt para personalizar, citando a palavra do prompt (ex.: troque \"woman\" por \"man\")",
+ "tags": ["3 ou 4 hashtags sem #, minúsculas, sem acento, em português, tiradas do CONTEÚDO deste prompt: o assunto (ex.: retrato, cafe, avatar), o estilo (ex.: fotorrealista, 3d, anime) e o clima ou cenário. Nada genérico como ia ou arte"]}}
 
 Regras: português simples, frases curtas, sem cara de IA (proibido "no mundo de hoje", "desbloqueie",
 "revolucionário", "mergulhe"). Nada de travessão longo. Nunca escreva "imagens ilustrativas"."""
@@ -326,10 +326,24 @@ Regras: português simples, frases curtas, sem cara de IA (proibido "no mundo de
     if not r.get("serve"):
         print(f"[garimpo] recusado ({x['chave']}): {r.get('motivo', '')}")
         return None
-    if not (r.get("titulo") and r.get("prompt") and (r.get("prompt_en") or x.get("imagem_url"))):
+    if not r.get("titulo"):
         print(f"[garimpo] a IA devolveu incompleto ({x['chave']})")
         return None
+    r["prompt"] = r["prompt_en"] = sem_assinatura(x["texto"])
     return r
+
+
+def sem_assinatura(texto):
+    """O prompt como veio da galeria, só sem a frase com a assinatura ou marca d'água do site."""
+    marca = re.compile(r"promptplum|nanobananaprompt|prompts\.chat|brand signature", re.I)
+    linhas = []
+    for linha in texto.splitlines():
+        if marca.search(linha):
+            linha = " ".join(f for f in re.split(r"(?<=[.!?])\s+", linha) if not marca.search(f))
+            if not linha.strip():
+                continue
+        linhas.append(linha)
+    return re.sub(r"\n{3,}", "\n\n", "\n".join(linhas)).strip()
 
 
 def gerar_imagem(prompt_en):
