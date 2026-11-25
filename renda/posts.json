@@ -1951,5 +1951,44 @@
   "imagens": [
    "img/055.png"
   ]
+ },
+ {
+  "id": "056-voce-enviou-amostra",
+  "tipo": "quiz",
+  "titulo": "Você enviou a amostra de um logotipo ou texto para um potencial cliente e ele usou sem pagar ou contratar. O que fazer?",
+  "arte": {
+   "titulo": "Uso Indevido",
+   "sub": "Amostra usada sem contrato. O que fazer?",
+   "itens": [
+    "Cobrar pelo uso",
+    "Deixar pra lá",
+    "Agradecer a força",
+    "Oferecer desconto"
+   ],
+   "icone": "⚠️",
+   "icones": []
+  },
+  "quiz": {
+   "pergunta": "Você enviou a amostra de um logotipo ou texto para um potencial cliente e ele usou sem pagar ou contratar. O que fazer?",
+   "opcoes": [
+    "Cobrar pelo uso",
+    "Deixar pra lá",
+    "Agradecer a força",
+    "Oferecer desconto"
+   ],
+   "correta": 0,
+   "explicacao": "O seu trabalho tem valor e direitos autorais. Envie uma cobrança formal pelo uso da criação e exija a regularização.",
+   "descricao": "⚠️ Proteja suas criações e exija o pagamento pelo trabalho utilizado."
+  },
+  "corpo": "<b>Você dedicou tempo e criatividade para fazer uma amostra inicial para um novo interessado. Poucos dias depois, você descobre que ele colocou o seu material no ar sem fechar o contrato e sem pagar nada. Como agir?</b><br><br>Deixar esse tipo de situação passar abre espaço para que outros abusem da sua boa vontade. O seu esforço profissional merece respeito e remuneração justa, mesmo na etapa de demonstração.<br><br>🧠 Pense bem antes de responder ao quiz acima e descubra como agir quando usarem o seu trabalho sem permissão.<br><br><b>👀 Toque para ver a dica de ouro</b><br><details><summary>Envie sempre imagens em baixa resolução com marca d'água grande e só entregue arquivos finais após a confirmação do pagamento ou sinal.</summary></details><br>Salve e compartilhe com quem cria conteúdos e projetos! ⚠️<br><br>#rendaextra #freelancer #direitos #autonomo",
+  "tags": [
+   "rendaextra",
+   "freelancer",
+   "direitos",
+   "autonomo"
+  ],
+  "imagens": [
+   "img/056.png"
+  ]
  }
 ]
