@@ -2,7 +2,8 @@
   "postados": [
     "261125-1-foto-profissional-estilo-edito",
     "261125-4-crie-um-retrato-de-moda-chique",
-    "261125-2-misture-anime-desenho-e-massin"
+    "261125-2-misture-anime-desenho-e-massin",
+    "261125-3-crie-um-retrato-cinematogrfico"
   ],
   "pulados": [],
   "frente": [],
@@ -12,7 +13,8 @@
   "quando": {
     "261125-1-foto-profissional-estilo-edito": "2026-11-25T18:33:00+00:00",
     "261125-4-crie-um-retrato-de-moda-chique": "2026-11-25T18:33:02+00:00",
-    "261125-2-misture-anime-desenho-e-massin": "2026-11-25T18:33:09+00:00"
+    "261125-2-misture-anime-desenho-e-massin": "2026-11-25T18:33:09+00:00",
+    "261125-3-crie-um-retrato-cinematogrfico": "2026-11-25T22:46:45+00:00"
   },
   "mensagens": {
     "261125-1-foto-profissional-estilo-edito": [
@@ -23,9 +25,12 @@
     ],
     "261125-2-misture-anime-desenho-e-massin": [
       8
+    ],
+    "261125-3-crie-um-retrato-cinematogrfico": [
+      9
     ]
   },
-  "contador": 3,
+  "contador": 4,
   "vistos": [
     "pc:cmwwenmqs0001if08a8ptnnbv",
     "nb:29b524029373a7",
@@ -77,7 +82,7 @@
     "n": 4
   },
   "candidatos": [],
-  "ultimo": "2026-11-25T18:33:09+00:00",
+  "ultimo": "2026-11-25T22:46:45+00:00",
   "fontes": [
     "https://prompthero.com/midjourney-prompts"
   ]
