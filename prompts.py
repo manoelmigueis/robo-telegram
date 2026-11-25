@@ -80,6 +80,11 @@ def ligado():
     return bool(CFG.get("ligado"))
 
 
+def aprova_sozinho():
+    """config.json -> prompts -> "aprovar_sozinho": o garimpo põe direto na fila, sem prévia no privado."""
+    return bool(CFG.get("aprovar_sozinho"))
+
+
 # ---------------- o post ----------------
 def hashtags(item):
     tags = ["prompts"] + [t.lstrip("#").lower() for t in item.get("tags", []) if t.lstrip("#").lower() != "prompts"]
@@ -596,16 +601,25 @@ def garimpar(limite=None, chat=None):
                 "garimpado": central.agora_iso()}
         item["corpo"] = corpo(item)
 
+        auto = aprova_sozinho()
+
         def mudar(e, item=item, k=x["chave"]):
             c = e.get("imagens") if (e.get("imagens") or {}).get("dia") == hoje else {"dia": hoje, "n": 0}
             e["imagens"] = {"dia": hoje, "n": c["n"] + 1}
-            e["candidatos"] = e.get("candidatos", []) + [item]
+            if not auto:
+                e["candidatos"] = e.get("candidatos", []) + [item]
             e["vistos"] = (e.get("vistos", []) + [k])[-3000:]
-        central.gravar("prompts", f"prompts: candidato {pid}", mudar=mudar, arquivos={f"prompts/img/{pid}.jpg": jpg})
-        try:
-            mandar_candidato(chat, item)
-        except Exception as erro:
-            print(f"[garimpo] prévia de {pid} falhou: {erro}")
+
+        def mudar_banco(b, item=item):  # aprovação automática: vai direto para o fim da fila
+            if not any(i["id"] == item["id"] for i in b):
+                b.append({k: v for k, v in item.items() if k != "garimpado"})
+        central.gravar("prompts", f"prompts: {'na fila' if auto else 'candidato'} {pid}", mudar=mudar,
+                       mudar_banco=mudar_banco if auto else None, arquivos={f"prompts/img/{pid}.jpg": jpg})
+        if not auto:
+            try:
+                mandar_candidato(chat, item)
+            except Exception as erro:
+                print(f"[garimpo] prévia de {pid} falhou: {erro}")
         feitos.append(item)
         titulos.append(item["titulo"])
         print(f"[garimpo] candidato {pid}: {item['titulo']}")

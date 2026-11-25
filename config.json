@@ -143,7 +143,8 @@
       "18:00",
       "21:00"
     ],
-    "ligado": false,
-    "imagens_por_dia": 4
+    "ligado": true,
+    "aprovar_sozinho": true,
+    "imagens_por_dia": 12
   }
 }
