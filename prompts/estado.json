@@ -3,7 +3,8 @@
     "261125-1-foto-profissional-estilo-edito",
     "261125-4-crie-um-retrato-de-moda-chique",
     "261125-2-misture-anime-desenho-e-massin",
-    "261125-3-crie-um-retrato-cinematogrfico"
+    "261125-3-crie-um-retrato-cinematogrfico",
+    "261125-1-vista-um-terno-de-grife-com-se"
   ],
   "pulados": [],
   "frente": [],
@@ -14,7 +15,8 @@
     "261125-1-foto-profissional-estilo-edito": "2026-11-25T18:33:00+00:00",
     "261125-4-crie-um-retrato-de-moda-chique": "2026-11-25T18:33:02+00:00",
     "261125-2-misture-anime-desenho-e-massin": "2026-11-25T18:33:09+00:00",
-    "261125-3-crie-um-retrato-cinematogrfico": "2026-11-25T22:46:45+00:00"
+    "261125-3-crie-um-retrato-cinematogrfico": "2026-11-25T22:46:45+00:00",
+    "261125-1-vista-um-terno-de-grife-com-se": "2026-11-25T23:53:51+00:00"
   },
   "mensagens": {
     "261125-1-foto-profissional-estilo-edito": [
@@ -28,9 +30,12 @@
     ],
     "261125-3-crie-um-retrato-cinematogrfico": [
       9
+    ],
+    "261125-1-vista-um-terno-de-grife-com-se": [
+      10
     ]
   },
-  "contador": 4,
+  "contador": 5,
   "vistos": [
     "pc:cmwwenmqs0001if08a8ptnnbv",
     "nb:29b524029373a7",
@@ -104,7 +109,7 @@
     "n": 12
   },
   "candidatos": [],
-  "ultimo": "2026-11-25T22:46:45+00:00",
+  "ultimo": "2026-11-25T23:53:51+00:00",
   "fontes": [
     "https://prompthero.com/midjourney-prompts",
     "https://promptsref.com/library/nano-banana-pro?utm_source=x_unedrwood"
