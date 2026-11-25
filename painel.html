@@ -246,6 +246,7 @@ button.chip{font-family:var(--font)}
 .capa svg.i{width:20px;height:20px}
 .item .corpo{flex:1;min-width:0}
 .item .tit{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item .resumo{font-size:13.5px;color:var(--muted);margin-top:3px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .item .meta{font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:3px}
 .item .botoes{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
 .item .erro{font-size:12.5px;color:var(--perigo);margin-top:4px}
@@ -993,11 +994,17 @@ function limpar(semPerguntar) {
 const STATUS = { fila: ["na fila", "azul"], agendado: ["agendado", "azul"], postado: ["postado", "ok"], cancelado: ["cancelado", ""],
   expirou: ["promoção acabou", "aviso"], erro: ["erro", "perigo"], publicando: ["postando", "aviso"] };
 function capa(p) { return p.foto && p.foto.startsWith("http") ? `<img class="capa" src="${esc(p.foto)}" alt="" loading="lazy">` : `<div class="capa">${ico(p.origem === "oferta" ? "carrinho" : p.origem === "livro" ? "folha" : "criar")}</div>`; }
+// Do que o livro trata: o resumo que a IA escreveu para o post (ou a descrição da Amazon).
+function resumoLivro(p) {
+  if (p.origem !== "livro") return "";
+  const d = p.dados || {}, t = String(d.texto_post || d.descricao || d.sobre || "").replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+  return t ? `<div class="resumo" title="${esc(t)}">${esc(t)}</div>` : "";
+}
 function itemPost(p, botoes) {
   const tipo = { manual: "✍️ manual", livro: "📖 livro", oferta: "🛒 oferta" }[p.origem] || p.origem;
   const [st, cor] = STATUS[p.status] || [p.status, ""];
   return `<div class="item">${capa(p)}<div class="corpo">
-    <div class="tit">${esc(p.titulo || "(sem título)")}</div>
+    <div class="tit">${esc(p.titulo || "(sem título)")}</div>${resumoLivro(p)}
     <div class="meta"><span class="badge">${tipo}</span><span class="badge ${cor}">${esc(st)}</span>${p.agendado_para ? `<span>🕐 ${dataBR(p.agendado_para)}</span>` : ""}${p.expira_horas ? `<span>apaga em ${p.expira_horas}h</span>` : ""}</div>
     ${p.erro ? `<div class="erro">${esc(p.erro)}</div>` : ""}
     ${botoes ? `<div class="botoes">${botoes}</div>` : ""}</div></div>`;
