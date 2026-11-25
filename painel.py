@@ -686,10 +686,40 @@ def central_acao(nicho: str, acao: str, dados: dict = Body(default={})):
     if acao == "criar":
         item = _central(central.criar, nicho, str(dados.get("tema", ""))[:300], str(dados.get("tipo", "lista")))
         return {"ok": True, "msg": f"Post novo criado e posto no fim da fila: {item.get('titulo', '')}", "item": item["id"]}
+    if nicho == "prompts" and acao in ("aprovar", "descartar"):
+        import prompts
+        c = _central(prompts.aprovar if acao == "aprovar" else prompts.descartar, pid)
+        return {"ok": True, "msg": f"Aprovado e posto no fim da fila: {c.get('titulo', '')}" if acao == "aprovar"
+                else "Descartado."}
+    if nicho == "prompts" and acao == "garimpar":
+        return garimpar_prompts()
     if acao == "noticia":
         titulo = _central(central.postar_noticia, nicho)
         return {"ok": True, "msg": f"Notícia postada: {titulo[:120]}"}
     erro("Ação desconhecida.", 404)
+
+
+def garimpar_prompts():
+    """Na nuvem chama o robô do canal de prompts (prompts.yml); no PC roda aqui mesmo, em segundo plano."""
+    if os.environ.get("GITHUB_ACTIONS"):
+        import requests
+        r = requests.post(
+            f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/actions/workflows/prompts.yml/dispatches",
+            headers={"Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}", "Accept": "application/vnd.github+json"},
+            json={"ref": "main", "inputs": {"acao": "garimpar"}}, timeout=30)
+        if r.status_code >= 300:
+            erro(f"Não consegui começar o garimpo ({r.status_code}). Tente de novo.")
+    else:
+        import prompts
+
+        def trabalho():
+            try:
+                prompts.garimpar()
+            except Exception as x:
+                postador.avisar(f"⚠️ O garimpo de prompts falhou: {x}")
+        threading.Thread(target=trabalho, daemon=True).start()
+    return {"ok": True, "msg": "Garimpo de prompts começou. Em uns 5 minutos as prévias chegam no seu privado "
+                               "e aparecem aqui em “Esperando aprovação”."}
 
 
 @app.post("/api/garimpar")

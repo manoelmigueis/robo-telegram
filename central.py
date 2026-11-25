@@ -265,6 +265,8 @@ def resumo(n):
             "pulados": [cartao(por_id[i]) for i in e["pulados"] if i in por_id],
             "total_postados": len(e["postados"]), "ultimo": e.get("ultimo"),
             "dias": round(len(f) / por_dia, 1), "noticias": n == "renda",
+            # prompts: o que o garimpo achou e ainda espera o seu ✅ Aprovar
+            "garimpo": n == "prompts", "candidatos": [cartao(c) for c in e.get("candidatos", [])] if n == "prompts" else [],
             "vercel": bool(os.environ.get("VERCEL"))}
 
 

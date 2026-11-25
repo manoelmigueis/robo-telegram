@@ -1410,14 +1410,14 @@ function renderCentral(n) {
       <div class="kpi"><div class="ic">${ico("check")}</div><div><div class="n">${g.total_postados}</div><div class="l">já saíram</div></div></div>
       <div class="kpi"><div class="ic">${ico("relogio")}</div><div><div class="n" style="font-size:17px">${esc(ultimo)}</div><div class="l">último post</div></div></div>
     </div>
-    ${g.fila.length <= 9 ? `<div class="card" style="padding:14px 22px"><span class="badge aviso">⚠️ ${g.fila.length ? `Só dá para ${String(g.dias).replace(".", ",")} dias.` : "A fila acabou."} Crie posts novos aqui embaixo.</span></div>` : ""}
-    <div class="card cx-criar"><div class="secao">${ico("brilho")} Criar post com IA</div>
+    ${g.fila.length <= 9 ? `<div class="card" style="padding:14px 22px"><span class="badge aviso">⚠️ ${g.fila.length ? `Só dá para ${String(g.dias).replace(".", ",")} dias.` : "A fila acabou."} ${g.garimpo ? "Garimpe e aprove prompts novos aqui embaixo." : "Crie posts novos aqui embaixo."}</span></div>` : ""}
+    ${g.garimpo ? cxGarimpo(n, g) : `<div class="card cx-criar"><div class="secao">${ico("brilho")} Criar post com IA</div>
       <div class="seg" role="group" aria-label="Tipo de post">${TIPOS_IA[n].map(([v, r]) => `<button aria-pressed="${tipoIA[n] === v}" onclick="tipoIA['${n}']='${v}';renderCentral('${n}')">${r}</button>`).join("")}</div>
       <div class="linha" style="margin-top:12px"><input id="cx_tema_${n}" placeholder="${n === "ingles" ? "Tema (ex.: frases para entrevista de emprego)" : "Tema (ex.: cursos grátis de Excel com certificado)"}" aria-label="Tema do post">
         <button class="btn pri" style="flex:0 0 auto" onclick="cxCriar('${n}')">${ico("brilho")}Criar com IA</button></div>
       <p class="dica">A IA escreve no estilo do canal${n === "renda" ? " e desenha a arte" : ""}. O post entra no fim da fila; depois você pode postar agora, mandar a prévia ou agendar. Leva de 1 a 3 minutos.</p>
       ${g.noticias ? `<div class="acoes" style="margin-top:12px"><button class="btn peq" onclick='cxAcao("${n}","noticia","","Garimpar e postar uma notícia agora no canal?")'>📰 Postar uma notícia agora</button></div>` : ""}
-    </div>
+    </div>`}
     <div class="grade">
       <div class="card"><div class="secao">${ico("relogio")} Próximos horários <span class="conta-s">${esc(horas)}</span></div>
         ${g.agenda.map(a => `<div class="item cx-it"><div class="cx-quando">${esc(a.quando)}</div>${cxThumb(n, a)}<div class="corpo"><div class="tit">${esc(a.titulo)}</div>${a.nome_tipo ? `<div class="meta"><span class="badge">${esc(a.nome_tipo)}</span></div>` : ""}</div></div>`).join("") || vazio("Nenhum horário.")}</div>
@@ -1427,7 +1427,7 @@ function renderCentral(n) {
         <p class="dica">O agendado sai na primeira rodada da nuvem depois da hora marcada (até 1 hora depois), entre 8h e 21h.</p></div>
     </div>
     <div class="card"><div class="secao">${ico("fila")} Fila <span class="conta-s">${g.fila.length} posts, nesta ordem</span></div>
-      ${g.fila.map(i => cxItem(n, i, bFila(i))).join("") || vazio("A fila acabou. Crie posts novos com a IA aqui em cima.")}</div>
+      ${g.fila.map(i => cxItem(n, i, bFila(i))).join("") || vazio(g.garimpo ? "A fila está vazia. Aprove prompts em “Esperando aprovação”." : "A fila acabou. Crie posts novos com a IA aqui em cima.")}</div>
     <div class="card"><div class="secao">${ico("check")} Já saíram <span class="conta-s">últimos ${g.postados.length}</span></div>
       ${g.postados.map(i => cxItem(n, i, i.apagado ? `<span class="badge perigo">apagado do canal</span><button class="btn peq" onclick='cxAcao("${n}","voltar",${id(i)})'>Voltar para a fila</button>`
         : i.apagavel ? `<button class="btn perigo peq" onclick='cxAcao("${n}","apagar",${id(i)},"Apagar este post do canal? Não dá para desfazer.")'>${ico("lixo")}Apagar do canal</button>` : "",
@@ -1435,6 +1435,17 @@ function renderCentral(n) {
       <p class="dica">Só dá para apagar daqui os posts que saíram depois da central. Os mais antigos: segure o dedo no post no Telegram e toque em Apagar.</p></div>
     ${g.pulados.length ? `<div class="card"><div class="secao">${ico("lixo")} Tirados da fila <span class="conta-s">${g.pulados.length}</span></div>
       ${g.pulados.map(i => cxItem(n, i, `<button class="btn peq" onclick='cxAcao("${n}","voltar",${id(i)})'>Voltar para a fila</button>`)).join("")}</div>` : ""}`;
+}
+// canal de prompts: garimpo + o que espera o seu ✅ Aprovar (o resto da central é igual aos outros canais)
+function cxGarimpo(n, g) {
+  const c = g.candidatos || [];
+  return `<div class="card cx-criar"><div class="secao"><svg class="i"><use href="#i-picareta"/></svg> Garimpar prompts</div>
+      <div class="linha-garimpo"><button class="btn pri peq" onclick='cxAcao("${n}","garimpar","","Garimpar prompts novos nas galerias agora?")'><svg class="i"><use href="#i-picareta"/></svg>Garimpar prompts</button></div>
+      <p class="dica">Busca prompts novos no PromptPlum, prompts.chat e nanobananaprompt.org, com a imagem de exemplo do site. Leva uns 5 minutos. As prévias chegam no seu privado e aparecem aqui embaixo. Nada vai para o canal sem você aprovar. O garimpo também roda sozinho todo dia às 07h40.</p></div>
+    <div class="card"><div class="secao">⏳ Esperando aprovação <span class="conta-s">${c.length}</span></div>
+      ${c.map(i => cxItem(n, i, `<button class="btn peq" onclick='cxAcao("${n}","descartar",${esc(JSON.stringify(i.id))},"Descartar este prompt?")'>${ico("lixo")}Descartar</button>
+        <button class="btn pri peq" onclick='cxAcao("${n}","aprovar",${esc(JSON.stringify(i.id))})'>✅ Aprovar</button>`)).join("") || vazio("Nada esperando. Use “Garimpar prompts” aqui em cima.")}
+      <p class="dica">Aprovado vai para o fim da fila e sai nos horários do canal.</p></div>`;
 }
 async function cxAcao(n, acao, pid, pergunta, extra) {
   if (pergunta && !confirm(pergunta)) return;
