@@ -1990,5 +1990,39 @@
   "imagens": [
    "img/056.png"
   ]
+ },
+ {
+  "id": "057-passos-para-iniciar",
+  "tipo": "lista",
+  "titulo": "🐾 5 passos para iniciar o serviço de pet sitter",
+  "arte": {
+   "titulo": "5 passos para pet sitter",
+   "sub": "",
+   "itens": [
+    "Visite o pet antes",
+    "Conheça a rotina dele",
+    "Mande fotos todos os dias",
+    "Guarde a chave com cuidado",
+    "Tenha o contato do veterinário"
+   ],
+   "icone": "🐾",
+   "icones": [
+    "🏠",
+    "📋",
+    "📸",
+    "🔑",
+    "🩺"
+   ]
+  },
+  "corpo": "<p>Muitas pessoas viajam ou passam o dia fora e precisam de alguém de confiança para cuidar dos animais de estimação em casa. O serviço de pet sitter, ou cuidador de pets, é uma ótima alternativa para quem ama bichos e quer faturar:</p><p><b>1.</b> <b>Visite o pet antes</b>: vá até a casa do cliente para o animal se acostumar com a sua presença e cheirar você sem medo.<br/><b>2.</b> <b>Conheça a rotina dele</b>: anote os horários da ração, a quantidade de água, os remédios e as manias na hora do passeio.<br/><b>3.</b> <b>Mande fotos todos os dias</b>: envie mensagens curtas e cliques do pet comendo ou brincando para tranquilizar o dono durante a viagem.<br/><b>4.</b> <b>Guarde a chave com cuidado</b>: trate a chave da casa do cliente com total segurança e sigilo absoluto enquanto ele estiver fora.<br/><b>5.</b> <b>Tenha o contato do veterinário</b>: salve o número da clínica de confiança da família e o plantão mais próximo para qualquer imprevisto.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Ofereça serviços extras durante a visita, como regar as plantas da entrada ou recolher as correspondências. Isso agrega muito valor ao seu trabalho e fideliza o cliente.</p></details><p>📌 Salve e compartilhe com quem quer ganhar dinheiro cuidando de animais.</p>",
+  "tags": [
+   "rendaextra",
+   "pets",
+   "trabalhocomocal",
+   "animais"
+  ],
+  "imagens": [
+   "img/057.png"
+  ]
  }
 ]
