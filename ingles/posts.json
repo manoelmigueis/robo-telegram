@@ -755,5 +755,20 @@
     "imagens": [
       "img/048.png"
     ]
+  },
+  {
+    "id": "049-the-beach-vocabulario",
+    "tipo": "lista",
+    "titulo": "🏖️ At the beach: vocabulário de praia em inglês",
+    "corpo": "<p>Quer curtir a praia e falar inglês sem travar? Salve este post 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Beach</td><td>Praia</td></tr><tr><td>Sand</td><td>Areia</td></tr><tr><td>Ocean</td><td>Oceano / Mar</td></tr><tr><td>Wave</td><td>Onda</td></tr><tr><td>Sunscreen</td><td>Protetor solar</td></tr><tr><td>Towel</td><td>Toalha</td></tr><tr><td>Sunglasses</td><td>Óculos de sol</td></tr><tr><td>Umbrella</td><td>Guarda-sol</td></tr></table><details><summary>👀 Como dizer \"vamos à praia\"?</summary><p>Para convidar alguém, os americanos dizem <b>Let's go to the beach</b> de forma bem simples e natural.</p></details><p>🔁 Mande para aquele amigo que ama curtir o sol.</p>",
+    "tags": [
+      "ingles",
+      "aprenderingles",
+      "vocabulario",
+      "praia"
+    ],
+    "imagens": [
+      "img/049.png"
+    ]
   }
 ]
