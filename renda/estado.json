@@ -49,7 +49,8 @@
     "047-passos-para-editar",
     "048-cliente-pediu-arquivo",
     "049-passos-para-organizar",
-    "050-cliente-exige-que"
+    "050-cliente-exige-que",
+    "051-passos-para-organizar"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -70,8 +71,8 @@
     "instituto energisa e ibm oferecem cursos gratuitos de capacitação digital até 31",
     "usp seleciona alunos para cursos a distância e gratuitos de aperfeiçoamento atua"
   ],
-  "contador": 50,
-  "ultimo": "2026-11-25T19:00:46+00:00",
+  "contador": 51,
+  "ultimo": "2026-11-25T23:00:49+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -118,7 +119,8 @@
     "047-passos-para-editar": "2026-11-24T16:01:59+00:00",
     "048-cliente-pediu-arquivo": "2026-11-24T23:00:41+00:00",
     "049-passos-para-organizar": "2026-11-25T12:00:46+00:00",
-    "050-cliente-exige-que": "2026-11-25T16:09:47+00:00"
+    "050-cliente-exige-que": "2026-11-25T16:09:47+00:00",
+    "051-passos-para-organizar": "2026-11-25T23:00:49+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -246,6 +248,9 @@
     ],
     "050-cliente-exige-que": [
       8887
+    ],
+    "051-passos-para-organizar": [
+      8892
     ]
   }
 }
