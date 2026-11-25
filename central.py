@@ -280,10 +280,15 @@ def achar(n, alvo, banco=None):
 
 
 # ---------------- postar ----------------
+def espelhos(m):
+    """Canais que repetem cada post do nicho, só com o @ trocado (config.json -> nicho -> "espelhos")."""
+    return [c for c in m.CFG.get("espelhos", []) if c and c != m.canal()]
+
+
 def enviar(n, item, chat, contador=0):
     m = modulo(n)
     if n == "ingles":
-        com_curso = chat == m.canal() and (contador + 1) % int(m.CFG.get("curso_a_cada", 5)) == 0
+        com_curso = chat in (m.canal(), *espelhos(m)) and (contador + 1) % int(m.CFG.get("curso_a_cada", 5)) == 0
         return m.enviar(chat, item, com_curso)
     return m.enviar_dica(chat, item)
 
@@ -344,6 +349,11 @@ def postar(n, item_id=None):
             return None, None
         item = f[0]
     mid = enviar(n, item, m.canal(), e["contador"])
+    for chat in espelhos(m):  # espelho que falhar não derruba o post principal
+        try:
+            enviar(n, item, chat, e["contador"])
+        except Exception as erro:
+            print(f"[central] {n}: espelho {chat} falhou: {erro}")
     registrar_postado(n, item["id"], mid)
     print(f"[central] {n}: postado {item['id']} (mensagem {mid})")
     return item, mid

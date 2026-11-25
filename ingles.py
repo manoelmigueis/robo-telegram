@@ -46,6 +46,16 @@ def canal():
     return CFG.get("canal", "@inglescomia")
 
 
+def espelhos():
+    """Canais que recebem o mesmo post, só com o @ trocado (config.json -> "ingles" -> "espelhos")."""
+    return [c for c in CFG.get("espelhos", []) if c and c != canal()]
+
+
+def perfil(chat):
+    """O @ que aparece no post: o do espelho quando vai para ele, senão o do canal principal."""
+    return chat if chat in espelhos() else canal()
+
+
 def hashtags(item):
     return " ".join("#" + t.lstrip("#") for t in item.get("tags", [])[:5])
 
@@ -54,7 +64,7 @@ def link_curso():
     return CFG.get("link_curso") or ""
 
 
-def html_rico(item, ids, com_curso):
+def html_rico(item, ids, com_curso, arroba=None):
     """Monta o HTML do sendRichMessage. ids = ids das fotos anexadas, na ordem."""
     e = html.escape
     partes = [f"<h2>{e(item['titulo'])}</h2>"]
@@ -66,7 +76,8 @@ def html_rico(item, ids, com_curso):
     partes.append(item.get("corpo", ""))
     if item.get("tags"):
         partes.append(f"<p>{e(hashtags(item))}</p>")
-    botoes = [f'<tg-button type="url" url="https://t.me/{canal().lstrip("@")}">📲 {e(canal())}</tg-button>']
+    arroba = arroba or canal()
+    botoes = [f'<tg-button type="url" url="https://t.me/{arroba.lstrip("@")}">📲 {e(arroba)}</tg-button>']
     if com_curso and link_curso():
         partes.append("<p>🇺🇸 <b>Quer falar inglês de verdade?</b> Curso completo com 9 e-books + professor de IA por R$ 29,90.</p>")
         botoes.insert(0, f'<tg-button type="url" style="success" url="{e(link_curso(), quote=True)}">QUERO APRENDER</tg-button>')
@@ -74,7 +85,7 @@ def html_rico(item, ids, com_curso):
     return "\n".join(partes)
 
 
-def legenda_simples(item, com_curso):
+def legenda_simples(item, com_curso, arroba=None):
     """Plano B (se o formato rico falhar): legenda curta no estilo antigo do canal."""
     e = html.escape
     txt = f"<b>{e(item['titulo'])}</b>"
@@ -82,7 +93,7 @@ def legenda_simples(item, com_curso):
         txt += f"\n\n{e(hashtags(item))}"
     if com_curso and link_curso():
         txt += f'\n\n🇺🇸 Curso completo de inglês 👉 <a href="{e(link_curso(), quote=True)}"><b>QUERO APRENDER</b></a>'
-    return txt + f"\n\n📲 {canal()}"
+    return txt + f"\n\n📲 {arroba or canal()}"
 
 
 def enviar_quiz(chat, item, com_curso):
@@ -119,14 +130,14 @@ def enviar(chat, item, com_curso=False):
         with ExitStack() as pilha:
             arquivos = {i: pilha.enter_context(open(p, "rb")) for i, p in zip(ids, imagens)}
             media = [{"id": i, "media": {"type": "photo", "media": f"attach://{i}"}} for i in ids]
-            rico = {"html": html_rico(item, ids, com_curso)}
+            rico = {"html": html_rico(item, ids, com_curso, perfil(chat))}
             if media:
                 rico["media"] = media
             r = postador.tg("sendRichMessage", arquivos=arquivos or None, chat_id=chat, rich_message=rico)
         return r["message_id"]
     except RuntimeError as erro:  # plano B: foto (ou álbum) com legenda curta
         print(f"Post rico falhou ({erro}); mandando no formato simples.")
-    legenda = legenda_simples(item, com_curso)
+    legenda = legenda_simples(item, com_curso, perfil(chat))
     if not imagens:
         return postador.tg("sendMessage", chat_id=chat, text=legenda, parse_mode="HTML")["message_id"]
     with ExitStack() as pilha:

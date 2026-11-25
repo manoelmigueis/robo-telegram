@@ -87,6 +87,7 @@
   },
   "ingles": {
     "canal": "@inglescomia",
+    "espelhos": ["@inglesexcelente"],
     "horarios": [
       "09:00",
       "13:00",
