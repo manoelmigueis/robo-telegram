@@ -691,6 +691,14 @@ def central_acao(nicho: str, acao: str, dados: dict = Body(default={})):
         c = _central(prompts.aprovar if acao == "aprovar" else prompts.descartar, pid)
         return {"ok": True, "msg": f"Aprovado e posto no fim da fila: {c.get('titulo', '')}" if acao == "aprovar"
                 else "Descartado."}
+    if nicho == "prompts" and acao == "fonte_add":
+        import prompts
+        dom = _central(prompts.fonte_add, str(dados.get("url", "")))
+        return {"ok": True, "msg": f"{dom} entrou na lista. O próximo garimpo já busca lá."}
+    if nicho == "prompts" and acao == "fonte_tirar":
+        import prompts
+        _central(prompts.fonte_tirar, str(dados.get("url", "")))
+        return {"ok": True, "msg": "Site tirado da lista."}
     if nicho == "prompts" and acao == "garimpar":
         return garimpar_prompts()
     if acao == "noticia":

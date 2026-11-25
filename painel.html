@@ -1441,11 +1441,29 @@ function cxGarimpo(n, g) {
   const c = g.candidatos || [];
   return `<div class="card cx-criar"><div class="secao"><svg class="i"><use href="#i-picareta"/></svg> Garimpar prompts</div>
       <div class="linha-garimpo"><button class="btn pri peq" onclick='cxAcao("${n}","garimpar","","Garimpar prompts novos nas galerias agora?")'><svg class="i"><use href="#i-picareta"/></svg>Garimpar prompts</button></div>
-      <p class="dica">Busca prompts novos no PromptPlum, prompts.chat e nanobananaprompt.org, com a imagem de exemplo do site. Leva uns 5 minutos. As prévias chegam no seu privado e aparecem aqui embaixo. Nada vai para o canal sem você aprovar. O garimpo também roda sozinho todo dia às 07h40.</p></div>
+      <p class="dica">Busca prompts novos nos sites da lista abaixo, com a imagem de exemplo do site. Leva uns 5 minutos. As prévias chegam no seu privado e aparecem aqui embaixo. Nada vai para o canal sem você aprovar. O garimpo também roda sozinho todo dia às 07h40.</p></div>
+    ${cxFontes(n, g.fontes || {})}
     <div class="card"><div class="secao">⏳ Esperando aprovação <span class="conta-s">${c.length}</span></div>
       ${c.map(i => cxItem(n, i, `<button class="btn peq" onclick='cxAcao("${n}","descartar",${esc(JSON.stringify(i.id))},"Descartar este prompt?")'>${ico("lixo")}Descartar</button>
         <button class="btn pri peq" onclick='cxAcao("${n}","aprovar",${esc(JSON.stringify(i.id))})'>✅ Aprovar</button>`)).join("") || vazio("Nada esperando. Use “Garimpar prompts” aqui em cima.")}
       <p class="dica">Aprovado vai para o fim da fila e sai nos horários do canal.</p></div>`;
+}
+function cxFontes(n, f) {
+  const fixas = f.fixas || [], extras = f.extras || [];
+  const dom = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return u; } };
+  return `<div class="card"><div class="secao">🌐 Sites do garimpo <span class="conta-s">${fixas.length + extras.length}</span></div>
+      ${fixas.map(s => `<div class="item"><div style="flex:1">${esc(s)}<div class="dica" style="margin:2px 0 0">fixo</div></div></div>`).join("")}
+      ${extras.map(u => `<div class="item"><div style="flex:1;min-width:0;overflow-wrap:anywhere">${esc(dom(u))}<div class="dica" style="margin:2px 0 0">${esc(u)}</div></div>
+        <button class="btn peq" onclick='cxAcao("${n}","fonte_tirar","",${esc(JSON.stringify("Tirar " + dom(u) + " do garimpo?"))},{url:${esc(JSON.stringify(u))}})'>${ico("lixo")}Tirar</button></div>`).join("")}
+      <div class="linha" style="margin-top:12px"><input id="cx_fonte_${n}" type="url" inputmode="url" placeholder="Link da página com os prompts (https://...)" aria-label="Link do site novo">
+        <button class="btn pri" style="flex:0 0 auto" onclick="cxFonte('${n}')">Adicionar site</button></div>
+      <p class="dica">Cole o link da página onde os prompts aparecem (a lista, não um prompt só). A IA lê a página e pega só os prompts completos, com a imagem de exemplo. Site que monta tudo por JavaScript não funciona: o robô avisa na hora.</p></div>`;
+}
+async function cxFonte(n) {
+  const url = $(`cx_fonte_${n}`).value.trim();
+  if (!url) return;
+  try { await api(`/api/central/${n}/fonte_add`, { url }); $(`cx_fonte_${n}`).value = ""; } catch (e) {}
+  carregarCentral(n);
 }
 async function cxAcao(n, acao, pid, pergunta, extra) {
   if (pergunta && !confirm(pergunta)) return;

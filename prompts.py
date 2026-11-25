@@ -8,7 +8,7 @@ pelo Cloudflare FLUX quando a fonte não tem imagem) e manda a prévia só para 
 
     python prompts.py garimpar           -> garimpa, gera até N imagens no dia e manda as prévias (1x por dia)
     python prompts.py agendado           -> posta se um horário venceu (só com o canal ligado)
-    python prompts.py fontes             -> só mostra o que achou nas galerias, sem gastar nada
+    python prompts.py fontes [links]     -> só mostra o que achou nas galerias (links: testa um site novo)
     python prompts.py previa ID [chat]   -> manda um post (aprovado ou candidato) só para você
 
 Regras do canal: "Linha editorial - Prompts Milionários.md" (no cofre). Estilo: prompts/ESTILO.md
@@ -21,6 +21,7 @@ import json
 import os
 import re
 import sys
+import urllib.parse
 from contextlib import ExitStack
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -252,10 +253,125 @@ def de_nanobanana(paginas=2):
     return achados
 
 
-def coletar(vistos=()):
+# ---------------- fontes que o Manoel acrescenta no painel ----------------
+FIXAS = ["promptplum.com", "prompts.chat", "nanobananaprompt.org"]
+MAX_FONTES = 10
+
+
+def _dominio(url):
+    return re.sub(r"^www\.", "", urllib.parse.urlsplit(url).netloc.lower())
+
+
+def _pagina_resumida(codigo, base):
+    """O texto da página, com [IMG endereço] onde há imagem e [LINK endereço] onde começa um link."""
+    t = re.sub(r"(?is)<(script|style|noscript|svg|head|nav|footer)\b.*?</\1>", " ", codigo)
+
+    def img(m):
+        src = re.search(r'\b(?:data-src|src)="([^"]+)"', m.group(0))
+        if not src or src.group(1).startswith("data:"):
+            return " "
+        return f" [IMG {urllib.parse.urljoin(base, html.unescape(src.group(1)))}] "
+    t = re.sub(r"(?is)<img\b[^>]*>", img, t)
+    t = re.sub(r'(?is)<a\b[^>]*href="([^"#]+)"[^>]*>',
+               lambda m: f" [LINK {urllib.parse.urljoin(base, html.unescape(m.group(1)))}] ", t)
+    t = re.sub(r"(?i)<(br|/p|/div|/li|/h\d|/article|/section|/pre|/blockquote)\b[^>]*>", "\n", t)
+    t = html.unescape(re.sub(r"<[^>]+>", " ", t))
+    t = re.sub(r"[ \t\r]+", " ", t)
+    return re.sub(r"\n\s*\n+", "\n", t).strip()
+
+
+def _abrir(url, timeout=30):
+    """Baixa a página. Sem charset no cabeçalho, o requests chuta Latin-1 e estraga aspas e acentos."""
+    r = requests.get(url, headers=NAVEGADOR, timeout=timeout)
+    r.raise_for_status()
+    if "charset" not in r.headers.get("content-type", "").lower():
+        r.encoding = r.apparent_encoding or "utf-8"
+    return r
+
+
+def _plano(t):
+    t = t.replace("“", '"').replace("”", '"').replace("’", "'").replace("‘", "'")
+    return re.sub(r"\s+", " ", t).lower()
+
+
+def de_link(url, quantos=15):
+    """Fonte acrescentada no painel: a IA lê a página e separa os prompts de imagem que estão nela.
+    Só entra prompt cujo texto existe de verdade na página (a IA não pode inventar nem mexer)."""
+    import central
+    import escritor
+    r = _abrir(url)
+    pagina = _pagina_resumida(r.text, r.url)[:40000]
+    if len(pagina) < 1000:
+        raise RuntimeError("a página veio quase vazia (o site monta tudo por JavaScript)")
+    pedido = f"""Abaixo está uma página de um site de prompts de imagem ({url}).
+[IMG endereço] marca onde aparece uma imagem e [LINK endereço] onde começa um link.
+<pagina>
+{pagina}
+</pagina>
+
+Separe até {quantos} prompts de imagem COMPLETOS que estão na página. Copie o texto de cada prompt EXATAMENTE
+como está, letra por letra: sem traduzir, resumir, corrigir nem juntar pedaços. Ignore menu, propaganda,
+comentários, textos sobre o site e prompts cortados no meio (terminando em "..." ou "Read more").
+Para cada um: "imagem_url" é o endereço do [IMG] que mostra o resultado daquele prompt (vazio se não tiver
+certeza) e "url" é o [LINK] da página só daquele prompt (vazio se não tiver).
+
+Responda só com um JSON, sem nada antes ou depois:
+{{"prompts": [{{"titulo": "...", "texto": "...", "imagem_url": "...", "url": "..."}}]}}
+Se não houver nenhum prompt de imagem completo, responda {{"prompts": []}}."""
+    texto = escritor.responder(pedido)
+    if not texto:
+        raise RuntimeError("nenhuma IA respondeu para ler a página")
+    dados = central._extrair_json(texto)
+    plano, fonte, achados = _plano(pagina), _dominio(url), []
+    for x in (dados.get("prompts") or [])[:quantos]:
+        t = (x.get("texto") or "").strip()
+        if not t or _plano(t)[:150] not in plano:
+            continue  # a IA mexeu no texto ou inventou: fica de fora
+        img = (x.get("imagem_url") or "").strip()
+        link = (x.get("url") or "").strip()
+        chave = hashlib.sha1(t[:300].lower().encode("utf-8")).hexdigest()[:14]
+        achados.append({"chave": f"lk:{chave}", "fonte": fonte, "titulo": x.get("titulo", ""), "texto": t,
+                        "imagem_url": img if img and f"[IMG {img}]" in pagina else "",
+                        "url": link if link and f"[LINK {link}]" in pagina else url, "autor": ""})
+    print(f"[garimpo] {fonte}: {len(achados)} prompts lidos pela IA")
+    return achados
+
+
+def fonte_add(url):
+    """Painel: acrescenta um site para o garimpo. Confere se o link abre antes de guardar."""
+    import central
+    url = (url or "").strip()
+    if not re.match(r"^https?://[^\s/]+\.[^\s/]+", url):
+        raise central.Erro("Cole o link inteiro do site, começando com https://")
+    dom = _dominio(url)
+    extras = central.estado("prompts", fresco=True).get("fontes", [])
+    if dom in FIXAS or url in extras:
+        raise central.Erro("Esse site já está na lista.")
+    if len(extras) >= MAX_FONTES:
+        raise central.Erro(f"Já são {MAX_FONTES} sites extras. Tire um antes de pôr outro.")
+    try:
+        r = _abrir(url, timeout=20)
+    except Exception as x:
+        raise central.Erro(f"O site não abriu para o robô ({type(x).__name__}). Confira o link.")
+    if len(_pagina_resumida(r.text, r.url)) < 1000:
+        raise central.Erro("A página abriu quase vazia para o robô (o site monta tudo por JavaScript). Esse não dá.")
+    central.gravar("prompts", f"prompts: fonte nova {dom}",
+                   mudar=lambda e: e.update(fontes=[f for f in e.get("fontes", []) if f != url] + [url]))
+    return dom
+
+
+def fonte_tirar(url):
+    import central
+    central.gravar("prompts", f"prompts: tirou a fonte {_dominio(url)}",
+                   mudar=lambda e: e.update(fontes=[f for f in e.get("fontes", []) if f != url]))
+
+
+def coletar(vistos=(), extras=()):
     """Junta as galerias, uma de cada vez, para variar a fonte."""
     listas = []
-    for funcao in (lambda: de_promptplum(vistos=vistos), de_prompts_chat, de_nanobanana):
+    funcoes = [lambda: de_promptplum(vistos=vistos), de_prompts_chat, de_nanobanana]
+    funcoes += [lambda u=u: de_link(u) for u in extras]
+    for funcao in funcoes:
         try:
             listas.append(funcao())
         except Exception as erro:
@@ -329,13 +445,19 @@ Regras: português simples, frases curtas, sem cara de IA (proibido "no mundo de
     if not r.get("titulo"):
         print(f"[garimpo] a IA devolveu incompleto ({x['chave']})")
         return None
-    r["prompt"] = r["prompt_en"] = sem_assinatura(x["texto"])
+    r["prompt"] = r["prompt_en"] = sem_assinatura(x["texto"], x.get("fonte", ""))
     return r
 
 
-def sem_assinatura(texto):
+def sem_assinatura(texto, fonte=""):
     """O prompt como veio da galeria, só sem a frase com a assinatura ou marca d'água do site."""
-    marca = re.compile(r"promptplum|nanobananaprompt|prompts\.chat|brand signature", re.I)
+    nomes = ["promptplum", "nanobananaprompt", r"prompts\.chat", "brand signature"]
+    if fonte and fonte not in FIXAS:  # site acrescentado: tira o domínio e o nome dele (se não for palavra comum)
+        nomes.append(re.escape(fonte))
+        nome = fonte.split(".")[0]
+        if len(nome) >= 8:
+            nomes.append(re.escape(nome))
+    marca = re.compile("|".join(nomes), re.I)
     linhas = []
     for linha in texto.splitlines():
         if marca.search(linha):
@@ -423,7 +545,7 @@ def garimpar(limite=None, chat=None):
         print(f"Teto de {teto} prévias por dia já usado hoje.")
         return []
     vistos = set(e.get("vistos", [])) | {c.get("chave") for c in e.get("candidatos", [])}
-    novos = [x for x in coletar(vistos) if x["chave"] not in vistos]
+    novos = [x for x in coletar(vistos, e.get("fontes", [])) if x["chave"] not in vistos]
     achados = [x for x in novos if serve(x) and (x.get("imagem_url") or pode_gerar)]
     fora = [x["chave"] for x in novos if x not in achados]
     if fora:  # não servem: marca como vistos para não ocupar a vez dos bons na próxima rodada
@@ -597,7 +719,8 @@ if __name__ == "__main__":
     postador.carregar_env()
     acao = sys.argv[1] if len(sys.argv) > 1 else "agendado"
     if acao == "fontes":
-        for x in coletar()[:30]:
+        extras = sys.argv[2:] or estado().get("fontes", [])
+        for x in coletar(extras=extras)[:60]:
             print(f"[{'ok' if serve(x) else '--'}] {x['fonte']:22} {x['texto'][:90]}")
     elif acao == "garimpar":
         garimpar(int(sys.argv[2]) if len(sys.argv) > 2 else None)
