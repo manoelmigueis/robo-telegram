@@ -115,6 +115,7 @@
   },
   "cursos": {
     "canal": "@cursosgratuitosudemy",
+    "espelhos": ["@cursosgratisnaudemy", "@cursosecursos"],
     "horarios": [
       "09:00",
       "12:00",

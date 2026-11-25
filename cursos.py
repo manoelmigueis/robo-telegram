@@ -54,6 +54,11 @@ def canal():
     return CFG.get("canal", "@cursosgratuitosudemy")
 
 
+def espelhos():
+    """Canais que recebem o mesmo post, só com o @ trocado (config.json -> "cursos" -> "espelhos")."""
+    return [c for c in CFG.get("espelhos", []) if c and c != canal()]
+
+
 def horarios():
     return CFG.get("horarios") or ["09:00", "12:00", "15:00", "18:00", "21:00"]
 
@@ -168,20 +173,22 @@ Descrição do curso: {c.get('descricao', '')}"""
     return resumo, list(dict.fromkeys(tags + ln["fixas"]))
 
 
-def legenda(c):
+def legenda(c, chat=None):
     """Padrão do canal de livros: título, descrição, idioma, gatilho com o link, @ do canal e hashtags do tema,
-    tudo no idioma do curso."""
-    resumo, tags = texto_ia(c)
+    tudo no idioma do curso. A IA escreve uma vez só; o espelho reaproveita o texto e troca só o @."""
+    if "_texto" not in c:
+        c["_texto"] = texto_ia(c)
+    resumo, tags = c["_texto"]
     ln = lingua(c)
     linhas = [f"🎓 <b>{html.escape(c['titulo'])}</b>", "", html.escape(resumo), "", ln["selo"], "",
               f'<a href="{html.escape(c["link"], quote=True)}">🕐 {ln["gratis"]} 🔥</a>', "",
-              f"📚: {canal()}", "", " ".join(tags)]
+              f"📚: {chat or canal()}", "", " ".join(tags)]
     return "\n".join(linhas)[:1024]
 
 
 def enviar(chat, c):
     teclado = {"inline_keyboard": [[{"text": lingua(c)["botao"], "url": c["link"]}]]}
-    texto = legenda(c)
+    texto = legenda(c, chat)
     if c.get("foto"):
         try:
             return postador.tg("sendPhoto", chat_id=chat, photo=c["foto"], caption=texto, parse_mode="HTML",
@@ -190,6 +197,17 @@ def enviar(chat, c):
             print(f"[cursos] a foto falhou, vai só o texto: {erro}")
     return postador.tg("sendMessage", chat_id=chat, text=texto, parse_mode="HTML", reply_markup=teclado,
                        link_preview_options={"is_disabled": True})["message_id"]
+
+
+def publicar(c):
+    """Posta no canal principal e repete nos espelhos. Espelho que falhar não derruba o post principal."""
+    mid = enviar(canal(), c)
+    for chat in espelhos():
+        try:
+            enviar(chat, c)
+        except Exception as erro:
+            print(f"[cursos] espelho {chat} falhou: {erro}")
+    return mid
 
 
 def marcar_postado(slug):
@@ -219,7 +237,7 @@ def postar_escolhido(c):
     c = detalhes(dict(c))
     if not c:
         return None
-    mid = enviar(canal(), c)
+    mid = publicar(c)
     marcar_postado(c["slug"])
     print(f"Curso postado pelo painel: {c['titulo']} (mensagem {mid})")
     return c["titulo"], mid
@@ -231,7 +249,7 @@ def postar_um():
         c = detalhes(c)
         if not c:
             continue
-        mid = enviar(canal(), c)
+        mid = publicar(c)
         e = estado()
         e["postados"].append(c["slug"])
         e["ultimo"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
