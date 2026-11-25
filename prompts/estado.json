@@ -88,11 +88,12 @@
     "pp:formal-suit-luxury-interior-prompt",
     "lk:0e728de159ba62",
     "pp:stylized-female-portrait-ai-prompt",
-    "lk:c19e142e1e2f89"
+    "lk:c19e142e1e2f89",
+    "pp:minimalist-monochrome-fashion-photo-prompt"
   ],
   "imagens": {
     "dia": "2026-11-25",
-    "n": 6
+    "n": 7
   },
   "candidatos": [],
   "ultimo": "2026-11-25T22:46:45+00:00",
