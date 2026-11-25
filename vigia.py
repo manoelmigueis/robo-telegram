@@ -16,7 +16,8 @@ TOKEN = os.environ["GITHUB_TOKEN"]
 DURACAO = int(os.environ.get("VIGIA_SEGUNDOS", 5 * 3600 + 45 * 60))
 ROBO = ("postar.yml", "relogio.yml", "garimpar.yml", "bot.yml")  # quem divide a vez no grupo "robo"
 
-# (arquivo, minuto UTC, horas UTC). Todos no minuto 0: o post sai em menos de 1 minuto depois da hora. Postar: 08h–22h de Manaus; inglês, renda, cursos e achadinhos: como no cron deles.
+# (arquivo, minuto UTC, horas UTC[, entradas]). Todos no minuto 0: o post sai em menos de 1 minuto depois da hora. Postar: 08h–22h de Manaus; inglês, renda, cursos e achadinhos: como no cron deles.
+# Prompts: garimpo às 07h40 de Manaus e postagem de hora em hora (o prompts.py só posta se "ligado" e no horário).
 TAREFAS = [
     ("postar.yml", 0, set(range(12, 24)) | {0, 1, 2}),
     ("ingles.yml", 0, set(range(13, 24)) | {0, 1}),
@@ -24,6 +25,8 @@ TAREFAS = [
     ("cursos.yml", 0, set(range(13, 24)) | {0, 1}),
     ("achadinhos.yml", 0, set(range(13, 24)) | {0, 1}),
     ("garimpar.yml", 30, {11}),
+    ("prompts.yml", 40, {11}, {"acao": "garimpar"}),
+    ("prompts.yml", 5, set(range(12, 24)) | {0, 1, 2}, {"acao": "agendado"}),
 ]
 
 
@@ -73,22 +76,23 @@ def main():
         agora = datetime.now(timezone.utc)
         mexeu_robo = False
         try:
-            for arquivo, minuto, horas in TAREFAS:
+            for arquivo, minuto, horas, *extra in TAREFAS:
+                entradas = extra[0] if extra else {"vigia": "1"}
                 if agora.hour not in horas or agora.minute < minuto or agora.minute > 55:
                     continue
-                chave = f"{arquivo} {agora:%Y-%m-%d %H}"
+                chave = f"{arquivo} {entradas} {agora:%Y-%m-%d %H}"
                 hora_cheia = agora.replace(minute=minuto, second=0, microsecond=0)
                 disparo = feitos.get(chave)
                 if disparo is None:
                     if ja_rodou_desde(arquivo, hora_cheia):  # o cron já fez nesta hora
                         feitos[chave] = agora
                         continue
-                    disparar(arquivo, {"vigia": "1"})
+                    disparar(arquivo, entradas)
                     feitos[chave] = agora
                     mexeu_robo |= arquivo in ROBO
                 elif agora - disparo > timedelta(minutes=2) and not ja_rodou_desde(arquivo, disparo - timedelta(seconds=30)):
                     # a rodada foi cancelada (um clique tomou a vez dela na fila): tenta de novo
-                    disparar(arquivo, {"vigia": "1"})
+                    disparar(arquivo, entradas)
                     feitos[chave] = agora
                     mexeu_robo |= arquivo in ROBO
             if not mexeu_robo and time.time() - ultimo_relogio >= 600 and not esperando_na_fila_robo():
