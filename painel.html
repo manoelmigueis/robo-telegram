@@ -1116,7 +1116,7 @@ function formCanal(c) {
   }
 
 // todos os canais numa lista só: os de conteúdo (central) e os de livros/ofertas (Amazon)
-const CONTEUDO = { ingles: { nome: "Inglês", emoji: "🇺🇸" }, renda: { nome: "Renda extra", emoji: "💰" } };
+const CONTEUDO = { ingles: { nome: "Inglês", emoji: "🇺🇸" }, renda: { nome: "Renda extra", emoji: "💰" }, prompts: { nome: "Prompts", emoji: "🍌" } };
 let hubFiltro = "todos";
 try { hubFiltro = localStorage.getItem("hubFiltro") || "todos"; } catch (e) {}
 function semAcento(s) { return String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); }

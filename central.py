@@ -30,9 +30,10 @@ if not ESPELHO.exists():
 NICHOS = {
     "ingles": {"nome": "Inglês", "emoji": "🇺🇸", "tipos": ["lista", "aula", "palavra", "quiz"]},
     "renda": {"nome": "Renda extra", "emoji": "💵", "tipos": ["lista", "quiz"]},
+    "prompts": {"nome": "Prompts", "emoji": "🍌", "tipos": ["prompt"]},
 }
 NOMES_TIPO = {"lista": "Lista", "aula": "Aula", "palavra": "Expressão", "quiz": "Quiz", "post": "Post",
-              "dica": "Dica", "noticia": "Notícia"}
+              "dica": "Dica", "noticia": "Notícia", "prompt": "Prompt"}
 
 
 class Erro(Exception):
@@ -110,9 +111,18 @@ def _json_banco(b, n):
     return json.dumps(b, ensure_ascii=False, indent=2 if n == "ingles" else 1)
 
 
+def _por_local(caminho, dados):
+    alvo = RAIZ / caminho
+    if dados is None:
+        alvo.unlink(missing_ok=True)
+        return
+    alvo.parent.mkdir(parents=True, exist_ok=True)
+    alvo.write_bytes(dados)
+
+
 def gravar(n, msg, mudar=None, mudar_banco=None, arquivos=None):
     """Aplica as mudanças em cima do GitHub mais novo e manda o commit (tenta 4 vezes).
-    mudar(estado) e mudar_banco(lista) mexem nos JSON; arquivos = {caminho: bytes} (ex.: imagens)."""
+    mudar(estado) e mudar_banco(lista) mexem nos JSON; arquivos = {caminho: bytes} (ex.: imagens; None apaga)."""
     m = modulo(n)
     if not tem_nuvem():  # sem cópia do GitHub: grava só aqui (o passo "Guardar" do GitHub envia depois)
         e = normal(m.estado())
@@ -124,8 +134,7 @@ def gravar(n, msg, mudar=None, mudar_banco=None, arquivos=None):
             mudar_banco(b)
             m.BANCO.write_text(_json_banco(b, n), encoding="utf-8")
         for caminho, dados in (arquivos or {}).items():
-            (RAIZ / caminho).parent.mkdir(parents=True, exist_ok=True)
-            (RAIZ / caminho).write_bytes(dados)
+            _por_local(caminho, dados)
         return e
     ultimo = None
     for tentativa in range(4):
@@ -146,6 +155,9 @@ def gravar(n, msg, mudar=None, mudar_banco=None, arquivos=None):
             idx = {"GIT_INDEX_FILE": str(Path(tempfile.gettempdir()) / f"central-indice-{os.getpid()}")}
             _git("read-tree", base, env=idx)
             for caminho, dados in novos.items():
+                if dados is None:
+                    _git("update-index", "--force-remove", caminho, env=idx)
+                    continue
                 blob = _git("hash-object", "-w", "--stdin", entrada=dados)
                 _git("update-index", "--add", "--cacheinfo", f"100644,{blob},{caminho}", env=idx)
             arvore = _git("write-tree", env=idx)
@@ -155,8 +167,7 @@ def gravar(n, msg, mudar=None, mudar_banco=None, arquivos=None):
             commit = _git("commit-tree", arvore, "-p", base, "-m", msg, env=quem)
             _git("push", "-q", "origin", f"{commit}:refs/heads/main")
             for caminho, dados in novos.items():  # deixa a cópia local igual à da nuvem
-                (RAIZ / caminho).parent.mkdir(parents=True, exist_ok=True)
-                (RAIZ / caminho).write_bytes(dados)
+                _por_local(caminho, dados)
             if e is not None:
                 _cache[n] = (time.time(), e)
             return e
@@ -325,7 +336,7 @@ def postar(n, item_id=None):
         if item["id"] in e["postados"] and item["id"] not in e["apagados"]:
             return item, None
     else:
-        f = fila(n, e) or reciclar(n, e)
+        f = fila(n, e) or ([] if n == "prompts" else reciclar(n, e))  # prompts: só sai o que você aprovou
         if not f:
             return None, None
         item = f[0]
@@ -444,8 +455,11 @@ def previa(n, item_id, chat):
 
 def tratar_botao(cb, arg):
     """Botões da prévia. arg: 'ip:ID' posta o post de inglês, 'rx:ID' tira a dica de renda da fila..."""
-    n = {"i": "ingles", "r": "renda"}.get(arg[:1])
+    n = {"i": "ingles", "r": "renda", "p": "prompts"}.get(arg[:1])
     acao, alvo = arg[1:2], arg[3:]
+    if n == "prompts" and acao in ("a", "d"):  # ✅ Aprovar / 🗑 Descartar do garimpo
+        import prompts
+        return prompts.tratar_candidato(cb, acao, alvo)
     try:
         if not n:
             return postador.trocar_botoes(cb, "Botão antigo")
@@ -517,6 +531,8 @@ def repor(n, minimo=6, lote=2):
     import postador
     if not postador.estado().get("ia_auto", True):
         return 0
+    if n == "prompts":  # prompts vêm só do garimpo aprovado
+        return 0
     restam = len(fila(n, banco=banco_nuvem(n)))
     if restam >= minimo:
         return 0
@@ -556,6 +572,8 @@ def desenhar_renda(arte, quiz):
 def criar(n, tema="", tipo="lista"):
     """A IA escreve um post novo no estilo do canal e ele entra no fim da fila."""
     import escritor
+    if n == "prompts":
+        raise Erro("Os prompts vêm do garimpo: aprove os que chegam no seu privado do robô.")
     m = modulo(n)
     if tipo not in NICHOS[n]["tipos"]:
         tipo = NICHOS[n]["tipos"][0]

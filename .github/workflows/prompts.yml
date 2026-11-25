@@ -1,0 +1,72 @@
+name: Canal de prompts
+
+on:
+  schedule:
+    # Garimpo 1x por dia (07h40 de Manaus): acha prompts novos, gera até N imagens e manda as prévias
+    # com ✅ Aprovar / 🗑 Descartar no privado do robô. Nada vai para o canal sem aprovação.
+    - cron: "40 11 * * *"
+    # Postagem de hora em hora (08h às 22h de Manaus). Só posta com "ligado": true em config.json -> prompts,
+    # e só o que foi aprovado. Minuto 23 evita o pico da hora cheia.
+    - cron: "23 12-23,0-2 * * *"
+  workflow_dispatch:
+    inputs:
+      acao:
+        description: "garimpar ou agendado"
+        required: false
+        default: "garimpar"
+
+concurrency:
+  group: prompts
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  rodar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: O que fazer agora
+        id: qual
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then ACAO="${{ inputs.acao }}";
+          elif [ "${{ github.event.schedule }}" = "40 11 * * *" ]; then ACAO=garimpar;
+          else ACAO=agendado; fi
+          LIGADO=$(python3 -c "import json;print(json.load(open('config.json')).get('prompts',{}).get('ligado',False))")
+          if [ "$ACAO" = "agendado" ] && [ "$LIGADO" != "True" ]; then ACAO=pular; fi
+          echo "acao=$ACAO" >> "$GITHUB_OUTPUT"
+          echo "Ação: $ACAO (canal ligado: $LIGADO)"
+      - uses: actions/setup-python@v5
+        if: steps.qual.outputs.acao != 'pular'
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements-nuvem.txt
+      - if: steps.qual.outputs.acao != 'pular'
+        run: pip install -r requirements-nuvem.txt
+      - name: Rodar o canal de prompts
+        if: steps.qual.outputs.acao != 'pular'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || secrets.GEMINI_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          PYTHONUTF8: "1"
+        # O estado (candidatos, fila, postados) é gravado direto no main pelo central.gravar.
+        run: python prompts.py ${{ steps.qual.outputs.acao }}
+      # Plano B: se a gravação direta falhou, o estado ficou só aqui. Este passo manda para o main.
+      - name: Guardar o estado
+        if: always() && steps.qual.outputs.acao != 'pular'
+        run: |
+          git config user.name "robo-nuvem"
+          git config user.email "robo-nuvem@users.noreply.github.com"
+          git add prompts/
+          git diff --cached --quiet || git commit -m "prompts: estado $(date -u +%F' '%H:%M)"
+          git pull --rebase -X theirs || true
+          git push

@@ -153,7 +153,7 @@ def soltar_agendados():
                 feitos += 1
     try:
         import central
-        for n in ("ingles", "renda"):
+        for n in ("ingles", "renda", "prompts"):
             try:
                 feitos += central.postar_agendados(n)
             except Exception as x:
