@@ -1,7 +1,8 @@
 {
   "postados": [
     "261125-1-foto-profissional-estilo-edito",
-    "261125-4-crie-um-retrato-de-moda-chique"
+    "261125-4-crie-um-retrato-de-moda-chique",
+    "261125-2-misture-anime-desenho-e-massin"
   ],
   "pulados": [],
   "frente": [],
@@ -10,7 +11,8 @@
   "agendados": {},
   "quando": {
     "261125-1-foto-profissional-estilo-edito": "2026-11-25T18:33:00+00:00",
-    "261125-4-crie-um-retrato-de-moda-chique": "2026-11-25T18:33:02+00:00"
+    "261125-4-crie-um-retrato-de-moda-chique": "2026-11-25T18:33:02+00:00",
+    "261125-2-misture-anime-desenho-e-massin": "2026-11-25T18:33:09+00:00"
   },
   "mensagens": {
     "261125-1-foto-profissional-estilo-edito": [
@@ -18,9 +20,12 @@
     ],
     "261125-4-crie-um-retrato-de-moda-chique": [
       7
+    ],
+    "261125-2-misture-anime-desenho-e-massin": [
+      8
     ]
   },
-  "contador": 2,
+  "contador": 3,
   "vistos": [
     "pc:cmwwenmqs0001if08a8ptnnbv",
     "nb:29b524029373a7",
@@ -99,5 +104,5 @@
       "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Create an ultra-realistic, photorealistic cinematic lifestyle portrait of a handsome man sitting beside a peaceful riverside canal during golden hour.\n\nSubject &amp; Identity: Use the provided reference photo as the exact identity reference. Preserve the person&#x27;s facial features, face shape, skin tone, and natural proportions with accurate identity matching.\n\nOutfit &amp; Styling: He is wearing a soft ivory-white oversized knit sweater layered over a light blue collared shirt, paired with relaxed-fit black trousers, black shoes. A brown leather crossbody messenger bag with a vintage finish rests against his right hip.\n\nPose &amp; Composition: The man is seated sideways on a sloping concrete embankment beside the canal, with one knee bent upward and the other leg extended naturally toward the foreground. One arm rests casually over his raised knee, while the other hand rests near his lap. His body faces slightly toward the camera while his head turns toward the left, gazing thoughtfully into the distance. Capture a relaxed, candid, contemplative moment.\n\nHairstyle &amp; Expression: Naturally styled, slightly tousled hair with a calm, subtle and thoughtful facial expression.\n\nBackground &amp; Environment: A quiet Japanese suburban riverside setting featuring a gently flowing canal, lush green grass and wild plants along both banks, a dark steel railway bridge crossing the river in the middle distance, traditional suburban houses, utility poles and overhead power lines. A distant cyclist adds a subtle everyday-life element to the scene.\n\nLighting &amp; Atmosphere: Warm natural golden-hour sunlight coming from the right side, softly illuminating the subject&#x27;s face, sweater and surrounding grass. A beautiful pale blue-to-warm peach sunset sky creates a peaceful, nostalgic atmosphere with soft shadows and natural reflections on the water.\n\nCamera &amp; Photography: Vertical 4:5 composition, eye-level camera angle, full-body wide environmental portrait, subject positioned slightly right of center, full seated pose visible, natural perspective, 35mm lens, f/2.8, realistic depth of field, beautifully balanced foreground and background.\n\nImage Quality: Ultra-photorealistic, 8K resolution, highly detailed natural skin texture, realistic fabric knitting, authentic leather texture, cinematic color grading, soft film-like tones, natural contrast, subtle atmospheric depth, professional lifestyle photography.</pre><p>💡 Mande sua foto junto com o prompt e troque &quot;ivory-white oversized knit sweater&quot; pela cor da roupa que você quiser.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
     }
   ],
-  "ultimo": "2026-11-25T18:33:02+00:00"
+  "ultimo": "2026-11-25T18:33:09+00:00"
 }
