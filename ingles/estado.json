@@ -39,10 +39,11 @@
     "037-working-from-home",
     "038-mini-aula-for",
     "039-the-bank-frases",
-    "040-colors-and-shapes"
+    "040-colors-and-shapes",
+    "041-movies-and-series"
   ],
-  "contador": 40,
-  "ultimo": "2026-11-24T23:00:44+00:00",
+  "contador": 41,
+  "ultimo": "2026-11-25T13:01:21+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -86,7 +87,8 @@
     "037-working-from-home": "2026-11-23T23:00:40+00:00",
     "038-mini-aula-for": "2026-11-24T13:00:48+00:00",
     "039-the-bank-frases": "2026-11-24T17:01:58+00:00",
-    "040-colors-and-shapes": "2026-11-24T23:00:44+00:00"
+    "040-colors-and-shapes": "2026-11-24T23:00:44+00:00",
+    "041-movies-and-series": "2026-11-25T13:01:21+00:00"
   },
   "mensagens": {
     "008-phone-conversation": [
@@ -202,6 +204,9 @@
     ],
     "040-colors-and-shapes": [
       8474
+    ],
+    "041-movies-and-series": [
+      8477
     ]
   }
 }
