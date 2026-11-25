@@ -1917,5 +1917,39 @@
   "imagens": [
    "img/054.png"
   ]
+ },
+ {
+  "id": "055-passos-para-revender",
+  "tipo": "lista",
+  "titulo": "📦 5 passos para revender roupas no enjoei",
+  "arte": {
+   "titulo": "5 passos para revender no enjoei",
+   "sub": "",
+   "itens": [
+    "Fotografe em fundo branco",
+    "Meça todas as peças",
+    "Descreva os detalhes",
+    "Defina um preço justo",
+    "Envie no mesmo dia"
+   ],
+   "icone": "📦",
+   "icones": [
+    "📸",
+    "📏",
+    "📝",
+    "💰",
+    "🚀"
+   ]
+  },
+  "corpo": "<p>Muitas roupas paradas no armário podem virar dinheiro extra de forma rápida. Aplicativos de brechó online facilitam a venda para o Brasil inteiro. Veja como começar a desapegar com organização:</p><p><b>1.</b> <b>Fotografe em fundo branco</b>: use a luz natural do dia e estique bem a peça para destacar as cores reais e atrair mais olhares.<br/><b>2.</b> <b>Meça todas as peças</b>: tire a largura do tórax e o comprimento com uma fita métrica para evitar devoluções e dúvidas dos compradores.<br/><b>3.</b> <b>Descreva os detalhes</b>: conte o estado de conservação, o tipo de tecido e se há alguma marquinha de uso de forma bem transparente.<br/><b>4.</b> <b>Defina um preço justo</b>: pesquise valores parecidos na plataforma e lembre-se de que as taxas do site descontam um pouco do valor final.<br/><b>5.</b> <b>Envie no mesmo dia</b>: embale a roupa com carinho e faça a postagem rápida nos Correios ou na transportadora indicada pelo aplicativo.</p><details><summary>👀 Toque para ver a dica de ouro</summary><p>Guarde as peças limpas e cheirosas em sacos plásticos individuais. Um brinde simples, como uma balinha ou bilhete, garante avaliações excelentes no seu perfil.</p></details><p>📌 Salve e compartilhe com quem quer ganhar dinheiro desapegando de roupas.</p>",
+  "tags": [
+   "rendaextra",
+   "brecho",
+   "vendas",
+   "trabalhocomocal"
+  ],
+  "imagens": [
+   "img/055.png"
+  ]
  }
 ]
