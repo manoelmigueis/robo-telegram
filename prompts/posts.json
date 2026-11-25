@@ -199,5 +199,30 @@
   "autor": "Fatih Kadir Akın",
   "chave": "pc:cmwvwx89y000tl507gpxgnhs2",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>A photorealistic photograph of a small, clear mountain stream flowing through an autumn forest on a calm, misty morning. The water runs gently over smooth grey stones covered with bright green moss and cascades down a few low steps, forming small white ribbons of water and a quiet pool in the foreground. Japanese maple and beech trees lean over the stream from both banks, their leaves in glowing crimson, scarlet, orange and gold. Dozens of red maple leaves float on the dark surface of the pool, a few are caught against the mossy stones, and a few are falling through the air. Thin morning mist hangs between the trunks in the background, and soft rays of sunlight break through the canopy and touch the water.\n\nShot like a professional nature photograph: 24 mm lens low near the water at the edge of the pool, looking upstream, strong depth with the stream leading back into the misty forest, sharp foreground stones and floating leaves, slightly softer background, rich red and gold against deep green moss and dark water, gentle natural light. No people, no animals, no buildings, no text. Landscape 16:9.</pre><p>💡 troque &quot;autumn forest&quot; por &quot;pine forest&quot; para mudar o cenário</p><p>🖼 Imagem de exemplo: prompts.chat</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261125-5-transforme-qualquer-prato-em-u",
+  "tipo": "prompt",
+  "titulo": "🍕 Transforme qualquer prato em uma maquete de arquiteto",
+  "prompt": "[DISH] as a hyper-detailed architect's scale model. Every ingredient in miniature — but built to make you hungry, not just precise. Sauces as warm poured resin still appearing to move. Proteins in richly grained timber reading as perfectly cooked. Crusts in toasted balsa with real char. Colours at full warmth and saturation — amplified by the model, not killed by it. Scale figures for proportion. Soft warm raking light catching every texture. Steam in fine white silk. Top-down and isometric views side by side. Labels in architectural drafting font: \"[Ref. 01] [INGREDIENT] scale 1:10, [material], [one line]\" \"[DISH NAME]\" clean modernist sans-serif. \"[TAGLINE]\" italic beneath. Warm white base. Real shadows. Mood: Tadao Ando meets the most craveable food photograph ever taken meets Wes Anderson. The model makes you hungry. 4K, tack sharp.",
+  "prompt_en": "[DISH] as a hyper-detailed architect's scale model. Every ingredient in miniature — but built to make you hungry, not just precise. Sauces as warm poured resin still appearing to move. Proteins in richly grained timber reading as perfectly cooked. Crusts in toasted balsa with real char. Colours at full warmth and saturation — amplified by the model, not killed by it. Scale figures for proportion. Soft warm raking light catching every texture. Steam in fine white silk. Top-down and isometric views side by side. Labels in architectural drafting font: \"[Ref. 01] [INGREDIENT] scale 1:10, [material], [one line]\" \"[DISH NAME]\" clean modernist sans-serif. \"[TAGLINE]\" italic beneath. Warm white base. Real shadows. Mood: Tadao Ando meets the most craveable food photograph ever taken meets Wes Anderson. The model makes you hungry. 4K, tack sharp.",
+  "dica": "Troque a palavra [DISH] pelo prato que você quiser",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "comida",
+   "maquete",
+   "arquitetura",
+   "miniatura"
+  ],
+  "imagens": [
+   "img/261125-5-transforme-qualquer-prato-em-u.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://pbs.twimg.com/media/HEG9QctXAAQ62B8.jpg",
+  "fonte": "nanobananaprompt.org",
+  "url": "https://nanobananaprompt.org/prompts",
+  "autor": "AllaAisling",
+  "chave": "nb:5a722a5dfc17a4",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>[DISH] as a hyper-detailed architect&#x27;s scale model. Every ingredient in miniature — but built to make you hungry, not just precise. Sauces as warm poured resin still appearing to move. Proteins in richly grained timber reading as perfectly cooked. Crusts in toasted balsa with real char. Colours at full warmth and saturation — amplified by the model, not killed by it. Scale figures for proportion. Soft warm raking light catching every texture. Steam in fine white silk. Top-down and isometric views side by side. Labels in architectural drafting font: &quot;[Ref. 01] [INGREDIENT] scale 1:10, [material], [one line]&quot; &quot;[DISH NAME]&quot; clean modernist sans-serif. &quot;[TAGLINE]&quot; italic beneath. Warm white base. Real shadows. Mood: Tadao Ando meets the most craveable food photograph ever taken meets Wes Anderson. The model makes you hungry. 4K, tack sharp.</pre><p>💡 Troque a palavra [DISH] pelo prato que você quiser</p><p>🖼 Imagem de exemplo: nanobananaprompt.org</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
