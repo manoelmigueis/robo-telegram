@@ -1,1 +1,27 @@
-[]
+[
+ {
+  "id": "261125-2-misture-anime-desenho-e-massin",
+  "tipo": "prompt",
+  "titulo": "☕ Misture anime, desenho e massinha numa mesma foto",
+  "prompt": "A photo of an everyday scene at a busy cafe serving breakfast. In the foreground is an anime man with blue hair, one of the people is a pencil sketch, another is a claymation person",
+  "prompt_en": "A photo of an everyday scene at a busy cafe serving breakfast. In the foreground is an anime man with blue hair, one of the people is a pencil sketch, another is a claymation person",
+  "dica": "troque \"anime man with blue hair\" por outro personagem e estilo",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "cafe",
+   "anime",
+   "sketch",
+   "claymation"
+  ],
+  "imagens": [
+   "img/261125-2-misture-anime-desenho-e-massin.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://pbs.twimg.com/media/HEG4tdZaAAA8tAp.jpg",
+  "fonte": "nanobananaprompt.org",
+  "url": "https://nanobananaprompt.org/prompts",
+  "autor": "IqraSaifiii",
+  "chave": "nb:b8ff849fd1aa03",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>A photo of an everyday scene at a busy cafe serving breakfast. In the foreground is an anime man with blue hair, one of the people is a pencil sketch, another is a claymation person</pre><p>💡 troque &quot;anime man with blue hair&quot; por outro personagem e estilo</p><p>🖼 Imagem de exemplo: nanobananaprompt.org</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ }
+]
