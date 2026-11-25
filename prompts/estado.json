@@ -49,11 +49,12 @@
     "pc:cmweuggim0001ia07ago7e8b1",
     "pc:cmwdf2zrb0005l808mx1xjm01",
     "pc:cmwbyenpn0009i808k59y8a7j",
-    "pp:outdoor-cafe-candid-portrait-prompt"
+    "pp:outdoor-cafe-candid-portrait-prompt",
+    "nb:b8ff849fd1aa03"
   ],
   "imagens": {
     "dia": "2026-11-25",
-    "n": 1
+    "n": 2
   },
   "candidatos": [
     {
@@ -82,6 +83,32 @@
       "chave": "pp:outdoor-cafe-candid-portrait-prompt",
       "garimpado": "2026-11-25T18:25:23+00:00",
       "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Create an ultra-realistic, photorealistic lifestyle portrait of a woman enjoying a relaxing afternoon at an outdoor café. She is seated at a small dark café table, leaning slightly forward with a cheerful, spontaneous expression, laughing naturally with her mouth slightly open. She wears stylish black cat-eye sunglasses with dark tinted lenses and gently touches the frame near her right temple with one hand. Her hair is naturally styled, with a few natural flyaway strands illuminated by sunlight.\n\nOutfit: A relaxed, oversized light beige linen button-down shirt with rolled-up sleeves, naturally draped fabric, and subtle wrinkles, paired with dark denim jeans.\n\nPose &amp; Expression: Seated comfortably with her upper body leaning slightly forward, one arm resting on the table and the other hand adjusting her sunglasses. Her head is turned slightly toward the camera, with a wide, genuine smile and a joyful, carefree expression.\n\nForeground Details: A freshly baked golden-brown croissant placed on a white ceramic plate on the left side of the table, alongside a tall transparent glass filled with iced coffee, visible ice cubes, creamy milk and a white straw.\n\nBackground: A charming outdoor European-style café setting with blurred tables, chairs, greenery, leafy trees and subtle architectural elements. Softly blurred warm café lights create a beautiful atmosphere.\n\nLighting: Strong natural afternoon sunlight filtering through the trees, creating beautiful dappled highlights across her hair, face, shoulders and table. Delicate golden rim lighting around her hair, with a balanced combination of warm sunlight and soft natural shadows.\n\nCamera &amp; Composition: Vertical 4:5 composition, medium close-up lifestyle portrait, eye-level camera angle, subject positioned slightly to the right of the frame, with the coffee and croissant clearly visible in the foreground. Shallow depth of field with creamy cinematic bokeh.\n\nTechnical Details: Shot on an 85mm portrait lens at f/1.8, natural skin texture, realistic facial details, crisp focus on the woman, beautiful background separation, warm cinematic color grading, subtle film grain, high dynamic range, professional editorial lifestyle photography, ultra-detailed 8K quality.</pre><p>💡 Troque &quot;woman&quot; por &quot;man&quot; para mudar a pessoa.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+    },
+    {
+      "id": "261125-2-misture-anime-desenho-e-massin",
+      "tipo": "prompt",
+      "titulo": "☕ Misture anime, desenho e massinha numa mesma foto",
+      "prompt": "A photo of an everyday scene at a busy cafe serving breakfast. In the foreground is an anime man with blue hair, one of the people is a pencil sketch, another is a claymation person",
+      "prompt_en": "A photo of an everyday scene at a busy cafe serving breakfast. In the foreground is an anime man with blue hair, one of the people is a pencil sketch, another is a claymation person",
+      "dica": "troque \"anime man with blue hair\" por outro personagem e estilo",
+      "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+      "tags": [
+        "cafe",
+        "anime",
+        "sketch",
+        "claymation"
+      ],
+      "imagens": [
+        "img/261125-2-misture-anime-desenho-e-massin.jpg"
+      ],
+      "imagem_da_fonte": true,
+      "imagem_url": "https://pbs.twimg.com/media/HEG4tdZaAAA8tAp.jpg",
+      "fonte": "nanobananaprompt.org",
+      "url": "https://nanobananaprompt.org/prompts",
+      "autor": "IqraSaifiii",
+      "chave": "nb:b8ff849fd1aa03",
+      "garimpado": "2026-11-25T18:25:36+00:00",
+      "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>A photo of an everyday scene at a busy cafe serving breakfast. In the foreground is an anime man with blue hair, one of the people is a pencil sketch, another is a claymation person</pre><p>💡 troque &quot;anime man with blue hair&quot; por outro personagem e estilo</p><p>🖼 Imagem de exemplo: nanobananaprompt.org</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
     }
   ]
 }
