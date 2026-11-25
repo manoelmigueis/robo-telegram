@@ -1878,5 +1878,44 @@
   "imagens": [
    "img/053.png"
   ]
+ },
+ {
+  "id": "054-cliente-pede-desconto",
+  "tipo": "quiz",
+  "titulo": "O cliente pede um desconto enorme alegando que o concorrente cobra muito mais barato. O que fazer?",
+  "arte": {
+   "titulo": "Preço Abaixo",
+   "sub": "Alegações sobre o concorrente. O que fazer?",
+   "itens": [
+    "Cobrir o preço",
+    "Explicar seu valor",
+    "Oferecer desconto",
+    "Discutir no chat"
+   ],
+   "icone": "🏷️",
+   "icones": []
+  },
+  "quiz": {
+   "pergunta": "O cliente pede um desconto enorme alegando que o concorrente cobra muito mais barato. O que fazer?",
+   "opcoes": [
+    "Cobrir o preço",
+    "Explicar seu valor",
+    "Oferecer desconto",
+    "Discutir no chat"
+   ],
+   "correta": 1,
+   "explicacao": "Mostre os diferenciais e a qualidade do seu trabalho em vez de entrar em uma guerra de preços que desvaloriza o seu serviço.",
+   "descricao": "🏷️ Defenda o valor do seu trabalho com argumentos claros e profissionais."
+  },
+  "corpo": "<b>Você preparou um orçamento justo baseado no seu tempo e experiência, mas o potencial cliente respondeu dizendo que achou um profissional que cobra metade do preço. Ele exige que você cubra a oferta. Como agir?</b><br><br>Ceder à pressão de preços baixos costuma atrair muita dor de cabeça e pouquíssimo lucro. Em vez de abaixar o seu valor, o melhor caminho é focar no que o seu serviço entrega de diferente.<br><br>🧠 Pense bem antes de responder ao quiz acima e descubra como lidar com a comparação de preços sem perder o cliente.<br><br><b>👀 Toque para ver a dica de ouro</b><br><details><summary>Reforce os seus diferenciais, prazos cumpridos e suporte oferecido, explicando que o valor reflete a qualidade e a segurança do que você entrega.</summary></details><br>Salve e compartilhe com quem trabalha por conta própria! 🏷️<br><br>#rendaextra #freelancer #negociacao #autonomo",
+  "tags": [
+   "rendaextra",
+   "freelancer",
+   "negociacao",
+   "autonomo"
+  ],
+  "imagens": [
+   "img/054.png"
+  ]
  }
 ]
