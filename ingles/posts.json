@@ -740,5 +740,20 @@
     "imagens": [
       "img/047.png"
     ]
+  },
+  {
+    "id": "048-technology-vocabulario-celular",
+    "tipo": "lista",
+    "titulo": "📱 Technology: vocabulário de celular e internet",
+    "corpo": "<p>Quer falar sobre tecnologia e redes sociais em inglês? Salve este post 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Smartphone</td><td>Celular / Smartphone</td></tr><tr><td>Password</td><td>Senha</td></tr><tr><td>Screen</td><td>Tela</td></tr><tr><td>Battery</td><td>Bateria</td></tr><tr><td>App</td><td>Aplicativo</td></tr><tr><td>Message</td><td>Mensagem</td></tr><tr><td>Link</td><td>Link / Endereço web</td></tr><tr><td>Wi-Fi</td><td>Wi-Fi / Internet sem fio</td></tr></table><details><summary>👀 Como dizer \"qual é a sua senha\"?</summary><p>Para perguntar isso a alguém, os americanos dizem <b>What is your password?</b> de forma bem natural.</p></details><p>🔁 Mande para aquele amigo que é viciado no celular.</p>",
+    "tags": [
+      "ingles",
+      "aprenderingles",
+      "vocabulario",
+      "tecnologia"
+    ],
+    "imagens": [
+      "img/048.png"
+    ]
   }
 ]
