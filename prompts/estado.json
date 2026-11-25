@@ -8,7 +8,8 @@
     "261125-2-crie-um-retrato-de-moda-no-est",
     "261125-3-faa-um-retrato-de-moda-em-pret",
     "261125-6-crie-um-retrato-de-moda-dramti",
-    "261125-4-crie-uma-foto-de-paisagem-com-"
+    "261125-4-crie-uma-foto-de-paisagem-com-",
+    "261125-7-crie-um-prato-de-cermica-pinta"
   ],
   "pulados": [],
   "frente": [],
@@ -24,7 +25,8 @@
     "261125-2-crie-um-retrato-de-moda-no-est": "2026-11-25T23:53:54+00:00",
     "261125-3-faa-um-retrato-de-moda-em-pret": "2026-11-25T23:54:02+00:00",
     "261125-6-crie-um-retrato-de-moda-dramti": "2026-11-25T23:54:03+00:00",
-    "261125-4-crie-uma-foto-de-paisagem-com-": "2026-11-25T23:54:10+00:00"
+    "261125-4-crie-uma-foto-de-paisagem-com-": "2026-11-25T23:54:10+00:00",
+    "261125-7-crie-um-prato-de-cermica-pinta": "2026-11-25T23:54:17+00:00"
   },
   "mensagens": {
     "261125-1-foto-profissional-estilo-edito": [
@@ -53,9 +55,12 @@
     ],
     "261125-4-crie-uma-foto-de-paisagem-com-": [
       14
+    ],
+    "261125-7-crie-um-prato-de-cermica-pinta": [
+      15
     ]
   },
-  "contador": 9,
+  "contador": 10,
   "vistos": [
     "pc:cmwwenmqs0001if08a8ptnnbv",
     "nb:29b524029373a7",
@@ -129,7 +134,7 @@
     "n": 12
   },
   "candidatos": [],
-  "ultimo": "2026-11-25T23:54:10+00:00",
+  "ultimo": "2026-11-25T23:54:17+00:00",
   "fontes": [
     "https://prompthero.com/midjourney-prompts",
     "https://promptsref.com/library/nano-banana-pro?utm_source=x_unedrwood"
