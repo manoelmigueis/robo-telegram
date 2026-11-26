@@ -557,7 +557,13 @@ def repor(n, minimo=6, lote=2):
         tipo = tipos[(base + tentativas) % len(tipos)]
         tentativas += 1
         try:
-            item = criar(n, "", tipo)
+            if n == "renda":
+                item = criar_de_materia()
+                if not item:
+                    print("[repor] renda: nenhuma matéria real boa agora; nada inventado (o horário vira notícia).")
+                    break
+            else:
+                item = criar(n, "", tipo)
             feitos += 1
             print(f"[repor] {n}: a IA escreveu {item['id']} ({tipo}).")
         except Exception as x:
@@ -581,6 +587,112 @@ def desenhar_renda(arte, quiz):
         png = pag.screenshot()
         nav.close()
     return png
+
+
+def criar_de_materia(salvar=True, tentativas=8):
+    """Dica de renda extra feita a partir de uma matéria real (Catho, Sebrae, g1, Google Notícias).
+    A IA só resume e organiza o que a matéria diz, com a fonte no post. salvar=False: só devolve (teste)."""
+    import escritor
+    m = modulo("renda")
+    estilo = (m.PASTA / "ESTILO.md").read_text(encoding="utf-8") if (m.PASTA / "ESTILO.md").exists() else ""
+    titulos = "; ".join(x.get("titulo", "") for x in banco_nuvem("renda")[-40:])
+    recusadas = []
+    for mat in m.achar_reais()[:tentativas]:
+        try:
+            if "news.google.com" in mat["link"]:
+                mat["link"] = m.link_real(mat["link"])
+            texto = m.texto_da_materia(mat)
+        except Exception as erro:
+            print(f"[reais] não li '{mat['titulo'][:60]}': {erro}")
+            recusadas.append(mat["chave"])
+            continue
+        if len(texto) < 600 or m.PROIBIDO.search(texto[:3000]):
+            print(f"[reais] texto curto ou proibido: {mat['titulo'][:60]}")
+            recusadas.append(mat["chave"])
+            continue
+        pedido = f"""Você escreve posts para o canal do Telegram {m.canal()}.
+{REGRAS["renda"]}
+
+Guia de estilo do canal:
+<guia>
+{estilo}
+</guia>
+
+Matéria REAL publicada por {mat['fonte']} (título: "{mat['titulo']}"):
+<materia>
+{texto}
+</materia>
+
+Transforme ESTA matéria em 1 post do canal. Regras duras:
+- Use só fatos, números, nomes, datas e links que estão na matéria. Não invente nada. Se a matéria não diz, não escreva.
+- Escreva com suas palavras (não copie frases inteiras). Português do Brasil simples, frases curtas, sem cara de IA
+  (proibido "no mundo de hoje", "desbloqueie", "revolucionário", "mergulhe"). Nada de travessão longo.
+- Decida se serve: serve se ajuda quem lê a ganhar dinheiro ou crescer no trabalho (vaga, curso, salário, habilidade,
+  ferramenta, negócio, concurso com inscrição aberta) e vale para gente do Brasil todo. NÃO serve se é evento/premiação
+  institucional, notícia local de uma cidade só, política, ou se o texto é fraco.
+- Títulos que já saíram (não repita o assunto): {titulos}
+
+Responda só com um JSON, sem nada antes ou depois:
+{{"serve": true ou false, "motivo": "curto, se não serve",
+ "titulo": "título com 1 emoji no começo, até 70 letras",
+ "corpo": "HTML do Telegram (p, b, i, br, details, summary): abertura de 1 frase que conversa com a pessoa; depois 4 a 7 itens numerados com o que a matéria traz de útil (<b>1.</b> ...<br/>); depois <details><summary>👀 Toque para ver a dica de ouro</summary><p>o passo prático que a pessoa pode dar hoje, tirado da matéria</p></details>; e uma frase final chamando para salvar ou mandar para um amigo",
+ "arte": {{"titulo": "frase curta para a capa, até 60 letras"}},
+ "tags": ["3 a 5 hashtags sem #, minúsculas, sem acento; inclua rendaextra"]}}
+
+Nunca escreva "imagens ilustrativas"."""
+        resposta = escritor.responder(pedido)
+        if not resposta:
+            raise Erro("A IA não respondeu agora.")
+        item = _extrair_json(resposta)
+        if not item.get("serve") or not item.get("titulo") or not item.get("corpo"):
+            print(f"[reais] a IA recusou '{mat['titulo'][:60]}': {item.get('motivo', 'incompleto')}")
+            recusadas.append(mat["chave"])
+            continue
+        if m.PROIBIDO.search(item["titulo"] + " " + item["corpo"]):
+            recusadas.append(mat["chave"])
+            continue
+        b = banco_nuvem("renda")
+        numeros = [int(x["id"][:3]) for x in b if x["id"][:3].isdigit()]
+        num = (max(numeros) if numeros else 0) + 1
+        item = {"id": f"{num:03d}-{_slug(item['titulo'])}", "tipo": "lista", "titulo": item["titulo"],
+                "corpo": item["corpo"], "tags": item.get("tags") or ["rendaextra"],
+                "arte": {"titulo": (item.get("arte") or {}).get("titulo") or item["titulo"]},
+                "fonte": mat["fonte"], "link": mat["link"], "materia": mat["titulo"], "imagens": []}
+        capa = None
+        try:  # capa do canal com a foto da própria matéria
+            import tempfile
+            foto, tipo_foto = None, "image/jpeg"
+            foto_url = m.foto_da_materia(mat["link"])
+            if foto_url:
+                foto, tipo_foto = m.baixar_foto(foto_url)
+            import sys
+            sys.path.insert(0, str(m.PASTA))
+            import arte as desenho
+            destino = Path(tempfile.gettempdir()) / f"renda-capa-{num:03d}.jpg"
+            desenho.capa_noticia(item["arte"]["titulo"], "renda", mat["fonte"], destino, foto, tipo_foto or "image/jpeg")
+            capa = destino.read_bytes()
+            item["imagens"] = [f"img/{num:03d}.jpg"]
+        except Exception as erro:
+            print(f"[reais] capa falhou ({erro}); o post sai só em texto.")
+        if not salvar:
+            item["_capa"] = capa
+            return item
+        chaves = recusadas + [mat["chave"]]
+
+        def mudar(e, chaves=chaves):
+            e.setdefault("reais", [])
+            e["reais"] = (e["reais"] + [k for k in chaves if k not in e["reais"]])[-400:]
+            e["noticias"].append(mat["chave"])  # a mesma matéria não sai de novo como notícia
+        gravar("renda", f"central: dica real {item['id']} ({mat['fonte']})", mudar=mudar,
+               mudar_banco=lambda lista: lista.append(item),
+               arquivos={f"renda/{item['imagens'][0]}": capa} if capa else None)
+        return item
+    if recusadas and salvar:
+        def marcar(e, chaves=recusadas):
+            e.setdefault("reais", [])
+            e["reais"] = (e["reais"] + [k for k in chaves if k not in e["reais"]])[-400:]
+        gravar("renda", "central: matérias recusadas", mudar=marcar)
+    return None
 
 
 def criar(n, tema="", tipo="lista"):

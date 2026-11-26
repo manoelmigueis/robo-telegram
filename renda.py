@@ -57,6 +57,15 @@ PROIBIDO = re.compile(r"\b(bet|bets|aposta\w*|cassino|tigrinho|jogo do bicho|lot
                       r"cripto\w*|bitcoin|forex|day ?trade|sem sair de casa ganhe|ganhe r\$)\b", re.I)
 
 
+# Sites com matéria de verdade que o robô lê na nuvem (testado em 25/11/2026). Threads e a busca do Pinterest
+# pedem login/token, por isso ficam de fora. Cada dica nova sai de uma matéria daqui, com a fonte no post.
+FONTES = CFG.get("fontes_reais") or [
+    ["Catho", "https://www.catho.com.br/carreira-sucesso/feed/"],
+    ["Agência Sebrae", "https://agenciasebrae.com.br/feed/"],
+    ["g1 Concursos e Emprego", "https://g1.globo.com/rss/g1/economia/concursos-e-emprego/"],
+]
+
+
 # ---------------- estado e banco ----------------
 def banco():
     return json.loads(BANCO.read_text(encoding="utf-8")) if BANCO.exists() else []
@@ -97,7 +106,7 @@ def enviar_dica(chat, item):
     img = PASTA / item["imagens"][0] if item.get("imagens") else None
     tem_img = bool(img and img.exists())
     corpo = (f"<h2>{html.escape(item['titulo'])}</h2>" + ('<img src="tg://photo?id=f0"/>' if tem_img else "")
-             + item.get("corpo", "") + f"<p>{html.escape(hashtags(item))}</p>"
+             + item.get("corpo", "") + credito(item) + f"<p>{html.escape(hashtags(item))}</p>"
              + f'<tg-button-row align="center">{botao_canal()}</tg-button-row>')
     try:
         with ExitStack() as pilha:
@@ -111,12 +120,21 @@ def enviar_dica(chat, item):
     texto = re.sub(r"<details><summary>(.*?)</summary>", r"\n\1\n", item.get("corpo", ""))
     texto = re.sub(r"<br\s*/?>|</p>", "\n", texto)
     texto = re.sub(r"<(?!/?b>)[^>]+>", "", texto).strip()
-    legenda = f"<b>{html.escape(item['titulo'])}</b>\n\n{texto}\n\n{html.escape(hashtags(item))}\n📲 {canal()}"
+    fonte = re.sub(r"<(?!/?(b|a)\b)[^>]+>", "", credito(item)).strip()
+    legenda = (f"<b>{html.escape(item['titulo'])}</b>\n\n{texto}\n\n" + (f"{fonte}\n\n" if fonte else "")
+               + f"{html.escape(hashtags(item))}\n📲 {canal()}")
     if not tem_img:
         return postador.tg("sendMessage", chat_id=chat, text=legenda[:4000], parse_mode="HTML")["message_id"]
     with open(img, "rb") as f:
         return postador.tg("sendPhoto", arquivos={"photo": f}, chat_id=chat, caption=legenda[:1024],
                            parse_mode="HTML")["message_id"]
+
+
+def credito(item):
+    if not item.get("link"):
+        return ""
+    return (f'<p>📰 Fonte: <a href="{html.escape(item["link"], quote=True)}">'
+            f'{html.escape(item.get("fonte") or "matéria original")}</a></p>')
 
 
 def enviar_quiz(chat, item):
@@ -211,6 +229,77 @@ def garimpar_noticias():
             continue
         vistas.append(k)
         boas.append(n)
+    return boas
+
+
+def ler_feed(nome, url, dias=10):
+    r = requests.get(url, headers=NAVEGADOR, timeout=25)
+    r.raise_for_status()
+    achadas, limite = [], datetime.now(timezone.utc) - timedelta(days=dias)
+    for it in ET.fromstring(r.content).iter("item"):
+        titulo = html.unescape((it.findtext("title") or "").strip())
+        try:
+            quando = parsedate_to_datetime(it.findtext("pubDate"))
+        except Exception:
+            continue
+        if quando.tzinfo is None:
+            quando = quando.replace(tzinfo=timezone.utc)
+        if quando < limite or not titulo:
+            continue
+        corpo = it.findtext("{http://purl.org/rss/1.0/modules/content/}encoded") or it.findtext("description") or ""
+        achadas.append({"tema": "renda", "titulo": titulo, "fonte": nome, "link": (it.findtext("link") or "").strip(),
+                        "quando": quando, "resumo": corpo})
+    return achadas
+
+
+def limpar_html(t):
+    t = re.sub(r"(?is)<(script|style|figure|figcaption|aside|nav|footer)[^>]*>.*?</\1>", " ", t or "")
+    t = re.sub(r"(?i)<br\s*/?>|</p>|</li>|</h\d>", "\n", t)
+    t = html.unescape(re.sub(r"<[^>]+>", " ", t))
+    return "\n".join(l.strip() for l in re.sub(r"[ \t]+", " ", t).split("\n") if len(l.strip()) > 2)
+
+
+def texto_da_materia(m):
+    """Texto da matéria: o do próprio feed se for longo; se não, os parágrafos da página."""
+    texto = limpar_html(m.get("resumo"))
+    if len(texto) >= 1500:
+        return texto[:7000]
+    pag = requests.get(m["link"], headers=NAVEGADOR, timeout=25).text
+    paragrafos = [limpar_html(p) for p in re.findall(r"(?is)<p[^>]*>(.*?)</p>", pag)]
+    corpo = "\n".join(p for p in paragrafos if len(p) > 60)
+    return (corpo if len(corpo) > len(texto) else texto)[:7000]
+
+
+def achar_reais():
+    """Matérias reais novas para virar dica (das FONTES e das buscas do Google Notícias), da mais nova à mais velha."""
+    e = estado()
+    ja = set(e["noticias"]) | set(e.get("reais", []))
+    achadas = []
+    for nome, url in FONTES:
+        try:
+            lista = ler_feed(nome, url)
+            print(f"[reais] {nome}: {len(lista)} matérias recentes")
+            achadas += lista
+        except Exception as erro:
+            print(f"[reais] {nome} falhou: {type(erro).__name__}: {erro}")
+    for tema, busca in BUSCAS:
+        try:
+            lista = buscar(tema, busca, dias=5)
+            print(f"[reais] Google Notícias '{busca}': {len(lista)}")
+            achadas += lista
+        except Exception as erro:
+            print(f"[reais] Google Notícias '{busca}' falhou: {erro}")
+    boas, vistas = [], []
+    for m in sorted(achadas, key=lambda m: m["quando"], reverse=True):
+        k = chave(m["titulo"])
+        if k in ja or parecida(k, vistas) or PROIBIDO.search(m["titulo"]):
+            continue
+        local = m["fonte"] not in ("Catho", "Agência Sebrae")
+        if local and not ONLINE.search(m["titulo"]) and not NACIONAL.search(m["titulo"]):
+            continue  # vaga ou curso de uma cidade só não serve para o Brasil todo
+        vistas.append(k)
+        m["chave"] = k
+        boas.append(m)
     return boas
 
 
