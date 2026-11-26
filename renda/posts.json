@@ -2066,5 +2066,26 @@
   "imagens": [
    "img/059.jpg"
   ]
+ },
+ {
+  "id": "060-cursos-gratis-seguranca",
+  "tipo": "lista",
+  "titulo": "💻 Cursos grátis de IA e segurança da IBM",
+  "corpo": "Quer aprender inteligência artificial e ganhar novas credenciais para o seu currículo sem pagar nada? A plataforma IBM SkillsBuild oferece cursos online e gratuitos com foco em tecnologia e mercado de trabalho.<br/><br/><b>1.</b> Cursos de IA, dados e computação em nuvem.<br/><b>2.</b> Aulas rápidas de 60 a 90 minutos para iniciantes.<br/><b>3.</b> Opção de estudar sem cadastro nos cursos de convidado.<br/><b>4.</b> Certificado em credenciais digitais ao se registrar.<br/><br/><details><summary>👀 Toque para ver a dica de ouro</summary><p>Acesse a plataforma IBM SkillsBuild hoje mesmo para fazer o cadastro e começar os cursos gratuitos em português.</p></details><br/>Salve esta dica ou mande para quem quer aprender tecnologia de graça!",
+  "tags": [
+   "rendaextra",
+   "cursosgratuitos",
+   "inteligenciaartificial",
+   "tecnologia"
+  ],
+  "arte": {
+   "titulo": "4 cursos grátis de IA na IBM"
+  },
+  "fonte": "Correio Braziliense",
+  "link": "https://www.correiobraziliense.com.br/euestudante/educacao-profissional/2026/11/7544142-ibm-skillsbuild-tem-cursos-gratuitos-de-ia-dados-e-seguranca-cibernetica.html",
+  "materia": "\"IBM SkillsBuild\" tem cursos gratuitos de IA, dados e segurança cibernética",
+  "imagens": [
+   "img/060.jpg"
+  ]
  }
 ]
