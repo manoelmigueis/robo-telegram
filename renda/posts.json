@@ -2150,5 +2150,27 @@
   "imagens": [
    "img/063.jpg"
   ]
+ },
+ {
+  "id": "064-banco-itau-abre",
+  "tipo": "lista",
+  "titulo": "🏦 Banco Itaú abre vagas de estágio com bolsa de R$ 2.600",
+  "corpo": "Se você cursa ensino superior e quer uma oportunidade em uma grande empresa, o Itaú está com inscrições abertas para o programa de estágio corporativo.<br/><br/><b>1.</b> Bolsas no valor de R$ 2.600 por mês.<br/><b>2.</b> Vagas para estudantes de exatas ou humanas de todo o Brasil.<br/><b>3.</b> Trabalho em modelo híbrido ou presencial, com jornada de seis horas diárias.<br/><b>4.</b> Pacote de benefícios com vale-refeição de R$ 1.173,15, planos de saúde e odontológico.<br/><b>5.</b> Oportunidades em tecnologia, produtos digitais, dados, corporativo e negócios.<br/><br/><details><summary>👀 Toque para ver a dica de ouro</summary><p>Acesse o site de recrutamento do banco e faça o seu cadastro com o currículo atualizado até o dia 10 de janeiro de 2027.</p></details><br/>Salve esta dica e compartilhe com quem está buscando uma vaga de estágio!",
+  "tags": [
+   "rendaextra",
+   "vagas",
+   "estagio",
+   "emprego",
+   "itau"
+  ],
+  "arte": {
+   "titulo": "Itaú tem vagas de estágio"
+  },
+  "fonte": "JC Concursos",
+  "link": "https://jcconcursos.com.br/noticia/empregos/banco-itau-tem-inscricoes-abertas-com-vagas-na-area-corporativa-146788",
+  "materia": "Banco Itaú tem vagas abertas na área corporativa; saiba como se inscrever",
+  "imagens": [
+   "img/064.jpg"
+  ]
  }
 ]
