@@ -2051,5 +2051,30 @@
   "autor": "",
   "chave": "pp:biker-on-mountain-road",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Cinematic full-body portrait of a [person], standing on an empty mountain road beside a [black hardtail mountain bike], one hand resting on the handlebar and the other hand casually in his pocket. He wears a [black baseball cap], an [oversized white short-sleeve t-shirt with small minimalist graphic text on the chest], [light grey cargo pants with side pockets], and [clean white low-top sneakers]. Calm, confident expression, looking directly at the camera.\n\nSetting: a winding asphalt road with white edge lines, lined with tall pine trees and lush green summer foliage, wild grass along the roadside, a forested mountain rising softly in the background under a pale blue sky with a few thin clouds.\n\nLighting: golden hour, warm sunlight flaring in from the upper left through the trees, soft rim light on the subject, gentle haze and glow in the background, natural shadows on the road.\n\nStyle: photorealistic, cinematic color grading with warm highlights and rich greens, shallow depth of field, sharp focus on the subject, 85mm lens look, eye-level camera angle, vertical composition, subject centered slightly right, high detail, natural skin texture, editorial lifestyle photography.\n\nNegative prompt:\ndistorted hands, extra fingers, warped bike frame, broken spokes, melted wheels, blurry face, face change, wrong face, identity change, cartoon, illustration, oversaturated, harsh flash, cluttered background, other people, cars, text artifacts, watermark</pre><p>💡 Mande sua foto junto com o prompt e troque &quot;black hardtail mountain bike&quot; pela bike que você quiser.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261126-11-crie-um-retrato-de-moda-com-lu",
+  "tipo": "prompt",
+  "titulo": "📸 Crie um retrato de moda com luz neon laranja",
+  "prompt": "editorial photography, male model, 50mm f/1.2 RF lens, f/2.8 set, 1/160s, iso 100, gradient neon orange, minimalist street style, deep orange atmospheric lighting, lights at ceiling, overhead softbox at 3200K, full-body confidence pose with silhouette, dramatic contrast, photorealistic quality, rich detailing --ar 9:16 --raw --profile otwluoo --stylize 200",
+  "prompt_en": "editorial photography, male model, 50mm f/1.2 RF lens, f/2.8 set, 1/160s, iso 100, gradient neon orange, minimalist street style, deep orange atmospheric lighting, lights at ceiling, overhead softbox at 3200K, full-body confidence pose with silhouette, dramatic contrast, photorealistic quality, rich detailing --ar 9:16 --raw --profile otwluoo --stylize 200",
+  "dica": "Troque \"male model\" pelo que quiser ou \"gradient neon orange\" pela cor do fundo.",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "retrato",
+   "moda",
+   "neon",
+   "estudio"
+  ],
+  "imagens": [
+   "img/261126-11-crie-um-retrato-de-moda-com-lu.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.prompthero.com/41ju9v8tp67gu096s5vc7gpxo01w/1080.webp",
+  "fonte": "prompthero.com",
+  "url": "https://prompthero.com/prompt/7ae913f5c1c-midjourney-7-editorial-photography-male-model-50mm-f12-rf-lens-f28-set-1160s-iso-100-gradient-neon-orange-minimalist-street-style-deep",
+  "autor": "",
+  "chave": "lk:08c7ae3cbd397b",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>editorial photography, male model, 50mm f/1.2 RF lens, f/2.8 set, 1/160s, iso 100, gradient neon orange, minimalist street style, deep orange atmospheric lighting, lights at ceiling, overhead softbox at 3200K, full-body confidence pose with silhouette, dramatic contrast, photorealistic quality, rich detailing --ar 9:16 --raw --profile otwluoo --stylize 200</pre><p>💡 Troque &quot;male model&quot; pelo que quiser ou &quot;gradient neon orange&quot; pela cor do fundo.</p><p>🖼 Imagem de exemplo: prompthero.com</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
