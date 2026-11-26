@@ -2045,5 +2045,26 @@
   "imagens": [
    "img/058.jpg"
   ]
+ },
+ {
+  "id": "059-curso-gratis-excel",
+  "tipo": "lista",
+  "titulo": "📊 Curso grátis de Excel para melhorar seu currículo",
+  "corpo": "Saber mexer bem em planilhas é uma exigência forte hoje em dia.<br/><br/><b>1.</b> A Escola Nacional de Administração Pública (Enap) tem curso gratuito.<br/><b>2.</b> O nível é intermediário, com 30 horas de carga horária e certificado.<br/><b>3.</b> Qualquer pessoa pode fazer, sem precisar ser servidor público.<br/><b>4.</b> O conteúdo aborda fórmulas, gráficos e tabelas dinâmicas.<br/><b>5.</b> As aulas são 100% online, sem horários fixos e em português.<br/><b>6.</b> O prazo para finalizar é de 30 dias após a matrícula.<br/><br/><details><summary>👀 Toque para ver a dica de ouro</summary><p>Crie sua conta na Escola Virtual de Governo (EV.G) e faça a inscrição gratuita hoje mesmo para adicionar o certificado ao seu currículo ou LinkedIn.</p></details><br/>Salve esse post ou compartilhe com quem quer aprender Excel de graça!",
+  "tags": [
+   "rendaextra",
+   "curso",
+   "excel",
+   "emprego"
+  ],
+  "arte": {
+   "titulo": "4 fatos sobre o curso de Excel da Enap"
+  },
+  "fonte": "Portal G",
+  "link": "https://www.portalg.com.br/2026/11/enap-curso-gratuito-excel-intermediario-certificado.html",
+  "materia": "Enap oferece curso gratuito de Excel Intermediário com certificado e início imediato",
+  "imagens": [
+   "img/059.jpg"
+  ]
  }
 ]
