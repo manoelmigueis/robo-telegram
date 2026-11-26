@@ -2001,5 +2001,30 @@
   "autor": "",
   "chave": "pp:stylish-couple-street-photography-portrait",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Create an ultra-realistic, candid street-style couple photograph featuring a stylish man and woman in a playful, affectionate pose on a European city street.\nMale Subject &amp; Outfit: A handsome man with naturally styled hair. He wears sleek black rectangular sunglasses, a dark brown oversized leather biker jacket with visible silver zippers, and a white graphic T-shirt. His expression is calm and confident, looking directly at the camera.\nFemale Subject &amp; Outfit: A beautiful woman with long, neatly styled hair, and subtle makeup. She wears slim rectangular tinted brown sunglasses, a burgundy oversized sweatshirt with broad white sleeve stripes and a white collared shirt underneath, paired with a black-and-white plaid skirt. Her expression is playful and cheerful.\nPose &amp; Composition: The woman stands closely behind the man, leaning forward and wrapping both arms affectionately around his shoulders and chest in a playful back hug. One hand rests gently on his shoulder while the other lies across his chest. The man holds her arm naturally with one hand. Both subjects are positioned close to the camera, creating an intimate, spontaneous couple portrait. Capture them from a slightly elevated eye-level perspective, framed vertically from the waist up.\nBackground: A beautiful European urban street with elegant historic stone buildings on the left, modern multi-story architecture on the right, parked cars along the roadside, and a soft blue sky visible between the buildings. Keep the background naturally blurred while maintaining recognizable architectural details.\nLighting &amp; Photography: Soft natural evening light combined with a gentle camera flash illuminating the subject. Balanced exposure, realistic skin tones, soft shadows, natural reflections on the sunglasses, and subtle cinematic depth of field.\nCamera &amp; Quality: Professional street photography, 85mm lens, f/1.8, eye-level perspective, sharp facial details, realistic skin texture, natural hair strands, authentic fabric and leather textures, photorealistic colors, premium candid fashion photography, ultra-detailed 8K quality, vertical 4:5 composition.\nNegative Prompt: No face distortion, no identity changes, no extra fingers, no malformed hands, no unnatural arms, no duplicate body parts, no artificial skin, no excessive retouching, no motion blur, no cartoon appearance, no CGI, no text, no logos, no watermark.</pre><p>💡 Troque a cor do moletom em &quot;burgundy oversized sweatshirt&quot; para mudar a roupa dela.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261126-9-crie-uma-caricatura-3d-com-exp",
+  "tipo": "prompt",
+  "titulo": "😡 Crie uma caricatura 3D com expressão muito brava",
+  "prompt": "a young girl in a business suit with a very angry expression, in the style of unreal engine 5, cartoonish caricatures, i can't believe how beautiful this is, animated gifs, life-like avian illustrations, close-up, soft, romantic scenes --ar 35:64 --stylize 750 --v 6",
+  "prompt_en": "a young girl in a business suit with a very angry expression, in the style of unreal engine 5, cartoonish caricatures, i can't believe how beautiful this is, animated gifs, life-like avian illustrations, close-up, soft, romantic scenes --ar 35:64 --stylize 750 --v 6",
+  "dica": "Troque \"young girl\" por quem você quiser e \"angry expression\" pelo sentimento que preferir.",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "caricatura",
+   "3d",
+   "animacao",
+   "retrato"
+  ],
+  "imagens": [
+   "img/261126-9-crie-uma-caricatura-3d-com-exp.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.prompthero.com/10pckza1p0gaurf4kxbsmp7d1qnp/1080.webp",
+  "fonte": "prompthero.com",
+  "url": "https://prompthero.com/prompt/455ba9632b9-midjourney-6-a-young-girl-in-a-business-suit-with-a-very-angry-expression-in-the-style-of-unreal-engine-5-cartoonish",
+  "autor": "",
+  "chave": "lk:b5be8b5289388f",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>a young girl in a business suit with a very angry expression, in the style of unreal engine 5, cartoonish caricatures, i can&#x27;t believe how beautiful this is, animated gifs, life-like avian illustrations, close-up, soft, romantic scenes --ar 35:64 --stylize 750 --v 6</pre><p>💡 Troque &quot;young girl&quot; por quem você quiser e &quot;angry expression&quot; pelo sentimento que preferir.</p><p>🖼 Imagem de exemplo: prompthero.com</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
