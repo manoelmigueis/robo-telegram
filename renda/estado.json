@@ -50,7 +50,8 @@
     "048-cliente-pediu-arquivo",
     "049-passos-para-organizar",
     "050-cliente-exige-que",
-    "051-passos-para-organizar"
+    "051-passos-para-organizar",
+    "058-licoes-ecossistemas-inovacao"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -77,8 +78,8 @@
     "ufpr abre inscrições para 22 cursos online gratuitos",
     "vivo abre vaga home office para atendente de experiência do cliente veja requisi"
   ],
-  "contador": 51,
-  "ultimo": "2026-11-25T23:00:49+00:00",
+  "contador": 52,
+  "ultimo": "2026-11-26T12:00:47+00:00",
   "pulados": [
     "052-cliente-liga-cobrando",
     "053-passos-para-marmitas",
@@ -133,7 +134,8 @@
     "048-cliente-pediu-arquivo": "2026-11-24T23:00:41+00:00",
     "049-passos-para-organizar": "2026-11-25T12:00:46+00:00",
     "050-cliente-exige-que": "2026-11-25T16:09:47+00:00",
-    "051-passos-para-organizar": "2026-11-25T23:00:49+00:00"
+    "051-passos-para-organizar": "2026-11-25T23:00:49+00:00",
+    "058-licoes-ecossistemas-inovacao": "2026-11-26T12:00:47+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -264,6 +266,9 @@
     ],
     "051-passos-para-organizar": [
       8892
+    ],
+    "058-licoes-ecossistemas-inovacao": [
+      8893
     ]
   },
   "reais": [
