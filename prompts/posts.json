@@ -674,5 +674,30 @@
   "autor": "",
   "chave": "pp:studio-portrait-man-black-suit",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Create a sophisticated studio fashion portrait of a handsome man seated on a black wooden stool, wearing a perfectly tailored black two-piece suit with a crisp white dress shirt, slim black necktie, white pocket square, black tailored trousers, and polished black leather dress shoes paired with black socks. He is seated in a relaxed yet confident pose, body angled slightly to the left, left hand resting inside his trouser pocket, right hand placed naturally on his thigh, looking off-camera to the left with a calm, serious, and contemplative expression. Captured in a full-body shot at eye-level with a minimalist black seamless studio background featuring a subtle gradient. Dramatic cinematic Rembrandt lighting from the left creates soft highlights and deep shadows, emphasizing facial structure and the premium fabric texture of the suit. Luxury editorial fashion photography, ultra-photorealistic, natural skin tones, high contrast, shallow depth of field, razor-sharp focus, 85mm lens, f/1.8, ISO 100, 8K resolution, HDR, premium men&#x27;s tailoring campaign, no text, no watermark, distortion-free, realistic skin. Aspect ratio 4:5.</pre><p>💡 Troque &quot;black two-piece suit&quot; se quiser mudar a roupa ou a cor do terno.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261125-4-vire-personagem-de-animao-3d-c",
+  "tipo": "prompt",
+  "titulo": "🤪 Vire personagem de animação 3D com óculos redondos usando sua foto",
+  "prompt": "Portrait based on the person in the uploaded photo: facial features, hairstyle, hair color, and freckles (if any) matching the photo. Clothing: an oversized black turtleneck. Funny 3D animated movie character: large round head, huge perfectly round saucer eyes with tiny pupils, large thin-rimmed round glasses, a small button nose, a tiny mouth, sticking-out ears, and the same hairstyle as in the photo. Deadpan and slightly bewildered expression: one eyebrow raised, lips pursed like a tiny dot, looking straight at the camera. Soft matte 3D rendering, visible fabric and hair textures, soft studio lighting. Chest-up portrait, centered, solid dusty gray-green gradient background. No text or logos. 4:5.",
+  "prompt_en": "Portrait based on the person in the uploaded photo: facial features, hairstyle, hair color, and freckles (if any) matching the photo. Clothing: an oversized black turtleneck. Funny 3D animated movie character: large round head, huge perfectly round saucer eyes with tiny pupils, large thin-rimmed round glasses, a small button nose, a tiny mouth, sticking-out ears, and the same hairstyle as in the photo. Deadpan and slightly bewildered expression: one eyebrow raised, lips pursed like a tiny dot, looking straight at the camera. Soft matte 3D rendering, visible fabric and hair textures, soft studio lighting. Chest-up portrait, centered, solid dusty gray-green gradient background. No text or logos. 4:5.",
+  "dica": "Mande sua foto junto com o prompt e troque \"black turtleneck\" pela cor da roupa que você quiser",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "retrato",
+   "3d",
+   "avatar",
+   "desenho"
+  ],
+  "imagens": [
+   "img/261125-4-vire-personagem-de-animao-3d-c.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.promptplum.com/cdn-cgi/image/q=78,scq=50,width=1400,height=1400,fit=contain,f=jpeg/promptImages/51896105-c466-4e32-9f59-8682a24aba7c.webp",
+  "fonte": "PromptPlum",
+  "url": "https://promptplum.com/prompt/funny-big-eyes-3d-cartoon-avatar/",
+  "autor": "",
+  "chave": "pp:funny-big-eyes-3d-cartoon-avatar",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Portrait based on the person in the uploaded photo: facial features, hairstyle, hair color, and freckles (if any) matching the photo. Clothing: an oversized black turtleneck. Funny 3D animated movie character: large round head, huge perfectly round saucer eyes with tiny pupils, large thin-rimmed round glasses, a small button nose, a tiny mouth, sticking-out ears, and the same hairstyle as in the photo. Deadpan and slightly bewildered expression: one eyebrow raised, lips pursed like a tiny dot, looking straight at the camera. Soft matte 3D rendering, visible fabric and hair textures, soft studio lighting. Chest-up portrait, centered, solid dusty gray-green gradient background. No text or logos. 4:5.</pre><p>💡 Mande sua foto junto com o prompt e troque &quot;black turtleneck&quot; pela cor da roupa que você quiser</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
