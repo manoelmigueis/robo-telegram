@@ -23,7 +23,8 @@
     "261125-2-transforme-seu-rosto-em-um-bon",
     "261125-1-crie-um-poster-de-aniversrio-3",
     "261125-5-crie-um-retrato-de-terno-com-l",
-    "261125-10-crie-um-retrato-de-executivo-t"
+    "261125-10-crie-um-retrato-de-executivo-t",
+    "261125-12-crie-um-retrato-de-moda-modern"
   ],
   "pulados": [],
   "frente": [],
@@ -54,7 +55,8 @@
     "261125-2-transforme-seu-rosto-em-um-bon": "2026-11-26T13:05:26+00:00",
     "261125-1-crie-um-poster-de-aniversrio-3": "2026-11-26T15:11:00+00:00",
     "261125-5-crie-um-retrato-de-terno-com-l": "2026-11-26T15:11:11+00:00",
-    "261125-10-crie-um-retrato-de-executivo-t": "2026-11-26T15:11:11+00:00"
+    "261125-10-crie-um-retrato-de-executivo-t": "2026-11-26T15:11:11+00:00",
+    "261125-12-crie-um-retrato-de-moda-modern": "2026-11-26T15:11:13+00:00"
   },
   "mensagens": {
     "261125-1-foto-profissional-estilo-edito": [
@@ -128,9 +130,12 @@
     ],
     "261125-10-crie-um-retrato-de-executivo-t": [
       29
+    ],
+    "261125-12-crie-um-retrato-de-moda-modern": [
+      30
     ]
   },
-  "contador": 24,
+  "contador": 25,
   "vistos": [
     "pc:cmwwenmqs0001if08a8ptnnbv",
     "nb:29b524029373a7",
@@ -257,7 +262,7 @@
     "n": 12
   },
   "candidatos": [],
-  "ultimo": "2026-11-26T15:11:11+00:00",
+  "ultimo": "2026-11-26T15:11:13+00:00",
   "fontes": [
     "https://prompthero.com/midjourney-prompts",
     "https://promptsref.com/library/nano-banana-pro?utm_source=x_unedrwood"
