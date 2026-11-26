@@ -574,5 +574,30 @@
   "autor": "",
   "chave": "lk:974762e933d417",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>fashion editorial photography, front shot, upper body, professional female model, shot with hasselblad x2d 100c, xcd 90mm f/2.5 lens, cinematic sepia color grading with golden hour warmth, dramatic black silhouette against burnt umber to honey amber gradient backdrop, avant-garde composition with tilted head pose, staring to camera, profound gaze, elongated body stance, flowing black turtleneck, professional main fresnel light at 60 degree angle with silk diffusion, rim light with cto gel at 75 degree angle, haze machine for ethereal atmosphere, feathered shadows, contrast curve manipulation, selective dodge and burn, grain texture overlay, color temperature adjustment at 5500k to 3200k gradient, ultra sharp details, raw format, inspired by paolo roversi lighting technique, hyper realistic, 16K, rich detail --ar 9:16 --quality 2 --style raw --personalize nq7rq2j --stylize 500 --v 6.1</pre><p>💡 Troque &quot;female model&quot; por &quot;male model&quot; ou mude a roupa em &quot;flowing black turtleneck&quot;.</p><p>🖼 Imagem de exemplo: prompthero.com</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261125-12-transforme-sua-foto-em-um-dese",
+  "tipo": "prompt",
+  "titulo": "✏️ Transforme sua foto em um desenho vetorizado estilo doodle",
+  "prompt": "Turn your reference image into a clean Doodle-style 2D vector portrait with simplified likeness",
+  "prompt_en": "Turn your reference image into a clean Doodle-style 2D vector portrait with simplified likeness",
+  "dica": "Mande sua foto junto com o prompt e troque \"doodle-style\" pelo estilo que preferir.",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "retrato",
+   "vetor",
+   "doodle",
+   "ilustracao"
+  ],
+  "imagens": [
+   "img/261125-12-transforme-sua-foto-em-um-dese.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://aitool.promptsref.com/thumbs/card/aitool.promptsref.com/Publish/Doodle%20Character%20Generator.png",
+  "fonte": "promptsref.com",
+  "url": "https://promptsref.com/tool/AI-Image-Generator?tab=effects&model=nano-banana-2&effectId=doodle_portrait",
+  "autor": "",
+  "chave": "lk:003ebcc8ae19f2",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Turn your reference image into a clean Doodle-style 2D vector portrait with simplified likeness</pre><p>💡 Mande sua foto junto com o prompt e troque &quot;doodle-style&quot; pelo estilo que preferir.</p><p>🖼 Imagem de exemplo: promptsref.com</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
