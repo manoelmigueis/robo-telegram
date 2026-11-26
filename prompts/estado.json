@@ -228,7 +228,8 @@
     "pp:cool-guy-sunglasses-leather-jacket-portrait",
     "pc:cmwx89yb60009le07yzucn165",
     "pp:elegant-mens-fashion-photography-outdoors",
-    "pp:sitting-pose-men-fashion-photography"
+    "pp:sitting-pose-men-fashion-photography",
+    "pp:man-in-luxurious-fur"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -244,7 +245,7 @@
     "inicio": "2026-11-26T11:40:28+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 10,
+    "feitos": 11,
     "meta": 12,
     "achados": 73,
     "msg": ""
