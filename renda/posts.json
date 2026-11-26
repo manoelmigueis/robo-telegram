@@ -2172,5 +2172,26 @@
   "imagens": [
    "img/064.jpg"
   ]
+ },
+ {
+  "id": "065-fiocruz-abre-mil",
+  "tipo": "lista",
+  "titulo": "🤖 Fiocruz abre 50 mil vagas em curso grátis de IA",
+  "corpo": "Aprender Inteligência Artificial sem pagar nada é uma ótima forma de melhorar o currículo.<br/><br/><b>1.</b> Curso 100% online oferecido pela Fiocruz.<br/><b>2.</b> Tema focado em IA aplicada à saúde.<br/><b>3.</b> Carga horária total de 45 horas.<br/><b>4.</b> Aberto para qualquer pessoa interessada.<br/><b>5.</b> Vagas preenchidas por ordem de inscrição.<br/><br/><details><summary>👀 Toque para ver a dica de ouro</summary><p>Acesse o site oficial da Fiocruz e faça sua inscrição o quanto antes para garantir sua vaga por ordem de chegada.</p></details><br/>Salve esta dica ou mande para quem busca cursos grátis!",
+  "tags": [
+   "rendaextra",
+   "cursosgratuitos",
+   "inteligenciaartificial",
+   "vagas"
+  ],
+  "arte": {
+   "titulo": "50 mil vagas em curso grátis de IA"
+  },
+  "fonte": "Hora Brasil",
+  "link": "https://www.horabrasil.com.br/2026/11/26/inscricoes-abertas-para-o-curso-online-gratis-de-inteligencia-artificial-aplicada-a-saude/",
+  "materia": "Inscrições abertas para o curso online grátis de Inteligência Artificial Aplicada à Saúde",
+  "imagens": [
+   "img/065.jpg"
+  ]
  }
 ]
