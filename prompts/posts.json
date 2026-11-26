@@ -374,5 +374,30 @@
   "autor": "",
   "chave": "pp:moon-night-woman-fantasy-photo",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Ultra realistic cinematic ethereal moonlit fantasy portrait of a beautiful young woman with long, flowing hair, soft wispy bangs and delicate loose strands framing her face. Her beautiful lifelike face is clearly visible and sharply focused, with expressive dark eyes gazing directly toward the camera, naturally defined eyebrows, subtle smoky eye makeup, soft rosy lips, delicate blush and luminous natural skin texture. She wears an elegant flowing ivory-white chiffon dress with delicate lace detailing, sheer long sleeves, a soft off-shoulder neckline and lightweight fabric gently moving in the night breeze. She stands gracefully in a field of tall silver-blue wild grasses, surrounded by softly blurred plants in the foreground, her body slightly turned with one hand gently touching the grass and her head tilted with a dreamy yet confident expression. An enormous luminous full moon sits directly behind her head, creating a magical celestial halo, while a deep blue midnight sky and distant silhouettes of trees complete the enchanting setting. Soft moonlight illuminates her hair and dress, subtle atmospheric mist surrounds the meadow, and delicate foreground bokeh adds cinematic depth. Face-focused composition with her face occupying a prominent clear area, soft focused beauty spotlight directly on her face, balanced frontal fill, maximum facial clarity, bright expressive eyes and slightly darker background for separation. Rich saturated sapphire blue, icy silver, midnight navy and luminous ivory color palette, dreamy romantic cinematic color grading, mysterious peaceful atmosphere, highly detailed, sharp focus, 8k, vertical. No cartoon face, no anime face, no animated face</pre><p>💡 Troque &quot;woman&quot; por &quot;man&quot; ou mude a cor do vestido em &quot;ivory-white chiffon dress&quot;.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261125-4-crie-folha-de-modelo-de-person",
+  "tipo": "prompt",
+  "titulo": "📐 Crie folha de modelo de personagem com várias vistas",
+  "prompt": "A clean, professional character design board featuring full-body front, side, and back views, along with head-angle references",
+  "prompt_en": "A clean, professional character design board featuring full-body front, side, and back views, along with head-angle references",
+  "dica": "Troque a palavra \"character\" pelo tipo de personagem que você quer criar.",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "personagem",
+   "design",
+   "modelo",
+   "ilustracao"
+  ],
+  "imagens": [
+   "img/261125-4-crie-folha-de-modelo-de-person.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://aitool.promptsref.com/thumbs/card/aitool.promptsref.com/Publish/publish-1774593322976-0476ab6c.png",
+  "fonte": "promptsref.com",
+  "url": "https://promptsref.com/tool/AI-Image-Generator?tab=effects&model=nano-banana-2&effectId=character_design_turnaround_sheet",
+  "autor": "",
+  "chave": "lk:3b1a20681e67dd",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>A clean, professional character design board featuring full-body front, side, and back views, along with head-angle references</pre><p>💡 Troque a palavra &quot;character&quot; pelo tipo de personagem que você quer criar.</p><p>🖼 Imagem de exemplo: promptsref.com</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
