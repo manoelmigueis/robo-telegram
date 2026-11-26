@@ -2087,5 +2087,26 @@
   "imagens": [
    "img/060.jpg"
   ]
+ },
+ {
+  "id": "061-500-cursos-gratis",
+  "tipo": "lista",
+  "titulo": "☁️ 500 cursos grátis de computação em nuvem na AWS",
+  "corpo": "Quer aprender tecnologia de ponta sem gastar nada e melhorar o seu currículo? A Amazon Web Services oferece mais de 500 opções gratuitas.<br/><br/><b>1.</b> Mais de 500 cursos de nuvem grátis.<br/><b>2.</b> Aulas em 17 idiomas, incluindo português.<br/><b>3.</b> Estude pelo celular ou PC no seu ritmo.<br/><b>4.</b> Planos para acompanhar seu progresso.<br/><b>5.</b> Opção sem precisar de conta Amazon.<br/><br/><details><summary>👀 Toque para ver a dica de ouro</summary><p>Acesse a plataforma AWS Skill Builder ou o AWS Educate para criar sua conta gratuita e começar hoje mesmo.</p></details><br/>Salve este post para estudar depois ou mande para quem busca vagas na área!",
+  "tags": [
+   "rendaextra",
+   "cursosgratuitos",
+   "tecnologia",
+   "curriculo"
+  ],
+  "arte": {
+   "titulo": "500 cursos grátis de nuvem na AWS"
+  },
+  "fonte": "Correio Braziliense",
+  "link": "https://www.correiobraziliense.com.br/euestudante/educacao-profissional/2026/11/7544128-aws-tem-mais-de-500-cursos-online-gratuitos-para-aprender-nuvem.html",
+  "materia": "\"AWS\" tem mais de 500 cursos online gratuitos para aprender nuvem",
+  "imagens": [
+   "img/061.jpg"
+  ]
  }
 ]
