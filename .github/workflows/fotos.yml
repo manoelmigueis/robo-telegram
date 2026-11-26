@@ -1,0 +1,38 @@
+name: Fotos dos canais
+
+on:
+  schedule:
+    - cron: "10 11 * * *"  # 07h10 em Manaus
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fotos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements-nuvem.txt
+      - run: pip install -r requirements-nuvem.txt
+      - name: Baixar as fotos
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PYTHONUTF8: "1"
+        run: python fotos_canais.py
+      - name: Guardar
+        run: |
+          git config user.name "robo-nuvem"
+          git config user.email "robo-nuvem@users.noreply.github.com"
+          git add -A fotos
+          git diff --cached --quiet || git commit -m "fotos dos canais $(date -u +%F)"
+          git pull --rebase -X theirs || true
+          git push

@@ -355,6 +355,7 @@ button.chip{font-family:var(--font)}
 .hub-c:focus-visible{outline:none;box-shadow:0 0 0 4px var(--acento-soft);border-color:var(--acento)}
 .hub-av{width:44px;height:44px;border-radius:14px;flex:none;display:grid;place-items:center;font-size:22px;font-weight:700;color:#fff;background:linear-gradient(140deg,#2f86f6,#1a4fb8)}
 .hub-av.emo{background:var(--soft)}
+.hub-av.foto{background:var(--soft) center/cover no-repeat;color:transparent}
 .hub-tx{flex:1;min-width:0}
 .hub-tx b{display:block;font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hub-tx small{display:block;color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -1142,19 +1143,31 @@ function listaCanais() {
     let status = "", cor = "";
     if (g && g.fila) { status = `${g.fila.length} na fila · ${String(g.dias).replace(".", ",")} dias`; cor = g.fila.length <= 9 ? "aviso" : "ok"; }
     return { chave: "c:" + n, tipo: "conteudo", nome: g ? g.nome : base.nome, sub: g ? g.canal : "posta sozinho pela nuvem",
-             emoji: g ? g.emoji : base.emoji, nicho: n, status, cor };
+             emoji: g ? g.emoji : base.emoji, nicho: n, status, cor, chat: g ? g.canal : "" };
   });
   const a = (dados && dados.ajustes) || {};
   ((dados && dados.canais) || []).forEach(c => {
     const status = !c.auto ? "automático desligado" : a.pausado ? "automático pausado" : "automático ligado";
     const am = amazon(c), nf = postsDoCanal(c).fila.length;
     out.push({ chave: "b:" + c.id, tipo: am ? "livros" : "outros", nome: c.nome, sub: [c.chat, c.nicho].filter(Boolean).join(" · "),
-               inicial: ((c.nome || "").replace(/^[^\p{L}\p{N}]+/u, "") || "?").charAt(0).toUpperCase(), nicho: c.nicho,
+               chat: c.chat, inicial: ((c.nome || "").replace(/^[^\p{L}\p{N}]+/u, "") || "?").charAt(0).toUpperCase(), nicho: c.nicho,
                status: am ? status : nf ? `${nf} na fila` : "você cria os posts", cor: am ? (!c.auto ? "" : a.pausado ? "aviso" : "ok") : "" });
   });
   return out.sort((x, y) => x.nome.localeCompare(y.nome, "pt-BR"));
 }
-function avatar(c) { return c.emoji ? `<span class="hub-av emo">${c.emoji}</span>` : `<span class="hub-av">${esc(c.inicial)}</span>`; }
+// foto de perfil de cada canal: o robô baixa do Telegram 1x por dia (fotos_canais.py) para fotos/ no GitHub
+const FOTOS_URL = "https://raw.githubusercontent.com/manoelmigueis/robo-telegram/main/fotos/";
+let FOTOS = {};
+fetch(FOTOS_URL + "index.json?t=" + Math.floor(Date.now() / 3600000)).then(r => r.ok ? r.json() : {}).then(j => {
+  FOTOS = j || {};
+  document.querySelectorAll(".hub-av[data-chat]").forEach(el => { const f = FOTOS[el.dataset.chat]; if (f) { el.textContent = ""; el.classList.add("foto"); el.style.backgroundImage = `url(${FOTOS_URL}${f})`; } });
+}).catch(() => {});
+function avatar(c) {
+  const f = c.chat && FOTOS[c.chat];
+  if (f) return `<span class="hub-av foto" style="background-image:url(${FOTOS_URL}${encodeURIComponent(f)})"></span>`;
+  const dc = c.chat ? ` data-chat="${esc(c.chat)}"` : "";
+  return c.emoji ? `<span class="hub-av emo"${dc}>${c.emoji}</span>` : `<span class="hub-av"${dc}>${esc(c.inicial)}</span>`;
+}
 function filtrar(lista, q) {
   q = semAcento(q).trim(); if (!q) return lista;
   const ps = q.split(/\s+/), comeca = c => (" " + semAcento(c.nome)).includes(" " + ps[0]) ? 0 : 1;
