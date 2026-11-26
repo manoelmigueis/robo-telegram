@@ -146,7 +146,8 @@
     "lk:3b1a20681e67dd",
     "pp:casual-woman-watercolor-sketch-prompt",
     "lk:532f0a4ae3521d",
-    "pp:funny-3d-cartoon-girl-avatar"
+    "pp:funny-3d-cartoon-girl-avatar",
+    "pp:professional-businessman-studio-photography"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -162,7 +163,7 @@
     "inicio": "2026-11-26T01:05:10+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 7,
+    "feitos": 8,
     "meta": 12,
     "achados": 87,
     "msg": ""
