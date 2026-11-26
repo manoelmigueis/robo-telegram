@@ -193,7 +193,8 @@
     "pp:woman-romantic-spring-nature-portrait",
     "pp:funny-low-battery-caricature-photo",
     "pp:floating-man-dark-studio-smoke-spotlight",
-    "pp:man-in-suit-with-red-roses-elevator-portrait"
+    "pp:man-in-suit-with-red-roses-elevator-portrait",
+    "pp:night-cityscape-bokeh-taxi-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -209,7 +210,7 @@
     "inicio": "2026-11-26T01:21:17+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 4,
+    "feitos": 5,
     "meta": 12,
     "achados": 74,
     "msg": ""
