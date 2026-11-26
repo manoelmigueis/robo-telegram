@@ -26,9 +26,9 @@ ESTADO = PASTA / "estado.json"
 CFG = postador.CONFIG.get("cursos", {})
 FUSO = timezone(timedelta(hours=-4))  # Manaus
 SITE = "https://www.couponami.com"
-# Português primeiro, depois espanhol e inglês (dá para mudar no config, em "listas").
-LISTAS = CFG.get("listas") or [["Português", "/language/Portuguese"], ["Espanhol", "/language/Spanish"],
-                               ["Inglês", "/language/English"]]
+# Português primeiro, depois inglês e espanhol; o canal reveza os três (equilibrar) (dá para mudar no config, em "listas").
+LISTAS = CFG.get("listas") or [["Português", "/language/Portuguese"], ["Inglês", "/language/English"],
+                               ["Espanhol", "/language/Spanish"]]
 # Igual ao canal de livros: curso de fora sai 100% no idioma dele (descrição, idioma, gatilho, botão e hashtags).
 LINGUAS = {
     "Português": {"selo": "🇧🇷 Português", "gratis": "GRÁTIS POR TEMPO LIMITADO", "botao": "🎓 Pegar o curso grátis",
@@ -105,10 +105,41 @@ def garimpar():
             slug = url.rstrip("/").rsplit("/", 1)[-1]
             quando = _limpo((re.search(r'class="category">(.*?)</span>', bloco, re.S) or [None, ""])[1]).lower()
             gratis = "free" in bloco.lower()
-            if slug in feitos or not gratis or (quando and quando not in NOVOS):
+            if slug in feitos or not gratis or (quando and not _recente(quando, idioma)):
                 continue
             achados.append({"slug": slug, "titulo": titulo, "pagina": url, "idioma": idioma})
-    return achados
+    return equilibrar(achados)
+
+
+def _recente(quando, idioma):
+    """Hoje e ontem valem para todos. Curso em português é raro na fonte: aceita até 3 dias."""
+    if quando in NOVOS:
+        return True
+    if idioma != "Português":
+        return False
+    try:
+        dia = datetime.strptime(quando, "%d %B %Y").date()
+    except ValueError:
+        return False
+    return (datetime.now(FUSO).date() - dia).days <= 3
+
+
+def equilibrar(achados):
+    """Reveza os idiomas: primeiro o que menos saiu nos últimos posts (empate: português, espanhol, inglês)."""
+    recentes = estado().get("idiomas", [])[-9:]
+    ordem = [i for i, _ in LISTAS]
+    vez = sorted(ordem, key=lambda i: (recentes.count(i), ordem.index(i)))
+    por = {i: [c for c in achados if c["idioma"] == i] for i in ordem}
+    saida = []
+    while any(por.values()):
+        for i in vez:
+            if por[i]:
+                saida.append(por[i].pop(0))
+    return saida
+
+
+def _anotar_idioma(e, idioma):
+    e["idiomas"] = (e.get("idiomas", []) + [idioma])[-30:]
 
 
 def detalhes(c):
@@ -210,7 +241,7 @@ def publicar(c):
     return mid
 
 
-def marcar_postado(slug):
+def marcar_postado(slug, idioma=None):
     """Guarda o curso como postado. Pelo painel (na nuvem) grava direto no GitHub, como a central faz."""
     import central
     agora = datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -218,6 +249,8 @@ def marcar_postado(slug):
         e = estado()
         e["postados"].append(slug)
         e["ultimo"] = agora
+        if idioma:
+            _anotar_idioma(e, idioma)
         salvar_estado(e)
         return
     try:
@@ -228,6 +261,8 @@ def marcar_postado(slug):
     e.setdefault("postados", []).append(slug)
     e["postados"] = e["postados"][-1000:]
     e["ultimo"] = agora
+    if idioma:
+        _anotar_idioma(e, idioma)
     central.gravar("ingles", f"cursos grátis: post pelo painel {agora[:16]}",
                    arquivos={"cursos/estado.json": json.dumps(e, ensure_ascii=False, indent=2).encode("utf-8")})
 
@@ -238,7 +273,7 @@ def postar_escolhido(c):
     if not c:
         return None
     mid = publicar(c)
-    marcar_postado(c["slug"])
+    marcar_postado(c["slug"], c.get("idioma"))
     print(f"Curso postado pelo painel: {c['titulo']} (mensagem {mid})")
     return c["titulo"], mid
 
@@ -252,6 +287,7 @@ def postar_um():
         mid = publicar(c)
         e = estado()
         e["postados"].append(c["slug"])
+        _anotar_idioma(e, c["idioma"])
         e["ultimo"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
         salvar_estado(e)
         print(f"Curso postado: {c['titulo']} (mensagem {mid})")
