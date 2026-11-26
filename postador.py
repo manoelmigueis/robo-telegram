@@ -370,7 +370,9 @@ REVISAR = [
         r"\berotic|\berotism|\bhot\b|\+ ?18\b|\b18 ?\+|\bexplicit|\bsexo\b|\bsexual|\bsexy\b|\bsex\b|\bbdsm\b|"
         r"\bdominador|\bdominante\b|\bsubmiss|\bsadomas|\bfetich|\bfetish|\btabu\b|\btaboo\b|\bharem\b|"
         r"\bsmut\b|\bsteamy\b|\bspicy\b|\bpicante|\bsensual|\bluxuria|\bmenage|\borgia|\bhentai\b|"
-        r"conteudo adulto|para adultos|\bdark romance\b|romance quente|cenas quentes")),
+        r"conteudo adulto|para adultos|maiores de 18|mais de 18|\bmais 18\b|menores de 18|proibido para menores|"
+        r"\bnsfw\b|\bporno|\bputaria|\bsafad|\btesao\b|\bgemid|\borgasm|\btransar|\bfoder\b|\bnudez\b|"
+        r"\blibido\b|\blasciv|\bdepravad|\bproibidao|\bxxx\b|\bcontos? (?:quentes|adultos|proibidos)|\bdark romance\b|romance quente|cenas quentes")),
 ]
 
 
