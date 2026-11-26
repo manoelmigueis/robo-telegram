@@ -30,7 +30,8 @@
     "261126-12-crie-uma-capa-de-revista-de-mo",
     "261126-7-crie-um-retrato-de-moda-com-ja",
     "261126-11-crie-um-retrato-de-estdio-com-",
-    "261126-1-crie-um-retrato-de-perto-com-m"
+    "261126-1-crie-um-retrato-de-perto-com-m",
+    "261126-5-vire-personagem-3d-estiloso-co"
   ],
   "pulados": [],
   "frente": [],
@@ -68,7 +69,8 @@
     "261126-12-crie-uma-capa-de-revista-de-mo": "2026-11-26T15:22:23+00:00",
     "261126-7-crie-um-retrato-de-moda-com-ja": "2026-11-26T15:41:12+00:00",
     "261126-11-crie-um-retrato-de-estdio-com-": "2026-11-26T15:50:09+00:00",
-    "261126-1-crie-um-retrato-de-perto-com-m": "2026-11-26T15:50:17+00:00"
+    "261126-1-crie-um-retrato-de-perto-com-m": "2026-11-26T15:50:17+00:00",
+    "261126-5-vire-personagem-3d-estiloso-co": "2026-11-26T15:50:18+00:00"
   },
   "mensagens": {
     "261125-1-foto-profissional-estilo-edito": [
@@ -163,9 +165,12 @@
     ],
     "261126-1-crie-um-retrato-de-perto-com-m": [
       36
+    ],
+    "261126-5-vire-personagem-3d-estiloso-co": [
+      37
     ]
   },
-  "contador": 31,
+  "contador": 32,
   "vistos": [
     "pc:cmwwenmqs0001if08a8ptnnbv",
     "nb:29b524029373a7",
@@ -306,7 +311,7 @@
     "n": 12
   },
   "candidatos": [],
-  "ultimo": "2026-11-26T15:50:17+00:00",
+  "ultimo": "2026-11-26T15:50:18+00:00",
   "fontes": [
     "https://prompthero.com/midjourney-prompts",
     "https://promptsref.com/library/nano-banana-pro?utm_source=x_unedrwood"
