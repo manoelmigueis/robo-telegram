@@ -161,7 +161,8 @@
     "pp:3d-typography-girl-birthday-prompt",
     "pp:professional-male-model-black-suit",
     "pp:studio-portrait-man-black-suit",
-    "pp:funny-big-eyes-3d-cartoon-avatar"
+    "pp:funny-big-eyes-3d-cartoon-avatar",
+    "pp:intense-cinematic-man-shades-photo-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -177,7 +178,7 @@
     "inicio": "2026-11-26T01:18:43+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 4,
+    "feitos": 5,
     "meta": 12,
     "achados": 79,
     "msg": ""
