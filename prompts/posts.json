@@ -1074,5 +1074,30 @@
   "autor": "",
   "chave": "pp:cute-chibi-cartoon-hugging-illustration",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Create a big-head, small-body chibi cartoon character, hilariously protecting the one thing they absolutely cannot live without [Coffee / Smartphone / Laptop / Object / Pet Animal / etc]. The object must be comically giant, while the character clings to it tightly as if it were the most important thing in the world, with funny, expressive facial features and hand-drawn texts like &#x27;Don&#x27;t Touch! It&#x27;s Mine!&#x27;.</pre><p>💡 Troque [Coffee / Smartphone / Laptop / Object / Pet Animal / etc] pelo que seu personagem vai proteger e mude o texto da placa se quiser</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261125-8-crie-um-retrato-de-moda-focado",
+  "tipo": "prompt",
+  "titulo": "🖤 Crie um retrato de moda focado em sombras marcantes",
+  "prompt": "high-resolution photograph, woman, stunning use of shadows, in the syle of crisp lines and forms, UHD, shot on a Sony A7III --ar 1:2 --style raw --stylize 250",
+  "prompt_en": "high-resolution photograph, woman, stunning use of shadows, in the syle of crisp lines and forms, UHD, shot on a Sony A7III --ar 1:2 --style raw --stylize 250",
+  "dica": "Troque a palavra woman por man para mudar a pessoa.",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "retrato",
+   "fotografia",
+   "sombra",
+   "moda"
+  ],
+  "imagens": [
+   "img/261125-8-crie-um-retrato-de-moda-focado.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.prompthero.com/x1vbmcdl3a611aymslpwjfk4keqt/1080.webp",
+  "fonte": "prompthero.com",
+  "url": "https://prompthero.com/prompt/35398996d65-midjourney-6-high-resolution-photograph-woman-stunning-use-of-shadows-in-the-syle-of-crisp-lines-and-forms-uhd-shot-on-a",
+  "autor": "",
+  "chave": "lk:3d50d54d0e7bc3",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>high-resolution photograph, woman, stunning use of shadows, in the syle of crisp lines and forms, UHD, shot on a Sony A7III --ar 1:2 --style raw --stylize 250</pre><p>💡 Troque a palavra woman por man para mudar a pessoa.</p><p>🖼 Imagem de exemplo: prompthero.com</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]

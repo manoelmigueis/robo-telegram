@@ -196,7 +196,8 @@
     "pp:man-in-suit-with-red-roses-elevator-portrait",
     "pp:night-cityscape-bokeh-taxi-portrait",
     "pp:man-black-tuxedo-rose-portrait",
-    "pp:cute-chibi-cartoon-hugging-illustration"
+    "pp:cute-chibi-cartoon-hugging-illustration",
+    "lk:3d50d54d0e7bc3"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -212,7 +213,7 @@
     "inicio": "2026-11-26T01:21:17+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 7,
+    "feitos": 8,
     "meta": 12,
     "achados": 74,
     "msg": ""
