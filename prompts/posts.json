@@ -1500,5 +1500,30 @@
   "autor": "",
   "chave": "pp:man-fashion-magazine-cover-photo-prompt",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Use the uploaded photo as the exact facial identity reference. Create a premium photorealistic fashion magazine cover, vertical 9:16. A stylish young man with thick voluminous curly hair, black rectangular sunglasses, black over-ear headphones, and a faded grey denim shirt with rolled-up sleeves. Medium shot, centered, head tilted down, calmly adjusting his black wristwatch with the opposite hand. Clean soft cream white background, natural daylight, professional DSLR quality, high contrast, sharp facial details. Huge bold red condensed serif “ACHROMATIC” title across the top, small spaced “Desaturated” above it, and elegant black quotes on both sides: “Starve your distractions, feed your focus.” and “Timeless style.” Minimal luxury editorial layout.</pre><p>💡 Mande sua foto junto com o prompt e troque a cor da camisa em &quot;faded grey denim shirt&quot;</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261126-1-crie-um-retrato-de-perto-com-m",
+  "tipo": "prompt",
+  "titulo": "🌊 Crie um retrato de perto com metade do rosto na água",
+  "prompt": "Hyper-realistic, ultra-detailed close-up portrait showing only the left half of my face submerged in water, one eye in sharp focus, positioned on the far left of the frame, light rays creating caustic patterns on the skin, suspended water droplets and bubbles adding depth, cinematic lighting with soft shadows and sharp highlights, photorealistic textures including skin pores, wet lips, eyelashes, and subtle subsurface scattering, surreal and dreamlike atmosphere, shallow depth of field, underwater macro perspective. 3:4 aspect ratio",
+  "prompt_en": "Hyper-realistic, ultra-detailed close-up portrait showing only the left half of my face submerged in water, one eye in sharp focus, positioned on the far left of the frame, light rays creating caustic patterns on the skin, suspended water droplets and bubbles adding depth, cinematic lighting with soft shadows and sharp highlights, photorealistic textures including skin pores, wet lips, eyelashes, and subtle subsurface scattering, surreal and dreamlike atmosphere, shallow depth of field, underwater macro perspective. 3:4 aspect ratio",
+  "dica": "Mande sua foto junto com o prompt e troque a água por outro cenário no texto",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "retrato",
+   "fotorealista",
+   "agua",
+   "cinematografico"
+  ],
+  "imagens": [
+   "img/261126-1-crie-um-retrato-de-perto-com-m.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.promptplum.com/cdn-cgi/image/q=78,scq=50,width=1400,height=1400,fit=contain,f=jpeg/promptImages/Gemini_Generated_Image_pbwyxwpbwyxwpbwy-1.png",
+  "fonte": "PromptPlum",
+  "url": "https://promptplum.com/prompt/underwater-portrait/",
+  "autor": "",
+  "chave": "pp:underwater-portrait",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Hyper-realistic, ultra-detailed close-up portrait showing only the left half of my face submerged in water, one eye in sharp focus, positioned on the far left of the frame, light rays creating caustic patterns on the skin, suspended water droplets and bubbles adding depth, cinematic lighting with soft shadows and sharp highlights, photorealistic textures including skin pores, wet lips, eyelashes, and subtle subsurface scattering, surreal and dreamlike atmosphere, shallow depth of field, underwater macro perspective. 3:4 aspect ratio</pre><p>💡 Mande sua foto junto com o prompt e troque a água por outro cenário no texto</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]

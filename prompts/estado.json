@@ -277,7 +277,8 @@
     "pp:man-in-luxurious-fur",
     "pp:man-fashion-magazine-cover-photo-prompt",
     "pc:cmwxncg8a0001l008j12g4rq0",
-    "pp:professional-man-linkedin-headshot-portrait"
+    "pp:professional-man-linkedin-headshot-portrait",
+    "pp:underwater-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -293,7 +294,7 @@
     "inicio": "2026-11-26T15:47:41+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 0,
+    "feitos": 1,
     "meta": 12,
     "achados": 70,
     "msg": ""
