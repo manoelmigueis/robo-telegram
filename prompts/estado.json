@@ -226,7 +226,8 @@
     "pp:3d-character-illustration-casual-fashion-prompt",
     "pc:cmwx8ap060001kz087pgy5h7w",
     "pp:cool-guy-sunglasses-leather-jacket-portrait",
-    "pc:cmwx89yb60009le07yzucn165"
+    "pc:cmwx89yb60009le07yzucn165",
+    "pp:elegant-mens-fashion-photography-outdoors"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -242,7 +243,7 @@
     "inicio": "2026-11-26T11:40:28+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 8,
+    "feitos": 9,
     "meta": 12,
     "achados": 73,
     "msg": ""
