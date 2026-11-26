@@ -2108,5 +2108,26 @@
   "imagens": [
    "img/061.jpg"
   ]
+ },
+ {
+  "id": "062-ufpr-abre-cursos",
+  "tipo": "lista",
+  "titulo": "🏫 UFPR abre 22 cursos online gratuitos com certificado",
+  "corpo": "Quer melhorar o currículo sem gastar nada?<br/><br/>A Universidade Federal do Paraná liberou novas formações online e gratuitas para todo o Brasil.<br/><br/><b>1.</b> Cursos nas áreas de educação, saúde, tecnologia, acessibilidade e construção civil.<br/><b>2.</b> Carga horária variando entre 20 a 96 horas de conteúdo completo.<br/><b>3.</b> Formato autoinstrucional para você estudar no seu próprio ritmo e horário.<br/><b>4.</b> Opções focadas em desenvolvimento web, JavaScript, CSS, SQL e design digital.<br/><b>5.</b> Certificado gratuito para quem cumprir os requisitos de conclusão.<br/><br/><details><summary>👀 Toque para ver a dica de ouro</summary><p>Acesse agora a plataforma UFPR Aberta, escolha sua área de interesse e faça seu cadastro gratuito para começar a estudar hoje mesmo.</p></details><br/>Salve este post para não esquecer e mande para quem quer aprender algo novo!",
+  "tags": [
+   "rendaextra",
+   "cursosgratis",
+   "curriculo",
+   "capacitacao"
+  ],
+  "arte": {
+   "titulo": "22 cursos grátis na UFPR"
+  },
+  "fonte": "Andifes",
+  "link": "https://www.andifes.org.br/2026/11/25/ufpr-abre-inscricoes-para-22-cursos-online-gratuitos/",
+  "materia": "UFPR abre inscrições para 22 cursos online gratuitos",
+  "imagens": [
+   "img/062.jpg"
+  ]
  }
 ]
