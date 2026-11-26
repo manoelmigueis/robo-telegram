@@ -273,6 +273,13 @@ def publicar(pid, conferir=True, so_canais=None, so_gratis=False):
         p["legenda"] = escritor.legenda(p["dados"])
         p["botoes"] = [escritor.botao(p["dados"])]
         banco.mudar_post(pid, legenda=p["legenda"], botoes=p["botoes"], dados=p["dados"])
+    if p["origem"] == "livro" and p["status"] == "fila" and not p["dados"].get("aprovado"):
+        motivo = motivo_revisar(p["dados"])
+        if motivo:
+            p["dados"]["motivo_revisao"] = motivo
+            banco.mudar_post(pid, status="revisar", dados=p["dados"])
+            avisar(f"🔎 Segurei para sua aprovação ({motivo}): {p['titulo'][:60]}")
+            return 0
     alvos = alvos_do_post(p, so_canais)
     horas = p["expira_horas"] if p["expira_horas"] is not None else (
         opcao("expira_auto_horas") if p["origem"] != "manual" else None)
@@ -318,6 +325,7 @@ def gratis_nos_dados(p):
 def proximo_automatico(canais_lista=None):
     """Escolhe o próximo da fila: livro, ou às vezes uma oferta (nunca duas seguidas).
     Com canais_lista, só vale post que vai para algum desses canais."""
+    segurar_sensiveis()
     fila = banco.posts(status=("fila",))
     vencimento = (datetime.now(banco.FUSO) - timedelta(days=2)).strftime("%Y-%m-%d")
     for p in fila:
@@ -351,6 +359,52 @@ def postar_proximo(canais_lista=None):
 
 
 # ---------- garimpo ----------
+# Livros que esperam o dono aprovar antes de entrar na fila automática.
+# O texto é comparado sem acento e em minúsculas.
+REVISAR = [
+    ("romance LGBT", re.compile(
+        r"\bgays?\b|\blgbt|\bqueer\b|\bhomossex|\bhomoafet|\bhomoerot|\blesbic|\blesbian|\bsafic|\bsapphic|"
+        r"\bbissex|\bbisexual|\bm/m\b|\bmm romance|\bboys? love\b|\byaoi\b|\byuri\b|\bmpreg\b|\bomegaverse\b|"
+        r"\btransgener|\btransex|\bdrag queen|dois homens|(?:romance|amor|paixao) entre (?:homens|mulheres)|\btwo men\b|\bmlm\b|\bwlw\b")),
+    ("conteúdo erótico", re.compile(
+        r"\berotic|\berotism|\bhot\b|\+ ?18\b|\b18 ?\+|\bexplicit|\bsexo\b|\bsexual|\bsexy\b|\bsex\b|\bbdsm\b|"
+        r"\bdominador|\bdominante\b|\bsubmiss|\bsadomas|\bfetich|\bfetish|\btabu\b|\btaboo\b|\bharem\b|"
+        r"\bsmut\b|\bsteamy\b|\bspicy\b|\bpicante|\bsensual|\bluxuria|\bmenage|\borgia|\bhentai\b|"
+        r"conteudo adulto|para adultos|\bdark romance\b|romance quente|cenas quentes")),
+]
+
+
+def motivo_revisar(dados):
+    """Diz por que o livro precisa de aprovação (ou "" se pode ir direto para a fila)."""
+    import unicodedata
+    texto = " ".join(str(dados.get(k) or "") for k in
+                     ("titulo", "titulo_completo", "titulo_curto", "descricao", "sobre", "texto_post", "categoria"))
+    texto = unicodedata.normalize("NFKD", texto).encode("ascii", "ignore").decode().lower()
+    for nome, regra in REVISAR:
+        achou = regra.search(texto)
+        if achou:
+            return f"{nome} (“{achou.group(0).strip()}”)"
+    return ""
+
+
+def segurar_sensiveis():
+    """Tira da fila os livros que pedem aprovação. Devolve quantos foram segurados agora."""
+    n = 0
+    for p in banco.posts(status=("fila",), limite=1000):
+        d = p.get("dados") or {}
+        if p["origem"] != "livro" or d.get("aprovado"):
+            continue
+        motivo = motivo_revisar(d)
+        if motivo:
+            d["motivo_revisao"] = motivo
+            banco.mudar_post(p["id"], status="revisar", dados=d)
+            print(f"[revisar] #{p['id']} {motivo}: {p['titulo'][:50]}")
+            n += 1
+    if n:
+        avisar(f"🔎 {n} livro(s) esperando sua aprovação no painel (Agenda > Esperando aprovação).")
+    return n
+
+
 def encher_fila():
     """Pega o último garimpo e transforma em posts na fila."""
     def ultimo(padrao):
@@ -367,6 +421,7 @@ def encher_fila():
                         botoes=[escritor.botao(i)], asin=i["asin"],
                         titulo=i.get("titulo") or i.get("titulo_curto") or i.get("titulo_completo", ""),
                         dados=i)
+    segurar_sensiveis()
     return len(novos)
 
 

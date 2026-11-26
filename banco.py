@@ -4,6 +4,7 @@
 - posts: tudo que vai ou foi para o ar.
     origem: manual | livro | oferta
     status: fila (automático, sai num horário) | agendado (data marcada) |
+            revisar (livro esperando o dono aprovar) |
             postado | cancelado | expirou (Amazon tirou a promo) | erro
 - envios: cada vez que um post foi para um canal (guarda o message_id
   para poder apagar depois, à mão ou quando expirar).

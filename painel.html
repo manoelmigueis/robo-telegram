@@ -671,6 +671,7 @@ button.chip{font-family:var(--font)}
       <div class="titulo"><div><h1>Agenda e fila</h1><p>A fila automática solta um post em cada horário. Os agendados saem na hora marcada.</p></div></div>
       <div class="card"><div class="secao">Agendados <span class="conta-s" id="c_agendados"></span></div><div id="lista_agendados"></div></div>
       <div class="card"><div class="secao">Fila automática <span class="conta-s" id="c_fila"></span></div><div class="linha-garimpo"><button class="btn pri peq bt-garimpo" onclick="garimpar()"><svg class="i"><use href="#i-picareta"/></svg>Garimpar novos</button></div><div class="garimpo-barra oculto"><div class="gb-t"><b>⛏ Garimpando livros e ofertas na Amazon…</b><span class="gb-tempo"></span></div><div class="gb-trilho"><div class="gb-enche"></div></div></div><div id="lista_fila"></div></div>
+      <div class="card oculto" id="card_revisar"><div class="secao">🔎 Esperando aprovação <span class="conta-s" id="c_revisar"></span></div><p class="dica">Livros com romance LGBT ou conteúdo erótico. Só entram na fila se você aprovar.</p><div id="lista_revisar"></div></div>
       <div class="card"><div class="secao">Histórico</div><div id="lista_historico"></div></div>
     </section>
 
@@ -992,7 +993,7 @@ function limpar(semPerguntar) {
 
 // ---------- listas ----------
 const STATUS = { fila: ["na fila", "azul"], agendado: ["agendado", "azul"], postado: ["postado", "ok"], cancelado: ["cancelado", ""],
-  expirou: ["promoção acabou", "aviso"], erro: ["erro", "perigo"], publicando: ["postando", "aviso"] };
+  expirou: ["promoção acabou", "aviso"], erro: ["erro", "perigo"], publicando: ["postando", "aviso"], revisar: ["esperando aprovação", "aviso"] };
 function capa(p) { return p.foto && p.foto.startsWith("http") ? `<img class="capa" src="${esc(p.foto)}" alt="" loading="lazy">` : `<div class="capa">${ico(p.origem === "oferta" ? "carrinho" : p.origem === "livro" ? "folha" : "criar")}</div>`; }
 // Do que o livro trata: o resumo que a IA escreveu para o post (ou a descrição da Amazon).
 function resumoLivro(p) {
@@ -1006,6 +1007,7 @@ function itemPost(p, botoes) {
   return `<div class="item">${capa(p)}<div class="corpo">
     <div class="tit">${esc(p.titulo || "(sem título)")}</div>${resumoLivro(p)}
     <div class="meta"><span class="badge">${tipo}</span><span class="badge ${cor}">${esc(st)}</span>${p.agendado_para ? `<span>🕐 ${dataBR(p.agendado_para)}</span>` : ""}${p.expira_horas ? `<span>apaga em ${p.expira_horas}h</span>` : ""}</div>
+    ${p.status === "revisar" && p.dados && p.dados.motivo_revisao ? `<div class="erro">🔎 Segurado: ${esc(p.dados.motivo_revisao)}</div>` : ""}
     ${p.erro ? `<div class="erro">${esc(p.erro)}</div>` : ""}
     ${botoes ? `<div class="botoes">${botoes}</div>` : ""}</div></div>`;
 }
@@ -1050,6 +1052,9 @@ function render() {
   $("c_agendados").textContent = d.agendados.length || ""; $("c_fila").textContent = d.fila.length ? `${livros} livros · ${ofertas} ofertas` : "";
   $("lista_agendados").innerHTML = d.agendados.map(p => itemPost(p, acoesPost(p))).join("") || vazio("Nada agendado.");
   $("lista_fila").innerHTML = d.fila.map(p => itemPost(p, acoesPost(p))).join("") || vazio("Fila vazia. Use “Garimpar” em Ajustes.");
+  const rev = d.revisar || [];
+  $("card_revisar").classList.toggle("oculto", !rev.length); $("c_revisar").textContent = rev.length || "";
+  $("lista_revisar").innerHTML = rev.map(p => itemPost(p, `<button class="btn pri peq" onclick="aprovar(${p.id})">Aprovar</button><button class="btn peq perigo" onclick="cancelar(${p.id})">Recusar</button>`)).join("");
   $("lista_historico").innerHTML = d.historico.map(p => itemPost(p)).join("") || vazio("Nada ainda.");
 
   renderLotes(); renderDesempenho(d.desempenho);
@@ -1499,6 +1504,7 @@ async function agora(id) {
   if (confirm("Postar agora nos canais?")) { indo.add(id); try { await api(`/api/posts/${id}/agora`, {}); } catch (e) {} finally { indo.delete(id); } carregar(); }
 }
 async function postarProximo() { if (dados && dados.fila[0]) agora(dados.fila[0].id); }
+async function aprovar(id) { try { await api(`/api/posts/${id}/aprovar`, {}); } catch (e) {} carregar(); }
 async function cancelar(id) { try { await api(`/api/posts/${id}/cancelar`, {}); } catch (e) {} carregar(); }
 async function apagarEnvio(id) { if (confirm("Apagar este post do canal? Não dá para desfazer.")) { try { await api(`/api/envios/${id}/apagar`, {}); } catch (e) {} carregar(); } }
 async function apagarLink() { if ($("link_apagar").value && confirm("Apagar essa mensagem do canal? Não dá para desfazer.")) { try { await api("/api/apagar-link", { link: $("link_apagar").value }); $("link_apagar").value = ""; } catch (e) {} carregar(); } }

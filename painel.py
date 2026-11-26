@@ -141,7 +141,8 @@ def resumo():
         "canais": banco.canais(),
         "agendados": banco.posts(status=("agendado",)),
         "fila": banco.posts(status=("fila",)),
-        "historico": [p for p in banco.posts(limite=60) if p["status"] not in ("fila", "agendado")],
+        "revisar": banco.posts(status=("revisar",)),
+        "historico": [p for p in banco.posts(limite=60) if p["status"] not in ("fila", "agendado", "revisar")],
         "no_ar": banco.envios_no_ar(),
         "lotes": lotes(),
         "desempenho": metricas.resumo(),
@@ -299,6 +300,17 @@ def criar_ia(dados: dict = Body(...)):
 def cancelar(pid: int):
     banco.mudar_post(pid, status="cancelado")
     return {"ok": True, "msg": "Cancelado."}
+
+
+@app.post("/api/posts/{pid}/aprovar")
+def aprovar(pid: int):
+    p = banco.post(pid) or erro("Post não existe.", 404)
+    if p["status"] != "revisar":
+        return {"ok": True, "msg": "Esse livro não está esperando aprovação."}
+    d = p.get("dados") or {}
+    d["aprovado"] = True
+    banco.mudar_post(pid, status="fila", dados=d)
+    return {"ok": True, "msg": "Aprovado: entrou na fila."}
 
 
 @app.post("/api/posts/{pid}/agora")
