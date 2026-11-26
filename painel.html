@@ -124,7 +124,13 @@ main.wrap{max-width:1180px;padding:6px 28px 80px calc(var(--dock-x) + var(--dock
 .grade{display:grid;gap:18px}
 .g2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .criar-grade{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.85fr);gap:18px;align-items:start}
-.grudar{position:sticky;top:18px}
+.grudar{position:sticky;top:18px;max-height:calc(100vh - 36px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:4px}
+.tg-topo .av.foto{background-size:cover;background-position:center;color:transparent}
+.tg-bio{background:var(--tg-bolha);color:var(--tg-texto);border-radius:14px;padding:12px 14px;max-width:420px;margin:0 auto;text-align:center;font:400 13.5px/1.45 -apple-system,'Segoe UI',Roboto,sans-serif;white-space:pre-wrap;word-wrap:break-word}
+.tg-bio b{display:block;font-size:14.5px;margin-bottom:4px}
+.tg-bio small{display:block;color:var(--tg-sub);margin-top:6px}
+.lote-txt{margin-top:6px;font-size:13px;line-height:1.4;color:var(--ink-2,inherit);opacity:.85;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;white-space:normal}
+.lote-txt a{color:inherit;text-decoration:underline}
 
 /* ---------- controles ---------- */
 .btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:10px 18px;font:600 14px var(--font);background:var(--glass-2);border:1px solid var(--line-2);color:var(--ink);cursor:pointer;transition:background .2s var(--ease),border-color .2s,transform .15s var(--ease);text-decoration:none;white-space:nowrap}
@@ -421,7 +427,7 @@ button.chip{font-family:var(--font)}
 /* ---------- celular ---------- */
 @media (max-width:900px){
   .criar-grade{grid-template-columns:minmax(0,1fr)}
-  .grudar{position:static}
+  .grudar{position:static;max-height:none;overflow:visible}
   .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
   .g2{grid-template-columns:minmax(0,1fr)}
 }
@@ -676,6 +682,7 @@ button.chip{font-family:var(--font)}
             <div class="secao">Seus anúncios nos canais <span class="conta-s" id="c_criar_lotes"></span></div>
             <p class="dica" style="margin-top:0">Para fazer um canal pequeno crescer: escreva o anúncio com o link dele, toque em <b>Todos</b>, ponha um dia em “Sai do ar em” e poste. O anúncio aparece aqui uma vez só, e “Apagar de todos” tira ele de todos os canais de uma vez.</p>
             <div id="criar_lotes"></div>
+            <div id="criar_antigos"></div>
           </div>
         </div>
 
@@ -684,7 +691,8 @@ button.chip{font-family:var(--font)}
           <div class="tg">
             <div class="tg-topo"><div class="av" id="pv_av">C</div><div><b id="pv_nome">Seu canal</b><small>canal</small></div></div>
             <div class="tg-chat">
-              <div class="tg-bolha">
+              <div class="tg-bio oculto" id="pv_bio"></div>
+              <div class="tg-bolha" id="pv_bolha">
                 <div id="pv_foto"></div>
                 <div class="tg-txt" id="previa"></div>
                 <div class="tg-hora" id="pv_hora"></div>
@@ -914,8 +922,16 @@ function previa() {
   const canal = marcado && dados ? dados.canais.find(c => String(c.id) === marcado.value) : null;
   const corPv = corBt || (canal && canal.cor_botao) || "";
   $("pv_botao").className = "tg-botao" + (bt ? "" : " oculto") + (corPv ? " " + corPv : ""); $("pv_botao").textContent = bt;
-  $("pv_nome").textContent = canal ? canal.nome : "Seu canal";
-  $("pv_av").textContent = (canal ? canal.nome : "C").trim().charAt(0).toUpperCase();
+  const inf = canal && INFO[canal.chat] || {};
+  $("pv_nome").textContent = canal ? (inf.titulo || canal.nome) : "Seu canal";
+  const fAv = canal && canal.chat && FOTOS[canal.chat];
+  $("pv_av").textContent = fAv ? "" : (canal ? canal.nome : "C").trim().charAt(0).toUpperCase();
+  $("pv_av").classList.toggle("foto", !!fAv);
+  $("pv_av").style.backgroundImage = fAv ? `url(${FOTOS_URL}${encodeURIComponent(fAv)})` : "";
+  const vazioTudo = !txt.trim() && !src && !bt;
+  $("pv_bio").classList.toggle("oculto", !(vazioTudo && canal));
+  $("pv_bolha").classList.toggle("oculto", vazioTudo && !!canal);
+  $("pv_bio").innerHTML = canal ? `<b>${esc(inf.titulo || canal.nome)}</b>${esc(inf.bio || "Este canal ainda não tem descrição.")}${inf.usuario ? `<small>@${esc(inf.usuario)}</small>` : ""}<small>Escreva o post ao lado e ele aparece aqui.</small>` : "";
   $("pv_hora").textContent = new Date().toTimeString().slice(0, 5);
   const urls = (txt.match(/https?:\/\/[^\s)]*amazon\.com\.br[^\s)]*/g) || []).concat($("botao_url").value.includes("amazon.com.br") ? [$("botao_url").value] : []);
   const semTag = urls.filter(u => !u.includes("tag=manoeljuniorm-20"));
@@ -1213,10 +1229,13 @@ function listaCanais() {
 // foto de perfil de cada canal: o robô baixa do Telegram 1x por dia (fotos_canais.py) para fotos/ no GitHub
 const FOTOS_URL = "https://raw.githubusercontent.com/manoelmigueis/robo-telegram/main/fotos/";
 let FOTOS = {};
+let INFO = {};
 function carregarFotos(agora) {
+  fetch(FOTOS_URL + "info.json?t=" + (agora ? Date.now() : Math.floor(Date.now() / 3600000))).then(r => r.ok ? r.json() : {}).then(j => { INFO = j || {}; if (typeof previa === "function") previa(); }).catch(() => {});
   fetch(FOTOS_URL + "index.json?t=" + (agora ? Date.now() : Math.floor(Date.now() / 3600000))).then(r => r.ok ? r.json() : {}).then(j => {
     FOTOS = j || {};
     document.querySelectorAll(".hub-av[data-chat]").forEach(el => { const f = FOTOS[el.dataset.chat]; if (f) { el.textContent = ""; el.classList.add("foto"); el.style.backgroundImage = `url(${FOTOS_URL}${encodeURIComponent(f)})`; } });
+    if (typeof previa === "function") previa();
   }).catch(() => {});
 }
 carregarFotos();
@@ -1768,10 +1787,28 @@ function renderCriarLotes() {
     return `<div class="item">${l.foto ? `<img class="capa" src="${esc(l.foto)}" alt="" loading="lazy">` : `<div class="capa">${ico("criar")}</div>`}<div class="corpo">
       <div class="tit">${esc(l.titulo || "post #" + l.id)}</div>
       <div class="meta"><span class="badge ${cor}">${st}</span><span class="badge">${l.canais.length} canal(is)</span>${l.saida_em ? `<span>sai ${dataBR(l.saida_em)}</span>` : ""}${fixado ? '<span class="badge">📌 fixado</span>' : ""}</div>
+      <div class="lote-txt">${md(l.texto || "")}</div>
       <div class="botoes"><button class="btn peq" onclick="ir('noar')">Editar</button>
+        <button class="btn peq" onclick="usarAnuncio('lotes', ${l.id})">↺ Usar de novo</button>
         <button class="btn peq" onclick="fixarLote(${l.id}, ${!fixado})">${fixado ? "Desafixar" : "📌 Fixar"}</button>
         <button class="btn peq perigo" onclick="apagarLote(${l.id}, '${l.status}')">${ico("lixo")}${l.status === "agendado" ? "Cancelar" : "Apagar de todos"}</button></div></div></div>`;
   }).join("") || vazio("Nenhum anúncio seu nos canais agora.");
+  const A = dados.anuncios_antigos || [];
+  $("criar_antigos").innerHTML = A.length ? `<details><summary class="secao" style="cursor:pointer;margin-top:14px">Anúncios anteriores <span class="conta-s">${A.length}</span></summary>` + A.map(a => `<div class="item">${a.foto ? `<img class="capa" src="${esc(a.foto)}" alt="" loading="lazy">` : `<div class="capa">${ico("criar")}</div>`}<div class="corpo">
+      <div class="tit">${esc(a.titulo || "post #" + a.id)}</div>
+      <div class="meta">${a.quando ? `<span>${dataBR(a.quando)}</span>` : ""}</div>
+      <div class="lote-txt">${md(a.texto || "")}</div>
+      <div class="botoes"><button class="btn peq pri" onclick="usarAnuncio('anuncios_antigos', ${a.id})">↺ Usar de novo</button></div></div></div>`).join("") + "</details>" : "";
+}
+function usarAnuncio(lista, id) {
+  const a = (dados[lista] || []).find(x => x.id === id); if (!a) return;
+  if ($("texto").value.trim() && !confirm("Trocar o texto que está escrito agora por este anúncio?")) return;
+  $("texto").value = a.texto || "";
+  $("botao_texto").value = a.botao_texto || ""; $("botao_url").value = a.botao_url || "";
+  corBt = a.botao_cor || ""; renderCorBt();
+  $("foto_url").value = a.foto || "";
+  previa(); $("texto").focus(); $("texto").scrollIntoView({ behavior: "smooth", block: "center" });
+  toast("Anúncio copiado para o editor. Escolha os canais e poste.");
 }
 function abrirLote(id) { loteAberto.has(id) ? loteAberto.delete(id) : loteAberto.add(id); renderLotes(); }
 async function salvarLote(id, bt) {

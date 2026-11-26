@@ -121,6 +121,43 @@ def fixar(chat, message_id, sim=True):
         tg("unpinChatMessage", chat_id=chat, message_id=int(message_id))
 
 
+def _copia_teste(chat, mid, admin):
+    """Copia a mensagem para o seu privado (sem som) e apaga a cópia. Devolve "ok", "servico" ou "nada"."""
+    try:
+        r = tg("copyMessage", chat_id=admin, from_chat_id=chat, message_id=int(mid), disable_notification=True)
+    except RuntimeError as e:
+        t = str(e).lower()
+        if "can't be copied" in t or "cannot be copied" in t:
+            return "servico"
+        return "nada"
+    try:
+        tg("deleteMessage", chat_id=admin, message_id=r["message_id"])
+    except RuntimeError:
+        pass
+    return "ok"
+
+
+def apagar_aviso_fixado(chat, mid_fixado, depois_de=None, tentativas=3):
+    """Apaga o aviso "fulano fixou uma mensagem" que o Telegram põe no canal.
+    O aviso é a mensagem logo depois da última que se conhece; só apaga se for mesmo um aviso
+    (aviso do Telegram não pode ser copiado, post de verdade pode)."""
+    admin = estado().get("admin")
+    if not admin:
+        return False
+    if _copia_teste(chat, mid_fixado, admin) != "ok":
+        return False  # canal que não deixa copiar nada: não dá para ter certeza, então não mexe
+    inicio = int(depois_de or mid_fixado)
+    for mid in range(inicio + 1, inicio + 1 + tentativas):
+        if _copia_teste(chat, mid, admin) == "servico":
+            try:
+                tg("deleteMessage", chat_id=chat, message_id=mid)
+                return True
+            except RuntimeError as e:
+                print(f"[aviso fixado] {chat}: {e}")
+                return False
+    return False
+
+
 def editar_envio(e, p, canal):
     """Troca o texto e o botão de um post que já está no canal."""
     legenda, botoes = metricas.links_rastreados(p, canal, legenda_do_canal(p, canal), p["botoes"])
@@ -294,24 +331,52 @@ def publicar(pid, conferir=True, so_canais=None, so_gratis=False):
         expira_em = saida
     fixa = bool((p.get("dados") or {}).get("fixar"))
     enviados, erros = 0, []
-    for canal in alvos:
+    textos = {c["id"]: metricas.links_rastreados(p, c, legenda_do_canal(p, c), p["botoes"]) for c in alvos}
+
+    def _um(canal, foto):
+        """Só fala com o Telegram (pode rodar junto com outros canais). Devolve mid, file_id, fixou, erro."""
+        leg, bts = textos[canal["id"]]
+        mid, file_id = enviar(canal["chat"], {**p, "foto": foto, "legenda": leg, "botoes": bts})
+        fixou, aviso = False, None
+        if fixa:
+            try:
+                fixar(canal["chat"], mid)
+                fixou = True
+                apagar_aviso_fixado(canal["chat"], mid)
+            except Exception as x:
+                aviso = f"{canal['nome']}: postou, mas não fixou ({x})"
+        return mid, file_id, fixou, aviso
+
+    def _guardar(canal, res):
+        nonlocal enviados
+        mid, file_id, fixou, aviso = res
+        eid = banco.novo_envio(pid, canal, mid, expira_em)
+        enviados += 1
+        if fixou:
+            banco.sql("UPDATE envios SET fixado=1 WHERE id=?", (eid,))
+        if aviso:
+            erros.append(aviso)
+
+    resto = list(alvos)
+    while resto and p.get("foto") and str(p["foto"]).startswith("uploads/"):
+        canal = resto.pop(0)  # a foto do computador sobe uma vez; os outros canais reaproveitam
         try:
-            leg, bts = metricas.links_rastreados(p, canal, legenda_do_canal(p, canal), p["botoes"])
-            mid, file_id = enviar(canal["chat"], {**p, "legenda": leg, "botoes": bts})
-            if file_id and p["foto"].startswith("uploads/"):
-                p["foto"] = file_id  # depois da 1ª vez, reaproveita a foto já enviada
-                banco.mudar_post(pid, foto=file_id)
-            eid = banco.novo_envio(pid, canal, mid, expira_em)
-            enviados += 1
-            if fixa:
-                try:
-                    fixar(canal["chat"], mid)
-                    banco.sql("UPDATE envios SET fixado=1 WHERE id=?", (eid,))
-                except Exception as x:
-                    erros.append(f"{canal['nome']}: postou, mas não fixou ({x})")
+            res = _um(canal, p["foto"])
+            _guardar(canal, res)
+            if res[1]:
+                p["foto"] = res[1]
+                banco.mudar_post(pid, foto=res[1])
         except Exception as e:
             erros.append(f"{canal['nome']}: {e}")
-        time.sleep(0.5)
+    if resto:
+        from concurrent.futures import ThreadPoolExecutor
+        with ThreadPoolExecutor(max_workers=6) as grupo:
+            futuros = [(c, grupo.submit(_um, c, p.get("foto"))) for c in resto]
+            for canal, fut in futuros:
+                try:
+                    _guardar(canal, fut.result())
+                except Exception as e:
+                    erros.append(f"{canal['nome']}: {e}")
     banco.mudar_post(pid, status="postado" if enviados else "erro", erro="; ".join(erros) or None)
     print(f"[postado] #{pid} em {enviados} canal(is) {p['titulo'][:50]}")
     return enviados

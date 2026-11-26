@@ -41,12 +41,14 @@ def links_rastreados(p, canal, legenda, botoes):
     """Legenda e botões de um post com os links passando pela ponte."""
     import re
     pid, cid = p.get("id"), canal.get("id")
+    if p.get("origem") == "manual":  # anúncio escrito por você: o link vai direto, sem passar pela ponte
+        pid = None
     legenda = re.sub(r'href="([^"]+)"', lambda m: f'href="{rastrear(m.group(1).replace("&amp;", "&"), pid, cid)}"'
                      .replace("&", "&amp;") if site_ok(m.group(1).replace("&amp;", "&")) else m.group(0), legenda or "")
     cor = canal.get("cor_botao") or ""
 
     def _bt(b):
-        b = {**b, "url": rastrear(b["url"], pid, cid)} if b.get("url") else dict(b)
+        b = {**b, "url": rastrear(b["url"], pid, cid)} if b.get("url") and pid else dict(b)
         if b.get("style") not in banco.CORES_BOTAO:  # sem cor própria: usa a cor do canal
             b.pop("style", None)
             if cor in banco.CORES_BOTAO:

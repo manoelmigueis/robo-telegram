@@ -131,6 +131,27 @@ def lotes():
     return saida
 
 
+def anuncios_antigos(ja=()):
+    """Anúncios que você escreveu e que já saíram do ar: dá para usar de novo."""
+    saida, vistos = [], set()
+    for p in banco.posts(limite=300):
+        if p["origem"] != "manual" or p["id"] in ja or p["status"] in ("agendado", "rascunho"):
+            continue
+        texto = para_editor(p["legenda"])
+        chave = (texto or "").strip()[:200]
+        if not chave or chave in vistos:
+            continue
+        vistos.add(chave)
+        botao = (p["botoes"] or [[{}]])[0][0] if p["botoes"] else {}
+        saida.append({"id": p["id"], "titulo": p["titulo"], "status": p["status"], "texto": texto,
+                      "botao_texto": botao.get("text", ""), "botao_url": botao.get("url", ""), "botao_cor": botao.get("style", ""),
+                      "foto": p["foto"] if str(p["foto"] or "").startswith("http") else "",
+                      "quando": p.get("agendado_para") or p.get("criado")})
+        if len(saida) >= 20:
+            break
+    return saida
+
+
 def canais_com_tipo():
     """Canais da tabela; os de conteúdo com IA levam "conteudo" (o nicho), para o painel não mostrar duas vezes."""
     try:
@@ -171,7 +192,8 @@ def resumo():
         "revisar": banco.posts(status=("revisar",)),
         "historico": [p for p in banco.posts(limite=60) if p["status"] not in ("fila", "agendado", "revisar")],
         "no_ar": banco.envios_no_ar(),
-        "lotes": lotes(),
+        "lotes": (_l := lotes()),
+        "anuncios_antigos": anuncios_antigos({x["id"] for x in _l}),
         "desempenho": metricas.resumo(),
         "ajustes": {
             "pausado": bool(e.get("pausado")),
@@ -415,14 +437,30 @@ def fixar_post(pid: int, dados: dict = Body(...)):
     p["dados"]["fixar"] = sim
     banco.mudar_post(pid, dados=p["dados"])
     feitos, erros = 0, []
-    for e in banco.envios_do_post(pid):
-        try:
-            postador.fixar(e["chat"], e["message_id"], sim)
-            banco.sql("UPDATE envios SET fixado=? WHERE id=?", (int(sim), e["id"]))
-            feitos += 1
-        except RuntimeError as x:
-            erros.append(f"{e['canal_nome'] or e['chat']}: {x}")
-        time.sleep(0.1)
+    envios = banco.envios_do_post(pid)
+    ultimos = {}
+    if sim and envios:  # a última mensagem que se conhece em cada canal: o aviso vem logo depois dela
+        for r in banco.sql("SELECT chat, MAX(CAST(message_id AS INTEGER)) AS m FROM envios GROUP BY chat"):
+            ultimos[r["chat"]] = r["m"]
+
+    def _um(e):
+        postador.fixar(e["chat"], e["message_id"], sim)
+        if sim:
+            try:
+                postador.apagar_aviso_fixado(e["chat"], e["message_id"], ultimos.get(e["chat"]), tentativas=8)
+            except Exception as x:
+                print("[aviso fixado]", x)
+
+    from concurrent.futures import ThreadPoolExecutor
+    with ThreadPoolExecutor(max_workers=6) as grupo:
+        futuros = [(e, grupo.submit(_um, e)) for e in envios]
+        for e, fut in futuros:
+            try:
+                fut.result()
+                banco.sql("UPDATE envios SET fixado=? WHERE id=?", (int(sim), e["id"]))
+                feitos += 1
+            except RuntimeError as x:
+                erros.append(f"{e['canal_nome'] or e['chat']}: {x}")
     if p["status"] == "agendado" and not feitos:
         return {"ok": True, "msg": "Vai entrar fixado." if sim else "Vai entrar sem fixar."}
     msg = f"{'Fixado' if sim else 'Desafixado'} em {feitos} canal(is)."

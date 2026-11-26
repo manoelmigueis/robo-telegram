@@ -29,7 +29,7 @@ def baixar(chat):
     info = postador.tg("getChat", chat_id=chat)
     foto = info.get("photo")
     if not foto:
-        return None
+        return None, info
     arq = postador.tg("getFile", file_id=foto["small_file_id"])
     token = postador.os.environ["TELEGRAM_BOT_TOKEN"]
     r = requests.get(f"https://api.telegram.org/file/bot{token}/{arq['file_path']}", timeout=60)
@@ -42,21 +42,22 @@ def baixar(chat):
 def main():
     postador.carregar_env()
     PASTA.mkdir(exist_ok=True)
-    indice = {}
+    indice, bios = {}, {}
     for chat in chats():
         try:
-            feito = baixar(chat)
+            nome, info = baixar(chat)
         except Exception as erro:
             print(f"[fotos] {chat}: {erro}")
             continue
-        if not feito:
-            print(f"[fotos] {chat}: canal sem foto")
-            continue
-        nome, info = feito
-        for chave in {chat, str(info["id"]), "@" + info["username"] if info.get("username") else chat}:
-            indice[chave] = nome
-        print(f"[fotos] {chat}: {nome}")
+        chaves = {chat, str(info["id"]), "@" + info["username"] if info.get("username") else chat}
+        for chave in chaves:
+            bios[chave] = {"titulo": info.get("title") or "", "bio": info.get("description") or "",
+                           "usuario": info.get("username") or ""}
+            if nome:
+                indice[chave] = nome
+        print(f"[fotos] {chat}: {nome or 'canal sem foto'}")
     (PASTA / "index.json").write_text(json.dumps(indice, ensure_ascii=False, indent=2), encoding="utf-8")
+    (PASTA / "info.json").write_text(json.dumps(bios, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 if __name__ == "__main__":
