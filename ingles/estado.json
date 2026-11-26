@@ -42,10 +42,11 @@
     "040-colors-and-shapes",
     "041-movies-and-series",
     "042-mini-aula-come",
-    "043-asking-for-directions"
+    "043-asking-for-directions",
+    "044-animals-animais-ingles"
   ],
-  "contador": 43,
-  "ultimo": "2026-11-25T23:00:56+00:00",
+  "contador": 44,
+  "ultimo": "2026-11-26T13:00:58+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -92,7 +93,8 @@
     "040-colors-and-shapes": "2026-11-24T23:00:44+00:00",
     "041-movies-and-series": "2026-11-25T13:01:21+00:00",
     "042-mini-aula-come": "2026-11-25T17:01:18+00:00",
-    "043-asking-for-directions": "2026-11-25T23:00:56+00:00"
+    "043-asking-for-directions": "2026-11-25T23:00:56+00:00",
+    "044-animals-animais-ingles": "2026-11-26T13:00:58+00:00"
   },
   "mensagens": {
     "008-phone-conversation": [
@@ -217,6 +219,9 @@
     ],
     "043-asking-for-directions": [
       8482
+    ],
+    "044-animals-animais-ingles": [
+      8483
     ]
   }
 }
