@@ -189,7 +189,8 @@
     "lk:45cb6a1eac425d",
     "pp:luxury-mens-fashion-coffee-portrait",
     "pc:cmwud5mmw0005kx08fbwza6ue",
-    "nb:de015d55a58ec2"
+    "nb:de015d55a58ec2",
+    "pp:woman-romantic-spring-nature-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -205,7 +206,7 @@
     "inicio": "2026-11-26T01:21:17+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 0,
+    "feitos": 1,
     "meta": 12,
     "achados": 74,
     "msg": ""
