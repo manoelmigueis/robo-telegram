@@ -1387,6 +1387,7 @@ async function carregarCentral(n) {
   if (!CENTRAL[n]) renderCentral(n);
   try { CENTRAL[n] = await api(`/api/central/${n}`); } catch (e) {}
   renderCentral(n);
+  if (CENTRAL[n] && CENTRAL[n].garimpo && !garimpoPromptsTimer && garimpoPromptsRodando(CENTRAL[n].garimpo_status)) vigiarGarimpoPrompts(n);
   if (abaAtual === "canal" && canalAtual === "c:" + n) { const c = listaCanais().find(x => x.chave === canalAtual); if (c) $("troca_bt").innerHTML = `${avatar(c)}<span class="nm">${esc(c.nome)}</span><svg class="i"><use href="#i-baixo"/></svg>`; }
 }
 function cxThumb(n, i) {
@@ -1452,8 +1453,9 @@ function renderCentral(n) {
 function cxGarimpo(n, g) {
   const c = g.candidatos || [];
   return `<div class="card cx-criar"><div class="secao"><svg class="i"><use href="#i-picareta"/></svg> Garimpar prompts</div>
-      <div class="linha-garimpo"><button class="btn pri peq" onclick='cxAcao("${n}","garimpar","","Garimpar prompts novos nas galerias agora?")'><svg class="i"><use href="#i-picareta"/></svg>Garimpar prompts</button></div>
-      <p class="dica">Busca prompts novos nos sites da lista abaixo, com a imagem de exemplo do site. Leva uns 5 minutos. As prévias chegam no seu privado e aparecem aqui embaixo. Nada vai para o canal sem você aprovar. O garimpo também roda sozinho todo dia às 07h40.</p></div>
+      <div class="linha-garimpo"><button class="btn pri peq" id="bt_garimpo_${n}" onclick='garimparPrompts("${n}")'><svg class="i"><use href="#i-picareta"/></svg>Garimpar prompts</button></div>
+      <div id="barra_garimpo_${n}">${barraPrompts(g.garimpo_status)}</div>
+      <p class="dica">Busca prompts novos nos sites da lista abaixo, com a imagem de exemplo do site. Leva uns 5 minutos. O garimpo também roda sozinho todo dia às 07h40.</p></div>
     ${cxFontes(n, g.fontes || {})}
     <div class="card"><div class="secao">⏳ Esperando aprovação <span class="conta-s">${c.length}</span></div>
       ${c.map(i => cxItem(n, i, `<button class="btn peq" onclick='cxAcao("${n}","descartar",${esc(JSON.stringify(i.id))},"Descartar este prompt?")'>${ico("lixo")}Descartar</button>
@@ -1470,6 +1472,53 @@ function cxFontes(n, f) {
       <div class="linha" style="margin-top:12px"><input id="cx_fonte_${n}" type="url" inputmode="url" placeholder="Link da página com os prompts (https://...)" aria-label="Link do site novo">
         <button class="btn pri" style="flex:0 0 auto" onclick="cxFonte('${n}')">Adicionar site</button></div>
       <p class="dica">Cole o link da página onde os prompts aparecem (a lista, não um prompt só). A IA lê a página e pega só os prompts completos, com a imagem de exemplo. Site que monta tudo por JavaScript não funciona: o robô avisa na hora.</p></div>`;
+}
+// barra do garimpo de prompts: o robô grava o andamento em estado["garimpo"]
+let garimpoPedido = 0, garimpoPromptsTimer = null;
+function barraPrompts(s) {
+  const esperando = garimpoPedido && Date.now() - garimpoPedido < 15 * 60000;
+  const novo = s && s.inicio && Date.parse(s.inicio) >= garimpoPedido - 60000;
+  if (esperando && !novo) {  // o pedido ainda está chegando ao robô na nuvem
+    const seg = Math.floor((Date.now() - garimpoPedido) / 1000);
+    return barraHtml("⛏ Ligando o robô de prompts…", `${seg} s`, Math.min(10, 2 + seg / 12));
+  }
+  if (!s || !s.inicio) return "";
+  if (s.fim) {
+    const recente = Date.now() - Date.parse(s.fim) < 30 * 60000;
+    if (!recente && !esperando) return "";
+    return barraHtml(`✅ Garimpo terminou: ${esc(s.msg || "")}`, "", 100);
+  }
+  const seg = Math.floor((Date.now() - Date.parse(s.inicio)) / 1000), t = `${Math.floor(seg / 60)} min ${seg % 60} s`;
+  if (s.fase === "buscando") return barraHtml("⛏ Procurando prompts novos nos sites…", t, 15);
+  const meta = s.meta || 0, feitos = s.feitos || 0;
+  if (!meta) return barraHtml("⛏ Conferindo o que achou…", t, 20);
+  return barraHtml(`✍️ Escrevendo e pegando a imagem: ${feitos} de ${meta}`, t, 20 + 78 * feitos / meta);
+}
+function barraHtml(texto, tempo, pct) {
+  return `<div class="garimpo-barra"><div class="gb-t"><b>${texto}</b><span class="gb-tempo">${tempo}</span></div>
+    <div class="gb-trilho"><div class="gb-enche" style="width:${Math.round(pct)}%"></div></div></div>`;
+}
+function garimpoPromptsRodando(s) {
+  if (garimpoPedido && Date.now() - garimpoPedido < 15 * 60000 && !(s && s.fim && Date.parse(s.fim) >= garimpoPedido)) return true;
+  return !!(s && s.inicio && !s.fim && Date.now() - Date.parse(s.inicio) < 30 * 60000);
+}
+function vigiarGarimpoPrompts(n) {
+  clearInterval(garimpoPromptsTimer);
+  garimpoPromptsTimer = setInterval(async () => {
+    try { CENTRAL[n] = await api(`/api/central/${n}`); } catch (e) {}
+    const s = (CENTRAL[n] || {}).garimpo_status;
+    if (!garimpoPromptsRodando(s)) { clearInterval(garimpoPromptsTimer); garimpoPromptsTimer = null; garimpoPedido = 0; renderCentral(n); return; }
+    const caixa = $(`barra_garimpo_${n}`); if (caixa) caixa.innerHTML = barraPrompts(s);
+    const bt = $(`bt_garimpo_${n}`); if (bt) bt.disabled = true;
+  }, 5000);
+}
+async function garimparPrompts(n) {
+  if (!confirm("Garimpar prompts novos nas galerias agora?")) return;
+  garimpoPedido = Date.now();
+  const caixa = $(`barra_garimpo_${n}`); if (caixa) caixa.innerHTML = barraPrompts(null);
+  const bt = $(`bt_garimpo_${n}`); if (bt) bt.disabled = true;
+  try { await api(`/api/central/${n}/garimpar`, {}); } catch (e) { garimpoPedido = 0; }
+  vigiarGarimpoPrompts(n);
 }
 async function cxFonte(n) {
   const url = $(`cx_fonte_${n}`).value.trim();

@@ -532,10 +532,40 @@ def mandar_candidato(chat, item):
 
 
 def garimpar(limite=None, chat=None):
-    """Garimpa, reescreve, gera a imagem (até o teto do dia) e manda as prévias. Nada vai para o canal."""
+    """Garimpa e grava o andamento em estado["garimpo"] para a barra do painel."""
+    import central
+    st = {"inicio": central.agora_iso(), "fim": None, "fase": "buscando", "feitos": 0, "meta": 0, "achados": 0, "msg": ""}
+
+    def marca(**campos):
+        st.update(campos)
+        try:
+            central.gravar("prompts", f"prompts: garimpo {st['fase']}",
+                           mudar=lambda e, s=dict(st): e.update(garimpo=s))
+        except Exception as erro:
+            print(f"[garimpo] não gravei o andamento: {erro}")
+
+    marca()
+    feitos = []
+    try:
+        feitos = _garimpar(limite, chat, marca, st)
+        return feitos
+    except Exception as erro:
+        st["msg"] = f"Deu erro: {str(erro)[:150]}"
+        raise
+    finally:
+        if not st["msg"]:
+            st["msg"] = (f"{len(feitos)} prompt(s) novo(s) entraram." if feitos
+                         else "Nenhum prompt novo nas fontes agora. Tente mais tarde.")
+        marca(fase="pronto", fim=central.agora_iso(), feitos=len(feitos))
+
+
+def _garimpar(limite, chat, marca, st):
+    """Garimpa, reescreve, pega a imagem e põe na fila (ou manda a prévia). O teto do dia vale só
+    para imagens GERADAS pela IA; prompt que já traz a imagem do site não gasta o teto."""
     import central
     if postador.pausa_total():
         print("Tudo pausado (pausa geral do painel).")
+        st["msg"] = "Está tudo pausado no painel (pausa geral)."
         return []
     chat = chat or postador.estado().get("admin")
     if not chat:
@@ -545,10 +575,10 @@ def garimpar(limite=None, chat=None):
     hoje = datetime.now(FUSO).strftime("%Y-%m-%d")
     cota = e.get("imagens") if (e.get("imagens") or {}).get("dia") == hoje else {"dia": hoje, "n": 0}
     teto = int(CFG.get("imagens_por_dia", 4))
-    vagas = max(0, min(teto - cota["n"], limite if limite is not None else teto))
-    if not vagas:
-        print(f"Teto de {teto} prévias por dia já usado hoje.")
-        return []
+    vagas = max(1, limite if limite is not None else teto)
+    if cota["n"] >= teto:
+        print(f"Teto de {teto} imagens geradas hoje já usado: só entram prompts com imagem do site.")
+        pode_gerar = False
     vistos = set(e.get("vistos", [])) | {c.get("chave") for c in e.get("candidatos", [])}
     novos = [x for x in coletar(vistos, e.get("fontes", [])) if x["chave"] not in vistos]
     achados = [x for x in novos if serve(x) and (x.get("imagem_url") or pode_gerar)]
@@ -557,6 +587,7 @@ def garimpar(limite=None, chat=None):
         central.gravar("prompts", f"prompts: {len(fora)} fora do perfil",
                        mudar=lambda e: e.update(vistos=(e.get("vistos", []) + fora)[-3000:]))
     print(f"[garimpo] {len(achados)} prompts novos que servem; vou mandar até {vagas}.")
+    marca(fase="escrevendo", meta=min(vagas, len(achados)), achados=len(achados))
     titulos = [i.get("titulo", "") for i in central.banco_nuvem("prompts")] + [c.get("titulo", "") for c in e.get("candidatos", [])]
     feitos, tentativas = [], 0
     for x in achados:
@@ -572,14 +603,14 @@ def garimpar(limite=None, chat=None):
             central.gravar("prompts", f"prompts: recusado {x['chave']}",
                            mudar=lambda e, k=x["chave"]: e.update(vistos=(e.get("vistos", []) + [k])[-3000:]))
             continue
-        cota_agora = central.estado("prompts", fresco=True).get("imagens") or {}
-        usadas = cota_agora.get("n", 0) if cota_agora.get("dia") == hoje else 0
-        if usadas >= teto:  # teto conferido de novo logo antes de gastar
-            print(f"Teto de {teto} prévias por dia atingido.")
-            break
         jpg = baixar_imagem(x.get("imagem_url"))
         da_fonte = jpg is not None
         if not da_fonte:
+            cota_agora = central.estado("prompts", fresco=True).get("imagens") or {}
+            usadas = cota_agora.get("n", 0) if cota_agora.get("dia") == hoje else 0
+            if usadas >= teto:  # teto conferido de novo logo antes de gastar
+                print(f"[garimpo] teto de {teto} imagens geradas atingido; {x['chave']} fica para outro dia.")
+                continue
             # prompt que usa a foto de quem lê não tem como ganhar exemplo gerado
             if not (pode_gerar and r.get("prompt_en")) or PRECISA_FOTO.search(x["texto"]):
                 print(f"[garimpo] {x['chave']} ficou sem imagem; pulei.")
@@ -603,9 +634,11 @@ def garimpar(limite=None, chat=None):
 
         auto = aprova_sozinho()
 
-        def mudar(e, item=item, k=x["chave"]):
-            c = e.get("imagens") if (e.get("imagens") or {}).get("dia") == hoje else {"dia": hoje, "n": 0}
-            e["imagens"] = {"dia": hoje, "n": c["n"] + 1}
+        def mudar(e, item=item, k=x["chave"], gerada=not da_fonte, n_feito=len(feitos) + 1):
+            if gerada:  # só imagem gerada pela IA gasta o teto do dia
+                c = e.get("imagens") if (e.get("imagens") or {}).get("dia") == hoje else {"dia": hoje, "n": 0}
+                e["imagens"] = {"dia": hoje, "n": c["n"] + 1}
+            e["garimpo"] = {**st, "feitos": n_feito}  # gravar() pode repetir: nada de += aqui
             if not auto:
                 e["candidatos"] = e.get("candidatos", []) + [item]
             e["vistos"] = (e.get("vistos", []) + [k])[-3000:]
@@ -621,6 +654,7 @@ def garimpar(limite=None, chat=None):
             except Exception as erro:
                 print(f"[garimpo] prévia de {pid} falhou: {erro}")
         feitos.append(item)
+        st["feitos"] = len(feitos)
         titulos.append(item["titulo"])
         print(f"[garimpo] candidato {pid}: {item['titulo']}")
     return feitos

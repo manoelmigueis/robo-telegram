@@ -266,7 +266,8 @@ def resumo(n):
             "total_postados": len(e["postados"]), "ultimo": e.get("ultimo"),
             "dias": round(len(f) / por_dia, 1), "noticias": n == "renda",
             # prompts: o que o garimpo achou e ainda espera o seu ✅ Aprovar
-            "garimpo": n == "prompts", "candidatos": [cartao(c) for c in e.get("candidatos", [])] if n == "prompts" else [],
+            "garimpo": n == "prompts", "garimpo_status": e.get("garimpo") if n == "prompts" else None,
+            "candidatos": [cartao(c) for c in e.get("candidatos", [])] if n == "prompts" else [],
             "fontes": {"fixas": list(getattr(m, "FIXAS", [])), "extras": e.get("fontes", [])} if n == "prompts" else {},
             "vercel": bool(os.environ.get("VERCEL"))}
 
