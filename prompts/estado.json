@@ -18,7 +18,8 @@
     "261125-7-vire-personagem-de-desenho-ani",
     "261125-8-crie-um-retrato-com-luz-de-est",
     "261125-2-transforme-sua-foto-em-um-bone",
-    "261125-7-vire-personagem-fofo-estilo-ch"
+    "261125-7-vire-personagem-fofo-estilo-ch",
+    "261125-5-crie-um-retrato-cinematogrfico"
   ],
   "pulados": [],
   "frente": [],
@@ -44,7 +45,8 @@
     "261125-7-vire-personagem-de-desenho-ani": "2026-11-26T01:19:58+00:00",
     "261125-8-crie-um-retrato-com-luz-de-est": "2026-11-26T01:19:56+00:00",
     "261125-2-transforme-sua-foto-em-um-bone": "2026-11-26T02:25:19+00:00",
-    "261125-7-vire-personagem-fofo-estilo-ch": "2026-11-26T02:25:32+00:00"
+    "261125-7-vire-personagem-fofo-estilo-ch": "2026-11-26T02:25:32+00:00",
+    "261125-5-crie-um-retrato-cinematogrfico": "2026-11-26T02:25:32+00:00"
   },
   "mensagens": {
     "261125-1-foto-profissional-estilo-edito": [
@@ -103,9 +105,12 @@
     ],
     "261125-7-vire-personagem-fofo-estilo-ch": [
       24
+    ],
+    "261125-5-crie-um-retrato-cinematogrfico": [
+      25
     ]
   },
-  "contador": 19,
+  "contador": 20,
   "vistos": [
     "pc:cmwwenmqs0001if08a8ptnnbv",
     "nb:29b524029373a7",
