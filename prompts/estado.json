@@ -148,5 +148,14 @@
   "fontes": [
     "https://prompthero.com/midjourney-prompts",
     "https://promptsref.com/library/nano-banana-pro?utm_source=x_unedrwood"
-  ]
+  ],
+  "garimpo": {
+    "inicio": "2026-11-26T01:05:10+00:00",
+    "fim": null,
+    "fase": "buscando",
+    "feitos": 0,
+    "meta": 0,
+    "achados": 0,
+    "msg": ""
+  }
 }
