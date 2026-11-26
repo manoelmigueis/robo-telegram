@@ -195,7 +195,8 @@
     "pp:floating-man-dark-studio-smoke-spotlight",
     "pp:man-in-suit-with-red-roses-elevator-portrait",
     "pp:night-cityscape-bokeh-taxi-portrait",
-    "pp:man-black-tuxedo-rose-portrait"
+    "pp:man-black-tuxedo-rose-portrait",
+    "pp:cute-chibi-cartoon-hugging-illustration"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -211,7 +212,7 @@
     "inicio": "2026-11-26T01:21:17+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 6,
+    "feitos": 7,
     "meta": 12,
     "achados": 74,
     "msg": ""

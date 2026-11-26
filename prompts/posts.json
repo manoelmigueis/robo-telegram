@@ -1049,5 +1049,30 @@
   "autor": "",
   "chave": "pp:man-black-tuxedo-rose-portrait",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Close-up portrait of an attractive, man wearing a tailored black tuxedo, black bow tie, crisp white dress shirt, and a red rose lapel pin. His face and body are turned slightly to the side in a three-quarter pose, with sharp light-colored eyes glancing directly at the camera. Intense, smoldering expression with subtle confidence. Naturally styled wet-look hair. Moody cinematic lighting, shallow depth of field, smooth gray studio background. Photorealistic, 8K resolution, shot on an 85mm lens, 4:5 vertical aspect ratio.\nIgnore the original pose, clothing and lighting completely.</pre><p>💡 Troque &quot;black tuxedo&quot; pela roupa que quiser e &quot;red rose&quot; pela cor da flor.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261125-7-vire-personagem-fofo-estilo-ch",
+  "tipo": "prompt",
+  "titulo": "🤪 Vire personagem fofo estilo chibi abraçando seu vício",
+  "prompt": "Create a big-head, small-body chibi cartoon character, hilariously protecting the one thing they absolutely cannot live without [Coffee / Smartphone / Laptop / Object / Pet Animal / etc]. The object must be comically giant, while the character clings to it tightly as if it were the most important thing in the world, with funny, expressive facial features and hand-drawn texts like 'Don't Touch! It's Mine!'.",
+  "prompt_en": "Create a big-head, small-body chibi cartoon character, hilariously protecting the one thing they absolutely cannot live without [Coffee / Smartphone / Laptop / Object / Pet Animal / etc]. The object must be comically giant, while the character clings to it tightly as if it were the most important thing in the world, with funny, expressive facial features and hand-drawn texts like 'Don't Touch! It's Mine!'.",
+  "dica": "Troque [Coffee / Smartphone / Laptop / Object / Pet Animal / etc] pelo que seu personagem vai proteger e mude o texto da placa se quiser",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "chibi",
+   "cartoon",
+   "avatar",
+   "ilustracao"
+  ],
+  "imagens": [
+   "img/261125-7-vire-personagem-fofo-estilo-ch.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.promptplum.com/cdn-cgi/image/q=78,scq=50,width=1400,height=1400,fit=contain,f=jpeg/promptImages/3adf7af3-6ef8-4336-b3ef-d23ea8ce5bc6.webp",
+  "fonte": "PromptPlum",
+  "url": "https://promptplum.com/prompt/cute-chibi-cartoon-hugging-illustration/",
+  "autor": "",
+  "chave": "pp:cute-chibi-cartoon-hugging-illustration",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Create a big-head, small-body chibi cartoon character, hilariously protecting the one thing they absolutely cannot live without [Coffee / Smartphone / Laptop / Object / Pet Animal / etc]. The object must be comically giant, while the character clings to it tightly as if it were the most important thing in the world, with funny, expressive facial features and hand-drawn texts like &#x27;Don&#x27;t Touch! It&#x27;s Mine!&#x27;.</pre><p>💡 Troque [Coffee / Smartphone / Laptop / Object / Pet Animal / etc] pelo que seu personagem vai proteger e mude o texto da placa se quiser</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
