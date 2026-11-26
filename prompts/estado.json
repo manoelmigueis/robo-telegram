@@ -331,7 +331,8 @@
     "pp:winter-snow-storm-male-portrait",
     "pp:cinematic-male-portrait-prompt",
     "pp:red-jacket-boy-split-panel-portrait",
-    "pp:man-reading-under-tree-park-portrait"
+    "pp:man-reading-under-tree-park-portrait",
+    "pp:professional-3d-male-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -347,7 +348,7 @@
     "inicio": "2026-11-26T20:32:13+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 4,
+    "feitos": 5,
     "meta": 12,
     "achados": 68,
     "msg": ""
