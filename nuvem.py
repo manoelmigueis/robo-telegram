@@ -103,4 +103,9 @@ def postar():
 if __name__ == "__main__":
     postador.carregar_env()
     acao = sys.argv[1] if len(sys.argv) > 1 else "postar"
+    try:
+        import central
+        central.garantir_canais()
+    except Exception as x:
+        print(f"[canais] {x}")
     {"postar": postar, "garimpar": garimpar, "relogio": relogio}[acao]()

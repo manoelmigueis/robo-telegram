@@ -185,6 +185,26 @@ input[type=file]::file-selector-button{border:0;border-radius:999px;background:v
 .chip:has(input:checked) .ck{background:var(--acento);border-color:var(--acento);opacity:1}
 .chip:has(input:checked) .ck::after{content:'';width:6px;height:6px;border-radius:50%;background:#fff}
 button.chip{font-family:var(--font)}
+.esc-topo{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.esc-conta{margin-left:auto;font-size:13px;font-weight:700;color:var(--muted)}
+.esc-grupo{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px}
+.esc-grupo:first-child{margin-top:0}
+.esc-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.esc-c{position:relative;display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:14px;background:var(--glass-2);border:1.5px solid var(--line);cursor:pointer;user-select:none;min-width:0;transition:border-color .2s,background .2s}
+.esc-c:hover{border-color:var(--ink)}
+.esc-c input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.esc-c:has(input:checked){border-color:var(--acento);background:var(--soft)}
+.esc-c:has(input:focus-visible){outline:2px solid var(--acento);outline-offset:2px}
+.esc-c .hub-av{width:34px;height:34px;border-radius:50%;font-size:15px}
+.esc-tx{display:flex;flex-direction:column;min-width:0;flex:1}
+.esc-tx b{font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.esc-tx small{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.esc-c .ck{width:20px;height:20px;border-radius:50%;border:1.6px solid var(--line);flex:none;display:grid;place-items:center}
+.esc-c:has(input:checked) .ck{background:var(--acento);border-color:var(--acento)}
+.esc-c:has(input:checked) .ck::after{content:'';width:8px;height:5px;border:2px solid #fff;border-top:0;border-right:0;transform:rotate(-45deg) translate(1px,-1px)}
+.cresc-total{display:flex;flex-wrap:wrap;gap:10px 28px;align-items:baseline;padding:14px 16px;border-radius:16px;background:var(--soft);margin-top:12px}
+.cresc-total .grande{font-size:30px;font-weight:800;letter-spacing:-.02em}
+.cresc-total small{color:var(--muted);font-size:12.5px}
 
 .ferramentas{display:flex;gap:4px;margin-bottom:6px;flex-wrap:wrap;align-items:center}
 .ferramentas button{border:1px solid var(--line);background:var(--glass-2);color:var(--ink);border-radius:10px;min-width:34px;height:32px;padding:0 9px;font:700 13px var(--font);cursor:pointer}
@@ -629,8 +649,8 @@ button.chip{font-family:var(--font)}
           <div class="card">
             <div class="secao">Onde e quando</div>
             <label class="rot" style="margin-top:0">Canais</label>
-            <div class="chips" id="escolha_canais"></div>
-            <div class="chips" id="escolha_nichos" style="margin-top:10px"></div>
+            <div class="esc-topo" id="escolha_nichos"></div>
+            <div id="escolha_canais"></div>
 
             <label class="rot">Quando</label>
             <div class="seg" id="modos" role="group" aria-label="Quando postar">
@@ -650,6 +670,12 @@ button.chip{font-family:var(--font)}
               <button class="btn acento" id="enviar" onclick="criarPost()"><svg class="i"><use href="#i-aviao"/></svg><span>Postar agora</span></button>
               <button class="btn" onclick="limpar()">Limpar</button>
             </div>
+          </div>
+
+          <div class="card">
+            <div class="secao">Seus anúncios nos canais <span class="conta-s" id="c_criar_lotes"></span></div>
+            <p class="dica" style="margin-top:0">Para fazer um canal pequeno crescer: escreva o anúncio com o link dele, toque em <b>Todos</b>, ponha um dia em “Sai do ar em” e poste. O anúncio aparece aqui uma vez só, e “Apagar de todos” tira ele de todos os canais de uma vez.</p>
+            <div id="criar_lotes"></div>
           </div>
         </div>
 
@@ -722,6 +748,7 @@ button.chip{font-family:var(--font)}
           <div class="seg" id="cresc_periodo" role="group" aria-label="Período"></div>
         </div>
         <p class="dica" id="cresc_dica">Membros de cada canal, medidos de hora em hora. Entradas e saídas são estimadas pela diferença entre uma medida e a seguinte.</p>
+        <div id="cresc_total"></div>
         <div id="cresc_canais" class="cresc-grade"></div>
       </div>
       <div id="hub_canais"></div>
@@ -1046,13 +1073,7 @@ function render() {
   const recentes = d.historico.filter(p => p.status === "postado").slice(0, 4);
   $("ini_hist").innerHTML = recentes.map(p => itemPost(p)).join("") || vazio("Nada postado ainda.");
 
-  const marcados = new Set([...document.querySelectorAll("#escolha_canais input:checked")].map(i => i.value));
-  const primeira = !$("escolha_canais").children.length;
-  $("escolha_canais").innerHTML = d.canais.map(c => `<label class="chip"><input type="checkbox" value="${c.id}" ${(primeira ? c.auto : marcados.has(String(c.id))) ? "checked" : ""}><span class="ck"></span>${esc(c.nome)}${c.nicho ? ` <span style="font-weight:500">· ${esc(c.nicho)}</span>` : ""}</label>`).join("") || vazio("Adicione um canal em Canais.");
-  const nichos = [...new Set(d.canais.map(c => (c.nicho || "").trim()).filter(Boolean))];
-  $("lista_nichos").innerHTML = nichos.map(n => `<option value="${esc(n)}">`).join("");
-  $("escolha_nichos").innerHTML = (d.canais.length > 1 ? `<button class="chip" data-nicho="*todos">Todos os canais</button><button class="chip" data-nicho="*nenhum">Nenhum</button>` : "")
-    + (nichos.length ? `<span class="dica" style="margin:0 4px 0 6px;align-self:center">Marcar nicho:</span>` + nichos.map(n => `<button class="chip" data-nicho="${esc(n)}">${esc(n)}</button>`).join("") : "");
+  renderEscolha(d);
 
   $("c_agendados").textContent = d.agendados.length || ""; $("c_fila").textContent = d.fila.length ? `${livros} livros · ${ofertas} ofertas` : "";
   $("lista_agendados").innerHTML = d.agendados.map(p => itemPost(p, acoesPost(p))).join("") || vazio("Nada agendado.");
@@ -1084,11 +1105,42 @@ function render() {
     : "O painel está só no PC (o túnel da Cloudflare não está ligado).";
   previa();
 }
+// escolha de canais do Criar: cartões com foto, separados por tipo, com contador
+function grupoCanal(c) { return c.conteudo ? "conteudo" : amazon(c) ? "livros" : "outros"; }
+function renderEscolha(d) {
+  const marcados = new Set([...document.querySelectorAll("#escolha_canais input:checked")].map(i => i.value));
+  const primeira = !$("escolha_canais").children.length;
+  const card = c => {
+    const ct = c.conteudo && CONTEUDO[c.conteudo];
+    const av = avatar({ chat: c.chat, emoji: ct ? ct.emoji : "", inicial: ((c.nome || "").replace(/^[^\p{L}\p{N}]+/u, "") || "?").charAt(0).toUpperCase() });
+    const on = primeira ? c.auto : marcados.has(String(c.id));
+    return `<label class="esc-c" title="${esc(c.nome)}"><input type="checkbox" value="${c.id}" ${on ? "checked" : ""}>${av}<span class="esc-tx"><b>${esc(c.nome)}</b><small>${esc([c.chat, c.nicho].filter(Boolean).join(" · "))}</small></span><span class="ck"></span></label>`;
+  };
+  const html = GRUPOS.map(([g, rot]) => {
+    const l = d.canais.filter(c => grupoCanal(c) === g).sort((x, y) => x.nome.localeCompare(y.nome, "pt-BR"));
+    return l.length ? `<div class="esc-grupo">${rot} · ${l.length}</div><div class="esc-grade">${l.map(card).join("")}</div>` : "";
+  }).join("");
+  $("escolha_canais").innerHTML = html || vazio("Adicione um canal em Canais.");
+  const nichos = [...new Set(d.canais.map(c => (c.nicho || "").trim()).filter(Boolean))];
+  $("lista_nichos").innerHTML = nichos.map(n => `<option value="${esc(n)}">`).join("");
+  const grupos = GRUPOS.filter(([g]) => d.canais.some(c => grupoCanal(c) === g));
+  $("escolha_nichos").innerHTML = d.canais.length > 1
+    ? `<button class="chip" data-nicho="*todos">Todos (${d.canais.length})</button><button class="chip" data-nicho="*nenhum">Nenhum</button>`
+      + (grupos.length > 1 ? grupos.map(([g, rot]) => `<button class="chip" data-nicho="*g:${g}">${rot}</button>`).join("") : "")
+      + `<span class="esc-conta" id="esc_conta"></span>` : "";
+  contarEscolha();
+}
+function contarEscolha() {
+  const el = $("esc_conta"); if (!el) return;
+  const n = document.querySelectorAll("#escolha_canais input:checked").length, t = document.querySelectorAll("#escolha_canais input").length;
+  el.textContent = `${n} de ${t} marcados`;
+}
+$("escolha_canais").addEventListener("change", contarEscolha);
 $("escolha_nichos").addEventListener("click", e => {
   const b = e.target.closest("[data-nicho]"); if (!b) return;
   const alvo = b.dataset.nicho;
-  const ids = dados.canais.filter(c => alvo === "*todos" || (alvo !== "*nenhum" && (c.nicho || "").trim() === alvo)).map(c => String(c.id));
-  document.querySelectorAll("#escolha_canais input").forEach(i => i.checked = ids.includes(i.value)); previa();
+  const ids = dados.canais.filter(c => alvo === "*todos" || (alvo.startsWith("*g:") ? grupoCanal(c) === alvo.slice(3) : alvo !== "*nenhum" && (c.nicho || "").trim() === alvo)).map(c => String(c.id));
+  document.querySelectorAll("#escolha_canais input").forEach(i => i.checked = ids.includes(i.value)); contarEscolha(); previa();
 });
 
 
@@ -1138,15 +1190,18 @@ let hubFiltro = "todos";
 try { hubFiltro = localStorage.getItem("hubFiltro") || "todos"; } catch (e) {}
 function semAcento(s) { return String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); }
 function listaCanais() {
+  const linhaConteudo = {};
+  ((dados && dados.canais) || []).forEach(c => { if (c.conteudo) linhaConteudo[c.conteudo] = c; });
   const out = Object.keys(CONTEUDO).map(n => {
-    const g = CENTRAL[n], base = CONTEUDO[n];
+    const g = CENTRAL[n], base = CONTEUDO[n], lc = linhaConteudo[n];
     let status = "", cor = "";
     if (g && g.fila) { status = `${g.fila.length} na fila · ${String(g.dias).replace(".", ",")} dias`; cor = g.fila.length <= 9 ? "aviso" : "ok"; }
     return { chave: "c:" + n, tipo: "conteudo", nome: g ? g.nome : base.nome, sub: g ? g.canal : "posta sozinho pela nuvem",
-             emoji: g ? g.emoji : base.emoji, nicho: n, status, cor, chat: g ? g.canal : "" };
+             emoji: g ? g.emoji : base.emoji, nicho: n, status, cor, chat: g ? g.canal : lc ? lc.chat : "" };
   });
   const a = (dados && dados.ajustes) || {};
   ((dados && dados.canais) || []).forEach(c => {
+    if (c.conteudo) return; // já está acima, como canal de conteúdo
     const status = !c.auto ? "automático desligado" : a.pausado ? "automático pausado" : "automático ligado";
     const am = amazon(c), nf = postsDoCanal(c).fila.length;
     out.push({ chave: "b:" + c.id, tipo: am ? "livros" : "outros", nome: c.nome, sub: [c.chat, c.nicho].filter(Boolean).join(" · "),
@@ -1158,10 +1213,13 @@ function listaCanais() {
 // foto de perfil de cada canal: o robô baixa do Telegram 1x por dia (fotos_canais.py) para fotos/ no GitHub
 const FOTOS_URL = "https://raw.githubusercontent.com/manoelmigueis/robo-telegram/main/fotos/";
 let FOTOS = {};
-fetch(FOTOS_URL + "index.json?t=" + Math.floor(Date.now() / 3600000)).then(r => r.ok ? r.json() : {}).then(j => {
-  FOTOS = j || {};
-  document.querySelectorAll(".hub-av[data-chat]").forEach(el => { const f = FOTOS[el.dataset.chat]; if (f) { el.textContent = ""; el.classList.add("foto"); el.style.backgroundImage = `url(${FOTOS_URL}${f})`; } });
-}).catch(() => {});
+function carregarFotos(agora) {
+  fetch(FOTOS_URL + "index.json?t=" + (agora ? Date.now() : Math.floor(Date.now() / 3600000))).then(r => r.ok ? r.json() : {}).then(j => {
+    FOTOS = j || {};
+    document.querySelectorAll(".hub-av[data-chat]").forEach(el => { const f = FOTOS[el.dataset.chat]; if (f) { el.textContent = ""; el.classList.add("foto"); el.style.backgroundImage = `url(${FOTOS_URL}${encodeURIComponent(f)})`; } });
+  }).catch(() => {});
+}
+carregarFotos();
 function avatar(c) {
   const f = c.chat && FOTOS[c.chat];
   if (f) return `<span class="hub-av foto" style="background-image:url(${FOTOS_URL}${encodeURIComponent(f)})"></span>`;
@@ -1193,6 +1251,10 @@ async function crescer(dias) {
     $("cresc_canais").innerHTML = vazio("A primeira medida sai na próxima rodada do robô (de hora em hora). Volte daqui a pouco.");
     return;
   }
+  const soma = f => c.canais.reduce((t, k) => t + (+k[f] || 0), 0);
+  $("cresc_total").innerHTML = `<div class="cresc-total"><div><div class="grande">${fmtN(soma("atual"))}</div><small>inscritos somando os ${c.canais.length} canais</small></div>
+    <div><b>${sinal(soma("dia"))}</b> <small>em 24 h</small></div><div><b>${sinal(soma("semana"))}</b> <small>em 7 dias</small></div>
+    <small style="flex-basis:100%">Quem segue 2 canais conta 2 vezes nessa soma.</small></div>`;
   $("cresc_canais").innerHTML = c.canais.map((k, i) => `
     <div class="cresc-item" data-i="${i}">
       <div class="cresc-nome" title="${esc(k.chat)}">${esc(k.nome)}</div>
@@ -1574,7 +1636,10 @@ async function aprovar(id) { try { await api(`/api/posts/${id}/aprovar`, {}); } 
 async function cancelar(id) { try { await api(`/api/posts/${id}/cancelar`, {}); } catch (e) {} carregar(); }
 async function apagarEnvio(id) { if (confirm("Apagar este post do canal? Não dá para desfazer.")) { try { await api(`/api/envios/${id}/apagar`, {}); } catch (e) {} carregar(); } }
 async function apagarLink() { if ($("link_apagar").value && confirm("Apagar essa mensagem do canal? Não dá para desfazer.")) { try { await api("/api/apagar-link", { link: $("link_apagar").value }); $("link_apagar").value = ""; } catch (e) {} carregar(); } }
-async function addCanal() { try { await api("/api/canais", { chat: $("novo_canal").value }); $("novo_canal").value = ""; } catch (e) {} carregar(); }
+async function addCanal() {
+  try { await api("/api/canais", { chat: $("novo_canal").value }); $("novo_canal").value = ""; [75, 150, 240].forEach(t => setTimeout(() => carregarFotos(true), t * 1000)); } catch (e) {}
+  carregar();
+}
 async function salvarCanal(id) {
   const box = document.querySelector(`[data-canal="${id}"]`), v = (n) => box.querySelector(`[name=${n}]`);
   const recebe = ["livro", "oferta"].filter(t => v(t).checked).join(",");
@@ -1669,6 +1734,7 @@ function renderDesempenho(m) {
 
 function renderLotes() {
   const L = dados.lotes || [];
+  renderCriarLotes();
   $("c_lotes").textContent = L.length || "";
   if (document.querySelector("#lista_lotes .lote-ed :focus")) return; // não apaga o que está sendo digitado
   $("lista_lotes").innerHTML = L.map(l => {
@@ -1692,6 +1758,20 @@ function renderLotes() {
         <button class="btn peq perigo" onclick="apagarLote(${l.id}, '${l.status}')">${ico("lixo")}${l.status === "agendado" ? "Cancelar" : "Apagar de todos"}</button></div>
       ${ed}</div></div>`;
   }).join("") || vazio("Nenhum post seu no ar ou agendado. Crie um em Criar e marque os canais.");
+}
+function renderCriarLotes() {
+  const L = dados.lotes || [];
+  $("c_criar_lotes").textContent = L.length || "";
+  $("criar_lotes").innerHTML = L.map(l => {
+    const [st, cor] = l.status === "agendado" ? ["vai entrar", "azul"] : ["no ar", "ok"];
+    const fixado = l.fixados || (l.status === "agendado" && l.fixar);
+    return `<div class="item">${l.foto ? `<img class="capa" src="${esc(l.foto)}" alt="" loading="lazy">` : `<div class="capa">${ico("criar")}</div>`}<div class="corpo">
+      <div class="tit">${esc(l.titulo || "post #" + l.id)}</div>
+      <div class="meta"><span class="badge ${cor}">${st}</span><span class="badge">${l.canais.length} canal(is)</span>${l.saida_em ? `<span>sai ${dataBR(l.saida_em)}</span>` : ""}${fixado ? '<span class="badge">📌 fixado</span>' : ""}</div>
+      <div class="botoes"><button class="btn peq" onclick="ir('noar')">Editar</button>
+        <button class="btn peq" onclick="fixarLote(${l.id}, ${!fixado})">${fixado ? "Desafixar" : "📌 Fixar"}</button>
+        <button class="btn peq perigo" onclick="apagarLote(${l.id}, '${l.status}')">${ico("lixo")}${l.status === "agendado" ? "Cancelar" : "Apagar de todos"}</button></div></div></div>`;
+  }).join("") || vazio("Nenhum anúncio seu nos canais agora.");
 }
 function abrirLote(id) { loteAberto.has(id) ? loteAberto.delete(id) : loteAberto.add(id); renderLotes(); }
 async function salvarLote(id, bt) {

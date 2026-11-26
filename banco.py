@@ -79,6 +79,11 @@ def canais(so_auto=False):
     return sql(f"SELECT * FROM canais {filtro} ORDER BY id")
 
 
+def garantir_canal(chat, nome):
+    """Põe o canal na tabela se ainda não estiver (sem livros/ofertas e sem automático). Não religa um tirado."""
+    sql("INSERT OR IGNORE INTO canais (chat, nome, auto, recebe) VALUES (?,?,0,'')", (chat, nome))
+
+
 def novo_canal(chat, nome, auto=True):
     # canal novo não recebe livros nem ofertas da Amazon até você marcar isso na ficha dele
     sql("INSERT OR IGNORE INTO canais (chat, nome, auto, recebe) VALUES (?,?,?,?)",

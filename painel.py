@@ -131,6 +131,33 @@ def lotes():
     return saida
 
 
+def canais_com_tipo():
+    """Canais da tabela; os de conteúdo com IA levam "conteudo" (o nicho), para o painel não mostrar duas vezes."""
+    try:
+        import central
+        mapa = {k.lower(): v for k, v in central.canais_conteudo().items()}
+    except Exception:
+        mapa = {}
+    lista = banco.canais()
+    for c in lista:
+        c["conteudo"] = mapa.get(str(c["chat"]).lower(), "")
+    return lista
+
+
+def baixar_fotos_depois():
+    """Na nuvem, pede ao GitHub para baixar de novo as fotos dos canais (workflow fotos.yml, ~1 minuto)."""
+    repo, token = os.environ.get("GITHUB_REPOSITORY"), os.environ.get("GITHUB_TOKEN")
+    if not (repo and token):
+        return
+    try:
+        import requests
+        requests.post(f"https://api.github.com/repos/{repo}/actions/workflows/fotos.yml/dispatches",
+                      headers={"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"},
+                      json={"ref": "main"}, timeout=20)
+    except Exception as x:
+        print(f"[fotos] não pedi a foto: {x}")
+
+
 @app.get("/api/resumo")
 def resumo():
     e = postador.estado()
@@ -138,7 +165,7 @@ def resumo():
         "agora": banco.agora(),
         "proxima": postador.proxima_hora(),
         "postados": banco.sql("SELECT COUNT(*) n FROM posts WHERE status='postado'", um=True)["n"],
-        "canais": banco.canais(),
+        "canais": canais_com_tipo(),
         "agendados": banco.posts(status=("agendado",)),
         "fila": banco.posts(status=("fila",)),
         "revisar": banco.posts(status=("revisar",)),
@@ -493,9 +520,10 @@ async def adicionar_canal(request: Request):
         erro("O robô está no canal, mas não é administrador com permissão de postar.")
     chat_final = f"@{info['username']}" if info.get("username") else str(info["id"])
     banco.novo_canal(chat_final, info.get("title", chat_final), auto=False)
+    baixar_fotos_depois()
     aviso = "" if membro.get("can_delete_messages") else \
         " Atenção: sem a permissão 'Apagar mensagens', o robô não consegue apagar posts nem fazer a validade."
-    return {"ok": True, "msg": f"Canal {info.get('title')} adicionado." + aviso}
+    return {"ok": True, "chat": chat_final, "msg": f"Canal {info.get('title')} adicionado. A foto dele aparece em 1 ou 2 minutos." + aviso}
 
 
 @app.post("/api/canais/{cid}")

@@ -46,6 +46,34 @@ def modulo(n):
     return importlib.import_module(n)
 
 
+def canais_conteudo():
+    """{chat: nicho} dos canais de conteúdo com IA (inglês, renda, prompts)."""
+    mapa = {}
+    for n in NICHOS:
+        try:
+            mapa[str(modulo(n).canal())] = n
+        except Exception:
+            pass
+    return mapa
+
+
+def garantir_canais():
+    """Os canais de conteúdo também entram na tabela de canais: assim dá para postar anúncio neles
+    pelo Criar post e eles entram no crescimento. Ficam sem automático de livros e ofertas."""
+    import banco
+    for chat, n in canais_conteudo().items():
+        if banco.sql("SELECT 1 FROM canais WHERE chat=?", (chat,), um=True):
+            continue
+        nome = f"{NICHOS[n]['emoji']} {NICHOS[n]['nome']}"
+        try:
+            import postador
+            nome = postador.tg("getChat", chat_id=chat).get("title") or nome
+        except Exception:
+            pass
+        banco.garantir_canal(chat, nome)
+        print(f"[canais] {chat} entrou na tabela como {nome}")
+
+
 def normal(e):
     e = dict(e or {})
     for k in ("postados", "pulados", "frente", "apagados", "noticias"):
