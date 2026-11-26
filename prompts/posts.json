@@ -799,5 +799,30 @@
   "autor": "meng_dagg695",
   "chave": "nb:dc57d6ebc0912b",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>{&quot;scene_type&quot;:&quot;macro food splash photography&quot;,&quot;subject&quot;:{&quot;object&quot;:&quot;strawberry&quot;,&quot;color&quot;:&quot;golden yellow&quot;,&quot;surface&quot;:&quot;glossy, reflective, smooth with evenly distributed seeds&quot;,&quot;seeds&quot;:{&quot;color&quot;:&quot;light orange to brown&quot;,&quot;depth&quot;:&quot;slightly embedded&quot;,&quot;density&quot;:&quot;uniform across surface&quot;},&quot;top&quot;:{&quot;calyx&quot;:&quot;fresh green leaves, slightly curved outward&quot;,&quot;stem&quot;:&quot;short, upright, centered, matte green&quot;}},&quot;liquid_elements&quot;:[{&quot;type&quot;:&quot;thick liquid splash&quot;,&quot;color&quot;:&quot;bright orange&quot;,&quot;finish&quot;:&quot;glossy, viscous&quot;,&quot;behavior&quot;:&quot;splashing outward behind and around strawberry, forming rounded droplets and elongated streaks&quot;},{&quot;type&quot;:&quot;thick liquid splash&quot;,&quot;color&quot;:&quot;deep black&quot;,&quot;finish&quot;:&quot;highly glossy, reflective&quot;,&quot;behavior&quot;:&quot;wrapping partially around lower strawberry, splashing outward with sharp spikes and droplets&quot;}],&quot;composition&quot;:{&quot;orientation&quot;:&quot;vertical&quot;,&quot;aspect_ratio&quot;:&quot;3:4&quot;,&quot;framing&quot;:&quot;centered subject&quot;,&quot;crop&quot;:&quot;tight macro close-up&quot;,&quot;depth_of_field&quot;:&quot;shallow, subject in sharp focus, background slightly blurred&quot;},&quot;background&quot;:{&quot;color&quot;:&quot;muted olive/khaki tone&quot;,&quot;texture&quot;:&quot;smooth, matte&quot;,&quot;details&quot;:&quot;subtle gradient, no patterns&quot;},&quot;lighting&quot;:{&quot;type&quot;:&quot;studio lighting&quot;,&quot;direction&quot;:&quot;front-top&quot;,&quot;intensity&quot;:&quot;high&quot;,&quot;effect&quot;:&quot;strong highlights on glossy surfaces, soft shadows, enhanced reflections on liquids and fruit&quot;},&quot;motion&quot;:{&quot;style&quot;:&quot;frozen high-speed splash&quot;,&quot;details&quot;:&quot;liquid droplets suspended mid-air, dynamic outward motion captured sharply&quot;},&quot;color_palette&quot;:[&quot;golden yellow&quot;,&quot;bright orange&quot;,&quot;deep black&quot;,&quot;fresh green&quot;,&quot;olive background&quot;],&quot;style&quot;:{&quot;look&quot;:&quot;AI-generated hyperrealistic&quot;,&quot;quality&quot;:&quot;ultra-detailed, 8K, sharp textures&quot;,&quot;finish&quot;:&quot;cinematic, high contrast, vibrant colors&quot;},&quot;camera&quot;:{&quot;type&quot;:&quot;macro lens&quot;,&quot;focus&quot;:&quot;sharp on strawberry surface and front splash&quot;,&quot;angle&quot;:&quot;slightly low frontal angle&quot;,&quot;details&quot;:&quot;high clarity, crisp edges, no visible noise&quot;}}</pre><p>💡 Troque &quot;strawberry&quot; por outra fruta se quiser mudar o assunto do prompt.</p><p>🖼 Imagem de exemplo: nanobananaprompt.org</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261125-9-crie-um-retrato-em-preto-e-bra",
+  "tipo": "prompt",
+  "titulo": "🖤 Crie um retrato em preto e branco com jogo de sombras",
+  "prompt": "a black and white photo of a woman with shadow., in the style of minimalist beauty, light bronze and bronze, serene faces, sharp edges, karencore, high definition, contrast shading, realism --ar 3:5 --stylize 750 --v 6.0 --style raw",
+  "prompt_en": "a black and white photo of a woman with shadow., in the style of minimalist beauty, light bronze and bronze, serene faces, sharp edges, karencore, high definition, contrast shading, realism --ar 3:5 --stylize 750 --v 6.0 --style raw",
+  "dica": "Troque a palavra \"woman\" por \"man\" ou outro personagem para mudar o rosto.",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "retrato",
+   "pretoebranco",
+   "minimalista",
+   "fotografia"
+  ],
+  "imagens": [
+   "img/261125-9-crie-um-retrato-em-preto-e-bra.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.prompthero.com/o7zetbmbjk7fr0d6qfsdlws88i8o/1080.webp",
+  "fonte": "prompthero.com",
+  "url": "https://prompthero.com/prompt/32aa4f3bf8f-midjourney-6-a-black-and-white-photo-of-a-woman-with-shadow-in-the-style-of-minimalist-beauty-light-bronze-and-bronze",
+  "autor": "",
+  "chave": "lk:45cb6a1eac425d",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>a black and white photo of a woman with shadow., in the style of minimalist beauty, light bronze and bronze, serene faces, sharp edges, karencore, high definition, contrast shading, realism --ar 3:5 --stylize 750 --v 6.0 --style raw</pre><p>💡 Troque a palavra &quot;woman&quot; por &quot;man&quot; ou outro personagem para mudar o rosto.</p><p>🖼 Imagem de exemplo: prompthero.com</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
