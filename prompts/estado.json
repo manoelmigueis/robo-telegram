@@ -143,7 +143,8 @@
     "pp:moody-studio-portrait-stylish-man-prompt",
     "lk:4e6108c80d35ac",
     "pp:moon-night-woman-fantasy-photo",
-    "lk:3b1a20681e67dd"
+    "lk:3b1a20681e67dd",
+    "pp:casual-woman-watercolor-sketch-prompt"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -159,7 +160,7 @@
     "inicio": "2026-11-26T01:05:10+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 4,
+    "feitos": 5,
     "meta": 12,
     "achados": 87,
     "msg": ""
