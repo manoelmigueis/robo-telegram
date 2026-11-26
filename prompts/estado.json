@@ -157,7 +157,8 @@
     "nb:8a1d4bae0de910",
     "lk:974762e933d417",
     "lk:003ebcc8ae19f2",
-    "pp:man-leaning-classic-convertible-portrait"
+    "pp:man-leaning-classic-convertible-portrait",
+    "pp:3d-typography-girl-birthday-prompt"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -173,7 +174,7 @@
     "inicio": "2026-11-26T01:18:43+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 0,
+    "feitos": 1,
     "meta": 12,
     "achados": 79,
     "msg": ""
