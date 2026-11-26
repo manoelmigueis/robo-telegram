@@ -328,7 +328,8 @@
     "pp:cute-3d-cartoon-couple-avatar-photo",
     "pp:realistic-girl-cartoon-character-twin-fashion-portrait",
     "pp:man-suit-blue-spotlight-portrait",
-    "pp:winter-snow-storm-male-portrait"
+    "pp:winter-snow-storm-male-portrait",
+    "pp:cinematic-male-portrait-prompt"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -344,7 +345,7 @@
     "inicio": "2026-11-26T20:32:13+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 1,
+    "feitos": 2,
     "meta": 12,
     "achados": 68,
     "msg": ""
