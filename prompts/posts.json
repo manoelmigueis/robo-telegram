@@ -1600,5 +1600,30 @@
   "autor": "",
   "chave": "pp:low-key-portrait-dual-lighting-male-portrait",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Create an ultra-realistic, cinematic low-key studio portrait of a handsome man, captured from the chest up against a completely black, seamless background. The subject is positioned centrally, with his body facing slightly forward and his head turned in a three-quarter right profile, gazing thoughtfully into the distance with a calm, serious expression.\nHe has neatly styled, hair, and realistic skin texture. He wears a simple, dark charcoal-black crew-neck sweatshirt with a minimal, clean appearance.\nLighting: Extremely dramatic low-key lighting with carefully controlled illumination. A subtle cool blue-white rim light outlines the left side of his hair, ear, jawline, and shoulder, revealing fine hair strands and facial contours. A warm, soft orange-red backlight creates a delicate glowing outline along the right side of his neck, jaw, and shoulders. Keep the left side of the face, including the cheekbone, jawline, and neck, in deep shadow while preserving subtle facial details without excessive illumination.\nComposition: Vertical 4:5 portrait, medium close-up framing, centered subject, generous negative space above the head, completely black background, symmetrical visual balance.\nCamera &amp; Quality: Professional full-frame DSLR photography, 85mm portrait lens, f/1.8 aperture, sharp focus on the subject, deep blacks, cinematic contrast, natural skin pores, highly detailed hair strands, realistic fabric texture, sophisticated dark editorial photography, 8K ultra-high resolution, photorealistic.\nNegative Prompt: Bright background, visible surroundings, flat lighting, overexposed front face, excessive front lighting, artificial skin, plastic texture, cartoon, CGI, illustration, blurry details, distorted facial features, extra limbs, text, logo, watermark.</pre><p>💡 Troque &quot;handsome man&quot; por quem você quiser no prompt.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261126-5-vire-pssaros-voando-em-foto-pr",
+  "tipo": "prompt",
+  "titulo": "🖤 Vire pássaros voando em foto preta e branca",
+  "prompt": "Ultra-realistic vertical black-and-white surrealist photography of an uploaded person in three-quarter view with closed eyes, head tilted slightly upward in peaceful reflection.\n\nThe right side of his face and body dramatically disintegrates into hundreds of flying black birds, shattered fragments, feathers and fine dust, spreading upward into the sky.\n\nPowerful wings frozens in motion, intricate facial textures, dramatic monochrome contrast, dark outfits, dramatic sky background, cinematic lighting, hyper-detailed feathers, realistic 3D fragmentation, fine-art photography, dark aesthetic, 8K masterpiece.",
+  "prompt_en": "Ultra-realistic vertical black-and-white surrealist photography of an uploaded person in three-quarter view with closed eyes, head tilted slightly upward in peaceful reflection.\n\nThe right side of his face and body dramatically disintegrates into hundreds of flying black birds, shattered fragments, feathers and fine dust, spreading upward into the sky.\n\nPowerful wings frozens in motion, intricate facial textures, dramatic monochrome contrast, dark outfits, dramatic sky background, cinematic lighting, hyper-detailed feathers, realistic 3D fragmentation, fine-art photography, dark aesthetic, 8K masterpiece.",
+  "dica": "Mande sua foto junto com o prompt e troque \"dark outfits\" pela roupa que quiser",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "retrato",
+   "surrealista",
+   "monocromatico",
+   "fotografia"
+  ],
+  "imagens": [
+   "img/261126-5-vire-pssaros-voando-em-foto-pr.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.promptplum.com/cdn-cgi/image/q=78,scq=50,width=1400,height=1400,fit=contain,f=jpeg/promptImages/fd3c0396-74f4-43cd-aa32-ff32abdf4372.jpg",
+  "fonte": "PromptPlum",
+  "url": "https://promptplum.com/prompt/man-dissolving-flying-birds-portrait/",
+  "autor": "",
+  "chave": "pp:man-dissolving-flying-birds-portrait",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Ultra-realistic vertical black-and-white surrealist photography of an uploaded person in three-quarter view with closed eyes, head tilted slightly upward in peaceful reflection.\n\nThe right side of his face and body dramatically disintegrates into hundreds of flying black birds, shattered fragments, feathers and fine dust, spreading upward into the sky.\n\nPowerful wings frozens in motion, intricate facial textures, dramatic monochrome contrast, dark outfits, dramatic sky background, cinematic lighting, hyper-detailed feathers, realistic 3D fragmentation, fine-art photography, dark aesthetic, 8K masterpiece.</pre><p>💡 Mande sua foto junto com o prompt e troque &quot;dark outfits&quot; pela roupa que quiser</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]

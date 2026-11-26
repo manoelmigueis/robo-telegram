@@ -281,7 +281,8 @@
     "pp:underwater-portrait",
     "pp:elegant-city-date-night-portrait",
     "pp:classic-bw-mens-fashion-portrait",
-    "pp:low-key-portrait-dual-lighting-male-portrait"
+    "pp:low-key-portrait-dual-lighting-male-portrait",
+    "pp:man-dissolving-flying-birds-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -297,7 +298,7 @@
     "inicio": "2026-11-26T15:47:41+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 4,
+    "feitos": 5,
     "meta": 12,
     "achados": 70,
     "msg": ""
