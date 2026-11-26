@@ -51,7 +51,8 @@
     "049-passos-para-organizar",
     "050-cliente-exige-que",
     "051-passos-para-organizar",
-    "058-licoes-ecossistemas-inovacao"
+    "058-licoes-ecossistemas-inovacao",
+    "059-curso-gratis-excel"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -79,8 +80,8 @@
     "vivo abre vaga home office para atendente de experiência do cliente veja requisi",
     "banco itaú tem vagas abertas na área corporativa saiba como se inscrever"
   ],
-  "contador": 52,
-  "ultimo": "2026-11-26T12:00:47+00:00",
+  "contador": 53,
+  "ultimo": "2026-11-26T16:00:48+00:00",
   "pulados": [
     "052-cliente-liga-cobrando",
     "053-passos-para-marmitas",
@@ -136,7 +137,8 @@
     "049-passos-para-organizar": "2026-11-25T12:00:46+00:00",
     "050-cliente-exige-que": "2026-11-25T16:09:47+00:00",
     "051-passos-para-organizar": "2026-11-25T23:00:49+00:00",
-    "058-licoes-ecossistemas-inovacao": "2026-11-26T12:00:47+00:00"
+    "058-licoes-ecossistemas-inovacao": "2026-11-26T12:00:47+00:00",
+    "059-curso-gratis-excel": "2026-11-26T16:00:48+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -270,6 +272,9 @@
     ],
     "058-licoes-ecossistemas-inovacao": [
       8893
+    ],
+    "059-curso-gratis-excel": [
+      8894
     ]
   },
   "reais": [
