@@ -140,7 +140,8 @@
     "pp:pop-art-stylized-profile-picture-prompt",
     "lk:9dc08907d5604a",
     "pp:mountain-adventure-couple-lifestyle-portrait",
-    "pp:moody-studio-portrait-stylish-man-prompt"
+    "pp:moody-studio-portrait-stylish-man-prompt",
+    "lk:4e6108c80d35ac"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -156,7 +157,7 @@
     "inicio": "2026-11-26T01:05:10+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 1,
+    "feitos": 2,
     "meta": 12,
     "achados": 87,
     "msg": ""

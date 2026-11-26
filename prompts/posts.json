@@ -324,5 +324,30 @@
   "autor": "",
   "chave": "pp:moody-studio-portrait-stylish-man-prompt",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Create an ultra-realistic, cinematic luxury studio portrait of a stylish man seated comfortably in a classic black leather Chesterfield armchair. Use the reference image as the exact facial identity reference, preserving 100% of the original facial features, face structure, natural skin texture, and proportions.\n\nAppearance &amp; Outfit: The man has neatly styled hair, and round transparent-frame eyeglasses. He is wearing a simple oversized black crew-neck sweatshirt with black trousers, creating an elegant, minimal all-black outfit.\n\nPose &amp; Composition: Capture him in a relaxed cross-legged seated position, with his left arm casually resting over the left armrest and his hand hanging naturally downward. His right elbow is slightly raised, with his right hand gently resting near the side of his neck and jawline. His upper body is slightly turned sideways, with his head facing toward the left side of the frame. His gaze is directed thoughtfully off-camera, creating a calm, confident, introspective expression.\n\nEnvironment: A vintage black leather Chesterfield armchair with deep button tufting, curved padded armrests, and subtle glossy leather reflections. Set against a completely dark, minimal studio background with no distracting elements.\n\nLighting: Dramatic warm amber-orange cinematic lighting coming from the upper-left side of the frame. The light softly illuminates the man&#x27;s forehead, glasses, nose, cheekbones, hands, and forearms while the opposite side of his face and body gradually disappear into deep shadows. A subtle warm glow in the left background creates atmospheric depth. Maintain rich blacks, deep shadows, and beautiful golden highlights.\n\nCamera &amp; Technical Details: Vertical 4:5 composition, medium-full seated portrait, slightly low eye-level camera angle, 85mm portrait lens, f/1.8 aperture, shallow depth of field, precise facial details, realistic skin pores, natural hair texture, detailed hair strands, realistic leather texture, professional studio photography, high dynamic range, cinematic chiaroscuro lighting, deep contrast, warm amber and burnt-orange color grading, ultra-photorealistic, 8K quality.</pre><p>💡 Mande sua foto junto com o prompt e troque &quot;black sweatshirt&quot; por outra roupa se preferir.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261125-2-transforme-seu-rosto-em-um-bon",
+  "tipo": "prompt",
+  "titulo": "🧸 Transforme seu rosto em um boneco de ação colecionável",
+  "prompt": "Upload your photo and use our AI Action Figure Generator to create unique, personalized action figure images in seconds",
+  "prompt_en": "Upload your photo and use our AI Action Figure Generator to create unique, personalized action figure images in seconds",
+  "dica": "Mande sua foto junto com o prompt e troque a roupa do boneco na descrição",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "boneco",
+   "acao",
+   "brinquedo",
+   "personalizado"
+  ],
+  "imagens": [
+   "img/261125-2-transforme-seu-rosto-em-um-bon.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://aitool.promptsref.com/thumbs/card/aitool.promptsref.com/Publish/publish-1775045509536-a8b7edb6.png",
+  "fonte": "promptsref.com",
+  "url": "https://promptsref.com/tool/AI-Image-Generator?tab=effects&model=nano-banana-2&effectId=action_figure_generator",
+  "autor": "",
+  "chave": "lk:4e6108c80d35ac",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Upload your photo and use our AI Action Figure Generator to create unique, personalized action figure images in seconds</pre><p>💡 Mande sua foto junto com o prompt e troque a roupa do boneco na descrição</p><p>🖼 Imagem de exemplo: promptsref.com</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
