@@ -186,7 +186,8 @@
     "pp:monochrome-corporate-portrait-prompt",
     "pc:cmwud6e5b0009kx08iyl2h7zb",
     "nb:dc57d6ebc0912b",
-    "lk:45cb6a1eac425d"
+    "lk:45cb6a1eac425d",
+    "pp:luxury-mens-fashion-coffee-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -202,7 +203,7 @@
     "inicio": "2026-11-26T01:18:43+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 9,
+    "feitos": 10,
     "meta": 12,
     "achados": 79,
     "msg": ""
