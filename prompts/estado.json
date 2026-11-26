@@ -287,7 +287,8 @@
     "lk:33779a88df93ef",
     "pp:digital-illustration-man-leather-jacket-portrait",
     "pp:royal-man-palace-luxury-portrait",
-    "pp:detailed-half-face-macro-portrait"
+    "pp:detailed-half-face-macro-portrait",
+    "lk:7e005cdd4cbbf5"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -303,7 +304,7 @@
     "inicio": "2026-11-26T15:47:41+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 10,
+    "feitos": 11,
     "meta": 12,
     "achados": 70,
     "msg": ""

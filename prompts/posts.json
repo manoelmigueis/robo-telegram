@@ -1750,5 +1750,30 @@
   "autor": "",
   "chave": "pp:detailed-half-face-macro-portrait",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Create an ultra-realistic, cinematic close-up portrait photograph with dramatic red and black lighting. Use the uploaded reference image strictly for facial identity and preserve the original facial features without alteration.\nCOMPOSITION &amp; POSE:\nExtreme close-up, vertically framed portrait showing approximately half of the face, with the subject positioned on the right side of the frame. Direct, intense eye contact with the camera. Tight crop emphasizing the eye, eyebrow, nose, lips, beard texture, and facial details.\nLIGHTING &amp; BACKGROUND:\nDramatic deep-red rim lighting illuminating the left side of the hair, ear, and jawline. Soft neutral light falling across the visible face, creating a striking contrast between monochrome skin tones and vibrant red highlights. Dark black and deep crimson background with subtle red smoke and atmospheric haze.\nCLOTHING &amp; DETAILS:\nBlack outfit blending naturally into the dark background. Highly detailed natural skin texture, sharp eye details, and individual hair strands.\nCAMERA &amp; QUALITY:\nProfessional cinematic photography, extreme close-up framing, 85mm portrait lens, shallow depth of field, high contrast, dramatic shadows, ultra-sharp focus, photorealistic details, premium editorial photography, 8K resolution.\nOVERALL MOOD:\nMysterious, intense, bold, dark cinematic atmosphere with a premium red-and-black color palette.\nAspect ratio 9:16.</pre><p>💡 Mande sua foto junto com o prompt e troque a cor em &quot;red&quot; se quiser outro tom</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261126-11-crie-um-retrato-de-estdio-com-",
+  "tipo": "prompt",
+  "titulo": "🟠 Crie um retrato de estúdio com fundo laranja",
+  "prompt": "photography, orange hue, korean woman model, solid orange backdrop, using a camera setup that mimics a large aperture, f/1.4 --ar 9:16 --style raw",
+  "prompt_en": "photography, orange hue, korean woman model, solid orange backdrop, using a camera setup that mimics a large aperture, f/1.4 --ar 9:16 --style raw",
+  "dica": "Troque \"korean woman model\" pela pessoa ou estilo que você quiser.",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "retrato",
+   "fotografia",
+   "estudio",
+   "modelo"
+  ],
+  "imagens": [
+   "img/261126-11-crie-um-retrato-de-estdio-com-.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.prompthero.com/yktjuihsozyxcetxc5hsasx2wed8/1080.webp",
+  "fonte": "prompthero.com",
+  "url": "https://prompthero.com/prompt/abb78caf579-midjourney-6-model-portrait",
+  "autor": "",
+  "chave": "lk:7e005cdd4cbbf5",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>photography, orange hue, korean woman model, solid orange backdrop, using a camera setup that mimics a large aperture, f/1.4 --ar 9:16 --style raw</pre><p>💡 Troque &quot;korean woman model&quot; pela pessoa ou estilo que você quiser.</p><p>🖼 Imagem de exemplo: prompthero.com</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
