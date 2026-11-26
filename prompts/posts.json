@@ -1149,5 +1149,30 @@
   "autor": "Fatih Kadir Akın",
   "chave": "pc:cmwud4u3k0001kx08tnoy90kx",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>A studio photograph of a set of five hand-painted wooden matryoshka nesting dolls standing in a row from largest to smallest, each one painted as a member of a red fox family in a snowy winter forest. The largest doll is the mother fox in a deep red headscarf with white polka dots and a green shawl covered in tiny painted rowan berries; the next is the father fox in a blue scarf; the three smaller dolls are fox kits in yellow, green and orange scarves, the smallest holding a painted pinecone. Each doll&#x27;s belly shows a small painted winter scene inside a gold-outlined oval: birch trunks, snowy fir trees, a crescent moon, a tiny cottage with a lit window. Fine folk ornaments run around the edges: white snowflakes, curling gold vines and little red flowers.\n\nRender it like real hand-turned and hand-painted lime wood: smooth rounded shapes, the thin seam line where the top and bottom halves meet, glossy lacquer with soft highlights, slightly uneven brushstrokes and tiny painted details. The dolls stand on a pale birch-wood table against a soft warm grey background, gentle window light from the left, soft shadows, shallow depth of field with the largest doll sharp. No text, no people, no hands. Portrait 3:4.</pre><p>💡 Troque &quot;fox&quot; por outro animal ou mude as cores dos cachecóis</p><p>🖼 Imagem de exemplo: prompts.chat</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261125-11-crie-uma-pintura-com-efeito-do",
+  "tipo": "prompt",
+  "titulo": "🖼 Crie uma pintura com efeito dourado e fundo escuro",
+  "prompt": "a woman with long black hair in a gold painting, in the style of charlie bowater, dark blue and dark black, michael garmash, comic art, realistic color palette, dark black and beige, soft-focused realism --ar 24:37 --stylize 750 --v 6",
+  "prompt_en": "a woman with long black hair in a gold painting, in the style of charlie bowater, dark blue and dark black, michael garmash, comic art, realistic color palette, dark black and beige, soft-focused realism --ar 24:37 --stylize 750 --v 6",
+  "dica": "Troque \"woman\" por \"man\" para mudar a pessoa.",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "pintura",
+   "retrato",
+   "dourado",
+   "realista"
+  ],
+  "imagens": [
+   "img/261125-11-crie-uma-pintura-com-efeito-do.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.prompthero.com/50gc2ppgkgsgxnv2krblzlx7rzvs/1080.webp",
+  "fonte": "prompthero.com",
+  "url": "https://prompthero.com/prompt/2ab02642feb-midjourney-6-a-woman-with-long-black-hair-in-a-gold-painting-in-the-style-of-charlie-bowater-dark-blue-and-dark",
+  "autor": "",
+  "chave": "lk:42e6b757cd2643",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>a woman with long black hair in a gold painting, in the style of charlie bowater, dark blue and dark black, michael garmash, comic art, realistic color palette, dark black and beige, soft-focused realism --ar 24:37 --stylize 750 --v 6</pre><p>💡 Troque &quot;woman&quot; por &quot;man&quot; para mudar a pessoa.</p><p>🖼 Imagem de exemplo: prompthero.com</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
