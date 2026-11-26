@@ -770,5 +770,19 @@
     "imagens": [
       "img/049.png"
     ]
+  },
+  {
+    "id": "050-mini-aula-para",
+    "tipo": "aula",
+    "titulo": "📘 Mini-aula: IN, ON ou AT para tempo?",
+    "corpo": "<p>Essas três palavrinhas causam muita confusão na hora de falar sobre dias, horas e meses em inglês.</p><table><tr><th>⏰ AT: horas exatas</th><th>📅 ON: dias e datas</th><th>🗓️ IN: meses, anos e períodos</th></tr><tr><td>at 7:00 (às 7 horas)</td><td>on Monday (na segunda)</td><td>in January (em janeiro)</td></tr><tr><td>at noon (ao meio-dia)</td><td>on my birthday (no meu aniversário)</td><td>in 2026 (em 2026)</td></tr><tr><td>at night (à noite)</td><td>on October 12th (em 12 de outubro)</td><td>in the morning (de manhã)</td></tr></table><p>💡 <b>Regra prática:</b> use <b>at</b> para o relógio (horas). Use <b>on</b> para o calendário (dias). Use <b>in</b> para blocos maiores de tempo (meses e anos).</p><details><summary>🧠 Desafio: \"My class is ___ Monday.\" É in, on ou at?</summary><p><b>On</b>. Dias da semana sempre usam <b>on</b>. Salve este post e mande para aquele amigo que sempre erra o tempo em inglês!</p></details>",
+    "tags": [
+      "ingles",
+      "gramaticainglesa",
+      "aprenderingles"
+    ],
+    "imagens": [
+      "img/050.png"
+    ]
   }
 ]
