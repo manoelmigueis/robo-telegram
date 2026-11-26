@@ -339,7 +339,8 @@
     "lk:b5be8b5289388f",
     "pp:biker-on-mountain-road",
     "nb:ea7cb767291c2b",
-    "lk:08c7ae3cbd397b"
+    "lk:08c7ae3cbd397b",
+    "pp:realistic-man-3d-character-prompt"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -355,7 +356,7 @@
     "inicio": "2026-11-26T20:32:13+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 11,
+    "feitos": 12,
     "meta": 12,
     "achados": 68,
     "msg": ""
