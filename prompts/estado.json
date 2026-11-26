@@ -219,7 +219,8 @@
     "pp:mens-nightlife-fashion-photography",
     "pp:mens-fashion-editorial-poster",
     "pp:detailed-male-pencil-drawing-prompt",
-    "pp:mens-winter-fashion-city-portrait"
+    "pp:mens-winter-fashion-city-portrait",
+    "pc:cmwxdrxsr0009jv07sd4r7xmj"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -235,7 +236,7 @@
     "inicio": "2026-11-26T11:40:28+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 1,
+    "feitos": 2,
     "meta": 12,
     "achados": 73,
     "msg": ""

@@ -1224,5 +1224,30 @@
   "autor": "",
   "chave": "pp:mens-winter-fashion-city-portrait",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Create an ultra-realistic, photorealistic full-body winter street-style portrait of a handsome man standing casually beside a metal waterfront railing, with the Chicago skyline in the background, including the iconic Willis Tower. The man has naturally styled hair, well-defined face. He is wearing a premium black quilted puffer jacket over a matching dark gray hoodie, loose-fit black washed denim jeans, and light gray chunky sneakers.\nPose &amp; Expression: Standing in a relaxed fashion-editorial pose with both hands tucked into his jacket pockets, legs casually crossed at the ankles, leaning slightly against the railing. His body faces the camera while his head turns slightly toward the left, looking into the distance with a calm, confident, thoughtful expression.\nBackground &amp; Environment: A beautiful urban waterfront scene overlooking Lake Michigan, with the Chicago skyline rising behind him. Turquoise-blue water, a snow-covered concrete walkway, and a metal safety railing create a natural winter atmosphere. Tall modern skyscrapers are clearly visible in the distance.\nLighting &amp; Atmosphere: Overcast winter daylight beneath a dramatic cloudy blue-gray sky, soft diffused natural lighting, subtle cinematic contrast, cool muted color grading, and realistic winter ambience.\nCamera &amp; Composition: Vertical full-body portrait, eye-level camera angle, subject positioned centrally, entire outfit and shoes visible, skyline clearly recognizable, natural perspective, 85mm photography, sharp focus on the subject with a slightly softened background.\nTechnical Details: Professional fashion photography, photorealistic skin texture, realistic fabric stitching and jacket quilting, detailed denim texture, natural body proportions, crisp architectural details, cinematic color grading, high dynamic range, 8K resolution, premium editorial photography, vertical 4:5 aspect ratio</pre><p>💡 Troque &quot;handsome man&quot; por outra pessoa e &quot;Chicago skyline&quot; por outra cidade</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261126-2-crie-um-vestido-de-alta-costur",
+  "tipo": "prompt",
+  "titulo": "👗 Crie um vestido de alta costura com tema e cores livres",
+  "prompt": "A full-body fashion illustration of one elegant model wearing a [theme]-inspired surrealist haute couture gown, avant-garde deconstructivist silhouette, sculptural tailoring, intricate 3D embroidery, layered velvet, translucent organza, pleated silk, elaborate [theme]-inspired headpiece, artistic handbag, flowing architectural forms, sophisticated [color1] and [color2] palette with [color3] accents, refined fashion illustration, dreamy editorial aesthetic, clean white background, 4K",
+  "prompt_en": "A full-body fashion illustration of one elegant model wearing a [theme]-inspired surrealist haute couture gown, avant-garde deconstructivist silhouette, sculptural tailoring, intricate 3D embroidery, layered velvet, translucent organza, pleated silk, elaborate [theme]-inspired headpiece, artistic handbag, flowing architectural forms, sophisticated [color1] and [color2] palette with [color3] accents, refined fashion illustration, dreamy editorial aesthetic, clean white background, 4K",
+  "dica": "Troque a palavra [theme] pelo seu tema preferido e [color1], [color2] e [color3] pelas cores que quiser.",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "moda",
+   "ilustracao",
+   "alta-costura",
+   "surrealista"
+  ],
+  "imagens": [
+   "img/261126-2-crie-um-vestido-de-alta-costur.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://prompts-chat-space.fra1.digitaloceanspaces.com/prompt-media/prompt-media-1795687162118-m4a5pk.jpg",
+  "fonte": "prompts.chat",
+  "url": "https://prompts.chat/prompts/cmwxdrxsr0009jv07sd4r7xmj_surrealist-haute-couture-fashion-illustration-theme-3-color-palette-template",
+  "autor": "Fatih Kadir Akın",
+  "chave": "pc:cmwxdrxsr0009jv07sd4r7xmj",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>A full-body fashion illustration of one elegant model wearing a [theme]-inspired surrealist haute couture gown, avant-garde deconstructivist silhouette, sculptural tailoring, intricate 3D embroidery, layered velvet, translucent organza, pleated silk, elaborate [theme]-inspired headpiece, artistic handbag, flowing architectural forms, sophisticated [color1] and [color2] palette with [color3] accents, refined fashion illustration, dreamy editorial aesthetic, clean white background, 4K</pre><p>💡 Troque a palavra [theme] pelo seu tema preferido e [color1], [color2] e [color3] pelas cores que quiser.</p><p>🖼 Imagem de exemplo: prompts.chat</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
