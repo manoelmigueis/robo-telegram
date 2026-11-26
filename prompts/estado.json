@@ -334,7 +334,8 @@
     "pp:man-reading-under-tree-park-portrait",
     "pp:professional-3d-male-portrait",
     "pp:modern-male-gradient-suit-fashion-portrait",
-    "pp:stylish-woman-surreal-butterfly-fashion-portrait"
+    "pp:stylish-woman-surreal-butterfly-fashion-portrait",
+    "pp:stylish-couple-street-photography-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -350,7 +351,7 @@
     "inicio": "2026-11-26T20:32:13+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 7,
+    "feitos": 8,
     "meta": 12,
     "achados": 68,
     "msg": ""
