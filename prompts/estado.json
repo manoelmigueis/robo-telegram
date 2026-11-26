@@ -283,7 +283,8 @@
     "pp:classic-bw-mens-fashion-portrait",
     "pp:low-key-portrait-dual-lighting-male-portrait",
     "pp:man-dissolving-flying-birds-portrait",
-    "pp:miniature-girl-headphones-dancing-portrait"
+    "pp:miniature-girl-headphones-dancing-portrait",
+    "lk:33779a88df93ef"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -299,7 +300,7 @@
     "inicio": "2026-11-26T15:47:41+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 6,
+    "feitos": 7,
     "meta": 12,
     "achados": 70,
     "msg": ""

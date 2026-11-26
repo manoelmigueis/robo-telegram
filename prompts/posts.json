@@ -1650,5 +1650,30 @@
   "autor": "",
   "chave": "pp:miniature-girl-headphones-dancing-portrait",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Use the uploaded photo as the facial identity reference. Transform the subject into an adorable sculpted miniature character with a petite body, short limbs, softly rounded cheeks and natural-sized glass eyes. Smooth matte sculpted surface, delicate handmade details, realistic miniature hair and clothing. No human skin texture, anime or plastic.\n\nThe small character dances barefoot on a rug, wearing oversized vintage headphones. Eyes closed, blissful smile, one leg lifted, arms swaying, hair bouncing. A much smaller baby animal sits nearby, seriously reading an open book, ignoring the dancing. Cozy retro living room, deep teal walls, burnt-orange cushions, wooden furniture, vintage music player. Soft afternoon sunlight. Front-facing elevated 3/4 view, matte sculpted miniature realism, 35mm, shallow DOF, vertical 4:5.</pre><p>💡 Mande sua foto junto com o prompt e troque &quot;vintage music player&quot; para mudar o aparelho de som</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261126-7-melhore-e-recupere-a-nitidez-d",
+  "tipo": "prompt",
+  "titulo": "📸 Melhore e recupere a nitidez da sua foto antiga",
+  "prompt": "Restore and upscale your image with high-fidelity detail, preserved identity, natural skin texture, and a sharp",
+  "prompt_en": "Restore and upscale your image with high-fidelity detail, preserved identity, natural skin texture, and a sharp",
+  "dica": "Mande sua foto junto com o prompt para recuperar a imagem com alta fidelidade.",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "restauracao",
+   "nitidez",
+   "retrato",
+   "fotorrealista"
+  ],
+  "imagens": [
+   "img/261126-7-melhore-e-recupere-a-nitidez-d.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://aitool.promptsref.com/thumbs/card/aitool.promptsref.com/Publish/Photo%20Restoration%20Generator.png",
+  "fonte": "promptsref.com",
+  "url": "https://promptsref.com/tool/AI-Image-Generator?tab=effects&model=nano-banana-2&effectId=photo_restoration_upscale",
+  "autor": "",
+  "chave": "lk:33779a88df93ef",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Restore and upscale your image with high-fidelity detail, preserved identity, natural skin texture, and a sharp</pre><p>💡 Mande sua foto junto com o prompt para recuperar a imagem com alta fidelidade.</p><p>🖼 Imagem de exemplo: promptsref.com</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
