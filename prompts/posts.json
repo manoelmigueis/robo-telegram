@@ -1475,5 +1475,30 @@
   "autor": "",
   "chave": "pp:man-in-luxurious-fur",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>A hyper-realistic, cinematic 3:4 portrait based on the uploaded image, keeping the same face and hairstyle.\nUltra-realistic 8K portrait of a stylish man standing confidently in a luxurious vintage interior, wearing a plush, oversized light brown fur coat over a cream satin shirt with the top buttons open, revealing a sleek gold pendant necklace. He wears dark sunglasses. The background features ornate wooden panelling, warm ambient lighting from antique wall sconces candles, and a classic oil painting in a gilded frame. The mood is cinematic and regal, with soft shadows and golden tones enhancing the opulence. Shot with a shallow depth of field, bokeh lights in the background, studio-quality lighting, Vogue editorial style, fashion photography, ultra-HD texture, perfect skin detail, confident pose, clean luxury lifestyle aesthetic.</pre><p>💡 Mande sua foto junto com o prompt e troque &quot;fur coat&quot; pela roupa que quiser.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261126-12-crie-uma-capa-de-revista-de-mo",
+  "tipo": "prompt",
+  "titulo": "📸 Crie uma capa de revista de moda com seu rosto",
+  "prompt": "Use the uploaded photo as the exact facial identity reference. Create a premium photorealistic fashion magazine cover, vertical 9:16. A stylish young man with thick voluminous curly hair, black rectangular sunglasses, black over-ear headphones, and a faded grey denim shirt with rolled-up sleeves. Medium shot, centered, head tilted down, calmly adjusting his black wristwatch with the opposite hand. Clean soft cream white background, natural daylight, professional DSLR quality, high contrast, sharp facial details. Huge bold red condensed serif “ACHROMATIC” title across the top, small spaced “Desaturated” above it, and elegant black quotes on both sides: “Starve your distractions, feed your focus.” and “Timeless style.” Minimal luxury editorial layout.",
+  "prompt_en": "Use the uploaded photo as the exact facial identity reference. Create a premium photorealistic fashion magazine cover, vertical 9:16. A stylish young man with thick voluminous curly hair, black rectangular sunglasses, black over-ear headphones, and a faded grey denim shirt with rolled-up sleeves. Medium shot, centered, head tilted down, calmly adjusting his black wristwatch with the opposite hand. Clean soft cream white background, natural daylight, professional DSLR quality, high contrast, sharp facial details. Huge bold red condensed serif “ACHROMATIC” title across the top, small spaced “Desaturated” above it, and elegant black quotes on both sides: “Starve your distractions, feed your focus.” and “Timeless style.” Minimal luxury editorial layout.",
+  "dica": "Mande sua foto junto com o prompt e troque a cor da camisa em \"faded grey denim shirt\"",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "moda",
+   "retrato",
+   "editorial",
+   "estilo"
+  ],
+  "imagens": [
+   "img/261126-12-crie-uma-capa-de-revista-de-mo.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.promptplum.com/cdn-cgi/image/q=78,scq=50,width=1400,height=1400,fit=contain,f=jpeg/promptImages/60c7c47c-4ff4-422f-8005-25ab428e8399.webp",
+  "fonte": "PromptPlum",
+  "url": "https://promptplum.com/prompt/man-fashion-magazine-cover-photo-prompt/",
+  "autor": "",
+  "chave": "pp:man-fashion-magazine-cover-photo-prompt",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Use the uploaded photo as the exact facial identity reference. Create a premium photorealistic fashion magazine cover, vertical 9:16. A stylish young man with thick voluminous curly hair, black rectangular sunglasses, black over-ear headphones, and a faded grey denim shirt with rolled-up sleeves. Medium shot, centered, head tilted down, calmly adjusting his black wristwatch with the opposite hand. Clean soft cream white background, natural daylight, professional DSLR quality, high contrast, sharp facial details. Huge bold red condensed serif “ACHROMATIC” title across the top, small spaced “Desaturated” above it, and elegant black quotes on both sides: “Starve your distractions, feed your focus.” and “Timeless style.” Minimal luxury editorial layout.</pre><p>💡 Mande sua foto junto com o prompt e troque a cor da camisa em &quot;faded grey denim shirt&quot;</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
