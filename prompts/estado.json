@@ -218,7 +218,8 @@
     "lk:42e6b757cd2643",
     "pp:mens-nightlife-fashion-photography",
     "pp:mens-fashion-editorial-poster",
-    "pp:detailed-male-pencil-drawing-prompt"
+    "pp:detailed-male-pencil-drawing-prompt",
+    "pp:mens-winter-fashion-city-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -234,7 +235,7 @@
     "inicio": "2026-11-26T11:40:28+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 0,
+    "feitos": 1,
     "meta": 12,
     "achados": 73,
     "msg": ""
