@@ -26,7 +26,8 @@
     "261125-10-crie-um-retrato-de-executivo-t",
     "261125-12-crie-um-retrato-de-moda-modern",
     "261125-12-crie-sua-foto-de-estilo-urbano",
-    "261125-8-crie-um-retrato-de-moda-focado"
+    "261125-8-crie-um-retrato-de-moda-focado",
+    "261126-12-crie-uma-capa-de-revista-de-mo"
   ],
   "pulados": [],
   "frente": [],
@@ -60,7 +61,8 @@
     "261125-10-crie-um-retrato-de-executivo-t": "2026-11-26T15:11:11+00:00",
     "261125-12-crie-um-retrato-de-moda-modern": "2026-11-26T15:11:13+00:00",
     "261125-12-crie-sua-foto-de-estilo-urbano": "2026-11-26T15:11:22+00:00",
-    "261125-8-crie-um-retrato-de-moda-focado": "2026-11-26T15:11:24+00:00"
+    "261125-8-crie-um-retrato-de-moda-focado": "2026-11-26T15:11:24+00:00",
+    "261126-12-crie-uma-capa-de-revista-de-mo": "2026-11-26T15:22:23+00:00"
   },
   "mensagens": {
     "261125-1-foto-profissional-estilo-edito": [
@@ -143,9 +145,12 @@
     ],
     "261125-8-crie-um-retrato-de-moda-focado": [
       32
+    ],
+    "261126-12-crie-uma-capa-de-revista-de-mo": [
+      33
     ]
   },
-  "contador": 27,
+  "contador": 28,
   "vistos": [
     "pc:cmwwenmqs0001if08a8ptnnbv",
     "nb:29b524029373a7",
@@ -272,7 +277,7 @@
     "n": 12
   },
   "candidatos": [],
-  "ultimo": "2026-11-26T15:11:24+00:00",
+  "ultimo": "2026-11-26T15:22:23+00:00",
   "fontes": [
     "https://prompthero.com/midjourney-prompts",
     "https://promptsref.com/library/nano-banana-pro?utm_source=x_unedrwood"
