@@ -21,7 +21,8 @@
     "261125-7-vire-personagem-fofo-estilo-ch",
     "261125-5-crie-um-retrato-cinematogrfico",
     "261125-2-transforme-seu-rosto-em-um-bon",
-    "261125-1-crie-um-poster-de-aniversrio-3"
+    "261125-1-crie-um-poster-de-aniversrio-3",
+    "261125-5-crie-um-retrato-de-terno-com-l"
   ],
   "pulados": [],
   "frente": [],
@@ -50,7 +51,8 @@
     "261125-7-vire-personagem-fofo-estilo-ch": "2026-11-26T02:25:32+00:00",
     "261125-5-crie-um-retrato-cinematogrfico": "2026-11-26T02:25:32+00:00",
     "261125-2-transforme-seu-rosto-em-um-bon": "2026-11-26T13:05:26+00:00",
-    "261125-1-crie-um-poster-de-aniversrio-3": "2026-11-26T15:11:00+00:00"
+    "261125-1-crie-um-poster-de-aniversrio-3": "2026-11-26T15:11:00+00:00",
+    "261125-5-crie-um-retrato-de-terno-com-l": "2026-11-26T15:11:11+00:00"
   },
   "mensagens": {
     "261125-1-foto-profissional-estilo-edito": [
@@ -118,9 +120,12 @@
     ],
     "261125-1-crie-um-poster-de-aniversrio-3": [
       27
+    ],
+    "261125-5-crie-um-retrato-de-terno-com-l": [
+      28
     ]
   },
-  "contador": 22,
+  "contador": 23,
   "vistos": [
     "pc:cmwwenmqs0001if08a8ptnnbv",
     "nb:29b524029373a7",
@@ -247,7 +252,7 @@
     "n": 12
   },
   "candidatos": [],
-  "ultimo": "2026-11-26T15:11:00+00:00",
+  "ultimo": "2026-11-26T15:11:11+00:00",
   "fontes": [
     "https://prompthero.com/midjourney-prompts",
     "https://promptsref.com/library/nano-banana-pro?utm_source=x_unedrwood"
