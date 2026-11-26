@@ -2024,5 +2024,26 @@
   "imagens": [
    "img/057.png"
   ]
+ },
+ {
+  "id": "058-licoes-ecossistemas-inovacao",
+  "tipo": "lista",
+  "titulo": "📈 5 lições de ecossistemas de inovação para o seu negócio",
+  "corpo": "Nem toda renda extra começa na capital ou com grandes investimentos...<br/><br/><b>1.</b> Conecte o governo, a academia, a sociedade civil e os negócios.<br/><b>2.</b> Entenda as vocações do seu território, como turismo ou gastronomia.<br/><b>3.</b> Transforme pesquisas e ideias antigas em produtos reais de mercado.<br/><b>4.</b> Una forças com instituições de ensino e parques tecnológicos locais.<br/><b>5.</b> Faça parcerias com startups para criar aplicativos de serviços locais.<br/><br/><details><summary>👀 Toque para ver a dica de ouro</summary><p>Mapeie os atores e as necessidades da sua região para focar em soluções práticas que já possuem demanda local.</p></details><br/>Salve este post ou mande para um amigo que quer inovar nos negócios!",
+  "tags": [
+   "rendaextra",
+   "inovacao",
+   "negocios",
+   "empreendedorismo"
+  ],
+  "arte": {
+   "titulo": "5 lições de inovação local"
+  },
+  "fonte": "Agência Sebrae",
+  "link": "https://agenciasebrae.com.br/inovacao-e-tecnologia/da-rocinha-a-amazonia-ecossistemas-mostram-caminhos-para-a-inovacao-e-o-desenvolvimento-no-eli-summit/",
+  "materia": "Da Rocinha à Amazônia, ecossistemas mostram caminhos para a inovação e o desenvolvimento no Eli Summit",
+  "imagens": [
+   "img/058.jpg"
+  ]
  }
 ]
