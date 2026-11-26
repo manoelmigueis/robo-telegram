@@ -449,5 +449,30 @@
   "autor": "",
   "chave": "lk:532f0a4ae3521d",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>A surveillance-style scene with face detection boxes and a sharp zoomed-in inset of the main subject.</pre><p>💡 Troque &quot;main subject&quot; no prompt por o que você quer focar.</p><p>🖼 Imagem de exemplo: promptsref.com</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261125-7-vire-personagem-de-desenho-ani",
+  "tipo": "prompt",
+  "titulo": "🧸 Vire personagem de desenho animado 3D com seu rosto",
+  "prompt": "A portrait based on a person from an uploaded photo: facial features, hairstyle, hair color, and freckles (if present) are replicated from the photo. The subject is wearing an oversized pink hoodie with the hood down, or a fuzzy sky-blue ribbed turtleneck. Styled as a whimsical 3D animated-film character, the figure features a large, round head; enormous, perfectly circular, bowl-like eyes with tiny pupils; large, round, thin-rimmed glasses; a small button nose; a tiny mouth; and protruding ears, with the hairstyle matching the photo. The expression is deadpan yet slightly bewildered—one eyebrow is raised, the lips are pursed into a small point, and the gaze is directed straight at the camera. The rendering is a soft, matte 3D style, with visible textures on the fabric and hair, illuminated by soft studio lighting. A centered, chest-up portrait set against a solid, dusty gray-green background. No text or logos. 3:4.",
+  "prompt_en": "A portrait based on a person from an uploaded photo: facial features, hairstyle, hair color, and freckles (if present) are replicated from the photo. The subject is wearing an oversized pink hoodie with the hood down, or a fuzzy sky-blue ribbed turtleneck. Styled as a whimsical 3D animated-film character, the figure features a large, round head; enormous, perfectly circular, bowl-like eyes with tiny pupils; large, round, thin-rimmed glasses; a small button nose; a tiny mouth; and protruding ears, with the hairstyle matching the photo. The expression is deadpan yet slightly bewildered—one eyebrow is raised, the lips are pursed into a small point, and the gaze is directed straight at the camera. The rendering is a soft, matte 3D style, with visible textures on the fabric and hair, illuminated by soft studio lighting. A centered, chest-up portrait set against a solid, dusty gray-green background. No text or logos. 3:4.",
+  "dica": "Mande sua foto junto com o prompt e troque \"pink hoodie\" pela cor de roupa que quiser",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "retrato",
+   "3d",
+   "avatar",
+   "personagem"
+  ],
+  "imagens": [
+   "img/261125-7-vire-personagem-de-desenho-ani.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.promptplum.com/cdn-cgi/image/q=78,scq=50,width=1400,height=1400,fit=contain,f=jpeg/promptImages/e6092357-be6a-4b95-9a26-67c2f50ae5ed.webp",
+  "fonte": "PromptPlum",
+  "url": "https://promptplum.com/prompt/funny-3d-cartoon-girl-avatar/",
+  "autor": "",
+  "chave": "pp:funny-3d-cartoon-girl-avatar",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>A portrait based on a person from an uploaded photo: facial features, hairstyle, hair color, and freckles (if present) are replicated from the photo. The subject is wearing an oversized pink hoodie with the hood down, or a fuzzy sky-blue ribbed turtleneck. Styled as a whimsical 3D animated-film character, the figure features a large, round head; enormous, perfectly circular, bowl-like eyes with tiny pupils; large, round, thin-rimmed glasses; a small button nose; a tiny mouth; and protruding ears, with the hairstyle matching the photo. The expression is deadpan yet slightly bewildered—one eyebrow is raised, the lips are pursed into a small point, and the gaze is directed straight at the camera. The rendering is a soft, matte 3D style, with visible textures on the fabric and hair, illuminated by soft studio lighting. A centered, chest-up portrait set against a solid, dusty gray-green background. No text or logos. 3:4.</pre><p>💡 Mande sua foto junto com o prompt e troque &quot;pink hoodie&quot; pela cor de roupa que quiser</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
