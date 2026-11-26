@@ -1024,5 +1024,30 @@
   "autor": "",
   "chave": "pp:night-cityscape-bokeh-taxi-portrait",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Create an ultra-realistic, cinematic nighttime street portrait of a woman sitting inside a yellow taxi with the passenger-side window rolled down, photographed from outside through the passenger-side window. She has natural facial features, naturally styled  hair, and a calm, thoughtful expression, gazing slightly toward the left side of the frame. Her face is softly illuminated by warm ambient city lights, revealing realistic skin texture, delicate facial details, and subtle reflections in her eyes.\nComposition &amp; Camera: Tight close-up portrait, three-quarter side angle, camera positioned outside the car, capturing the woman&#x27;s face through the rain-covered glass. The curved yellow taxi door frame and black window borders create a natural cinematic frame around her face.\nEnvironment: A busy city street at night with colorful neon signs, blurred storefronts, traffic lights, and glowing headlights in the background. Numerous tiny raindrops and water streaks cover the car window, creating beautiful reflections and atmospheric depth.\nLighting: Moody mixed lighting with warm amber and golden highlights from street lamps, contrasting with cool cyan, blue, and red neon reflections. Soft light falls naturally across her face while the surrounding interior remains dark.\nPhotography Style: Photorealistic cinematic street photography, ultra-detailed skin texture, natural hair, intimate urban atmosphere, shallow depth of field, natural reflections on wet glass, beautiful bokeh, realistic color grading, high dynamic range, shot on an 85mm lens at f/1.8, crisp facial details, professional editorial photography, 8K quality aspect ratio 3:4.\nMood: Quiet, introspective, dreamy, melancholic nighttime atmosphere.</pre><p>💡 Troque &quot;woman&quot; por &quot;man&quot; ou mude a cor do táxi trocando &quot;yellow taxi&quot;.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261125-6-crie-um-retrato-elegante-de-te",
+  "tipo": "prompt",
+  "titulo": "📸 Crie um retrato elegante de terno com rosa vermelha",
+  "prompt": "Close-up portrait of an attractive, man wearing a tailored black tuxedo, black bow tie, crisp white dress shirt, and a red rose lapel pin. His face and body are turned slightly to the side in a three-quarter pose, with sharp light-colored eyes glancing directly at the camera. Intense, smoldering expression with subtle confidence. Naturally styled wet-look hair. Moody cinematic lighting, shallow depth of field, smooth gray studio background. Photorealistic, 8K resolution, shot on an 85mm lens, 4:5 vertical aspect ratio.\nIgnore the original pose, clothing and lighting completely.",
+  "prompt_en": "Close-up portrait of an attractive, man wearing a tailored black tuxedo, black bow tie, crisp white dress shirt, and a red rose lapel pin. His face and body are turned slightly to the side in a three-quarter pose, with sharp light-colored eyes glancing directly at the camera. Intense, smoldering expression with subtle confidence. Naturally styled wet-look hair. Moody cinematic lighting, shallow depth of field, smooth gray studio background. Photorealistic, 8K resolution, shot on an 85mm lens, 4:5 vertical aspect ratio.\nIgnore the original pose, clothing and lighting completely.",
+  "dica": "Troque \"black tuxedo\" pela roupa que quiser e \"red rose\" pela cor da flor.",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "retrato",
+   "fotorrealista",
+   "cinematografico",
+   "moda"
+  ],
+  "imagens": [
+   "img/261125-6-crie-um-retrato-elegante-de-te.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.promptplum.com/cdn-cgi/image/q=78,scq=50,width=1400,height=1400,fit=contain,f=jpeg/promptImages/922c1f38-8b56-4599-b526-f967805c37f9.webp",
+  "fonte": "PromptPlum",
+  "url": "https://promptplum.com/prompt/man-black-tuxedo-rose-portrait/",
+  "autor": "",
+  "chave": "pp:man-black-tuxedo-rose-portrait",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Close-up portrait of an attractive, man wearing a tailored black tuxedo, black bow tie, crisp white dress shirt, and a red rose lapel pin. His face and body are turned slightly to the side in a three-quarter pose, with sharp light-colored eyes glancing directly at the camera. Intense, smoldering expression with subtle confidence. Naturally styled wet-look hair. Moody cinematic lighting, shallow depth of field, smooth gray studio background. Photorealistic, 8K resolution, shot on an 85mm lens, 4:5 vertical aspect ratio.\nIgnore the original pose, clothing and lighting completely.</pre><p>💡 Troque &quot;black tuxedo&quot; pela roupa que quiser e &quot;red rose&quot; pela cor da flor.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]

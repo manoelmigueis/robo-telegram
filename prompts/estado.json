@@ -194,7 +194,8 @@
     "pp:funny-low-battery-caricature-photo",
     "pp:floating-man-dark-studio-smoke-spotlight",
     "pp:man-in-suit-with-red-roses-elevator-portrait",
-    "pp:night-cityscape-bokeh-taxi-portrait"
+    "pp:night-cityscape-bokeh-taxi-portrait",
+    "pp:man-black-tuxedo-rose-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -210,7 +211,7 @@
     "inicio": "2026-11-26T01:21:17+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 5,
+    "feitos": 6,
     "meta": 12,
     "achados": 74,
     "msg": ""
