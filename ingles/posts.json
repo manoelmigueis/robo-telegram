@@ -784,5 +784,20 @@
     "imagens": [
       "img/050.png"
     ]
+  },
+  {
+    "id": "051-public-transportation-vocabulario",
+    "tipo": "palavra",
+    "titulo": "🚌 Public transportation: vocabulário para o transporte público",
+    "corpo": "<p>Precisa andar de ônibus ou metrô na gringa e quer saber como se virar? Veja termos essenciais para o seu dia a dia:</p><table><tr><th>Inglês</th><th>Português</th></tr><tr><td>✅ Bus stop.</td><td>Ponto de ônibus.</td></tr><tr><td>✅ Subway station.</td><td>Estação de metrô.</td></tr><tr><td>✅ Single ticket.</td><td>Bilhete único.</td></tr><tr><td>✅ Transfer.</td><td>Fazer baldeação.</td></tr><tr><td>✅ Fare.</td><td>Tarifa da passagem.</td></tr><tr><td>✅ Rush hour.</td><td>Horário de pico.</td></tr></table><p>🔁 Salve este post e mande para quem usa transporte público!</p>",
+    "tags": [
+      "ingles",
+      "viagem",
+      "vocabulario",
+      "aprenderingles"
+    ],
+    "imagens": [
+      "img/051.png"
+    ]
   }
 ]
