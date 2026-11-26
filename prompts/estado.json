@@ -11,7 +11,8 @@
     "261125-4-crie-uma-foto-de-paisagem-com-",
     "261125-7-crie-um-prato-de-cermica-pinta",
     "261125-8-crie-uma-ilustrao-moderna-no-e",
-    "261125-5-transforme-qualquer-prato-em-u"
+    "261125-5-transforme-qualquer-prato-em-u",
+    "261125-1-crie-um-retrato-de-estdio-sofi"
   ],
   "pulados": [],
   "frente": [],
@@ -30,7 +31,8 @@
     "261125-4-crie-uma-foto-de-paisagem-com-": "2026-11-25T23:54:10+00:00",
     "261125-7-crie-um-prato-de-cermica-pinta": "2026-11-25T23:54:17+00:00",
     "261125-8-crie-uma-ilustrao-moderna-no-e": "2026-11-25T23:54:18+00:00",
-    "261125-5-transforme-qualquer-prato-em-u": "2026-11-25T23:57:52+00:00"
+    "261125-5-transforme-qualquer-prato-em-u": "2026-11-25T23:57:52+00:00",
+    "261125-1-crie-um-retrato-de-estdio-sofi": "2026-11-26T01:06:45+00:00"
   },
   "mensagens": {
     "261125-1-foto-profissional-estilo-edito": [
@@ -68,9 +70,12 @@
     ],
     "261125-5-transforme-qualquer-prato-em-u": [
       17
+    ],
+    "261125-1-crie-um-retrato-de-estdio-sofi": [
+      18
     ]
   },
-  "contador": 12,
+  "contador": 13,
   "vistos": [
     "pc:cmwwenmqs0001if08a8ptnnbv",
     "nb:29b524029373a7",
@@ -158,7 +163,7 @@
     "n": 12
   },
   "candidatos": [],
-  "ultimo": "2026-11-25T23:57:52+00:00",
+  "ultimo": "2026-11-26T01:06:45+00:00",
   "fontes": [
     "https://prompthero.com/midjourney-prompts",
     "https://promptsref.com/library/nano-banana-pro?utm_source=x_unedrwood"
