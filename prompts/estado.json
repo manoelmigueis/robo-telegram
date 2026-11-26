@@ -222,7 +222,8 @@
     "pp:mens-winter-fashion-city-portrait",
     "pc:cmwxdrxsr0009jv07sd4r7xmj",
     "pp:casual-men-walking-parking-lot-fashion-portrait",
-    "pc:cmwx8bf9d0005kz082zscgo2u"
+    "pc:cmwx8bf9d0005kz082zscgo2u",
+    "pp:3d-character-illustration-casual-fashion-prompt"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -238,7 +239,7 @@
     "inicio": "2026-11-26T11:40:28+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 4,
+    "feitos": 5,
     "meta": 12,
     "achados": 73,
     "msg": ""
