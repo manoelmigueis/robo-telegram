@@ -163,7 +163,8 @@
     "pp:studio-portrait-man-black-suit",
     "pp:funny-big-eyes-3d-cartoon-avatar",
     "pp:intense-cinematic-man-shades-photo-portrait",
-    "pp:monochrome-corporate-portrait-prompt"
+    "pp:monochrome-corporate-portrait-prompt",
+    "pc:cmwud6e5b0009kx08iyl2h7zb"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -179,7 +180,7 @@
     "inicio": "2026-11-26T01:18:43+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 6,
+    "feitos": 7,
     "meta": 12,
     "achados": 79,
     "msg": ""
