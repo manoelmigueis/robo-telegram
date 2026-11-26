@@ -158,8 +158,29 @@ def apagar_aviso_fixado(chat, mid_fixado, depois_de=None, tentativas=3):
     return False
 
 
+def criar_convites(p):
+    """Anúncio escrito por você com link de um canal do robô: cria um convite só dele em cada canal citado.
+    Quem entra pelo convite fica contado no anúncio. Guarda em dados["convites"] = {nome: link}."""
+    if p.get("origem") != "manual":
+        return
+    dados = p.get("dados") or {}
+    convites = dict(dados.get("convites") or {})
+    meus = {str(c["chat"]).lstrip("@").lower() for c in banco.canais() if str(c["chat"]).startswith("@")}
+    faltam = (metricas.canais_nos_links(p.get("legenda"), p.get("botoes")) & meus) - set(convites)
+    for nome in sorted(faltam):
+        try:
+            r = tg("createChatInviteLink", chat_id="@" + nome, name=f"anuncio {p['id']}")
+            convites[nome] = r["invite_link"]
+        except Exception as x:  # sem permissão de convidar: o link fica como estava
+            print(f"[convite] @{nome}: {x}")
+    if convites != (dados.get("convites") or {}):
+        p["dados"] = {**dados, "convites": convites}
+        banco.mudar_post(p["id"], dados=p["dados"])
+
+
 def editar_envio(e, p, canal):
     """Troca o texto e o botão de um post que já está no canal."""
+    criar_convites(p)
     legenda, botoes = metricas.links_rastreados(p, canal, legenda_do_canal(p, canal), p["botoes"])
     teclado = {"inline_keyboard": botoes or []}
     try:
@@ -331,6 +352,7 @@ def publicar(pid, conferir=True, so_canais=None, so_gratis=False):
         expira_em = saida
     fixa = bool((p.get("dados") or {}).get("fixar"))
     enviados, erros = 0, []
+    criar_convites(p)
     textos = {c["id"]: metricas.links_rastreados(p, c, legenda_do_canal(p, c), p["botoes"]) for c in alvos}
 
     def _um(canal, foto):

@@ -77,6 +77,23 @@ class handler(BaseHTTPRequestHandler):
             except Exception as erro:
                 print(f"[ponte] não anotei a reação: {erro}")
             return self._responder(200, {})
+        membro = update.get("chat_member")
+        if membro:
+            # alguém entrou num canal: se foi pelo convite de um anúncio, anota para o robô contar
+            convite = membro.get("invite_link") or {}
+            nome_conv = convite.get("name") or ""
+            antes = (membro.get("old_chat_member") or {}).get("status")
+            agora = (membro.get("new_chat_member") or {}).get("status")
+            if nome_conv.startswith("anuncio ") and antes in ("left", "kicked") and agora in ("member", "restricted"):
+                pid = nome_conv.split()[-1]
+                nome = f"j~{pid}~{(membro.get('chat') or {}).get('id')}~{int(time.time())}~{uuid.uuid4().hex[:8]}"
+                try:
+                    github(f"/contents/metricas/{nome}.json", "PUT", {
+                        "message": "entrada", "branch": "painel-respostas",
+                        "content": base64.b64encode(b"{}").decode()})
+                except Exception as erro:
+                    print(f"[ponte] não anotei a entrada: {erro}")
+            return self._responder(200, {})
         cb = update.get("callback_query")
         msg = update.get("message") or {}
         quem = (cb or msg).get("from", {}).get("id")

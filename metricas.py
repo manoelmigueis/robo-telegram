@@ -37,6 +37,45 @@ def rastrear(url, pid, cid):
     return f"{PONTE}/r/{int(pid)}.{int(cid)}?u={quote(url, safe='')}"
 
 
+# link para um canal (t.me/nome), sem ser link de mensagem (t.me/nome/123) nem convite (t.me/+abc)
+LINK_CANAL = r'(?:https?://)?(?:www\.)?(?:t|telegram)\.me/([A-Za-z0-9_]{4,32})(?![\w/+])'
+
+
+def canais_nos_links(legenda, botoes):
+    """Os nomes de canal (sem @, minúsculos) que aparecem nos links do post."""
+    import re
+    textos = [legenda or ""] + [b.get("url", "") for linha in (botoes or []) for b in linha]
+    return {m.group(1).lower() for t in textos for m in re.finditer(LINK_CANAL, t)}
+
+
+def com_convites(legenda, botoes, convites):
+    """Troca t.me/canal pelo convite do anúncio, que conta quem entrou. O texto que aparece não muda."""
+    import re
+    if not convites:
+        return legenda, botoes
+
+    def _url(u):
+        m = re.fullmatch(LINK_CANAL + r'/?', (u or "").strip())
+        return convites.get(m.group(1).lower(), u) if m else u
+
+    partes, dentro_a, saida = re.split(r'(<[^>]+>)', legenda or ""), False, []
+    for parte in partes:
+        if parte.startswith("<"):
+            m_tag = re.match(r'<\s*(/?\w+)', parte)
+            tag = m_tag.group(1).lower() if m_tag else ""
+            if tag == "a":
+                dentro_a = True
+                parte = re.sub(r'href="([^"]+)"', lambda m: f'href="{_url(m.group(1))}"', parte)
+            elif tag == "/a":
+                dentro_a = False
+        elif not dentro_a:  # link escrito solto no texto: vira link com o mesmo texto
+            parte = re.sub(LINK_CANAL, lambda m: f'<a href="{convites[m.group(1).lower()]}">{m.group(0)}</a>'
+                           if m.group(1).lower() in convites else m.group(0), parte)
+        saida.append(parte)
+    novos = [[{**b, "url": _url(b["url"])} if b.get("url") else b for b in linha] for linha in (botoes or [])]
+    return "".join(saida), novos
+
+
 def links_rastreados(p, canal, legenda, botoes):
     """Legenda e botões de um post com os links passando pela ponte."""
     import re
@@ -55,6 +94,8 @@ def links_rastreados(p, canal, legenda, botoes):
                 b["style"] = cor
         return b
     novos = [[_bt(b) for b in linha] for linha in (botoes or [])]
+    if p.get("origem") == "manual":
+        legenda, novos = com_convites(legenda, novos, (p.get("dados") or {}).get("convites"))
     return legenda, novos
 
 
@@ -81,7 +122,7 @@ def _novo_evento(nome, tipo, post_id, canal_id, envio_id, quando, valor):
 
 def contar(nomes):
     """Soma no banco os avisos (nomes de arquivo sem .json). Devolve (cliques, reações) novos."""
-    cliques = reacoes = 0
+    cliques = reacoes = entradas = 0
     chats = {}
     for c in banco.canais():
         chats[str(c["chat"]).lstrip("@").lower()] = c["id"]
@@ -96,6 +137,9 @@ def contar(nomes):
                     if e:
                         banco.sql("UPDATE envios SET cliques=COALESCE(cliques,0)+1 WHERE id=?", (e["id"],))
                     cliques += 1
+            elif p[0] == "j" and len(p) == 5:  # alguém entrou num canal pelo convite de um anúncio
+                if _novo_evento(nome, "entrada", int(p[1]), None, None, _quando(p[3]), 1):
+                    entradas += 1
             elif p[0] == "r" and len(p) == 6:
                 chat, mid, total, quando = p[1].lstrip("@").lower(), int(p[2]), int(p[3]), _quando(p[4])
                 cid = chats.get(chat)
@@ -107,6 +151,8 @@ def contar(nomes):
                     reacoes += 1
         except (ValueError, IndexError) as x:
             print(f"[métricas] aviso estranho {nome}: {x}")
+    if entradas:
+        print(f"[métricas] {entradas} pessoa(s) entraram em canais pelos convites dos anúncios")
     return cliques, reacoes
 
 

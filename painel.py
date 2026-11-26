@@ -104,9 +104,16 @@ async def login_telegram(request: Request):
     return _cookie(JSONResponse({"ok": True, "token": TOKEN}), request)
 
 
+def _entradas():
+    """Quantas pessoas entraram nos canais pelo convite de cada anúncio: {post_id: total}."""
+    return {r["post_id"]: r["n"] for r in banco.sql(
+        "SELECT post_id, COUNT(*) n FROM eventos WHERE tipo='entrada' GROUP BY post_id")}
+
+
 def lotes():
     """Posts escritos por você (um texto em vários canais): os agendados e os que estão no ar."""
     nomes = {c["id"]: c["nome"] for c in banco.canais()}
+    entradas = _entradas()
     saida = []
     for p in banco.posts(limite=200):
         if p["origem"] != "manual" or p["status"] not in ("agendado", "postado", "publicando", "erro"):
@@ -125,6 +132,7 @@ def lotes():
             "canais": [e["canal_nome"] or e["chat"] for e in no_ar] if no_ar
             else [nomes.get(c, f"canal {c}") for c in (p["canais"] or [])],
             "no_ar": len(no_ar),
+            "convite": bool((p["dados"] or {}).get("convites")), "entraram": entradas.get(p["id"], 0),
         })
         if len(saida) >= 40:
             break
@@ -134,6 +142,7 @@ def lotes():
 def anuncios_antigos(ja=()):
     """Anúncios que você escreveu e que já saíram do ar: dá para usar de novo."""
     saida, vistos = [], set()
+    entradas = _entradas()
     for p in banco.posts(limite=300):
         if p["origem"] != "manual" or p["id"] in ja or p["status"] in ("agendado", "rascunho"):
             continue
@@ -146,7 +155,8 @@ def anuncios_antigos(ja=()):
         saida.append({"id": p["id"], "titulo": p["titulo"], "status": p["status"], "texto": texto,
                       "botao_texto": botao.get("text", ""), "botao_url": botao.get("url", ""), "botao_cor": botao.get("style", ""),
                       "foto": p["foto"] if str(p["foto"] or "").startswith("http") else "",
-                      "quando": p.get("agendado_para") or p.get("criado")})
+                      "quando": p.get("agendado_para") or p.get("criado"),
+                      "convite": bool((p["dados"] or {}).get("convites")), "entraram": entradas.get(p["id"], 0)})
         if len(saida) >= 20:
             break
     return saida

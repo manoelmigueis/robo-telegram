@@ -1786,7 +1786,7 @@ function renderCriarLotes() {
     const fixado = l.fixados || (l.status === "agendado" && l.fixar);
     return `<div class="item">${l.foto ? `<img class="capa" src="${esc(l.foto)}" alt="" loading="lazy">` : `<div class="capa">${ico("criar")}</div>`}<div class="corpo">
       <div class="tit">${esc(l.titulo || "post #" + l.id)}</div>
-      <div class="meta"><span class="badge ${cor}">${st}</span><span class="badge">${l.canais.length} canal(is)</span>${l.saida_em ? `<span>sai ${dataBR(l.saida_em)}</span>` : ""}${fixado ? '<span class="badge">📌 fixado</span>' : ""}</div>
+      <div class="meta"><span class="badge ${cor}">${st}</span><span class="badge">${l.canais.length} canal(is)</span>${l.saida_em ? `<span>sai ${dataBR(l.saida_em)}</span>` : ""}${fixado ? '<span class="badge">📌 fixado</span>' : ""}${l.convite ? `<span class="badge ok" title="Pessoas que entraram no canal pelo link deste anúncio">👥 ${l.entraram} entraram</span>` : ""}</div>
       <div class="lote-txt">${md(l.texto || "")}</div>
       <div class="botoes"><button class="btn peq" onclick="ir('noar')">Editar</button>
         <button class="btn peq" onclick="usarAnuncio('lotes', ${l.id})">↺ Usar de novo</button>
@@ -1796,7 +1796,7 @@ function renderCriarLotes() {
   const A = dados.anuncios_antigos || [];
   $("criar_antigos").innerHTML = A.length ? `<details><summary class="secao" style="cursor:pointer;margin-top:14px">Anúncios anteriores <span class="conta-s">${A.length}</span></summary>` + A.map(a => `<div class="item">${a.foto ? `<img class="capa" src="${esc(a.foto)}" alt="" loading="lazy">` : `<div class="capa">${ico("criar")}</div>`}<div class="corpo">
       <div class="tit">${esc(a.titulo || "post #" + a.id)}</div>
-      <div class="meta">${a.quando ? `<span>${dataBR(a.quando)}</span>` : ""}</div>
+      <div class="meta">${a.quando ? `<span>${dataBR(a.quando)}</span>` : ""}${a.convite ? `<span class="badge ok">👥 ${a.entraram} entraram</span>` : ""}</div>
       <div class="lote-txt">${md(a.texto || "")}</div>
       <div class="botoes"><button class="btn peq pri" onclick="usarAnuncio('anuncios_antigos', ${a.id})">↺ Usar de novo</button></div></div></div>`).join("") + "</details>" : "";
 }
