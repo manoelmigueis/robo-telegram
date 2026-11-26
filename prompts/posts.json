@@ -424,5 +424,30 @@
   "autor": "",
   "chave": "pp:casual-woman-watercolor-sketch-prompt",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Create an elegant, full-body micro detailed watercolor fashion illustration of a woman walking casually, rendered in a super fine hand-painted watercolor and fine ink sketch style on textured off-white watercolor paper.\n\nSubject &amp; Appearance: A stylish woman with long, naturally styled detailed hair, wearing a dark charcoal camouflage baseball cap. She has a soft, pleasant smile and a relaxed expression, looking slightly toward her right.\n\nOutfit: An oversized dusty-blue sweatshirt with loose sleeves and natural fabric folds, paired with high-waisted, wide-leg cream-beige trousers. White chunky lace-up sneakers complete the casual outfit.\n\nPose &amp; Composition: Full-body walking pose, captured mid-stride with one leg crossing slightly in front of the other. Her posture is relaxed and natural. She holds a takeaway coffee cup in one hand and a brown hardcover notebook against her body with the other arm. A brown leather crossbody messenger bag hangs at her left hip, with its strap running diagonally across her chest. A simple wristwatch and small hoop earrings add subtle details.\n\nArt Style &amp; Details: Beautiful traditional watercolor painting with detailed pencil outlines, super-fine ink detailing, soft translucent color washes, subtle shading, detailed facial textures, realistic fabric creases, and carefully illustrated hair strands. Use warm beige, dusty blue, muted brown, and soft peach tones. Add subtle watercolor splashes and abstract paint blooms in pale peach and powder blue around the subject, blending naturally into the background.\n\nBackground: Minimal warm ivory-white handmade watercolor paper with visible fine paper grain and a subtle natural texture. Keep the background clean, bright, and uncluttered, with plenty of negative space around the figure.\n\nLighting &amp; Mood: Soft diffused natural lighting, gentle shadows, warm pastel color grading, peaceful lifestyle aesthetic, sophisticated editorial fashion illustration.\n\nTechnical Details: 16K highly detailed watercolor artwork, detailed hand-drawn contours, organic brush textures, balanced composition, full-body character completely visible from head to shoes, centered placement, vertical 4:5 aspect ratio, high-resolution illustration.\n\nNegative Prompt: Photorealistic photography, 3D rendering, anime, cartoonish proportions, dark background, excessive details, extra fingers, distorted hands, missing objects, cropped feet, cut-off head, text, logo, watermark.</pre><p>💡 Troque a cor do casaco mudando a palavra &quot;dusty-blue sweatshirt&quot; no prompt.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261125-6-crie-uma-cena-de-filme-estilo-",
+  "tipo": "prompt",
+  "titulo": "🎥 Crie uma cena de filme estilo câmera de segurança",
+  "prompt": "A surveillance-style scene with face detection boxes and a sharp zoomed-in inset of the main subject.",
+  "prompt_en": "A surveillance-style scene with face detection boxes and a sharp zoomed-in inset of the main subject.",
+  "dica": "Troque \"main subject\" no prompt por o que você quer focar.",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "vigilancia",
+   "cinema",
+   "camera",
+   "seguranca"
+  ],
+  "imagens": [
+   "img/261125-6-crie-uma-cena-de-filme-estilo-.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://aitool.promptsref.com/thumbs/card/aitool.promptsref.com/Publish/publish-1773823431642-1ac9676f.png",
+  "fonte": "promptsref.com",
+  "url": "https://promptsref.com/tool/AI-Image-Generator?tab=effects&model=nano-banana-2&effectId=cctv_face_tracking_zoom",
+  "autor": "",
+  "chave": "lk:532f0a4ae3521d",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>A surveillance-style scene with face detection boxes and a sharp zoomed-in inset of the main subject.</pre><p>💡 Troque &quot;main subject&quot; no prompt por o que você quer focar.</p><p>🖼 Imagem de exemplo: promptsref.com</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
