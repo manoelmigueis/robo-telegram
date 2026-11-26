@@ -233,10 +233,10 @@
   "garimpo": {
     "inicio": "2026-11-26T11:40:28+00:00",
     "fim": null,
-    "fase": "buscando",
+    "fase": "escrevendo",
     "feitos": 0,
-    "meta": 0,
-    "achados": 0,
+    "meta": 12,
+    "achados": 73,
     "msg": ""
   }
 }
