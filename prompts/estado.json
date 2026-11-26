@@ -282,7 +282,8 @@
     "pp:elegant-city-date-night-portrait",
     "pp:classic-bw-mens-fashion-portrait",
     "pp:low-key-portrait-dual-lighting-male-portrait",
-    "pp:man-dissolving-flying-birds-portrait"
+    "pp:man-dissolving-flying-birds-portrait",
+    "pp:miniature-girl-headphones-dancing-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -298,7 +299,7 @@
     "inicio": "2026-11-26T15:47:41+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 5,
+    "feitos": 6,
     "meta": 12,
     "achados": 70,
     "msg": ""
