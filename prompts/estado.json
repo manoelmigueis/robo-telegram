@@ -215,11 +215,11 @@
   ],
   "garimpo": {
     "inicio": "2026-11-26T01:21:17+00:00",
-    "fim": null,
-    "fase": "escrevendo",
+    "fim": "2026-11-26T01:22:40+00:00",
+    "fase": "pronto",
     "feitos": 12,
     "meta": 12,
     "achados": 74,
-    "msg": ""
+    "msg": "12 prompt(s) novo(s) entraram."
   }
 }
