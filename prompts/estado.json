@@ -332,7 +332,8 @@
     "pp:cinematic-male-portrait-prompt",
     "pp:red-jacket-boy-split-panel-portrait",
     "pp:man-reading-under-tree-park-portrait",
-    "pp:professional-3d-male-portrait"
+    "pp:professional-3d-male-portrait",
+    "pp:modern-male-gradient-suit-fashion-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -348,7 +349,7 @@
     "inicio": "2026-11-26T20:32:13+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 5,
+    "feitos": 6,
     "meta": 12,
     "achados": 68,
     "msg": ""
