@@ -73,7 +73,14 @@
   ],
   "contador": 51,
   "ultimo": "2026-11-25T23:00:49+00:00",
-  "pulados": [],
+  "pulados": [
+    "052-cliente-liga-cobrando",
+    "053-passos-para-marmitas",
+    "054-cliente-pede-desconto",
+    "055-passos-para-revender",
+    "056-voce-enviou-amostra",
+    "057-passos-para-iniciar"
+  ],
   "frente": [],
   "apagados": [],
   "agendados": {},
