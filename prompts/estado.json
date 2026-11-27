@@ -364,7 +364,8 @@
     "pp:thoughtful-gentleman-luxury-interior-portrait",
     "pp:monochrome-man-orange-sunglasses-portrait",
     "pp:man-holding-raven-black-three-piece-suit-portrait",
-    "pp:girl-chasing-mini-chibi-chatgpt-photo-prompt"
+    "pp:girl-chasing-mini-chibi-chatgpt-photo-prompt",
+    "pp:artistic-couple-ink-illustration"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -380,7 +381,7 @@
     "inicio": "2026-11-27T20:18:39+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 0,
+    "feitos": 1,
     "meta": 12,
     "achados": 61,
     "msg": ""

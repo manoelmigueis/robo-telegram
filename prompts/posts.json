@@ -2401,5 +2401,30 @@
   "autor": "",
   "chave": "pp:monochrome-man-orange-sunglasses-portrait",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Create an ultra-realistic, dramatic high-contrast black-and-white studio portrait of a man, framed from mid-torso upward. He wears a textured white open-collar shirt and aviator sunglasses with deep amber-orange tinted lenses—the only color in the image. His head turns three-quarter toward the right, gazing off-camera with a sharp, intense expression. Strong directional side lighting creates bold highlights, deep facial shadows, and detailed skin texture. Pure black background, cinematic editorial photography, razor-sharp facial details.</pre><p>💡 Troque &quot;man&quot; por outra pessoa e &quot;amber-orange&quot; pela cor da lente dos óculos no prompt.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261127-1-crie-um-retrato-romntico-em-pr",
+  "tipo": "prompt",
+  "titulo": "🖤 Crie um retrato romântico em preto e branco com seu rosto",
+  "prompt": "Black and white artistic ink splash illustration of a young romantic couple in love, foreheads touching eyes closed, messy curly hair, watercolor ink drips and splatters, botanical leaves and butterflies dissolving around them, starry galaxy texture inside silhouette, dreamy ethereal, highly detailed pencil drawing mixed with digital art, white background --ar 4:5 --style artistic. Use the uploaded image for face reference and create the picture.",
+  "prompt_en": "Black and white artistic ink splash illustration of a young romantic couple in love, foreheads touching eyes closed, messy curly hair, watercolor ink drips and splatters, botanical leaves and butterflies dissolving around them, starry galaxy texture inside silhouette, dreamy ethereal, highly detailed pencil drawing mixed with digital art, white background --ar 4:5 --style artistic. Use the uploaded image for face reference and create the picture.",
+  "dica": "Mande sua foto junto com o prompt e troque \"romantic couple\" pelo que quiser.",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "casal",
+   "romantico",
+   "pretoebranco",
+   "arte"
+  ],
+  "imagens": [
+   "img/261127-1-crie-um-retrato-romntico-em-pr.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.promptplum.com/cdn-cgi/image/q=78,scq=50,width=1400,height=1400,fit=contain,f=jpeg/promptImages/32a0bba3-2f09-4560-bd95-18beb0ba83ef.webp",
+  "fonte": "PromptPlum",
+  "url": "https://promptplum.com/prompt/artistic-couple-ink-illustration/",
+  "autor": "",
+  "chave": "pp:artistic-couple-ink-illustration",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Black and white artistic ink splash illustration of a young romantic couple in love, foreheads touching eyes closed, messy curly hair, watercolor ink drips and splatters, botanical leaves and butterflies dissolving around them, starry galaxy texture inside silhouette, dreamy ethereal, highly detailed pencil drawing mixed with digital art, white background --ar 4:5 --style artistic. Use the uploaded image for face reference and create the picture.</pre><p>💡 Mande sua foto junto com o prompt e troque &quot;romantic couple&quot; pelo que quiser.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
