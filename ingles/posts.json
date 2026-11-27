@@ -799,5 +799,20 @@
     "imagens": [
       "img/051.png"
     ]
+  },
+  {
+    "id": "052-the-park-vocabulario",
+    "tipo": "lista",
+    "titulo": "🌳 At the park: vocabulário de parque em inglês",
+    "corpo": "<p>Quer passear no parque e praticar inglês? Salve este post 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Park</td><td>Parque</td></tr><tr><td>Tree</td><td>Árvore</td></tr><tr><td>Grass</td><td>Grama</td></tr><tr><td>Bench</td><td>Banco</td></tr><tr><td>Flower</td><td>Flor</td></tr><tr><td>Path</td><td>Caminho / trilha</td></tr><tr><td>Lake</td><td>Lago</td></tr><tr><td>Playground</td><td>Parquinho infantil</td></tr></table><details><summary>👀 Como dizer \"vamos caminhar no parque\"?</summary><p>Para fazer esse convite, os americanos dizem <b>Let's walk in the park</b> de forma bem natural.</p></details><p>🔁 Mande para aquele amigo que adora ar livre.</p>",
+    "tags": [
+      "ingles",
+      "aprenderingles",
+      "vocabulario",
+      "natureza"
+    ],
+    "imagens": [
+      "img/052.png"
+    ]
   }
 ]
