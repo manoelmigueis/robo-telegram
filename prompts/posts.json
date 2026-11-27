@@ -2476,5 +2476,30 @@
   "autor": "",
   "chave": "pp:simple-mens-fashion-ai-portrait",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Create an ultra-realistic, high-resolution 8K studio fashion portrait of a stylish man. Use the uploaded reference image as the exact identity reference, preserving his original facial features, face shape, and natural proportions with accurate face matching and no identity change.\nComposition &amp; Pose: Vertical 4:5 portrait, framed from the head to the upper thighs. The subject stands slightly turned in a three-quarter right-facing body pose, with his head gently turned toward the camera. His posture is relaxed and confident, with both hands naturally clasped together in front of his waist. Keep the subject centered, with comfortable negative space around him.\nOutfit &amp; Accessories: A vibrant red baseball cap featuring a small black rectangular front patch with subtle white typography, dark rectangular sunglasses with reddish-brown tinted lenses and glossy black frames, a clean oversized white crew-neck T-shirt with short sleeves, and dark indigo denim jeans. Add a minimalist silver wristwatch with a black strap and a simple silver ring. Include a small silver stud earring. Preserve realistic fabric folds, stitching, and accessory details.\nExpression: Calm, composed, confident expression with relaxed lips and a subtle natural smile. His face is slightly angled toward the camera, with a casual, fashionable attitude.\nBackground: Plain, seamless light gray studio backdrop with a subtle cool tone, completely uncluttered and free of distracting objects.\nLighting: Soft, balanced professional studio lighting from the front and slightly to one side, producing gentle facial shadows, natural skin highlights, and even illumination across the white T-shirt. Maintain accurate skin tones and excellent detail without overexposure.\nCamera &amp; Quality: Eye-level camera angle, professional fashion photography, 85mm portrait lens, f/4 aperture, sharp facial details, realistic skin texture and pores, individually defined hair curls, natural hands and fingers, crisp clothing details, balanced contrast, subtle shadows, and premium commercial editorial photography.</pre><p>💡 Mande sua foto junto com o prompt e mude a cor do &quot;red baseball cap&quot; e do &quot;white crew-neck T-shirt&quot; para as suas roupas favoritas.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261127-4-crie-uma-foto-luxuosa-na-pisci",
+  "tipo": "prompt",
+  "titulo": "🌇 Crie uma foto luxuosa na piscina com seu rosto",
+  "prompt": "Ultra-realistic 8K cinematic portrait of an uploaded person relaxing in an infinity pool at a rooftop penthouse, overlooking a breathtaking sunset city skyline. The warm golden and pink sky reflects perfectly on the water's surface, creating a dreamy mirror effect. He is wearing a stylish\n\nopen-collar linen shirt, accessorized with a luxury watch and a minimal chain. His wet hair is naturally messy, glowing softly under the golden light.\n\nBehind him, glass railings and tropical plants add a refined lifestyle vibe. Shot in a 4:5 vertical frame with DSLR clarity, hyper-detailed skin, water reflections, and cinematic lighting, a high-fashion lifestyle photoshoot aesthetic.\nUse the face from the uploaded reference image and preserve the same facial features - do not alter the face.",
+  "prompt_en": "Ultra-realistic 8K cinematic portrait of an uploaded person relaxing in an infinity pool at a rooftop penthouse, overlooking a breathtaking sunset city skyline. The warm golden and pink sky reflects perfectly on the water's surface, creating a dreamy mirror effect. He is wearing a stylish\n\nopen-collar linen shirt, accessorized with a luxury watch and a minimal chain. His wet hair is naturally messy, glowing softly under the golden light.\n\nBehind him, glass railings and tropical plants add a refined lifestyle vibe. Shot in a 4:5 vertical frame with DSLR clarity, hyper-detailed skin, water reflections, and cinematic lighting, a high-fashion lifestyle photoshoot aesthetic.\nUse the face from the uploaded reference image and preserve the same facial features - do not alter the face.",
+  "dica": "Mande sua foto junto com o prompt e troque \"linen shirt\" pela roupa que preferir.",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "retrato",
+   "piscina",
+   "cinematografico",
+   "luxo"
+  ],
+  "imagens": [
+   "img/261127-4-crie-uma-foto-luxuosa-na-pisci.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.promptplum.com/cdn-cgi/image/q=78,scq=50,width=1400,height=1400,fit=contain,f=jpeg/promptImages/e71079b8-891a-4f1a-b485-a16aab7e4ae8.webp",
+  "fonte": "PromptPlum",
+  "url": "https://promptplum.com/prompt/sunset-infinity-pool-elegance/",
+  "autor": "",
+  "chave": "pp:sunset-infinity-pool-elegance",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Ultra-realistic 8K cinematic portrait of an uploaded person relaxing in an infinity pool at a rooftop penthouse, overlooking a breathtaking sunset city skyline. The warm golden and pink sky reflects perfectly on the water&#x27;s surface, creating a dreamy mirror effect. He is wearing a stylish\n\nopen-collar linen shirt, accessorized with a luxury watch and a minimal chain. His wet hair is naturally messy, glowing softly under the golden light.\n\nBehind him, glass railings and tropical plants add a refined lifestyle vibe. Shot in a 4:5 vertical frame with DSLR clarity, hyper-detailed skin, water reflections, and cinematic lighting, a high-fashion lifestyle photoshoot aesthetic.\nUse the face from the uploaded reference image and preserve the same facial features - do not alter the face.</pre><p>💡 Mande sua foto junto com o prompt e troque &quot;linen shirt&quot; pela roupa que preferir.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
