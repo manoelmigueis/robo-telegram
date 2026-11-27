@@ -46,10 +46,11 @@
     "044-animals-animais-ingles",
     "045-mini-aula-make",
     "046-mini-aula-few",
-    "047-cleaning-the-house"
+    "047-cleaning-the-house",
+    "048-technology-vocabulario-celular"
   ],
-  "contador": 47,
-  "ultimo": "2026-11-27T13:00:47+00:00",
+  "contador": 48,
+  "ultimo": "2026-11-27T17:00:51+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -100,7 +101,8 @@
     "044-animals-animais-ingles": "2026-11-26T13:00:58+00:00",
     "045-mini-aula-make": "2026-11-26T17:00:52+00:00",
     "046-mini-aula-few": "2026-11-26T23:00:59+00:00",
-    "047-cleaning-the-house": "2026-11-27T13:00:47+00:00"
+    "047-cleaning-the-house": "2026-11-27T13:00:47+00:00",
+    "048-technology-vocabulario-celular": "2026-11-27T17:00:51+00:00"
   },
   "mensagens": {
     "008-phone-conversation": [
@@ -237,6 +239,9 @@
     ],
     "047-cleaning-the-house": [
       8503
+    ],
+    "048-technology-vocabulario-celular": [
+      8504
     ]
   }
 }
