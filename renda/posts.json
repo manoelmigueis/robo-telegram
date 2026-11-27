@@ -2214,5 +2214,27 @@
   "imagens": [
    "img/066.jpg"
   ]
+ },
+ {
+  "id": "067-cursos-gratis-python",
+  "tipo": "lista",
+  "titulo": "🐍 Cursos grátis de Python com certificado",
+  "corpo": "Quer aprender programação do zero e melhorar o seu currículo sem gastar nada?<br/><br/><b>1.</b> O Ministério da Educação (MEC) oferece cursos online de Python com certificado gratuito.<br/><b>2.</b> A Fundação Bradesco disponibiliza formações na área com atividades pela internet.<br/><b>3.</b> A Escola Nacional de Administração Pública (Enap) conta com conteúdos para iniciantes.<br/><b>4.</b> A plataforma Aprenda Mais tem o curso Python Fundamental 2, desenvolvido pelo IFSC.<br/><b>5.</b> As formações abordam lógica de programação, variáveis, operadores e funções.<br/><br/><details><summary>👀 Toque para ver a dica de ouro</summary><p>Acesse o site oficial da instituição escolhida, crie seu cadastro e confirme a matrícula hoje mesmo para garantir sua vaga e o certificado.</p></details><br/>Salve este post para estudar depois e compartilhe com quem quer aprender programação!",
+  "tags": [
+   "rendaextra",
+   "cursosgratuitos",
+   "programacao",
+   "python",
+   "capacitacao"
+  ],
+  "arte": {
+   "titulo": "4 opções de cursos grátis de Python"
+  },
+  "fonte": "Hora Brasil",
+  "link": "https://www.horabrasil.com.br/2026/11/27/python-gratis-veja-onde-fazer-cursos-online-para-iniciantes-em-programacao/",
+  "materia": "Python grátis: veja onde fazer cursos online para iniciantes em programação",
+  "imagens": [
+   "img/067.jpg"
+  ]
  }
 ]
