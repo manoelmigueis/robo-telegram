@@ -358,7 +358,8 @@
     "pc:cmwynxfxn0005jn076ti6rps2",
     "pp:handsome-man-sunglasses-city-view-prompt",
     "pc:cmwynwdaa0001jn07qh64bwct",
-    "pp:halloween-pumpkin-head-man-portrait"
+    "pp:halloween-pumpkin-head-man-portrait",
+    "pp:halloween-gothic-witch-woman-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -374,7 +375,7 @@
     "inicio": "2026-11-27T11:40:26+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 8,
+    "feitos": 9,
     "meta": 12,
     "achados": 64,
     "msg": ""
