@@ -376,7 +376,8 @@
     "pp:cinematic-red-dual-tone-lighting-male-portrait",
     "pp:man-retro-scratchboard-art-prompt",
     "pp:indian-girl-black-saree-portrait",
-    "pp:mixed-media-scrapbook-portrait-collage-with-hand-drawn-illustrations-ai-prompt"
+    "pp:mixed-media-scrapbook-portrait-collage-with-hand-drawn-illustrations-ai-prompt",
+    "lk:23dd00bfb83d90"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -392,7 +393,7 @@
     "inicio": "2026-11-27T20:18:39+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 11,
+    "feitos": 12,
     "meta": 12,
     "achados": 61,
     "msg": ""

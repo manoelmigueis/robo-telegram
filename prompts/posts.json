@@ -2676,5 +2676,30 @@
   "autor": "",
   "chave": "pp:mixed-media-scrapbook-portrait-collage-with-hand-drawn-illustrations-ai-prompt",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Create a vibrant, premium mixed-media scrapbook portrait in vertical 3:4 format of the uploaded person. Ignore the original pose and framing compleatly.\nPlace one large, photorealistic full-body person in the center, occupying 75–80% of the canvas height, standing confidently in fashionable modern streetwear with a relaxed expression and natural pose. \nWaring a fitted top, oversized open shirt, high-waisted jeans, chunky sneakers, and an optional shoulder bag.\nSurround the central person with FIVE large, expressive, colorful HAND-DRAWN illustrations of the same person, creatively positioned around and partially behind the main figure. Show five different poses: playful wink, laughing with arms open, cool sunglasses pose, chin resting on hands, and a mischievous side peek.\nRender these surrounding characters as beautiful 2D ink-and-marker illustrations with bold black outlines, vibrant colored-pencil shading, expressive facial details, and dynamic comic-style movement. Keep adult facial proportions.\nDesign the background as a handcrafted artistic scrapbook with irregular torn-paper layers, overlapping illustrated cutouts, colorful brushstrokes, doodled hearts, stars, arrows, and subtle paper shadows. Use vibrant coral, turquoise, mustard yellow, emerald green, white, and warm cream.\nCreate a visually striking, cohesive composition with energetic asymmetry, beautiful overlapping layers, rich colour contrast, and professional editorial quality.\nSTRICT: Only the central person is photorealistic. All five surrounding characters must be genuinely hand-drawn illustrations, not photographs or photo filters. Keep every face recognizable as the same person. No Polaroid frames, photo grids, repeated poses, random text, excessive decorations, or clutter.</pre><p>💡 Mande sua foto junto com o prompt e troque &quot;streetwear&quot; pelo estilo de roupa que quiser.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261127-12-crie-retratos-divertidos-de-ad",
+  "tipo": "prompt",
+  "titulo": "📼 Crie retratos divertidos de adolescentes dos anos 90",
+  "prompt": "Kooky portraits of 90’s mall teens in retro clothing, shot on VHS",
+  "prompt_en": "Kooky portraits of 90’s mall teens in retro clothing, shot on VHS",
+  "dica": "Troque \"retro clothing\" pelas roupas que você quiser colocar nos jovens.",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "retrato",
+   "anos90",
+   "vintage",
+   "estilo"
+  ],
+  "imagens": [
+   "img/261127-12-crie-retratos-divertidos-de-ad.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.prompthero.com/yxmnjwx7akj5yh08n6h6er498wmu/1080.webp",
+  "fonte": "prompthero.com",
+  "url": "https://prompthero.com/prompt/d48a3c464ed-midjourney-52-kooky-portraits-of-90s-mall-teens-in-retro-clothing-shot-on-vhs",
+  "autor": "",
+  "chave": "lk:23dd00bfb83d90",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Kooky portraits of 90’s mall teens in retro clothing, shot on VHS</pre><p>💡 Troque &quot;retro clothing&quot; pelas roupas que você quiser colocar nos jovens.</p><p>🖼 Imagem de exemplo: prompthero.com</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
