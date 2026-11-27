@@ -375,12 +375,12 @@
     "https://promptsref.com/library/nano-banana-pro?utm_source=x_unedrwood"
   ],
   "garimpo": {
-    "inicio": "2026-11-27T11:40:26+00:00",
-    "fim": "2026-11-27T11:56:55+00:00",
-    "fase": "pronto",
-    "feitos": 12,
-    "meta": 12,
-    "achados": 64,
-    "msg": "12 prompt(s) novo(s) entraram."
+    "inicio": "2026-11-27T20:18:39+00:00",
+    "fim": null,
+    "fase": "buscando",
+    "feitos": 0,
+    "meta": 0,
+    "achados": 0,
+    "msg": ""
   }
 }
