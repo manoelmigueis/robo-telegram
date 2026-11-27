@@ -2193,5 +2193,26 @@
   "imagens": [
    "img/065.jpg"
   ]
+ },
+ {
+  "id": "066-perdao-dividas-mei",
+  "tipo": "lista",
+  "titulo": "⚖️ Perdão de dívidas do MEI: saiba como regularizar seu CNPJ",
+  "corpo": "Se você é microempreendedor individual, fique atento às regras para limpar suas pendências e recomeçar o ano com o CNPJ em ordem.<br/><br/><b>1.</b> O perdão alcança 100% da contribuição do INSS dos boletos DAS-MEI vencidos até 13 de outubro de 2026.<br/><b>2.</b> Impostos como ICMS (comércio) e ISS (serviços) continuam devidos e não entram no benefício.<br/><b>3.</b> O cancelamento das dívidas de INSS será feito de forma automática a partir de 1º de janeiro de 2027.<br/><b>4.</b> Quem tem meses com status \"não apurado\" deve acessar o portal e gerar o DAS para o sistema reconhecer a dívida.<br/><b>5.</b> É preciso enviar declarações anuais (DASN-SIMEI) em atraso para destravar a apuração dos meses pendentes.<br/><b>6.</b> Quem possui débitos em Dívida Ativa pode consultar o andamento pelo portal Regularize da PGFN.<br/><br/><details><summary>👀 Toque para ver a dica de ouro</summary><p>Acesse o Portal do Empreendedor ainda em dezembro para regularizar pendências e garantir que o perdão seja aplicado automaticamente.</p></details><br/>Salve este post e compartilhe com aquele amigo que tem CNPJ!",
+  "tags": [
+   "rendaextra",
+   "mei",
+   "negocios",
+   "empreendedorismo"
+  ],
+  "arte": {
+   "titulo": "Perdão de dívidas do MEI"
+  },
+  "fonte": "Agência Sebrae",
+  "link": "https://agenciasebrae.com.br/economia-e-politica/perdao-de-dividas-do-mei-saiba-como-funciona-o-beneficio-e-tire-todas-as-duvidas/",
+  "materia": "Perdão de dívidas do MEI: saiba como funciona o benefício e tire todas as dúvidas",
+  "imagens": [
+   "img/066.jpg"
+  ]
  }
 ]
