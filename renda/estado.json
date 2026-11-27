@@ -54,7 +54,8 @@
     "058-licoes-ecossistemas-inovacao",
     "059-curso-gratis-excel",
     "060-cursos-gratis-seguranca",
-    "061-500-cursos-gratis"
+    "061-500-cursos-gratis",
+    "062-ufpr-abre-cursos"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -86,8 +87,8 @@
     "perdão de dívidas do mei saiba como funciona o benefício e tire todas as dúvidas",
     "python grátis veja onde fazer cursos online para iniciantes em programação"
   ],
-  "contador": 55,
-  "ultimo": "2026-11-27T12:00:49+00:00",
+  "contador": 56,
+  "ultimo": "2026-11-27T16:00:47+00:00",
   "pulados": [
     "052-cliente-liga-cobrando",
     "053-passos-para-marmitas",
@@ -146,7 +147,8 @@
     "058-licoes-ecossistemas-inovacao": "2026-11-26T12:00:47+00:00",
     "059-curso-gratis-excel": "2026-11-26T16:00:48+00:00",
     "060-cursos-gratis-seguranca": "2026-11-26T23:00:47+00:00",
-    "061-500-cursos-gratis": "2026-11-27T12:00:49+00:00"
+    "061-500-cursos-gratis": "2026-11-27T12:00:49+00:00",
+    "062-ufpr-abre-cursos": "2026-11-27T16:00:47+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -289,6 +291,9 @@
     ],
     "061-500-cursos-gratis": [
       8912
+    ],
+    "062-ufpr-abre-cursos": [
+      8915
     ]
   },
   "reais": [
