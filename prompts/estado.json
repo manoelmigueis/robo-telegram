@@ -353,7 +353,8 @@
     "pp:woman-red-blazer-autumn-portrait",
     "pp:stylish-man-pink-sunglasses-pop-art-prompt",
     "pp:handsome-guy-red-theme-photo-fashion-portrait",
-    "pc:cmwynywg50009jn07hnqa97wv"
+    "pc:cmwynywg50009jn07hnqa97wv",
+    "pp:fit-man-tropical-waterfall-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -369,7 +370,7 @@
     "inicio": "2026-11-27T11:40:26+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 3,
+    "feitos": 4,
     "meta": 12,
     "achados": 64,
     "msg": ""
