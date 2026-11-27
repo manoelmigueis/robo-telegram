@@ -814,5 +814,20 @@
     "imagens": [
       "img/052.png"
     ]
+  },
+  {
+    "id": "053-school-vocabulario-escola",
+    "tipo": "lista",
+    "titulo": "📚 At school: vocabulário de escola e sala de aula em inglês",
+    "corpo": "<p>Quer falar sobre estudos e sala de aula em inglês? Salve este post 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>School</td><td>Escola</td></tr><tr><td>Classroom</td><td>Sala de aula</td></tr><tr><td>Desk</td><td>Carteira / escrivaninha</td></tr><tr><td>Blackboard</td><td>Quadro-negro</td></tr><tr><td>Notebook</td><td>Caderno</td></tr><tr><td>Pencil</td><td>Lápis</td></tr><tr><td>Eraser</td><td>Borracha</td></tr><tr><td>Teacher</td><td>Professor / professora</td></tr></table><details><summary>👀 Como dizer \"faço lição de casa\"?</summary><p>Para falar que estuda em casa, os americanos dizem <b>I do my homework</b> de forma bem simples e natural.</p></details><p>🔁 Mande para aquele amigo que está estudando inglês.</p>",
+    "tags": [
+      "ingles",
+      "aprenderingles",
+      "vocabulario",
+      "escola"
+    ],
+    "imagens": [
+      "img/053.png"
+    ]
   }
 ]
