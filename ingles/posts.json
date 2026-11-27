@@ -829,5 +829,19 @@
     "imagens": [
       "img/053.png"
     ]
+  },
+  {
+    "id": "054-mini-aula-much",
+    "tipo": "aula",
+    "titulo": "📘 Mini-aula: MUCH ou MANY?",
+    "corpo": "<p>Essas duas palavras também significam muito em português, mas usamos cada uma com um tipo diferente de substantivo.</p><table><tr><th>📦 MANY: para coisas que podemos contar</th><th>💧 MUCH: para coisas que não podemos contar</th></tr><tr><td>many friends (muitos amigos)</td><td>much time (muito tempo)</td></tr><tr><td>many books (muitos livros)</td><td>much water (muita água)</td></tr><tr><td>many problems (muitos problemas)</td><td>much money (muito dinheiro)</td></tr></table><p>💡 <b>Regra prática:</b> use <b>many</b> no plural para coisas contáveis. Use <b>much</b> no singular para líquidos, massas e ideias abstratas.</p><details><summary>🧠 Desafio: \"I don't have ___ time.\" É much ou many?</summary><p><b>Much</b>. Tempo não é algo que contamos por unidades. Salve este post e mande para um amigo!</p></details>",
+    "tags": [
+      "ingles",
+      "gramaticainglesa",
+      "aprenderingles"
+    ],
+    "imagens": [
+      "img/054.png"
+    ]
   }
 ]
