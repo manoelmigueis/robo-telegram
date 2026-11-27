@@ -350,7 +350,8 @@
     "lk:58286935957957",
     "lk:c86962d32b9c8a",
     "pp:man-with-three-faded-profiles-prompt",
-    "pp:woman-red-blazer-autumn-portrait"
+    "pp:woman-red-blazer-autumn-portrait",
+    "pp:stylish-man-pink-sunglasses-pop-art-prompt"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -366,7 +367,7 @@
     "inicio": "2026-11-27T11:40:26+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 0,
+    "feitos": 1,
     "meta": 12,
     "achados": 64,
     "msg": ""
