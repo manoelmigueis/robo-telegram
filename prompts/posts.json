@@ -2376,5 +2376,30 @@
   "autor": "",
   "chave": "pp:thoughtful-gentleman-luxury-interior-portrait",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Create an ultra-realistic, high-end cinematic fashion portrait of a handsome man, using the uploaded reference image for accurate facial identity, with no identity change.\nComposition &amp; Pose: Vertical 4:5 portrait, framed from the waist up. The man stands confidently in a luxurious, elegant interior, his body facing slightly toward the camera in a three-quarter pose, with his head turned slightly to his left and his gaze directed thoughtfully off-camera. One hand is raised to his chin in a sophisticated, contemplative gesture, with relaxed fingers displaying elegant metallic rings.\nAppearance: Well-groomed, naturally styled hair, deep-set eyes, realistic skin texture, and a calm, confident expression. A small silver hoop earring adds a refined touch.\nOutfit &amp; Accessories: Premium dark navy-black velvet tuxedo jacket with luxurious texture, broad satin peak lapels, a crisp white dress shirt with the top buttons casually open, and no tie. A sophisticated silver floral lapel pin and a small metallic lapel accent complete the look. Multiple elegant silver and gold rings adorn the raised hand.\nBackground: An upscale, classic hotel or mansion interior featuring tall architectural windows on the right, warm wooden wall panels, elegant golden wall sconces on the left, and a polished floor. The background is softly blurred with beautiful warm bokeh, creating depth and an exclusive luxury atmosphere.\nLighting &amp; Color Grading: Soft natural daylight enters through the tall windows from the right, gently illuminating the face and white shirt. Warm amber practical lights in the background contrast with the cool, deep navy tones of the suit. Subtle shadows, balanced highlights, cinematic contrast, and rich, sophisticated color grading.\nCamera &amp; Technical Details: Eye-level camera angle, medium close-up portrait, 85mm portrait lens, f/1.8 aperture, shallow depth of field, sharp focus on the eyes and facial features, realistic velvet fibers, detailed hairs, natural skin pores, lifelike hands and jewelry, professional luxury menswear editorial photography, photorealistic, ultra-detailed, 8K quality, HDR, vertical 4:5 aspect ratio.</pre><p>💡 Mande sua foto junto com o prompt e troque &quot;dark navy-black&quot; pela cor do terno que quiser.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261127-12-crie-um-retrato-em-preto-e-bra",
+  "tipo": "prompt",
+  "titulo": "🕶️ Crie um retrato em preto e branco com óculos laranjas",
+  "prompt": "Create an ultra-realistic, dramatic high-contrast black-and-white studio portrait of a man, framed from mid-torso upward. He wears a textured white open-collar shirt and aviator sunglasses with deep amber-orange tinted lenses—the only color in the image. His head turns three-quarter toward the right, gazing off-camera with a sharp, intense expression. Strong directional side lighting creates bold highlights, deep facial shadows, and detailed skin texture. Pure black background, cinematic editorial photography, razor-sharp facial details.",
+  "prompt_en": "Create an ultra-realistic, dramatic high-contrast black-and-white studio portrait of a man, framed from mid-torso upward. He wears a textured white open-collar shirt and aviator sunglasses with deep amber-orange tinted lenses—the only color in the image. His head turns three-quarter toward the right, gazing off-camera with a sharp, intense expression. Strong directional side lighting creates bold highlights, deep facial shadows, and detailed skin texture. Pure black background, cinematic editorial photography, razor-sharp facial details.",
+  "dica": "Troque \"man\" por outra pessoa e \"amber-orange\" pela cor da lente dos óculos no prompt.",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "retrato",
+   "fotografia",
+   "estudio",
+   "pretoEbranco"
+  ],
+  "imagens": [
+   "img/261127-12-crie-um-retrato-em-preto-e-bra.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.promptplum.com/cdn-cgi/image/q=78,scq=50,width=1400,height=1400,fit=contain,f=jpeg/promptImages/c67aa616-70ea-4564-9e07-50bdbcfecd0a.webp",
+  "fonte": "PromptPlum",
+  "url": "https://promptplum.com/prompt/monochrome-man-orange-sunglasses-portrait/",
+  "autor": "",
+  "chave": "pp:monochrome-man-orange-sunglasses-portrait",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Create an ultra-realistic, dramatic high-contrast black-and-white studio portrait of a man, framed from mid-torso upward. He wears a textured white open-collar shirt and aviator sunglasses with deep amber-orange tinted lenses—the only color in the image. His head turns three-quarter toward the right, gazing off-camera with a sharp, intense expression. Strong directional side lighting creates bold highlights, deep facial shadows, and detailed skin texture. Pure black background, cinematic editorial photography, razor-sharp facial details.</pre><p>💡 Troque &quot;man&quot; por outra pessoa e &quot;amber-orange&quot; pela cor da lente dos óculos no prompt.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]

@@ -361,7 +361,8 @@
     "pp:halloween-pumpkin-head-man-portrait",
     "pp:halloween-gothic-witch-woman-portrait",
     "pp:smiling-handsome-man-studio-portrait-prompt",
-    "pp:thoughtful-gentleman-luxury-interior-portrait"
+    "pp:thoughtful-gentleman-luxury-interior-portrait",
+    "pp:monochrome-man-orange-sunglasses-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -377,7 +378,7 @@
     "inicio": "2026-11-27T11:40:26+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 11,
+    "feitos": 12,
     "meta": 12,
     "achados": 64,
     "msg": ""
