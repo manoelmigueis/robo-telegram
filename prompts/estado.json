@@ -369,7 +369,8 @@
     "pc:cmwz2sd7j0005jn07vkec9hyg",
     "pp:realistic-thread-art-man-illustration",
     "pp:simple-mens-fashion-ai-portrait",
-    "pp:sunset-infinity-pool-elegance"
+    "pp:sunset-infinity-pool-elegance",
+    "pp:exaggerated-90s-cartoon-caricature-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -385,7 +386,7 @@
     "inicio": "2026-11-27T20:18:39+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 4,
+    "feitos": 5,
     "meta": 12,
     "achados": 61,
     "msg": ""

@@ -2501,5 +2501,30 @@
   "autor": "",
   "chave": "pp:sunset-infinity-pool-elegance",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Ultra-realistic 8K cinematic portrait of an uploaded person relaxing in an infinity pool at a rooftop penthouse, overlooking a breathtaking sunset city skyline. The warm golden and pink sky reflects perfectly on the water&#x27;s surface, creating a dreamy mirror effect. He is wearing a stylish\n\nopen-collar linen shirt, accessorized with a luxury watch and a minimal chain. His wet hair is naturally messy, glowing softly under the golden light.\n\nBehind him, glass railings and tropical plants add a refined lifestyle vibe. Shot in a 4:5 vertical frame with DSLR clarity, hyper-detailed skin, water reflections, and cinematic lighting, a high-fashion lifestyle photoshoot aesthetic.\nUse the face from the uploaded reference image and preserve the same facial features - do not alter the face.</pre><p>💡 Mande sua foto junto com o prompt e troque &quot;linen shirt&quot; pela roupa que preferir.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261127-5-transforme-sua-foto-em-desenho",
+  "tipo": "prompt",
+  "titulo": "🤪 Transforme sua foto em desenho animado louco dos anos 90",
+  "prompt": "Create image Use the attached image as a 2D exaggerated cartoon close-up inspired by grotesque 1990s animation, shown from the shoulders up, absurd facial expression, exaggerated mouth, detailed teeth, bulging eyes, dramatic facial distortion, thick expressive outlines, high-energy cartoon style, flat vibrant colors, centered portrait, solid yellow background, clean single-color backdrop.",
+  "prompt_en": "Create image Use the attached image as a 2D exaggerated cartoon close-up inspired by grotesque 1990s animation, shown from the shoulders up, absurd facial expression, exaggerated mouth, detailed teeth, bulging eyes, dramatic facial distortion, thick expressive outlines, high-energy cartoon style, flat vibrant colors, centered portrait, solid yellow background, clean single-color backdrop.",
+  "dica": "Mande sua foto junto com o prompt e troque \"yellow\" pela cor de fundo que quiser.",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "desenho",
+   "cartoon",
+   "caricatura",
+   "anos90"
+  ],
+  "imagens": [
+   "img/261127-5-transforme-sua-foto-em-desenho.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.promptplum.com/cdn-cgi/image/q=78,scq=50,width=1400,height=1400,fit=contain,f=jpeg/promptImages/dee3a1b9-cf23-4068-b40f-6b4137c936fe.webp",
+  "fonte": "PromptPlum",
+  "url": "https://promptplum.com/prompt/exaggerated-90s-cartoon-caricature-portrait/",
+  "autor": "",
+  "chave": "pp:exaggerated-90s-cartoon-caricature-portrait",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Create image Use the attached image as a 2D exaggerated cartoon close-up inspired by grotesque 1990s animation, shown from the shoulders up, absurd facial expression, exaggerated mouth, detailed teeth, bulging eyes, dramatic facial distortion, thick expressive outlines, high-energy cartoon style, flat vibrant colors, centered portrait, solid yellow background, clean single-color backdrop.</pre><p>💡 Mande sua foto junto com o prompt e troque &quot;yellow&quot; pela cor de fundo que quiser.</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
