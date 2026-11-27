@@ -371,7 +371,8 @@
     "pp:simple-mens-fashion-ai-portrait",
     "pp:sunset-infinity-pool-elegance",
     "pp:exaggerated-90s-cartoon-caricature-portrait",
-    "pp:amber-blue-cinematic-male-portrait-ai-prompt"
+    "pp:amber-blue-cinematic-male-portrait-ai-prompt",
+    "pp:sharp-dressed-man-grey-suit-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -387,7 +388,7 @@
     "inicio": "2026-11-27T20:18:39+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 6,
+    "feitos": 7,
     "meta": 12,
     "achados": 61,
     "msg": ""
