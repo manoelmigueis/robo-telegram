@@ -53,7 +53,8 @@
     "051-passos-para-organizar",
     "058-licoes-ecossistemas-inovacao",
     "059-curso-gratis-excel",
-    "060-cursos-gratis-seguranca"
+    "060-cursos-gratis-seguranca",
+    "061-500-cursos-gratis"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -84,8 +85,8 @@
     "5 formações gratuitas e ead do mec estão recebendo inscrições",
     "perdão de dívidas do mei saiba como funciona o benefício e tire todas as dúvidas"
   ],
-  "contador": 54,
-  "ultimo": "2026-11-26T23:00:47+00:00",
+  "contador": 55,
+  "ultimo": "2026-11-27T12:00:49+00:00",
   "pulados": [
     "052-cliente-liga-cobrando",
     "053-passos-para-marmitas",
@@ -143,7 +144,8 @@
     "051-passos-para-organizar": "2026-11-25T23:00:49+00:00",
     "058-licoes-ecossistemas-inovacao": "2026-11-26T12:00:47+00:00",
     "059-curso-gratis-excel": "2026-11-26T16:00:48+00:00",
-    "060-cursos-gratis-seguranca": "2026-11-26T23:00:47+00:00"
+    "060-cursos-gratis-seguranca": "2026-11-26T23:00:47+00:00",
+    "061-500-cursos-gratis": "2026-11-27T12:00:49+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -283,6 +285,9 @@
     ],
     "060-cursos-gratis-seguranca": [
       8908
+    ],
+    "061-500-cursos-gratis": [
+      8912
     ]
   },
   "reais": [
