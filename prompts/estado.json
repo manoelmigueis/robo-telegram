@@ -373,7 +373,8 @@
     "pp:exaggerated-90s-cartoon-caricature-portrait",
     "pp:amber-blue-cinematic-male-portrait-ai-prompt",
     "pp:sharp-dressed-man-grey-suit-portrait",
-    "pp:cinematic-red-dual-tone-lighting-male-portrait"
+    "pp:cinematic-red-dual-tone-lighting-male-portrait",
+    "pp:man-retro-scratchboard-art-prompt"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -389,7 +390,7 @@
     "inicio": "2026-11-27T20:18:39+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 8,
+    "feitos": 9,
     "meta": 12,
     "achados": 61,
     "msg": ""
