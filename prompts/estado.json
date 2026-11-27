@@ -374,7 +374,8 @@
     "pp:amber-blue-cinematic-male-portrait-ai-prompt",
     "pp:sharp-dressed-man-grey-suit-portrait",
     "pp:cinematic-red-dual-tone-lighting-male-portrait",
-    "pp:man-retro-scratchboard-art-prompt"
+    "pp:man-retro-scratchboard-art-prompt",
+    "pp:indian-girl-black-saree-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -390,7 +391,7 @@
     "inicio": "2026-11-27T20:18:39+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 9,
+    "feitos": 10,
     "meta": 12,
     "achados": 61,
     "msg": ""
