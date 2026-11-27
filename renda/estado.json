@@ -55,7 +55,8 @@
     "059-curso-gratis-excel",
     "060-cursos-gratis-seguranca",
     "061-500-cursos-gratis",
-    "062-ufpr-abre-cursos"
+    "062-ufpr-abre-cursos",
+    "063-vivo-abre-vaga"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -89,8 +90,8 @@
     "entenda como a black friday abre caminho para novas estratégias de negócio",
     "instituto federal abre 370 vagas em três especializações a distância"
   ],
-  "contador": 56,
-  "ultimo": "2026-11-27T19:00:48+00:00",
+  "contador": 57,
+  "ultimo": "2026-11-27T23:00:53+00:00",
   "pulados": [
     "052-cliente-liga-cobrando",
     "053-passos-para-marmitas",
@@ -150,7 +151,8 @@
     "059-curso-gratis-excel": "2026-11-26T16:00:48+00:00",
     "060-cursos-gratis-seguranca": "2026-11-26T23:00:47+00:00",
     "061-500-cursos-gratis": "2026-11-27T12:00:49+00:00",
-    "062-ufpr-abre-cursos": "2026-11-27T16:00:47+00:00"
+    "062-ufpr-abre-cursos": "2026-11-27T16:00:47+00:00",
+    "063-vivo-abre-vaga": "2026-11-27T23:00:53+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -296,6 +298,9 @@
     ],
     "062-ufpr-abre-cursos": [
       8915
+    ],
+    "063-vivo-abre-vaga": [
+      8923
     ]
   },
   "reais": [
