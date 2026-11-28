@@ -48,10 +48,11 @@
     "046-mini-aula-few",
     "047-cleaning-the-house",
     "048-technology-vocabulario-celular",
-    "049-the-beach-vocabulario"
+    "049-the-beach-vocabulario",
+    "050-mini-aula-para"
   ],
-  "contador": 49,
-  "ultimo": "2026-11-27T23:00:49+00:00",
+  "contador": 50,
+  "ultimo": "2026-11-28T13:01:02+00:00",
   "pulados": [],
   "frente": [],
   "apagados": [],
@@ -104,7 +105,8 @@
     "046-mini-aula-few": "2026-11-26T23:00:59+00:00",
     "047-cleaning-the-house": "2026-11-27T13:00:47+00:00",
     "048-technology-vocabulario-celular": "2026-11-27T17:00:51+00:00",
-    "049-the-beach-vocabulario": "2026-11-27T23:00:49+00:00"
+    "049-the-beach-vocabulario": "2026-11-27T23:00:49+00:00",
+    "050-mini-aula-para": "2026-11-28T13:01:02+00:00"
   },
   "mensagens": {
     "008-phone-conversation": [
@@ -247,6 +249,9 @@
     ],
     "049-the-beach-vocabulario": [
       8508
+    ],
+    "050-mini-aula-para": [
+      8511
     ]
   }
 }
