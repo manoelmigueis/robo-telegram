@@ -2701,5 +2701,30 @@
   "autor": "",
   "chave": "lk:23dd00bfb83d90",
   "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Kooky portraits of 90’s mall teens in retro clothing, shot on VHS</pre><p>💡 Troque &quot;retro clothing&quot; pelas roupas que você quiser colocar nos jovens.</p><p>🖼 Imagem de exemplo: prompthero.com</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
+ },
+ {
+  "id": "261128-1-crie-um-retrato-artstico-com-e",
+  "tipo": "prompt",
+  "titulo": "🖤 Crie um retrato artístico com efeito de tinta derretida usando seu rosto",
+  "prompt": "Generate an image of the person from the attached photo. Preserve exact facial likeness. Composition: close-up side-profile portrait, low-angle view looking up, head tilted slightly backward, eyes closed, chin slightly elevated, centred framing, vertical orientation.\n\nSurrealism and Layers: hyper-detailed charcoal drawing style fused with expressive ink wash painting, hair and lower neck area dissolving fluid ink swirls, double exposure effect, ink splatter and splashing droplets in upper left corner, ink drip streaks running vertically down the canvas, torn paper collage texture, ethereal disintegration, surreal composition.\n\nLighting and Color: monochromatic black and white palette, dramatic chiaroscuro lighting, soft diffused highlight on facial features, deep charcoal shadows, high contrast, grainy texture, matte paper background.\n\nEnvironment and Details: minimalist off-white canvas background, no clothing visible, focus on face and abstract flowing hair, expressive brushstrokes, raw artistic strokes, ink bleeding effect, photorealistic charcoal sketch, ultra-detailed, emotional fine art portrait, abstract expressionism.\n\nAspect ratio 4:5.",
+  "prompt_en": "Generate an image of the person from the attached photo. Preserve exact facial likeness. Composition: close-up side-profile portrait, low-angle view looking up, head tilted slightly backward, eyes closed, chin slightly elevated, centred framing, vertical orientation.\n\nSurrealism and Layers: hyper-detailed charcoal drawing style fused with expressive ink wash painting, hair and lower neck area dissolving fluid ink swirls, double exposure effect, ink splatter and splashing droplets in upper left corner, ink drip streaks running vertically down the canvas, torn paper collage texture, ethereal disintegration, surreal composition.\n\nLighting and Color: monochromatic black and white palette, dramatic chiaroscuro lighting, soft diffused highlight on facial features, deep charcoal shadows, high contrast, grainy texture, matte paper background.\n\nEnvironment and Details: minimalist off-white canvas background, no clothing visible, focus on face and abstract flowing hair, expressive brushstrokes, raw artistic strokes, ink bleeding effect, photorealistic charcoal sketch, ultra-detailed, emotional fine art portrait, abstract expressionism.\n\nAspect ratio 4:5.",
+  "dica": "Mande sua foto junto com o prompt para manter seus traços",
+  "funciona_no": "Gemini (Nano Banana) · ChatGPT · Grok",
+  "tags": [
+   "retrato",
+   "pretoebranco",
+   "surrealismo",
+   "carvao"
+  ],
+  "imagens": [
+   "img/261128-1-crie-um-retrato-artstico-com-e.jpg"
+  ],
+  "imagem_da_fonte": true,
+  "imagem_url": "https://img.promptplum.com/cdn-cgi/image/q=78,scq=50,width=1400,height=1400,fit=contain,f=jpeg/promptImages/259e4745-667c-474d-ab5f-764b9a287192.webp",
+  "fonte": "PromptPlum",
+  "url": "https://promptplum.com/prompt/charcoal-ink-wash-portrait-drawing/",
+  "autor": "",
+  "chave": "pp:charcoal-ink-wash-portrait-drawing",
+  "corpo": "<p>⚙️ <b>Funciona no:</b> Gemini (Nano Banana) · ChatGPT · Grok</p><pre>Generate an image of the person from the attached photo. Preserve exact facial likeness. Composition: close-up side-profile portrait, low-angle view looking up, head tilted slightly backward, eyes closed, chin slightly elevated, centred framing, vertical orientation.\n\nSurrealism and Layers: hyper-detailed charcoal drawing style fused with expressive ink wash painting, hair and lower neck area dissolving fluid ink swirls, double exposure effect, ink splatter and splashing droplets in upper left corner, ink drip streaks running vertically down the canvas, torn paper collage texture, ethereal disintegration, surreal composition.\n\nLighting and Color: monochromatic black and white palette, dramatic chiaroscuro lighting, soft diffused highlight on facial features, deep charcoal shadows, high contrast, grainy texture, matte paper background.\n\nEnvironment and Details: minimalist off-white canvas background, no clothing visible, focus on face and abstract flowing hair, expressive brushstrokes, raw artistic strokes, ink bleeding effect, photorealistic charcoal sketch, ultra-detailed, emotional fine art portrait, abstract expressionism.\n\nAspect ratio 4:5.</pre><p>💡 Mande sua foto junto com o prompt para manter seus traços</p><p>🖼 Imagem de exemplo: PromptPlum</p><p>💾 Salve · 📤 Mande para um amigo · @chatgpclaudegemini</p>"
  }
 ]
