@@ -857,5 +857,20 @@
     "imagens": [
       "img/055.png"
     ]
+  },
+  {
+    "id": "056-the-office-vocabulario",
+    "tipo": "lista",
+    "titulo": "👔 At the office: vocabulário do escritório em inglês",
+    "corpo": "<p>Quer falar sobre o ambiente de trabalho e escritório em inglês? Salve este post 📌</p><table><tr><th>🇺🇸 Inglês</th><th>🇧🇷 Português</th></tr><tr><td>Office</td><td>Escritório</td></tr><tr><td>Desk</td><td>Escrivaninha</td></tr><tr><td>Chair</td><td>Cadeira</td></tr><tr><td>Computer</td><td>Computador</td></tr><tr><td>Keyboard</td><td>Teclado</td></tr><tr><td>Mouse</td><td>Mouse</td></tr><tr><td>Printer</td><td>Impressora</td></tr><tr><td>Meeting</td><td>Reunião</td></tr></table><details><summary>👀 Como dizer \"estou trabalhando\"?</summary><p>Para falar que está no batente, os americanos dizem <b>I am working</b> de forma bem natural.</p></details><p>🔁 Mande para aquele amigo que trabalha em escritório.</p>",
+    "tags": [
+      "ingles",
+      "aprenderingles",
+      "vocabulario",
+      "trabalho"
+    ],
+    "imagens": [
+      "img/056.png"
+    ]
   }
 ]
