@@ -57,7 +57,8 @@
     "061-500-cursos-gratis",
     "062-ufpr-abre-cursos",
     "063-vivo-abre-vaga",
-    "064-banco-itau-abre"
+    "064-banco-itau-abre",
+    "065-fiocruz-abre-mil"
   ],
   "noticias": [
     "mec e ufu oferecem nova chance de ingresso em curso gratuito ead de 225 horas",
@@ -93,8 +94,8 @@
     "google tem vagas abertas em são paulo e belo horizonte",
     "usp abre 8 mil vagas em curso a distância sobre inteligência artificial na educa"
   ],
-  "contador": 58,
-  "ultimo": "2026-11-28T12:00:47+00:00",
+  "contador": 59,
+  "ultimo": "2026-11-28T16:01:08+00:00",
   "pulados": [
     "052-cliente-liga-cobrando",
     "053-passos-para-marmitas",
@@ -156,7 +157,8 @@
     "061-500-cursos-gratis": "2026-11-27T12:00:49+00:00",
     "062-ufpr-abre-cursos": "2026-11-27T16:00:47+00:00",
     "063-vivo-abre-vaga": "2026-11-27T23:00:53+00:00",
-    "064-banco-itau-abre": "2026-11-28T12:00:47+00:00"
+    "064-banco-itau-abre": "2026-11-28T12:00:47+00:00",
+    "065-fiocruz-abre-mil": "2026-11-28T16:01:08+00:00"
   },
   "mensagens": {
     "009-quiz-preco": [
@@ -308,6 +310,9 @@
     ],
     "064-banco-itau-abre": [
       8926
+    ],
+    "065-fiocruz-abre-mil": [
+      8929
     ]
   },
   "reais": [
