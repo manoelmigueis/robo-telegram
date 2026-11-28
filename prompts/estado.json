@@ -384,7 +384,8 @@
     "pp:transparent-glass-business-card-profile",
     "pp:charcoal-ink-wash-portrait-drawing",
     "pp:girl-coffee-cup-brown-sweater-moody-portrait",
-    "pp:night-city-fashion-male-fashion-portrait"
+    "pp:night-city-fashion-male-fashion-portrait",
+    "pp:black-white-mens-fashion-portrait"
   ],
   "imagens": {
     "dia": "2026-11-25",
@@ -400,7 +401,7 @@
     "inicio": "2026-11-28T11:40:24+00:00",
     "fim": null,
     "fase": "escrevendo",
-    "feitos": 3,
+    "feitos": 4,
     "meta": 12,
     "achados": 59,
     "msg": ""
