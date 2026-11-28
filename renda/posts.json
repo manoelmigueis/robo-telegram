@@ -2278,5 +2278,27 @@
   "imagens": [
    "img/069.jpg"
   ]
+ },
+ {
+  "id": "070-usp-abre-mil",
+  "tipo": "lista",
+  "titulo": "🤖 USP abre 8 mil vagas em curso grátis de IA na educação",
+  "corpo": "Quer usar inteligência artificial no trabalho e melhorar seu currículo na área de educação?<br/><br/><b>1.</b> São 8 mil vagas gratuitas oferecidas pela Esalq/USP na modalidade a distância.<br/><b>2.</b> O curso foca em inteligência artificial generativa aplicada à rotina escolar e pedagógica.<br/><b>3.</b> As aulas acontecem de 1 a 14 de dezembro e não exigem graduação prévia.<br/><b>4.</b> As inscrições seguem abertas até o dia 09 de dezembro de 2026 na página da USP.<br/><br/><details><summary>👀 Toque para ver a dica de ouro</summary><p>Acesse a página de minicursos da USP hoje mesmo para preencher a ficha de inscrição completa e garantir sua vaga antes do fim do prazo.</p></details><br/>Salve esta dica e compartilhe com quem quer aprender IA.",
+  "tags": [
+   "rendaextra",
+   "cursosgratuitos",
+   "inteligenciaartificial",
+   "educacao",
+   "vagas"
+  ],
+  "arte": {
+   "titulo": "8 mil vagas USP em IA"
+  },
+  "fonte": "PEBSP",
+  "link": "https://www.pebsp.com/usp-abre-8-mil-vagas-em-curso-a-distancia-sobre-inteligencia-artificial-na-educacao-dcs/",
+  "materia": "USP abre 8 mil vagas em curso a distância sobre Inteligência Artificial na Educação",
+  "imagens": [
+   "img/070.jpg"
+  ]
  }
 ]
