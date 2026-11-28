@@ -2257,5 +2257,26 @@
   "imagens": [
    "img/068.jpg"
   ]
+ },
+ {
+  "id": "069-google-tem-vagas",
+  "tipo": "lista",
+  "titulo": "🏢 Google tem vagas abertas em SP, BH, Campinas e home office",
+  "corpo": "Se você busca uma grande oportunidade na tecnologia e quer trabalhar em uma empresa global, essa é a hora de atualizar o currículo.<br/><br/><b>1.</b> Vagas para Engenheiro de Software Sênior em IA.<br/><b>2.</b> Oportunidades de Gerente Regional de Operações.<br/><b>3.</b> Cargos nas áreas de vendas, marketing e suporte.<br/><b>4.</b> Vagas de Jovem Aprendiz Data Center em Campinas.<br/><b>5.</b> Oportunidades em segurança e arquitetura de soluções.<br/><b>6.</b> Há funções disponíveis no YouTube e em home office.<br/><br/><details><summary>👀 Toque para ver a dica de ouro</summary><p>Acesse o site oficial de carreiras do Google para conferir os pré-requisitos completos e enviar sua candidatura hoje mesmo.</p></details><br/>Salve este post ou mande para aquele amigo que está procurando emprego!",
+  "tags": [
+   "rendaextra",
+   "vagas",
+   "emprego",
+   "homeoffice"
+  ],
+  "arte": {
+   "titulo": "Google abre vagas em SP, BH e home office"
+  },
+  "fonte": "SpaceMoney",
+  "link": "https://www.spacemoney.com.br/carreiras/google-vagas-big-techs-brasil/",
+  "materia": "Google tem vagas abertas em São Paulo e Belo Horizonte",
+  "imagens": [
+   "img/069.jpg"
+  ]
  }
 ]
